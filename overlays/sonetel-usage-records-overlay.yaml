@@ -1,0 +1,37 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist overlay for Sonetel Usage Records API
+  version: 1.0.0
+extends: ../openapi/_original/sonetel-usage-records-openapi.yml
+x-generated: '2026-10-09'
+x-method: generated
+x-source: openapi/sonetel-usage-records-openapi.yml
+actions:
+- target: $.info
+  description: Record API Evangelist provenance.
+  update:
+    x-api-evangelist:
+      provider: sonetel
+      generated: '2026-10-09'
+      source: openapi/sonetel-usage-records-openapi.yml
+      upstream: https://github.com/Sonetel/sonetel-api-docs
+      documentation: https://docs.sonetel.com/
+- target: $
+  description: The upstream document declares no tags; add one tag naming this API so operations group
+    in renderers.
+  update:
+    tags:
+    - name: Sonetel Usage Records
+      description: Use our `/usagerecord` APIs to get the details of calls and other charges applied to
+        your Sonetel account. This is the same data that is available in our web app's [usage](https://app.sonetel.com/account-settings/usage)
+        section.
+- target: $.paths['/usage/account/{accountid}/usagerecord'].get
+  description: Tag get-usagerecord.
+  update:
+    tags:
+    - Sonetel Usage Records
+- target: $.paths['/usage/account/{accountid}/usagerecord/download'].get
+  description: Tag get-usagerecord-download.
+  update:
+    tags:
+    - Sonetel Usage Records

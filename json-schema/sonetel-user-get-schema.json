@@ -1,0 +1,287 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/sonetel/main/json-schema/sonetel-user-get-schema.json",
+  "title": "User-GET",
+  "description": "User Schema",
+  "x-generated": "2026-10-09",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/sonetel-users-openapi.yml#/components/schemas/User-GET",
+  "type": "object",
+  "properties": {
+    "resource": {
+      "type": "string",
+      "description": "Name of the resource accessed"
+    },
+    "status": {
+      "type": "string",
+      "description": "Status of the response i.e. success or failed",
+      "minLength": 1
+    },
+    "response": {
+      "type": "object",
+      "properties": {
+        "user_fname": {
+          "type": "string",
+          "description": "The user's first name",
+          "minLength": 1
+        },
+        "max_conversations": {
+          "type": "number",
+          "description": "The maximum number of customer conversations the user can handle simultaneously"
+        },
+        "numbers": {
+          "type": "array",
+          "description": "The \"numbers\" represents Sonetel numbers assigned to the user including the user's extension.",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "object",
+            "properties": {
+              "number_id": {
+                "type": "string",
+                "description": "Unique Id of the number",
+                "minLength": 1
+              },
+              "number_type": {
+                "type": "string",
+                "description": "This can take the following values\n\n- \"internal\": The user's extension\n- \"phnum\": Local number anywhere worldwide from Sonetel connected to the user",
+                "minLength": 1
+              },
+              "number": {
+                "type": "string",
+                "description": "The E164 phone number. In the case of extension, it is the short number assigned to the user (usually between 3 to 5 digits).",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "number_id",
+              "number_type",
+              "number"
+            ]
+          }
+        },
+        "phones": {
+          "type": "array",
+          "description": "List of the phones (SIP phones or verified mobile numbers) linked to the user's profile that can used for answering calls.",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "object",
+            "properties": {
+              "phone_id": {
+                "type": "string",
+                "description": "Unique ID of the phone.",
+                "minLength": 1
+              },
+              "phnum": {
+                "type": "string",
+                "description": "The actual phone number that is used to forward incoming calls. Applied to non-SIP phones.",
+                "minLength": 1
+              },
+              "phone_type": {
+                "type": "string",
+                "description": "The type of phone i.e. sip or regular",
+                "minLength": 1
+              },
+              "phone_name": {
+                "type": "string",
+                "description": "User's chosen name for the phone number",
+                "minLength": 1
+              },
+              "receive_calls": {
+                "type": "string",
+                "description": "Flag that indicates if incoming calls to the user should be sent to this phone. In case of SIP phones, this field is not applicable.",
+                "minLength": 1
+              },
+              "verified": {
+                "type": "string",
+                "description": "Read only field Flag that indicates if the phone is verified or not",
+                "minLength": 1,
+                "readOnly": true
+              },
+              "is_primary": {
+                "type": "boolean",
+                "description": "Flag that indicates if this number must be used as the default for callback/callthru calls. This field is only applicable for verified mobile numbers. Only verified mobile numbers can be set as primary."
+              },
+              "sip_details": {
+                "type": "object",
+                "description": "Details of the SIP phones, if connected.",
+                "properties": {
+                  "registered": {
+                    "type": "string",
+                    "description": "Flag indicating if the SIP phone is registered"
+                  },
+                  "registered_since": {
+                    "type": "string",
+                    "description": "The date/time since when the SIP phone is registered to Sonetel."
+                  },
+                  "auto_provision": {
+                    "type": "string",
+                    "description": "Flag that indicates if the SIP phone is automatically provisioned. Sonetel ready phones can be automatically provisioned.\nIn the current version of the API, a phone cannot be added to Sonetel for automatic provisioning."
+                  },
+                  "address": {
+                    "type": "string",
+                    "description": "The SIP address of the phone. This address is automatically specified by the phone to Sonetel using SIP when it registers to Sonetel."
+                  },
+                  "useragent": {
+                    "type": "string",
+                    "description": "The SIP device information published by the SIP phone while registering to Sonetel."
+                  },
+                  "mac": {
+                    "type": "string",
+                    "description": "The MAC address of the SIP phone."
+                  }
+                }
+              }
+            },
+            "required": [
+              "phone_id",
+              "phnum",
+              "phone_type",
+              "phone_name",
+              "receive_calls",
+              "verified",
+              "is_primary"
+            ]
+          }
+        },
+        "language": {
+          "type": "string",
+          "description": "Three letter ISO code of the user's account language.",
+          "minLength": 1
+        },
+        "auto_translate": {
+          "type": "boolean",
+          "description": "Flag to indicate whether automatic translation is turned on for the user. Reserved for future use."
+        },
+        "language_id": {
+          "type": "number",
+          "description": "An internal numeric code of the user's account language."
+        },
+        "title": {
+          "type": "string",
+          "description": "The user's job title for example, Sales Engineer, CEO, etc."
+        },
+        "type": {
+          "type": "string",
+          "description": "Privilege level of user i.e. admin or regular.",
+          "minLength": 1
+        },
+        "user_lname": {
+          "type": "string",
+          "description": "The last name of the user.",
+          "minLength": 1
+        },
+        "password_status": {
+          "type": "string",
+          "enum": [
+            "ok",
+            "1",
+            "2",
+            "locked"
+          ],
+          "description": "A user's access via password may be blocked if there are many attempts to use an incorrect password, either while signing in to the web portal or while connecting a SIP phone. This field indicates the current status of the password. It can take the following values.\n\n- \"ok\": Indicates that access via password is OK.\n- \"1\" or \"2\": There has been one(1) or two(2) attempts to connect with an incorrect password.\n- \"locked\": The password is locked out and must be reset.",
+          "minLength": 1,
+          "readOnly": true
+        },
+        "account_id": {
+          "type": "string",
+          "description": "The Sonetel account ID of the account the user is a part of.",
+          "minLength": 1,
+          "readOnly": true
+        },
+        "user_jid": {
+          "type": "string",
+          "description": "The User's Jabber Id.",
+          "minLength": 1
+        },
+        "sonetel-id": {
+          "type": "string",
+          "description": "User's unique id in Sonetel. This will be currently <uuid>@sonetel.com",
+          "minLength": 1
+        },
+        "user_id": {
+          "type": "string",
+          "description": "Unique Id of the Sonetel user.",
+          "minLength": 1
+        },
+        "company_name": {
+          "type": "string",
+          "description": "The name of the company the user is part of.",
+          "minLength": 1
+        },
+        "location": {
+          "type": "object",
+          "description": "User''s location details such as country, area code and timezone.",
+          "properties": {
+            "country": {
+              "type": "string",
+              "description": "The user's country. Has an affect on how the user dials phone numbers",
+              "minLength": 1
+            },
+            "area_code": {
+              "type": "string",
+              "description": "The user's telephone area code.",
+              "minLength": 1
+            },
+            "timezone": {
+              "type": "string",
+              "description": "The user's timezone."
+            },
+            "timezone_id": {
+              "type": "number",
+              "description": "An internal numeric identifier for the user's timezone."
+            }
+          },
+          "required": [
+            "country",
+            "area_code"
+          ]
+        },
+        "created_date": {
+          "type": "string",
+          "description": "The date and time the user was created.",
+          "minLength": 1
+        },
+        "email": {
+          "type": "string",
+          "description": "The user's email address.",
+          "minLength": 1
+        },
+        "notifications": {
+          "type": "number",
+          "description": "The number of unread in-app notifications."
+        },
+        "password": {
+          "type": "string",
+          "description": "The user's login password.",
+          "format": "password"
+        }
+      },
+      "required": [
+        "user_fname",
+        "max_conversations",
+        "language",
+        "auto_translate",
+        "language_id",
+        "type",
+        "user_lname",
+        "password_status",
+        "account_id",
+        "user_jid",
+        "sonetel-id",
+        "user_id",
+        "company_name",
+        "created_date",
+        "email",
+        "notifications",
+        "password"
+      ]
+    }
+  },
+  "required": [
+    "status",
+    "response"
+  ]
+}

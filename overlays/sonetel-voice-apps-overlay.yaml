@@ -1,0 +1,80 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist overlay for Sonetel Voice apps API
+  version: 1.0.0
+extends: ../openapi/_original/sonetel-voice-apps-openapi.yml
+x-generated: '2026-10-09'
+x-method: generated
+x-source: openapi/sonetel-voice-apps-openapi.yml
+actions:
+- target: $.info
+  description: Record API Evangelist provenance.
+  update:
+    x-api-evangelist:
+      provider: sonetel
+      generated: '2026-10-09'
+      source: openapi/sonetel-voice-apps-openapi.yml
+      upstream: https://github.com/Sonetel/sonetel-api-docs
+      documentation: https://docs.sonetel.com/
+- target: $
+  description: The upstream document declares no tags; add one tag naming this API so operations group
+    in renderers.
+  update:
+    tags:
+    - name: Sonetel Voice apps
+      description: '# Voice apps'
+- target: $.paths['/account/{accountid}/voiceapp'].get
+  description: Tag get-voiceapps-account.
+  update:
+    tags:
+    - Sonetel Voice apps
+- target: $.paths['/account/{accountid}/voiceapp'].post
+  description: Tag create-voiceapp-account.
+  update:
+    tags:
+    - Sonetel Voice apps
+- target: $.paths['/account/{accountid}/voiceapp/{voiceappid}'].get
+  description: Tag get-account-voiceappid.
+  update:
+    tags:
+    - Sonetel Voice apps
+- target: $.paths['/account/{accountid}/voiceapp/{voiceappid}'].put
+  description: Tag update-account-voiceappid.
+  update:
+    tags:
+    - Sonetel Voice apps
+- target: $.paths['/account/{accountid}/voiceapp/{voiceappid}'].delete
+  description: Tag delete-account-voiceappid.
+  update:
+    tags:
+    - Sonetel Voice apps
+- target: $.paths['/account/{accountid}/voiceapp/{voiceappid}/prompt'].post
+  description: Tag post-user.
+  update:
+    tags:
+    - Sonetel Voice apps
+- target: $.paths['/account/{accountid}/voiceapp/{voiceappid}/prompt'].get
+  description: Tag get-user.
+  update:
+    tags:
+    - Sonetel Voice apps
+- target: $.paths['/account/{accountid}/voiceapp/{voiceappid}/prompt/{promptid}'].get
+  description: Tag get-voiceapp-prompt-id.
+  update:
+    tags:
+    - Sonetel Voice apps
+- target: $.paths['/account/{accountid}/voiceapp/{voiceappid}/prompt/{promptid}'].put
+  description: Tag Replace-voiceapp-promptid.
+  update:
+    tags:
+    - Sonetel Voice apps
+- target: $.paths['/account/{accountid}/voiceapp/{voiceappid}/prompt/{promptid}'].delete
+  description: Tag delete-voiceapp-promptid.
+  update:
+    tags:
+    - Sonetel Voice apps
+- target: $.paths['/prompt/{promptid}/message'].post
+  description: Tag upload-message.
+  update:
+    tags:
+    - Sonetel Voice apps

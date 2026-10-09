@@ -1,0 +1,131 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/sonetel/main/json-schema/sonetel-user-update-schema.json",
+  "title": "User-Update",
+  "x-generated": "2026-10-09",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/sonetel-users-openapi.yml#/components/schemas/User-Update",
+  "type": "object",
+  "properties": {
+    "user_fname": {
+      "type": "string",
+      "description": "User's first name",
+      "minLength": 1
+    },
+    "max_conversations": {
+      "type": "number",
+      "description": "The maximum number of customer conversations the user can handle simultaneously"
+    },
+    "phones": {
+      "type": "array",
+      "description": "List of the phones (SIP phones or verified mobile numbers) linked to the user's profile that can used for call forwarding.",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "properties": {
+          "phnum": {
+            "type": "string",
+            "description": "The actual phone number that is used to forward incoming calls. Applied to non-SIP phones.",
+            "minLength": 1
+          },
+          "phone_type": {
+            "type": "string",
+            "enum": [
+              "sip",
+              "regular"
+            ],
+            "description": "The type of phone i.e. sip or regular\n",
+            "minLength": 1
+          },
+          "phone_name": {
+            "type": "string",
+            "description": "User's chosen name for the phone number",
+            "minLength": 1
+          },
+          "receive_calls": {
+            "type": "string",
+            "description": "Flag that indicates if incoming calls to the user should be sent to this phone. In case of SIP phones, this field is not applicable.",
+            "minLength": 1
+          },
+          "verified": {
+            "type": "string",
+            "description": "Read only field Flag that indicates if the phone is verified or not",
+            "minLength": 1,
+            "readOnly": true
+          }
+        }
+      }
+    },
+    "language": {
+      "type": "string",
+      "description": "Three letter ISO code of the user's account language.",
+      "minLength": 1
+    },
+    "language_id": {
+      "type": "number",
+      "description": "An internal numeric code of the user's account language."
+    },
+    "title": {
+      "type": "string",
+      "description": "The user's job title for example, Sales Engineer, CEO, etc.",
+      "minLength": 1
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "admin",
+        "regular"
+      ],
+      "description": "Privilege level of user i.e. admin or regular.",
+      "minLength": 1
+    },
+    "user_lname": {
+      "type": "string",
+      "description": "The last name of the user.",
+      "minLength": 1
+    },
+    "location": {
+      "type": "object",
+      "description": "User's location details such as country, area code and timezone.",
+      "properties": {
+        "country": {
+          "type": "string",
+          "description": "The user's country. Has an affect on how the user dials phone numbers.",
+          "minLength": 1
+        },
+        "area_code": {
+          "type": "string",
+          "description": "The user's telephone area code.",
+          "minLength": 1
+        },
+        "timezone": {
+          "type": "string",
+          "description": "The user's timezone."
+        },
+        "timezone_id": {
+          "type": "number",
+          "description": "An internal numeric identifier for the user's timezone."
+        }
+      }
+    },
+    "email": {
+      "type": "string",
+      "description": "The user's email address.",
+      "format": "email",
+      "minLength": 1
+    },
+    "password": {
+      "type": "string",
+      "description": "The user's login password.",
+      "format": "password"
+    }
+  },
+  "required": [
+    "user_fname",
+    "user_lname",
+    "email",
+    "password"
+  ]
+}

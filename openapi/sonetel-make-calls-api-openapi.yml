@@ -1,0 +1,216 @@
+openapi: 3.2.0
+info:
+  title: Sonetel Make Calls API
+  version: '2.0'
+  contact:
+    name: Sonetel API Support
+    email: api.support@sonetel.com
+  termsOfService: https://sonetel.com/en/help/help-topics/terms-conditions/terms-conditions/
+  description: 'Operations tagged Make Calls across 2 of this provider''s published API definitions: make_calls.yaml, sonetel-make-calls-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://public-api.sonetel.com/
+  description: Production
+security:
+- Production: []
+tags:
+- name: Make Calls
+paths:
+  /make-calls/call/call-back:
+    post:
+      summary: Start a callback call
+      description: '# Start a callback call
+
+
+        Use our Callback API to make international or local calls between 2 phone numbers.
+
+
+        ## Authentication
+
+
+        The call-back API requires authentication before it can initiate calls.
+
+
+        Use `/oauth/token` to generate an Oauth2 bearer token. Pass the token in the `Authorization` header to authenticate your request.
+
+
+        Here is a sample request.
+
+
+        ```c
+
+        curl \
+
+        --location \
+
+        --request POST ''https://beta-api.sonetel.com/make-calls/call/call-back'' \
+
+        --header ''Content-Type: application/json'' \
+
+        --header ''Authorization: Bearer '' \
+
+        --data-raw {"app_id" : "myCallbackAppv1.2", "call1":"+12125550000", "call2":"+4680000000", "show_1":"automatic", "show_2":"automatic"}''
+
+        ```
+
+
+        In the above request, our system will first call +12125550000. Once this call is answered, then our system will place a call to +4680000000.'
+      operationId: post-make-calls-call-call-back
+      parameters:
+      - $ref: '#/components/parameters/Content-Type'
+      - $ref: '#/components/parameters/Accept'
+      - $ref: '#/components/parameters/Authorization'
+      requestBody:
+        $ref: '#/components/requestBodies/callback'
+      responses:
+        '202':
+          description: Accepted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  statusCode:
+                    type: number
+                    description: The status of the request
+                  response:
+                    type: object
+                    properties:
+                      session_id:
+                        type: string
+                        description: Unique ID to identify the phone call in our logs
+                        minLength: 1
+                x-examples:
+                  example-1:
+                    statusCode: 202
+                    response:
+                      session_id: e492825719344831ae3367f4de4ffeb0
+        '401':
+          $ref: '#/components/responses/unauthorized'
+        '403':
+          $ref: '#/components/responses/insufficient-balance'
+      security:
+      - Production: []
+      servers:
+      - url: https://public-api.sonetel.com/
+        description: Production
+      tags:
+      - Make Calls
+    servers:
+    - url: https://public-api.sonetel.com/
+      description: Production
+components:
+  responses:
+    unauthorized:
+      description: This response is sent when the acces token has expired
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                description: The type of error
+              error_description:
+                type: string
+                description: Details of the error
+            x-examples:
+              example-1:
+                error: invalid_token
+                error_description: 'Access token expired: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsiYXBpLnNvbmV0ZWwuY29tIl0sInVzZXJfaWQiOiIyMDE1MTE2MjM5IiwidXNlcl9uYW1lIjoiYWFzaGVlc2hqb3NoaUBnbWFpbC5jb20iLCJzY29wZSI6WyJhY2NvdW50LnJlYWQiLCJhY2NvdW50LndyaXRlIimiY29udmVyc2F0aW9uLnJlYWQiLCJjb252ZXJzYXRpb24ud3JpdGUiLCJ1c2VyLnJlYWQiLCJ1c2VyLndyaXRlIl0sImlzcyI6IlNvbmV0ZWxOb2RlMTIzIiwiZXhwIjoxNjU5NTMzMjEwLCJpYXQiOjE2NTk1MzE0MTAsImp0aSI6IjNmNTg1ZjQ3LWUzNWYtNDAzMi1iOGUwLTRlNTlhYWUxNmM4MiIsImFjY19pZCI6MjA2NDk6OTMyECJjbGllbnRfaWQiOiJzb25ldGVsLXdlYiJ9.P-6GqNJOW7qZYavq7rlSU_LzpKd-xjCqi2JEncn-9Vzm9D3ZCcQgsUmkWNJEsfPlFZl7YLJvkXt7JzaqUCdgEr6VfL69EhxPYrQ1Vyrx3pgPBPcJVCENZqja4-3N-mLSaua7C2KXhakYb01kT6NyJ0f0i8_0XwPQQKZPRonPP2Qa8plUmShrCcTzU_vxkWQTSEbxtTlYB5gIpnrgXbG0EWb0YOMIhqT8NSF7FSR_uJ5GFvy1KqYtL4OGwccy63gU66Or-C5331UDwGGVCiw4z49Me699PsKygngh4LaT3BpuqA8oE77xYiCVUJ8j2vNz36Qw58GLmJFSURAIAynpxw'
+    insufficient-balance:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              statusCode:
+                type: integer
+                description: The status code of the response
+              response:
+                type: object
+                description: The respone object
+                properties:
+                  response:
+                    type: string
+                    description: Text describing the error message
+            x-examples:
+              example-1:
+                statusCode: 403
+                response:
+                  session_id: string
+  parameters:
+    Authorization:
+      name: Authorization
+      in: header
+      description: The authorization header contains your access token and is used to authenticate requests. Generate an `access_token` using the `/oauth/token` endpoint.
+      required: true
+      schema:
+        type: string
+        examples:
+        - Bearer <ACCESS_TOKEN>
+    Content-Type:
+      name: Content-Type
+      in: header
+      description: The content type of the request
+      required: false
+      schema:
+        type: string
+        default: application/json
+    Accept:
+      name: Accept
+      in: header
+      description: The content type that should be returned in the response.
+      required: true
+      schema:
+        type: string
+        default: application/json
+  requestBodies:
+    callback:
+      description: Send a callback request to Sonetel.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              app_id:
+                type: string
+                description: An ID for your client. This can be any string.
+              call1:
+                type: string
+                description: Your number or address that we will call first
+              call2:
+                type: string
+                description: The number or address you wish to call.
+              show_1:
+                type: string
+                description: The caller ID that should be shown to you when you answer `call1`.
+              show_2:
+                type: string
+                description: The caller ID that should be shown to the person you are calling.
+            x-examples:
+              example-1:
+                app_id: your_app_name_or_id
+                call1: '+12025550000'
+                call2: '+14045551111'
+                show_1: automatic
+                show_2: automatic
+          examples:
+            Callback Example:
+              value:
+                app_id: acme_nodejs_app_v2.1
+                call1: john.doe@example.com
+                call2: '+12025551234'
+                show_1: automatic
+                show_2: '+19175551234'
+  securitySchemes:
+    Production:
+      type: oauth2
+      flows:
+        password:
+          refreshUrl: https://api.sonetel.com/SonetelAuth/beta/oauth/token
+          tokenUrl: https://api.sonetel.com/SonetelAuth/beta/oauth/token
+          scopes: {}
+x-refined-from:
+- make_calls.yaml
+- sonetel-make-calls-openapi.yml

@@ -1,0 +1,76 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist overlay for Sonetel AI Prompt Manager API
+  version: 1.0.0
+extends: ../openapi/_original/sonetel-ai-prompt-manager-openapi.yml
+x-generated: '2026-10-09'
+x-method: generated
+x-source: openapi/sonetel-ai-prompt-manager-openapi.yml
+actions:
+- target: $.info
+  description: Record API Evangelist provenance.
+  update:
+    x-api-evangelist:
+      provider: sonetel
+      generated: '2026-10-09'
+      source: openapi/sonetel-ai-prompt-manager-openapi.yml
+      upstream: https://github.com/Sonetel/sonetel-api-docs
+      documentation: https://docs.sonetel.com/
+- target: $
+  description: The upstream document declares no tags; add one tag naming this API so operations group
+    in renderers.
+  update:
+    tags:
+    - name: Sonetel AI Prompt Manager
+      description: The prompt manager API is a part of the Sonetel AI platform. It enables viewing and
+        managing prompts for Sonetel's generative AI services.
+- target: $.paths['/prompt'].get
+  description: Tag get-prompt.
+  update:
+    tags:
+    - Sonetel AI Prompt Manager
+- target: $.paths['/prompt'].post
+  description: Tag post-prompt.
+  update:
+    tags:
+    - Sonetel AI Prompt Manager
+- target: $.paths['/prompt/{prompt_id}'].get
+  description: Tag get-prompt-id.
+  update:
+    tags:
+    - Sonetel AI Prompt Manager
+- target: $.paths['/prompt/{prompt_id}'].delete
+  description: Tag delete-prompt-prompt_id.
+  update:
+    tags:
+    - Sonetel AI Prompt Manager
+- target: $.paths['/prompt/{prompt_id}'].put
+  description: Tag put-prompt-prompt_id.
+  update:
+    tags:
+    - Sonetel AI Prompt Manager
+- target: $.paths['/prompt/{prompt_id}/version'].get
+  description: Tag get-prompt-prompt_id-version.
+  update:
+    tags:
+    - Sonetel AI Prompt Manager
+- target: $.paths['/prompt/{prompt_id}/version'].post
+  description: Tag post-prompt-prompt_id-version.
+  update:
+    tags:
+    - Sonetel AI Prompt Manager
+- target: $.paths['/prompt/{prompt_id}/version/{version}'].get
+  description: Tag get-prompt-prompt_id-version-version.
+  update:
+    tags:
+    - Sonetel AI Prompt Manager
+- target: $.paths['/prompt/{prompt_id}/version/{version}'].delete
+  description: Tag delete-prompt-prompt_id-version-version.
+  update:
+    tags:
+    - Sonetel AI Prompt Manager
+- target: $.paths['/prompt/{prompt_id}/version/{version}'].put
+  description: Tag put-prompt-prompt_id-version-version.
+  update:
+    tags:
+    - Sonetel AI Prompt Manager

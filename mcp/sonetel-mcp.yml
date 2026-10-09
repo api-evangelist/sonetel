@@ -1,0 +1,718 @@
+name: Sonetel MCP Server (candidate)
+type: MCPServer
+generated: '2026-10-09'
+method: derived
+source: openapi/ (18 Sonetel OpenAPI files from github.com/Sonetel/sonetel-api-docs)
+status: candidate
+description: No official Sonetel MCP server was found. A web search for a Sonetel MCP server returned nothing naming
+  Sonetel. The Sonetel GitHub org (15 repos) has no MCP repository. https://sonetel.com/.well-known/mcp.json returned
+  404 and mcp.sonetel.com did not resolve. https://api.sonetel.com/mcp returned 401, but so does a nonsense path
+  (https://api.sonetel.com/zzz-nonexistent-9183 -> 401, same sonetel_native error body), so that 401 tells us nothing
+  about an MCP server. The tools below are a CANDIDATE list derived 1:1 from the OpenAPI operationIds. Nobody ships
+  them.
+deployment:
+  mode: none
+  auth: unknown
+  verified: derived
+evidence:
+- url: https://sonetel.com/.well-known/mcp.json
+  status: 404
+- url: https://mcp.sonetel.com/
+  status: no response (DNS/connect failure)
+- url: https://api.sonetel.com/mcp
+  status: 401
+  note: catch-all gateway 401; control path also 401
+- url: https://api.github.com/orgs/Sonetel/repos
+  status: 200
+  note: no MCP repository
+transport_if_built: would call https://public-api.sonetel.com with a bearer token from POST https://api.sonetel.com/SonetelAuth/beta/oauth/token
+tools:
+- name: get-users-userId
+  description: Get your account information
+  api: openapi/sonetel-account-openapi.yml
+  method: GET
+  path: /account/{accountId}
+  read_only: true
+- name: put-account-accountId
+  description: Update your account information
+  api: openapi/sonetel-account-openapi.yml
+  method: PUT
+  path: /account/{accountId}
+  read_only: false
+- name: get-account-accountId-settings-data-mgr-call-recording
+  description: Fetch call recording data settings
+  api: openapi/sonetel-account-openapi.yml
+  method: GET
+  path: /account/{accountId}/settings/data-mgr/call-recording
+  read_only: true
+- name: put-account-accountId-settings-data-mgr-call-recording
+  description: Update call recording data settings
+  api: openapi/sonetel-account-openapi.yml
+  method: PUT
+  path: /account/{accountId}/settings/data-mgr/call-recording
+  read_only: false
+- name: get-business
+  description: List businesses
+  api: openapi/sonetel-ai-business-openapi.yml
+  method: GET
+  path: /business
+  read_only: true
+- name: post-business
+  description: Create a business profile
+  api: openapi/sonetel-ai-business-openapi.yml
+  method: POST
+  path: /business
+  read_only: false
+- name: put-business-id
+  description: Update a business profile
+  api: openapi/sonetel-ai-business-openapi.yml
+  method: PUT
+  path: /business/{business_id}
+  read_only: false
+- name: get-ai-business-business-business-id
+  description: Get a business by id
+  api: openapi/sonetel-ai-business-openapi.yml
+  method: GET
+  path: /business/{business_id}
+  read_only: true
+- name: delete-business-id
+  description: Delete a business
+  api: openapi/sonetel-ai-business-openapi.yml
+  method: DELETE
+  path: /business/{business_id}
+  read_only: false
+- name: post-filemgr-upload
+  description: Upload file
+  api: openapi/sonetel-ai-file-manager-openapi.yml
+  method: POST
+  path: /filemgr/upload
+  read_only: false
+- name: post-filemgr-upload-url
+  description: Create upload URLs
+  api: openapi/sonetel-ai-file-manager-openapi.yml
+  method: POST
+  path: /filemgr/upload-url
+  read_only: false
+- name: post-filemgr-upload-url-complete
+  description: Complete multi-part upload
+  api: openapi/sonetel-ai-file-manager-openapi.yml
+  method: POST
+  path: /filemgr/upload-url/complete
+  read_only: false
+- name: get-filemgr-file_id
+  description: Fetch file content
+  api: openapi/sonetel-ai-file-manager-openapi.yml
+  method: GET
+  path: /filemgr/file/{file_id}
+  read_only: true
+- name: delete-filemgr-file-file_id
+  description: Delete a file
+  api: openapi/sonetel-ai-file-manager-openapi.yml
+  method: DELETE
+  path: /filemgr/file/{file_id}
+  read_only: false
+- name: get-filemgr-file-file_id-meta-data
+  description: Fetch file meta data
+  api: openapi/sonetel-ai-file-manager-openapi.yml
+  method: GET
+  path: /filemgr/file/{file_id}/meta-data
+  read_only: true
+- name: put-filemgr-file-file_id-meta-data
+  description: Update file meta data
+  api: openapi/sonetel-ai-file-manager-openapi.yml
+  method: PUT
+  path: /filemgr/file/{file_id}/meta-data
+  read_only: false
+- name: get-filemgr-file
+  description: List files
+  api: openapi/sonetel-ai-file-manager-openapi.yml
+  method: GET
+  path: /filemgr/file
+  read_only: true
+- name: get-ai-integration-customer_faq-faq_template
+  description: Download Template
+  api: openapi/sonetel-ai-functions-openapi.yml
+  method: GET
+  path: /ai-integration/customer_faq/faq_template
+  read_only: true
+- name: get-faq
+  description: List all FAQs
+  api: openapi/sonetel-ai-functions-openapi.yml
+  method: GET
+  path: /ai-integration/customer_faq/faq
+  read_only: true
+- name: post-faq
+  description: Upload FAQs
+  api: openapi/sonetel-ai-functions-openapi.yml
+  method: POST
+  path: /ai-integration/customer_faq/faq
+  read_only: false
+- name: delete-faq
+  description: Delete all FAQs
+  api: openapi/sonetel-ai-functions-openapi.yml
+  method: DELETE
+  path: /ai-integration/customer_faq/faq
+  read_only: false
+- name: get-customer_faq-csv
+  description: Download as CSV
+  api: openapi/sonetel-ai-functions-openapi.yml
+  method: GET
+  path: /ai-integration/customer_faq/faq_csv
+  read_only: true
+- name: get-suggested-answers
+  description: Get Suggested Answer from AI
+  api: openapi/sonetel-ai-functions-openapi.yml
+  method: GET
+  path: /ai-integration/customer_faq/suggested-answers
+  read_only: true
+- name: get-prompt
+  description: List prompts
+  api: openapi/sonetel-ai-prompt-manager-openapi.yml
+  method: GET
+  path: /prompt
+  read_only: true
+- name: post-prompt
+  description: Create a prompt
+  api: openapi/sonetel-ai-prompt-manager-openapi.yml
+  method: POST
+  path: /prompt
+  read_only: false
+- name: get-prompt-id
+  description: Fetch a prompt
+  api: openapi/sonetel-ai-prompt-manager-openapi.yml
+  method: GET
+  path: /prompt/{prompt_id}
+  read_only: true
+- name: delete-prompt-prompt_id
+  description: Delete a prompt
+  api: openapi/sonetel-ai-prompt-manager-openapi.yml
+  method: DELETE
+  path: /prompt/{prompt_id}
+  read_only: false
+- name: put-prompt-prompt_id
+  description: Update prompt
+  api: openapi/sonetel-ai-prompt-manager-openapi.yml
+  method: PUT
+  path: /prompt/{prompt_id}
+  read_only: false
+- name: get-prompt-prompt_id-version
+  description: List prompt versions
+  api: openapi/sonetel-ai-prompt-manager-openapi.yml
+  method: GET
+  path: /prompt/{prompt_id}/version
+  read_only: true
+- name: post-prompt-prompt_id-version
+  description: Create prompt version
+  api: openapi/sonetel-ai-prompt-manager-openapi.yml
+  method: POST
+  path: /prompt/{prompt_id}/version
+  read_only: false
+- name: get-prompt-prompt_id-version-version
+  description: Get a prompt version
+  api: openapi/sonetel-ai-prompt-manager-openapi.yml
+  method: GET
+  path: /prompt/{prompt_id}/version/{version}
+  read_only: true
+- name: delete-prompt-prompt_id-version-version
+  description: Delete prompt version
+  api: openapi/sonetel-ai-prompt-manager-openapi.yml
+  method: DELETE
+  path: /prompt/{prompt_id}/version/{version}
+  read_only: false
+- name: put-prompt-prompt_id-version-version
+  description: Update prompt version
+  api: openapi/sonetel-ai-prompt-manager-openapi.yml
+  method: PUT
+  path: /prompt/{prompt_id}/version/{version}
+  read_only: false
+- name: post-ai-service-business-description
+  description: Write business description
+  api: openapi/sonetel-ai-services-openapi.yml
+  method: POST
+  path: /ai-service/business-description
+  read_only: false
+- name: post-ai-service-blog-title-list
+  description: Generate blog titles
+  api: openapi/sonetel-ai-services-openapi.yml
+  method: POST
+  path: /ai-service/blog-title-list
+  read_only: false
+- name: post-ai-service-blog
+  description: Write a blog
+  api: openapi/sonetel-ai-services-openapi.yml
+  method: POST
+  path: /ai-service/blog
+  read_only: false
+- name: post-ai-service-meeting-minutes
+  description: Write meeting minutes
+  api: openapi/sonetel-ai-services-openapi.yml
+  method: POST
+  path: /ai-service/meeting-minutes
+  read_only: false
+- name: post-ai-service-vm-summary
+  description: Write voicemail summary
+  api: openapi/sonetel-ai-services-openapi.yml
+  method: POST
+  path: /ai-service/vm-summary
+  read_only: false
+- name: post-ai-service-call-summary
+  description: Write call summary
+  api: openapi/sonetel-ai-services-openapi.yml
+  method: POST
+  path: /ai-service/call-summary
+  read_only: false
+- name: get-ai-service-status
+  description: Get Service instance
+  api: openapi/sonetel-ai-services-openapi.yml
+  method: GET
+  path: /ai-service/{service_id}
+  read_only: true
+- name: get-ai-service
+  description: List service instances
+  api: openapi/sonetel-ai-services-openapi.yml
+  method: GET
+  path: /ai-service
+  read_only: true
+- name: get-textmgr-text
+  description: List texts
+  api: openapi/sonetel-ai-text-manager-openapi.yml
+  method: GET
+  path: /textmgr/text
+  read_only: true
+- name: post-textmgr-text
+  description: Create a text
+  api: openapi/sonetel-ai-text-manager-openapi.yml
+  method: POST
+  path: /textmgr/text
+  read_only: false
+- name: delete-textmgr-text
+  description: Delete many text(s)
+  api: openapi/sonetel-ai-text-manager-openapi.yml
+  method: DELETE
+  path: /textmgr/text
+  read_only: false
+- name: get-textmgr-text-text-id
+  description: GET text by id
+  api: openapi/sonetel-ai-text-manager-openapi.yml
+  method: GET
+  path: /textmgr/text/{text_id}
+  read_only: true
+- name: put-ai-textman-text-text-id
+  description: Update text fields
+  api: openapi/sonetel-ai-text-manager-openapi.yml
+  method: PUT
+  path: /textmgr/text/{text_id}
+  read_only: false
+- name: delete-ai-textmgr-text-text-id
+  description: Delete a text
+  api: openapi/sonetel-ai-text-manager-openapi.yml
+  method: DELETE
+  path: /textmgr/text/{text_id}
+  read_only: false
+- name: post-textmgr-text-text-id-version
+  description: Create text version
+  api: openapi/sonetel-ai-text-manager-openapi.yml
+  method: POST
+  path: /textmgr/text/{text_id}/version
+  read_only: false
+- name: put-textmgr-text-text-id-version-version-id
+  description: Update a text version (internal)
+  api: openapi/sonetel-ai-text-manager-openapi.yml
+  method: PUT
+  path: /textmgr/text/{text_id}/version/{version}
+  read_only: false
+- name: delete-textmgr-text-text-id-version-version-id
+  description: Delete text version
+  api: openapi/sonetel-ai-text-manager-openapi.yml
+  method: DELETE
+  path: /textmgr/text/{text_id}/version/{version}
+  read_only: false
+- name: post-textmgr-text-text-id-write
+  description: Write text (internal)
+  api: openapi/sonetel-ai-text-manager-openapi.yml
+  method: POST
+  path: /textmgr/text/{text_id}/write
+  read_only: false
+- name: get-textmgr-text-id-business-description
+  description: Get business description
+  api: openapi/sonetel-ai-text-manager-openapi.yml
+  method: GET
+  path: /textmgr/text/{text_id}/business-description
+  read_only: true
+- name: get-txtmgr-business-description
+  description: List business description
+  api: openapi/sonetel-ai-text-manager-openapi.yml
+  method: GET
+  path: /textmgr/business-description
+  read_only: true
+- name: get-textmgr-text-text-id-webpage
+  description: Get Web page
+  api: openapi/sonetel-ai-text-manager-openapi.yml
+  method: GET
+  path: /textmgr/text/{text-id}/webpage
+  read_only: true
+- name: get-textmgr-webpage
+  description: List web pages
+  api: openapi/sonetel-ai-text-manager-openapi.yml
+  method: GET
+  path: /textmgr/webpage
+  read_only: true
+- name: get-textmgr-text-text_id-blog-title-list
+  description: Get blog title list
+  api: openapi/sonetel-ai-text-manager-openapi.yml
+  method: GET
+  path: /textmgr/text/{text_id}/blog-title-list
+  read_only: true
+- name: get-textmgr-blog-title-list
+  description: List Blog title lists
+  api: openapi/sonetel-ai-text-manager-openapi.yml
+  method: GET
+  path: /textmgr/blog-title-list
+  read_only: true
+- name: get-textmgr-text-text_id-blog
+  description: Get blog article
+  api: openapi/sonetel-ai-text-manager-openapi.yml
+  method: GET
+  path: /textmgr/text/{text_id}/blog
+  read_only: true
+- name: get-textmgr-blog
+  description: List blogs
+  api: openapi/sonetel-ai-text-manager-openapi.yml
+  method: GET
+  path: /textmgr/blog
+  read_only: true
+- name: get-textmgr-text-text_id-meeting-minutes
+  description: Get meeting minutes
+  api: openapi/sonetel-ai-text-manager-openapi.yml
+  method: GET
+  path: /textmgr/text/{text_id}/meeting-minutes
+  read_only: true
+- name: delete-textmgr-text-text_id-meeting-minutes
+  description: Delete meeting-minutes
+  api: openapi/sonetel-ai-text-manager-openapi.yml
+  method: DELETE
+  path: /textmgr/text/{text_id}/meeting-minutes
+  read_only: false
+- name: put-textmgr-text-text_id-meeting-minutes
+  description: Update meeting minutes
+  api: openapi/sonetel-ai-text-manager-openapi.yml
+  method: PUT
+  path: /textmgr/text/{text_id}/meeting-minutes
+  read_only: false
+- name: get-textmgr-meeting-minutes
+  description: List meeting minutes
+  api: openapi/sonetel-ai-text-manager-openapi.yml
+  method: GET
+  path: /textmgr/meeting-minutes
+  read_only: true
+- name: get-textmgr-text-text_id-vm-summary
+  description: Get voicemail summary
+  api: openapi/sonetel-ai-text-manager-openapi.yml
+  method: GET
+  path: /textmgr/text/{text_id}/vm-summary
+  read_only: true
+- name: get-textmgr-vm-summary
+  description: List voicemail summaries
+  api: openapi/sonetel-ai-text-manager-openapi.yml
+  method: GET
+  path: /textmgr/vm-summary
+  read_only: true
+- name: get-textmgr-text-text_id-call-summary
+  description: Fetch call summary
+  api: openapi/sonetel-ai-text-manager-openapi.yml
+  method: GET
+  path: /textmgr/text/{text_id}/call-summary
+  read_only: true
+- name: delete-textmgr-text-call-summary-text_id
+  description: Delete call summary
+  api: openapi/sonetel-ai-text-manager-openapi.yml
+  method: DELETE
+  path: /textmgr/text/{text_id}/call-summary
+  read_only: false
+- name: get-textmgr-call-summary
+  description: List call summaries
+  api: openapi/sonetel-ai-text-manager-openapi.yml
+  method: GET
+  path: /textmgr/call-summary
+  read_only: true
+- name: get-app-view-settings
+  description: GET app-view-settings
+  api: openapi/sonetel-app-view-settings-openapi.yml
+  method: GET
+  path: /app-view-settings
+  read_only: true
+- name: create-JWT-token
+  description: Create token
+  api: openapi/sonetel-authentication-openapi.yml
+  method: POST
+  path: /oauth/token
+  read_only: false
+- name: post-make-calls-call-call-back
+  description: Start a callback call
+  api: openapi/sonetel-make-calls-openapi.yml
+  method: POST
+  path: /make-calls/call/call-back
+  read_only: false
+- name: get-country
+  description: Inventory - Phone number support by country
+  api: openapi/sonetel-phone-numbers-openapi.yml
+  method: GET
+  path: /country
+  read_only: true
+- name: get-stock
+  description: Inventory - Quantities of numbers available by type/country
+  api: openapi/sonetel-phone-numbers-openapi.yml
+  method: GET
+  path: /numberstocksummary/{country}
+  read_only: true
+- name: get-numberstocksummary-country-availablephonenumber
+  description: Inventory - Available numbers in a country
+  api: openapi/sonetel-phone-numbers-openapi.yml
+  method: GET
+  path: /numberstocksummary/{country}/availablephonenumber
+  read_only: true
+- name: get-subscribed-numbers
+  description: Get my subscribed numbers
+  api: openapi/sonetel-phone-numbers-openapi.yml
+  method: GET
+  path: /account/{accountid}/phonenumbersubscription
+  read_only: true
+- name: postaccount-accountid-phonenumbersubscription
+  description: Buy a number
+  api: openapi/sonetel-phone-numbers-openapi.yml
+  method: POST
+  path: /account/{accountid}/phonenumbersubscription
+  read_only: false
+- name: putaccount-accountid-phonenumbersubscription-phnum
+  description: Update number settings
+  api: openapi/sonetel-phone-numbers-openapi.yml
+  method: PUT
+  path: /account/{accountid}/phonenumbersubscription/{phnum}
+  read_only: false
+- name: getaccount-accountid-phonenumbersubscription-phnum
+  description: Get my number details
+  api: openapi/sonetel-phone-numbers-openapi.yml
+  method: GET
+  path: /account/{accountid}/phonenumbersubscription/{phnum}
+  read_only: true
+- name: deleteaccount-accountid-phonenumbersubscription-phnum
+  description: Return number
+  api: openapi/sonetel-phone-numbers-openapi.yml
+  method: DELETE
+  path: /account/{accountid}/phonenumbersubscription/{phnum}
+  read_only: false
+- name: get-recording-recordingId
+  description: Get call recording by ID
+  api: openapi/sonetel-recorded-calls-openapi.yml
+  method: GET
+  path: /call-recording/{recording-id}
+  read_only: true
+- name: delete-call-recording-recording-id
+  description: Delete a call recording by ID
+  api: openapi/sonetel-recorded-calls-openapi.yml
+  method: DELETE
+  path: /call-recording/{recording-id}
+  read_only: false
+- name: get-call-recording
+  description: Retrieve call recordings
+  api: openapi/sonetel-recorded-calls-openapi.yml
+  method: GET
+  path: /call-recording
+  read_only: true
+- name: delete-call-recording
+  description: Delete many recordings
+  api: openapi/sonetel-recorded-calls-openapi.yml
+  method: DELETE
+  path: /call-recording
+  read_only: false
+- name: get-call-recording-recording-id-summarize
+  description: Summarize a call recording
+  api: openapi/sonetel-recorded-calls-openapi.yml
+  method: GET
+  path: /call-recording/{recording-id}/summarize
+  read_only: true
+- name: get-call-recording-summarize
+  description: Summarize many call recordings
+  api: openapi/sonetel-recorded-calls-openapi.yml
+  method: GET
+  path: /call-recording/summarize
+  read_only: true
+- name: get-globaldata-timezone
+  description: List all timezones
+  api: openapi/sonetel-supporting-data-openapi.yml
+  method: GET
+  path: /globaldata/timezone
+  read_only: true
+- name: get-globaldata-voiceprompts
+  description: List of pre-recorded voices
+  api: openapi/sonetel-supporting-data-openapi.yml
+  method: GET
+  path: /globaldata/voiceprompts
+  read_only: true
+- name: get-globaldata-language
+  description: List all language codes
+  api: openapi/sonetel-supporting-data-openapi.yml
+  method: GET
+  path: /globaldata/language
+  read_only: true
+- name: post-prompt-convert
+  description: Convert voice message
+  api: openapi/sonetel-text-to-speech-openapi.yml
+  method: POST
+  path: /tts/prompt/convert
+  read_only: false
+- name: get-tts-prompt-voice
+  description: List available voices
+  api: openapi/sonetel-text-to-speech-openapi.yml
+  method: GET
+  path: /tts/prompt/voice
+  read_only: true
+- name: transcribeFile
+  description: Request transcription of a file
+  api: openapi/sonetel-transcription-openapi.yml
+  method: POST
+  path: /transcription/transcribe_async
+  read_only: false
+- name: get-transcription-transcribe_async-req_id
+  description: Fetch transcription status
+  api: openapi/sonetel-transcription-openapi.yml
+  method: GET
+  path: /transcription/transcribe_async/{req_id}
+  read_only: true
+- name: get-usagerecord
+  description: Get usage records
+  api: openapi/sonetel-usage-records-openapi.yml
+  method: GET
+  path: /usage/account/{accountid}/usagerecord
+  read_only: true
+- name: get-usagerecord-download
+  description: Download usage records
+  api: openapi/sonetel-usage-records-openapi.yml
+  method: GET
+  path: /usage/account/{accountid}/usagerecord/download
+  read_only: true
+- name: post-user
+  description: Add new user
+  api: openapi/sonetel-users-openapi.yml
+  method: POST
+  path: /account/{accountid}/user
+  read_only: false
+- name: getaccount-accountid-user
+  description: List all users
+  api: openapi/sonetel-users-openapi.yml
+  method: GET
+  path: /account/{accountid}/user
+  read_only: true
+- name: get-account-accountid-user-userid
+  description: Get user profile
+  api: openapi/sonetel-users-openapi.yml
+  method: GET
+  path: /account/{accountid}/user/{userid}
+  read_only: true
+- name: put-account-accountid-user-userid
+  description: Update user profile
+  api: openapi/sonetel-users-openapi.yml
+  method: PUT
+  path: /account/{accountid}/user/{userid}
+  read_only: false
+- name: delete-account-accountid-user-userid
+  description: Delete a user
+  api: openapi/sonetel-users-openapi.yml
+  method: DELETE
+  path: /account/{accountid}/user/{userid}
+  read_only: false
+- name: post-account-accountid-user-userid-call
+  description: Update call settings
+  api: openapi/sonetel-users-openapi.yml
+  method: POST
+  path: /account/{accountid}/user/{userid}/call
+  read_only: false
+- name: get-account-accountid-user-userid-call
+  description: Get call settings
+  api: openapi/sonetel-users-openapi.yml
+  method: GET
+  path: /account/{accountid}/user/{userid}/call
+  read_only: true
+- name: get-user-userid-ai-settings
+  description: Fetch Users Data settings
+  api: openapi/sonetel-users-openapi.yml
+  method: GET
+  path: /user/{userid}/settings/data-mgr
+  read_only: true
+- name: put-user-userid-ai-settings
+  description: Update User Data settings
+  api: openapi/sonetel-users-openapi.yml
+  method: PUT
+  path: /user/{userid}/settings/data-mgr
+  read_only: false
+- name: get-voiceapps-account
+  description: Get all voice apps
+  api: openapi/sonetel-voice-apps-openapi.yml
+  method: GET
+  path: /account/{accountid}/voiceapp
+  read_only: true
+- name: create-voiceapp-account
+  description: Create new voice app
+  api: openapi/sonetel-voice-apps-openapi.yml
+  method: POST
+  path: /account/{accountid}/voiceapp
+  read_only: false
+- name: get-account-voiceappid
+  description: Get voice app by ID
+  api: openapi/sonetel-voice-apps-openapi.yml
+  method: GET
+  path: /account/{accountid}/voiceapp/{voiceappid}
+  read_only: true
+- name: update-account-voiceappid
+  description: Update voice app by ID
+  api: openapi/sonetel-voice-apps-openapi.yml
+  method: PUT
+  path: /account/{accountid}/voiceapp/{voiceappid}
+  read_only: false
+- name: delete-account-voiceappid
+  description: Delete a voice app
+  api: openapi/sonetel-voice-apps-openapi.yml
+  method: DELETE
+  path: /account/{accountid}/voiceapp/{voiceappid}
+  read_only: false
+- name: post-user
+  description: Create a custom prompt
+  api: openapi/sonetel-voice-apps-openapi.yml
+  method: POST
+  path: /account/{accountid}/voiceapp/{voiceappid}/prompt
+  read_only: false
+- name: get-user
+  description: List prompts linked to voice app
+  api: openapi/sonetel-voice-apps-openapi.yml
+  method: GET
+  path: /account/{accountid}/voiceapp/{voiceappid}/prompt
+  read_only: true
+- name: get-voiceapp-prompt-id
+  description: Get prompts by ID
+  api: openapi/sonetel-voice-apps-openapi.yml
+  method: GET
+  path: /account/{accountid}/voiceapp/{voiceappid}/prompt/{promptid}
+  read_only: true
+- name: Replace-voiceapp-promptid
+  description: Update prompt by ID
+  api: openapi/sonetel-voice-apps-openapi.yml
+  method: PUT
+  path: /account/{accountid}/voiceapp/{voiceappid}/prompt/{promptid}
+  read_only: false
+- name: delete-voiceapp-promptid
+  description: Delete a custom prompt
+  api: openapi/sonetel-voice-apps-openapi.yml
+  method: DELETE
+  path: /account/{accountid}/voiceapp/{voiceappid}/prompt/{promptid}
+  read_only: false
+- name: upload-message
+  description: Add custom message to a prompt
+  api: openapi/sonetel-voice-apps-openapi.yml
+  method: POST
+  path: /prompt/{promptid}/message
+  read_only: false
+notes:
+- operationIds `post-user` and `get-user` appear in BOTH the Users and Voice apps specs (in Voice apps they actually
+  name voice-app prompt operations), and `get-users-userId` names GET /account/{accountId}. A real server would
+  need to rename these to avoid tool-name collisions.
+- POST /internal/filemgr/* operations were left out of the candidate list because they are marked internal.

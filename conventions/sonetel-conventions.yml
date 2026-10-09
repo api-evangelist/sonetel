@@ -1,0 +1,63 @@
+generated: '2026-10-09'
+method: searched
+source: https://docs.sonetel.com/docs/sonetel-documentation/ZG9jOjE0NjU1NTI4-guidelines
+name: Sonetel Conventions
+sources:
+- https://docs.sonetel.com/docs/sonetel-documentation/ZG9jOjE0NjU1NTI4-guidelines
+- https://docs.sonetel.com/docs/sonetel-documentation/ZG9jOjE0NjUyMDIx-responses
+- https://docs.sonetel.com/docs/sonetel-documentation/ZG9jOjE0NjUyMDIy-error-codes
+- https://docs.sonetel.com/docs/sonetel-documentation/143990db3cda3-authentication
+auth:
+  style: OAuth2 password grant -> bearer token in Authorization header (token valid 30 days, refresh_token grant)
+  see: authentication/sonetel-authentication.yml
+idempotency:
+  coverage: none
+  mechanism: null
+  note: No idempotency key or replay protection is documented in the docs or declared in the OpenAPI contracts.
+pagination:
+  style: none documented
+  note: No page/limit/offset/cursor parameters appear in the contracts; list endpoints are filtered (e.g. created_date_min/created_date_max, status, type) rather than paged.
+field_selection:
+  param: fields
+  text: 'You can specify what fields you need in a comma separated list under the filter "fields". The following format applies /resource?fields=field1,field2,field3.'
+  source: https://docs.sonetel.com/docs/sonetel-documentation/ZG9jOjE0NjUyMDIx-responses
+filters:
+  multi_value: comma separated list, e.g. ?area_code=747,515
+  wildcard: 'The wild card character used is asterisk * and a minimum of 3 characters are required'
+  booleans: 'Boolean or flags in query strings in the urls always use "yes" or "no", unless explicitly specified.'
+  unknown_params: Unknown parameters in urls are ignored while processing requests.
+formats:
+  countries: ISO 3166-1
+  currencies: ISO 4217
+  time: 'ISO 8601, GMT only, basic format YYYYMMDDThh:mm:ssZ'
+  phone_numbers: E164 without plus sign (e.g. 12025551234)
+  casing: all lower case for properties and string values except ISO codes
+  decimals: dot separator, rounded to the property's defined precision
+response_envelope:
+  success: '{"resource": ..., "status": "success", "response": {...}}'
+  error: '{"response": {"detail": ..., "code": ...}, "resource": ..., "status": "failed"}'
+  note: Failures are returned as HTTP 200 with status "failed"; clients must check the status field.
+  see: errors/sonetel-error-codes.yml
+request_id: null
+versioning:
+  see: lifecycle/sonetel-lifecycle.yml
+rate_limit_signaling:
+  note: none documented
+  see: rate-limits/sonetel-rate-limits.yml
+reversibility:
+  write_surface: true
+  operations:
+  - surface: phone number subscriptions
+    operationId: deleteaccount-accountid-phonenumbersubscription-phnum
+    reversible: false
+    text: 'Deleting a phone number subscription permanently removes it. ... it may not be possible to re-assign the phone number once it is removed from your account.'
+    alternative: 'If you wish to return the number after the current subscription period ends, you can turn off the renewal instead (app.sonetel.com, renewal mode "Do not renew").'
+    source: openapi/_original/phone_numbers.yaml (Return number description)
+  - surface: call recordings, users, voice apps, prompts, texts, files
+    reversible: null
+    note: DELETE operations exist; no restore/undo operation or recovery window is documented.
+  - surface: callback calls (post-make-calls-call-call-back)
+    reversible: null
+    note: No cancel/hangup operation is documented.
+  grade: none
+  note: No reversal operation with a stated window is documented for any write surface.

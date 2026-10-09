@@ -1,0 +1,36 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist overlay for Sonetel Text to speech API
+  version: 1.0.0
+extends: ../openapi/_original/sonetel-text-to-speech-openapi.yml
+x-generated: '2026-10-09'
+x-method: generated
+x-source: openapi/sonetel-text-to-speech-openapi.yml
+actions:
+- target: $.info
+  description: Record API Evangelist provenance.
+  update:
+    x-api-evangelist:
+      provider: sonetel
+      generated: '2026-10-09'
+      source: openapi/sonetel-text-to-speech-openapi.yml
+      upstream: https://github.com/Sonetel/sonetel-api-docs
+      documentation: https://docs.sonetel.com/
+- target: $
+  description: The upstream document declares no tags; add one tag naming this API so operations group
+    in renderers.
+  update:
+    tags:
+    - name: Sonetel Text to speech
+      description: Use our text-to-speech (TTS) API to quickly create professional voice messages for
+        your IVR and other voice apps.
+- target: $.paths['/tts/prompt/convert'].post
+  description: Tag post-prompt-convert.
+  update:
+    tags:
+    - Sonetel Text to speech
+- target: $.paths['/tts/prompt/voice'].get
+  description: Tag get-tts-prompt-voice.
+  update:
+    tags:
+    - Sonetel Text to speech

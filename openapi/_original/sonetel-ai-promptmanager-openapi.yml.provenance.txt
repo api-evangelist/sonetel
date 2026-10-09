@@ -1,0 +1,9 @@
+generated: '2026-10-09'
+method: probed
+generator: harvest-sibling-contracts.py
+source: https://raw.githubusercontent.com/Sonetel/sonetel-api-docs/master/reference/ai_promptmanager.yaml
+found_on: https://github.com/Sonetel/sonetel-api-docs
+operations: gh:ai_promptmanager.yaml
+version: 3.1.0
+ownership: sibling of a contract the pass accepted on the same host; URL names the
+  provider

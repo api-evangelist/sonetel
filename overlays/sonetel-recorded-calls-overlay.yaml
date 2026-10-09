@@ -1,0 +1,57 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist overlay for Sonetel Recorded calls API
+  version: 1.0.0
+extends: ../openapi/_original/sonetel-recorded-calls-openapi.yml
+x-generated: '2026-10-09'
+x-method: generated
+x-source: openapi/sonetel-recorded-calls-openapi.yml
+actions:
+- target: $.info
+  description: Record API Evangelist provenance.
+  update:
+    x-api-evangelist:
+      provider: sonetel
+      generated: '2026-10-09'
+      source: openapi/sonetel-recorded-calls-openapi.yml
+      upstream: https://github.com/Sonetel/sonetel-api-docs
+      documentation: https://docs.sonetel.com/
+- target: $
+  description: The upstream document declares no tags; add one tag naming this API so operations group
+    in renderers.
+  update:
+    tags:
+    - name: Sonetel Recorded calls
+      description: Calls or conferences handled using your Sonetel account can be recorded using the call
+        recording function. The recorded calls are stored in Sonetel and can be managed via the Call recording
+        API.
+- target: $.paths['/call-recording/{recording-id}'].get
+  description: Tag get-recording-recordingId.
+  update:
+    tags:
+    - Sonetel Recorded calls
+- target: $.paths['/call-recording/{recording-id}'].delete
+  description: Tag delete-call-recording-recording-id.
+  update:
+    tags:
+    - Sonetel Recorded calls
+- target: $.paths['/call-recording'].get
+  description: Tag get-call-recording.
+  update:
+    tags:
+    - Sonetel Recorded calls
+- target: $.paths['/call-recording'].delete
+  description: Tag delete-call-recording.
+  update:
+    tags:
+    - Sonetel Recorded calls
+- target: $.paths['/call-recording/{recording-id}/summarize'].get
+  description: Tag get-call-recording-recording-id-summarize.
+  update:
+    tags:
+    - Sonetel Recorded calls
+- target: $.paths['/call-recording/summarize'].get
+  description: Tag get-call-recording-summarize.
+  update:
+    tags:
+    - Sonetel Recorded calls

@@ -1,0 +1,353 @@
+generated: '2026-10-09'
+method: derived
+generator: derive-vocabulary.py
+source:
+- openapi/sonetel-account-openapi.yml
+- openapi/sonetel-ai-business-openapi.yml
+- openapi/sonetel-ai-file-manager-openapi.yml
+- openapi/sonetel-ai-functions-openapi.yml
+- openapi/sonetel-ai-prompt-manager-openapi.yml
+vocabulary:
+  name: Sonetel Domain Vocabulary
+  description: 'Terms declared by Sonetel''s own API contract: its resource groups, objects and enumerations, with the contract''s definitions.
+    Derived, not authored.'
+  version: '2026-10-09'
+  terms:
+  - term: Account-GET
+    definition: Your Sonetel account settings
+    tags:
+    - Object
+    source: openapi/sonetel-account-openapi.yml#/components/schemas/Account-GET
+  - term: ServiceSettings
+    definition: An account's service settings
+    tags:
+    - Object
+    source: openapi/sonetel-account-openapi.yml#/components/schemas/ServiceSettings
+  - term: Account-PUT
+    definition: Update your account settings
+    tags:
+    - Object
+    source: openapi/sonetel-account-openapi.yml#/components/schemas/Account-PUT
+  - term: ServiceSettings-PUT
+    definition: Service settings of an account that can be updated
+    tags:
+    - Object
+    source: openapi/sonetel-account-openapi.yml#/components/schemas/ServiceSettings-PUT
+  - term: AccountDataMgrCallRecSettings
+    definition: 'Object declared by the contract with fields: auto_delete, auto_delete_time.'
+    tags:
+    - Object
+    source: openapi/sonetel-account-openapi.yml#/components/schemas/AccountDataMgrCallRecSettings
+  - term: business-with-description
+    definition: Business details without description
+    tags:
+    - Object
+    source: openapi/sonetel-ai-business-openapi.yml#/components/schemas/business-with-description
+  - term: business-description
+    definition: Business description with partially (still being written) or completed text. If status is `in_progress`, `text_data` may have
+      part of the text available. The `text_data` continues to get updated until the status changes to ready.
+    tags:
+    - Object
+    source: openapi/sonetel-ai-business-openapi.yml#/components/schemas/business-description
+  - term: business-without-desc
+    definition: The business details with business description
+    tags:
+    - Object
+    source: openapi/sonetel-ai-business-openapi.yml#/components/schemas/business-without-desc
+  - term: FileWithID
+    definition: File meta data
+    tags:
+    - Object
+    source: openapi/sonetel-ai-file-manager-openapi.yml#/components/schemas/FileWithID
+  - term: ImageMetaData
+    definition: Meta data for image files
+    tags:
+    - Object
+    source: openapi/sonetel-ai-file-manager-openapi.yml#/components/schemas/ImageMetaData
+  - term: VideoMetaData
+    definition: Meta data for video files
+    tags:
+    - Object
+    source: openapi/sonetel-ai-file-manager-openapi.yml#/components/schemas/VideoMetaData
+  - term: AudioMetaData
+    definition: Meta data for audio files
+    tags:
+    - Object
+    source: openapi/sonetel-ai-file-manager-openapi.yml#/components/schemas/AudioMetaData
+  - term: InUseWith
+    definition: Information about services file is in use with
+    tags:
+    - Object
+    source: openapi/sonetel-ai-file-manager-openapi.yml#/components/schemas/InUseWith
+  - term: gpt-settings
+    definition: GPT specific settings for the prompt
+    tags:
+    - Object
+    source: openapi/sonetel-ai-prompt-manager-openapi.yml#/components/schemas/gpt-settings
+  - term: linked-prompts
+    definition: A list of prompts linked to this prompt
+    tags:
+    - Object
+    source: openapi/sonetel-ai-prompt-manager-openapi.yml#/components/schemas/linked-prompts
+  - term: prompt
+    definition: A prompt object
+    tags:
+    - Object
+    source: openapi/sonetel-ai-prompt-manager-openapi.yml#/components/schemas/prompt
+  - term: prompt-version-no-id
+    definition: Prompt version information
+    tags:
+    - Object
+    source: openapi/sonetel-ai-prompt-manager-openapi.yml#/components/schemas/prompt-version-no-id
+  - term: prompt-tag
+    definition: Prompt tag
+    tags:
+    - Object
+    source: openapi/sonetel-ai-prompt-manager-openapi.yml#/components/schemas/prompt-tag
+  - term: prompt-version
+    definition: A prompt version
+    tags:
+    - Object
+    source: openapi/sonetel-ai-prompt-manager-openapi.yml#/components/schemas/prompt-version
+  - term: Account-context
+    definition: Account, user and business information
+    tags:
+    - Object
+    source: openapi/sonetel-ai-services-openapi.yml#/components/schemas/Account-context
+  - term: File-input
+    definition: File either as a `file_id` or a file URL
+    tags:
+    - Object
+    source: openapi/sonetel-ai-services-openapi.yml#/components/schemas/File-input
+  - term: Business-description-inputs
+    definition: Inputs to service for generating a business description
+    tags:
+    - Object
+    source: openapi/sonetel-ai-services-openapi.yml#/components/schemas/Business-description-inputs
+  - term: Blog-title-list-inputs
+    definition: Inputs to service for generating blog title list
+    tags:
+    - Object
+    source: openapi/sonetel-ai-services-openapi.yml#/components/schemas/Blog-title-list-inputs
+  - term: Blog-inputs
+    definition: Inputs to service for generating a blog.
+    tags:
+    - Object
+    source: openapi/sonetel-ai-services-openapi.yml#/components/schemas/Blog-inputs
+  - term: Blog-post-process
+    definition: Optional settings and functions to be used while generating a Blog title list
+    tags:
+    - Object
+    source: openapi/sonetel-ai-services-openapi.yml#/components/schemas/Blog-post-process
+  - term: Meeting-minutes-inputs
+    definition: Inputs for meeting minutes
+    tags:
+    - Object
+    source: openapi/sonetel-ai-services-openapi.yml#/components/schemas/Meeting-minutes-inputs
+  - term: Service-object
+    definition: A service object along with its status
+    tags:
+    - Object
+    source: openapi/sonetel-ai-services-openapi.yml#/components/schemas/Service-object
+  - term: Service-status
+    definition: The service status information including an overall status and progress information
+    tags:
+    - Object
+    source: openapi/sonetel-ai-services-openapi.yml#/components/schemas/Service-status
+  - term: Text-version-object-no-id
+    definition: A version of text with the various text data, status and meta-data
+    tags:
+    - Object
+    source: openapi/sonetel-ai-text-manager-openapi.yml#/components/schemas/Text-version-object-no-Id
+  - term: Meta-data
+    definition: The meta data associated to a version of the text. The meta-data may take the structure of any of any of the text types depending
+      on the type of text stored
+    tags:
+    - Object
+    source: openapi/sonetel-ai-text-manager-openapi.yml#/components/schemas/Meta-data
+  - term: Business description
+    definition: Business description with partially (still being written) or completed text. If status is `in_progress`, `text_data` may have
+      part of the text available. The `text_data` continues to get updated until the status changes to `ready`.
+    tags:
+    - Object
+    source: openapi/sonetel-ai-text-manager-openapi.yml#/components/schemas/Business-description
+  - term: Text-data-simple
+    definition: Simple text data with status
+    tags:
+    - Object
+    source: openapi/sonetel-ai-text-manager-openapi.yml#/components/schemas/Text-data-simple
+  - term: Web-page
+    definition: Web page information along with the URL, raw text references and additional fields
+    tags:
+    - Object
+    source: openapi/sonetel-ai-text-manager-openapi.yml#/components/schemas/Web-page
+  - term: Text-info
+    definition: Information about the text
+    tags:
+    - Object
+    source: openapi/sonetel-ai-text-manager-openapi.yml#/components/schemas/Text-info
+  - term: Blog-title-list
+    definition: List of blog titles
+    tags:
+    - Object
+    source: openapi/sonetel-ai-text-manager-openapi.yml#/components/schemas/Blog-title-list
+  - term: Blog
+    definition: A blog article along with a bunch of information about it. Blog article is broken down into ordered sections with text. Each section
+      is assigned a type.
+    tags:
+    - Object
+    source: openapi/sonetel-ai-text-manager-openapi.yml#/components/schemas/Blog
+  - term: Text-section
+    definition: A section of text which is a part of a longer text. A section has a `type` and `status` `type` may be used by user interfaces
+      to render the section in a certain way `status` indicates if the text in the section is ready or still being written
+    tags:
+    - Object
+    source: openapi/sonetel-ai-text-manager-openapi.yml#/components/schemas/Text-section
+  - term: Meeting-minutes
+    definition: Meeting minutes and meeting details including meeting name, agreement, summary, action items.
+    tags:
+    - Object
+    source: openapi/sonetel-ai-text-manager-openapi.yml#/components/schemas/Meeting-minutes
+  - term: File-single
+    definition: A single file information
+    tags:
+    - Object
+    source: openapi/sonetel-ai-text-manager-openapi.yml#/components/schemas/File-single
+  - term: Call-summary
+    definition: Call summary text object
+    tags:
+    - Object
+    source: openapi/sonetel-ai-text-manager-openapi.yml#/components/schemas/Call-summary
+  - term: Call-analysis-support
+    definition: 'Object declared by the contract with fields: resolution, general, sentiment, score, suggestion, tactics.'
+    tags:
+    - Object
+    source: openapi/sonetel-ai-text-manager-openapi.yml#/components/schemas/Call-analysis-support
+  - term: Call-summary-common
+    definition: 'Object declared by the contract with fields: summary, topics, agreements, action_items.'
+    tags:
+    - Object
+    source: openapi/sonetel-ai-text-manager-openapi.yml#/components/schemas/Call-summary-common
+  - term: Headers
+    definition: Headers to be shown on the UI
+    tags:
+    - Object
+    source: openapi/sonetel-ai-text-manager-openapi.yml#/components/schemas/Headers
+  - term: Call-analysis-sentiment-customer
+    definition: 'Object declared by the contract with fields: overall, agent, customer, customer_h1, customer_h2, sentiment_decline_reason, header.'
+    tags:
+    - Object
+    source: openapi/sonetel-ai-text-manager-openapi.yml#/components/schemas/Call-analysis-sentiment-customer
+  - term: Call-analysis-score
+    definition: Scores from call analysis
+    tags:
+    - Object
+    source: openapi/sonetel-ai-text-manager-openapi.yml#/components/schemas/Call-analysis-score
+  - term: Call-analysis-suggestions
+    definition: 'Object declared by the contract with fields: list.'
+    tags:
+    - Object
+    source: openapi/sonetel-ai-text-manager-openapi.yml#/components/schemas/Call-analysis-suggestions
+  - term: Call-analysis-sales
+    definition: 'Object declared by the contract with fields: general, sentiment, score, suggestion, tactics.'
+    tags:
+    - Object
+    source: openapi/sonetel-ai-text-manager-openapi.yml#/components/schemas/Call-analysis-sales
+  - term: Call-analysis-other
+    definition: 'Object declared by the contract with fields: general.'
+    tags:
+    - Object
+    source: openapi/sonetel-ai-text-manager-openapi.yml#/components/schemas/Call-analysis-other
+  - term: Text
+    definition: The text object with the latest version of the text
+    tags:
+    - Object
+    source: openapi/sonetel-ai-text-manager-openapi.yml#/components/schemas/Text
+  - term: Text-version-object
+    definition: A version of text with the various text data, status and meta-data
+    tags:
+    - Object
+    source: openapi/sonetel-ai-text-manager-openapi.yml#/components/schemas/Text-version-object
+  - term: Text-many-versions
+    definition: The text object with the latest version of the text
+    tags:
+    - Object
+    source: openapi/sonetel-ai-text-manager-openapi.yml#/components/schemas/Text-many-versions
+  - term: Voicemail-summary
+    definition: Voicemail summary text object
+    tags:
+    - Object
+    source: openapi/sonetel-ai-text-manager-openapi.yml#/components/schemas/Voicemail-summary
+  - term: List my phone number subscriptions
+    definition: This is a list of subscriptions under an account
+    tags:
+    - Object
+    source: openapi/sonetel-phone-numbers-openapi.yml#/components/schemas/List-PhnumSubscriptions
+  - term: Phone number subscription
+    definition: Represents a single phone number subscribed by an account
+    tags:
+    - Object
+    source: openapi/sonetel-phone-numbers-openapi.yml#/components/schemas/Single-phone-number-subscription
+  - term: Call-recording
+    definition: 'Object declared by the contract with fields: resource, status, response.'
+    tags:
+    - Object
+    source: openapi/sonetel-recorded-calls-openapi.yml#/components/schemas/Call-recording
+  - term: Call-recording-list
+    definition: 'Object declared by the contract with fields: resource, status, response.'
+    tags:
+    - Object
+    source: openapi/sonetel-recorded-calls-openapi.yml#/components/schemas/Call-recording-list
+  - term: file
+    definition: File to be transcribed must be specified either via a `file_id`, a URL or by providing the file data
+    tags:
+    - Object
+    source: openapi/sonetel-transcription-openapi.yml#/components/schemas/file
+  - term: write_to
+    definition: The destination where the transcript must be deposited. One of more destinations may be specified
+    tags:
+    - Object
+    source: openapi/sonetel-transcription-openapi.yml#/components/schemas/write_to
+  - term: requested_by
+    definition: Details of the service requesting transcription
+    tags:
+    - Object
+    source: openapi/sonetel-transcription-openapi.yml#/components/schemas/requested_by
+  - term: User-Update
+    definition: 'Object declared by the contract with fields: user_fname, max_conversations, phones, language, language_id, title, type, user_lname,
+      location, email, password.'
+    tags:
+    - Object
+    source: openapi/sonetel-users-openapi.yml#/components/schemas/User-Update
+  - term: User-GET
+    definition: User Schema
+    tags:
+    - Object
+    source: openapi/sonetel-users-openapi.yml#/components/schemas/User-GET
+  - term: User-Call-Settings
+    definition: The object that defines the user's call settings
+    tags:
+    - Object
+    source: openapi/sonetel-users-openapi.yml#/components/schemas/User-Call-Settings
+  - term: User-Data-settings
+    definition: A user's Data settings
+    tags:
+    - Object
+    source: openapi/sonetel-users-openapi.yml#/components/schemas/User-Data-settings
+  - term: Voiceapp
+    definition: 'Object declared by the contract with fields: app_type, play_menu, name, voice, play_welcome, get_extension, final_action, menu,
+      error_voice, greeting_prompt, goodbye_prompt, deliver_to. (1 more)'
+    tags:
+    - Object
+    source: openapi/sonetel-voice-apps-openapi.yml#/components/schemas/Voiceapp
+  - term: Create-Prompt
+    definition: 'Object declared by the contract with fields: name.'
+    tags:
+    - Object
+    source: openapi/sonetel-voice-apps-openapi.yml#/components/schemas/Create-Prompt
+  - term: Create-Voiceapp
+    definition: Referenced by this document but never defined in it. API Evangelist added this empty placeholder so the document resolves; the
+      shape is unknown and is NOT a claim about the API.
+    tags:
+    - Object
+    source: openapi/sonetel-voice-apps-openapi.yml#/components/schemas/Create-Voiceapp

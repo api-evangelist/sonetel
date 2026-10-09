@@ -1,0 +1,146 @@
+generated: '2026-10-09'
+method: derived
+source: the pre-flight dossier, apis.yml pointers, spec servers, well-known, vendors -- nothing fetched here
+generator: derive-hosts.py
+summary:
+  hosts: 9
+  own: 7
+  other_domain: 0
+  platform: 2
+  roles:
+  - api
+  - docs
+  - identity
+  - other
+  - source
+  - status
+  - website
+hosts:
+- host: api.sonetel.com
+  found_by:
+  - apis[]
+  - probed
+  - site-links
+  - contract-discovery
+  - well-known
+  types: []
+  serves:
+  - api
+  registrable_domain: sonetel.com
+  role: api
+  relation: own
+- host: app.sonetel.com
+  found_by:
+  - probed
+  - site-links
+  - contract-discovery
+  - well-known
+  types: []
+  serves: []
+  registrable_domain: sonetel.com
+  role: other
+  relation: own
+- host: docs.sonetel.com
+  found_by:
+  - pointer
+  - apis[]
+  - probed
+  - site-links
+  - namespace-probe
+  - docs-index
+  - contract-discovery
+  - well-known
+  - vendor-detect
+  types:
+  - Documentation
+  serves:
+  - docs
+  - cdn
+  title: Sonetel | Stoplight
+  status: 200
+  vendor: cloudflare
+  registrable_domain: sonetel.com
+  role: docs
+  relation: own
+- host: github.com
+  found_by:
+  - pointer
+  - apis[]
+  types:
+  - SpectralRules
+  - GitHubOrganization
+  serves:
+  - docs
+  registrable_domain: github.com
+  role: source
+  relation: platform
+- host: portal.sonetel.com
+  found_by:
+  - pointer
+  - probed
+  - site-links
+  - docs-index
+  - contract-discovery
+  - well-known
+  types:
+  - Login
+  serves:
+  - docs
+  registrable_domain: sonetel.com
+  role: identity
+  relation: own
+- host: public-api.sonetel.com
+  found_by:
+  - apis[]
+  types: []
+  serves:
+  - api
+  registrable_domain: sonetel.com
+  role: other
+  relation: own
+- host: sonetel.com
+  found_by:
+  - pointer
+  - probed
+  - docs-index
+  - contract-discovery
+  - well-known
+  - vendor-detect
+  types:
+  - Website
+  - GettingStarted
+  - Support
+  - Blog
+  - Pricing
+  - SignUp
+  - TermsOfService
+  - PrivacyPolicy
+  - Leadership
+  serves:
+  - docs
+  - cdn
+  vendor: cloudfront
+  registrable_domain: sonetel.com
+  role: website
+  relation: own
+- host: status.sonetel.com
+  found_by:
+  - pointer
+  - probed
+  - site-links
+  - well-known
+  types:
+  - StatusPage
+  serves: []
+  registrable_domain: sonetel.com
+  role: status
+  relation: own
+- host: www.linkedin.com
+  found_by:
+  - pointer
+  types:
+  - LinkedIn
+  serves: []
+  registrable_domain: linkedin.com
+  role: other
+  relation: platform

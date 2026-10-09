@@ -1,0 +1,485 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/sonetel/main/json-schema/sonetel-voiceapp-schema.json",
+  "title": "Voiceapp",
+  "x-generated": "2026-10-09",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/sonetel-voice-apps-openapi.yml#/components/schemas/Voiceapp",
+  "type": "object",
+  "properties": {
+    "app_type": {
+      "type": "string",
+      "enum": [
+        "ivr",
+        "mailbox",
+        "sysprompt"
+      ],
+      "description": "The type of voice app being created."
+    },
+    "play_menu": {
+      "type": "string",
+      "description": "A flag that indicates if the interactive voice menu function(receive digits from callers to take actions) is active or not."
+    },
+    "name": {
+      "type": "string",
+      "description": "The name of the voice app"
+    },
+    "voice": {
+      "type": "string",
+      "enum": [
+        "en",
+        "swe",
+        "spa",
+        "hin-fe",
+        "tam-fe",
+        "tel-fe",
+        "en-fe",
+        "gr-fe",
+        "en-uk-fe",
+        "fr-fe",
+        "ara-fe"
+      ],
+      "description": "The set of pre-recorded voice prompts for the voice app"
+    },
+    "play_welcome": {
+      "type": "string",
+      "enum": [
+        "yes",
+        "no"
+      ],
+      "description": "A flag that indicates if the welcome message is played or not."
+    },
+    "get_extension": {
+      "type": "string",
+      "enum": [
+        "yes",
+        "no"
+      ],
+      "description": "A flag that indicates if the auto-attendant function is active."
+    },
+    "final_action": {
+      "type": "object",
+      "description": "The final action that is taken in case the menu (represented by `play_menu`) is not active.\n\nThis property can only be set if `play_menu` is set to `no`.",
+      "properties": {
+        "action": {
+          "type": "string",
+          "enum": [
+            "play",
+            "connect",
+            "call"
+          ],
+          "description": "The final action to take once the caller has heard the welcome message."
+        },
+        "to": {
+          "type": "string",
+          "enum": [
+            "user",
+            "other",
+            "prompt",
+            "app"
+          ],
+          "description": "The destination type where the call should be connected. For example, user."
+        },
+        "id": {
+          "type": "string",
+          "description": "A unique ID to identify the destination. For example, if the `to` field is user then `id` will be the user's unique ID."
+        }
+      }
+    },
+    "menu": {
+      "type": "object",
+      "description": "The voice response menu that defines the digits and the actions taken on each digit press",
+      "properties": {
+        "digit_0": {
+          "type": "object",
+          "description": "Action to be taken when the caller selects option 0 in the IVR.",
+          "properties": {
+            "action": {
+              "type": "string",
+              "enum": [
+                "play",
+                "connect",
+                "call"
+              ],
+              "description": "Action to take when the menu item is selected by the caller."
+            },
+            "to": {
+              "type": "string",
+              "enum": [
+                "user",
+                "other",
+                "prompt",
+                "app"
+              ],
+              "description": "The destination type where the call should be connected. For example, user."
+            },
+            "id": {
+              "type": "string",
+              "description": "A unique ID to identify the destination. For example, if the `to` field is user then `id` will be the user's unique ID."
+            }
+          },
+          "required": [
+            "action"
+          ]
+        },
+        "digit_1": {
+          "type": "object",
+          "description": "Action to be taken when the caller selects option 1 in the IVR.",
+          "properties": {
+            "action": {
+              "type": "string",
+              "enum": [
+                "play",
+                "connect",
+                "call"
+              ],
+              "description": "Action to take when the menu item is selected by the caller."
+            },
+            "to": {
+              "type": "string",
+              "enum": [
+                "user",
+                "other",
+                "prompt",
+                "app"
+              ],
+              "description": "The destination type where the call should be connected. For example, user."
+            },
+            "id": {
+              "type": "string",
+              "description": "A unique ID to identify the destination. For example, if the `to` field is user then `id` will be the user's unique ID."
+            }
+          },
+          "required": [
+            "action"
+          ]
+        },
+        "digit_2": {
+          "type": "object",
+          "description": "Action to be taken when the caller selects option 2 in the IVR.",
+          "properties": {
+            "action": {
+              "type": "string",
+              "enum": [
+                "play",
+                "connect",
+                "call"
+              ],
+              "description": "Action to take when the menu item is selected by the caller."
+            },
+            "to": {
+              "type": "string",
+              "enum": [
+                "user",
+                "other",
+                "prompt",
+                "app"
+              ],
+              "description": "The destination type where the call should be connected. For example, user."
+            },
+            "id": {
+              "type": "string",
+              "description": "A unique ID to identify the destination. For example, if the `to` field is user then `id` will be the user's unique ID."
+            }
+          },
+          "required": [
+            "action"
+          ]
+        },
+        "digit_3": {
+          "type": "object",
+          "description": "Action to be taken when the caller selects option 3 in the IVR.",
+          "properties": {
+            "action": {
+              "type": "string",
+              "enum": [
+                "play",
+                "connect",
+                "call"
+              ],
+              "description": "Action to take when the menu item is selected by the caller."
+            },
+            "to": {
+              "type": "string",
+              "enum": [
+                "user",
+                "other",
+                "prompt",
+                "app"
+              ],
+              "description": "The destination type where the call should be connected. For example, user."
+            },
+            "id": {
+              "type": "string",
+              "description": "A unique ID to identify the destination. For example, if the `to` field is user then `id` will be the user's unique ID."
+            }
+          },
+          "required": [
+            "action"
+          ]
+        },
+        "digit_4": {
+          "type": "object",
+          "description": "Action to be taken when the caller selects option 4 in the IVR.",
+          "properties": {
+            "action": {
+              "type": "string",
+              "enum": [
+                "play",
+                "connect",
+                "call"
+              ],
+              "description": "Action to take when the menu item is selected by the caller."
+            },
+            "to": {
+              "type": "string",
+              "enum": [
+                "user",
+                "other",
+                "prompt",
+                "app"
+              ],
+              "description": "The destination type where the call should be connected. For example, user."
+            },
+            "id": {
+              "type": "string",
+              "description": "A unique ID to identify the destination. For example, if the `to` field is user then `id` will be the user's unique ID."
+            }
+          },
+          "required": [
+            "action"
+          ]
+        },
+        "digit_5": {
+          "type": "object",
+          "description": "Action to be taken when the caller selects option 5 in the IVR.",
+          "properties": {
+            "action": {
+              "type": "string",
+              "enum": [
+                "play",
+                "connect",
+                "call"
+              ],
+              "description": "Action to take when the menu item is selected by the caller."
+            },
+            "to": {
+              "type": "string",
+              "enum": [
+                "user",
+                "other",
+                "prompt",
+                "app"
+              ],
+              "description": "The destination type where the call should be connected. For example, user."
+            },
+            "id": {
+              "type": "string",
+              "description": "A unique ID to identify the destination. For example, if the `to` field is user then `id` will be the user's unique ID."
+            }
+          },
+          "required": [
+            "action"
+          ]
+        },
+        "digit_6": {
+          "type": "object",
+          "description": "Action to be taken when the caller selects option 6 in the IVR.",
+          "properties": {
+            "action": {
+              "type": "string",
+              "enum": [
+                "play",
+                "connect",
+                "call"
+              ],
+              "description": "Action to take when the menu item is selected by the caller."
+            },
+            "to": {
+              "type": "string",
+              "enum": [
+                "user",
+                "other",
+                "prompt",
+                "app"
+              ],
+              "description": "The destination type where the call should be connected. For example, user."
+            },
+            "id": {
+              "type": "string",
+              "description": "A unique ID to identify the destination. For example, if the `to` field is user then `id` will be the user's unique ID."
+            }
+          },
+          "required": [
+            "action"
+          ]
+        },
+        "digit_7": {
+          "type": "object",
+          "description": "Action to be taken when the caller selects option 7 in the IVR.",
+          "properties": {
+            "action": {
+              "type": "string",
+              "enum": [
+                "play",
+                "connect",
+                "call"
+              ],
+              "description": "Action to take when the menu item is selected by the caller."
+            },
+            "to": {
+              "type": "string",
+              "enum": [
+                "user",
+                "other",
+                "prompt",
+                "app"
+              ],
+              "description": "The destination type where the call should be connected. For example, user."
+            },
+            "id": {
+              "type": "string",
+              "description": "A unique ID to identify the destination. For example, if the `to` field is user then `id` will be the user's unique ID."
+            }
+          },
+          "required": [
+            "action"
+          ]
+        },
+        "digit_8": {
+          "type": "object",
+          "description": "Action to be taken when the caller selects option 8 in the IVR.",
+          "properties": {
+            "action": {
+              "type": "string",
+              "enum": [
+                "play",
+                "connect",
+                "call"
+              ],
+              "description": "Action to take when the menu item is selected by the caller."
+            },
+            "to": {
+              "type": "string",
+              "enum": [
+                "user",
+                "other",
+                "prompt",
+                "app"
+              ],
+              "description": "The destination type where the call should be connected. For example, user."
+            },
+            "id": {
+              "type": "string",
+              "description": "A unique ID to identify the destination. For example, if the `to` field is user then `id` will be the user's unique ID."
+            }
+          },
+          "required": [
+            "action"
+          ]
+        },
+        "digit_9": {
+          "type": "object",
+          "description": "Action to be taken when the caller selects option 9 in the IVR.",
+          "properties": {
+            "action": {
+              "type": "string",
+              "enum": [
+                "play",
+                "connect",
+                "call"
+              ],
+              "description": "Action to take when the menu item is selected by the caller."
+            },
+            "to": {
+              "type": "string",
+              "enum": [
+                "user",
+                "other",
+                "prompt",
+                "app"
+              ],
+              "description": "The destination type where the call should be connected. For example, user."
+            },
+            "id": {
+              "type": "string",
+              "description": "A unique ID to identify the destination. For example, if the `to` field is user then `id` will be the user's unique ID."
+            }
+          },
+          "required": [
+            "action"
+          ]
+        },
+        "timeout": {
+          "type": "object",
+          "description": "Action to be taken when the caller has not selected any option.",
+          "properties": {
+            "action": {
+              "type": "string",
+              "enum": [
+                "play",
+                "connect",
+                "call"
+              ],
+              "description": "Action to take when the menu item is selected by the caller."
+            },
+            "to": {
+              "type": "string",
+              "enum": [
+                "user",
+                "other",
+                "prompt",
+                "app"
+              ],
+              "description": "The destination type where the call should be connected. For example, user."
+            },
+            "id": {
+              "type": "string",
+              "description": "A unique ID to identify the destination. For example, if the `to` field is user then `id` will be the user's unique ID."
+            }
+          },
+          "required": [
+            "action"
+          ]
+        }
+      }
+    },
+    "error_voice": {
+      "type": "string",
+      "description": "The voice that applies for playing system messages. This field applies in case the app_type is `sysprompt`."
+    },
+    "greeting_prompt": {
+      "type": "string",
+      "enum": [
+        "yes",
+        "no"
+      ],
+      "description": "A flag that indicates if a greeting message is played when a caller reaches the voicemail. This field applies in case the app_type is `mailbox`"
+    },
+    "goodbye_prompt": {
+      "type": "string",
+      "enum": [
+        "yes",
+        "no"
+      ],
+      "description": "A flag that indicates if a goodbye message is played when a caller has left a voicemail message. This field applies in case the app_type is `mailbox`."
+    },
+    "deliver_to": {
+      "type": "string",
+      "enum": [
+        "user",
+        "email"
+      ],
+      "description": "Voicemails are delivered as email attachments. This field can specify either a user or an email address to which the voicemail are delivered. This can take values `user` or `email`.\n\nThis field applies in case the app_type is `mailbox`."
+    },
+    "deliver_to_details": {
+      "type": "string",
+      "description": "If `deliver_to` is a user, this field takes the user_id of the user. The email is delivered to the email address of the user configured in the Sonetel account.\nIf `deliver_to` is an email, this field takes the email address to which the voicemail is delivered."
+    }
+  },
+  "required": [
+    "app_type",
+    "name"
+  ]
+}

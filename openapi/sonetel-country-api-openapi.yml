@@ -1,0 +1,308 @@
+openapi: 3.2.0
+info:
+  title: Sonetel Country API
+  version: '2.0'
+  contact:
+    email: api.support@sonetel.com
+  termsOfService: https://sonetel.com/en/help/help-topics/terms-conditions/terms-conditions/
+  description: 'Operations tagged Country across 2 of this provider''s published API definitions: phone_numbers.yaml, sonetel-phone-numbers-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://public-api.sonetel.com/
+  description: Production
+tags:
+- name: Country
+paths:
+  /country:
+    get:
+      summary: Inventory - Phone number support by country
+      description: '# Inventory - Phone number support by country
+
+
+        This endpoint provides an overview of the different types of phone numbers available across the world.
+
+
+        It allows you to filter the response by number type, country name, phone number support and other properties listed below.
+
+
+        To filter the response just add one or more of the query parameters to the API call. For example, to get a list of all the countries from where we offer mobile numbers use `GET /country?type=mobile`.
+
+
+        This endpoint does not return information about the actual phone numbers available for purchase. Use `/numberstocksummary` and `/availablephonenumber` endpoints to get the details such as how many numbers are available, what do they cost and the actual list of phone numbers.'
+      operationId: get-country
+      parameters:
+      - name: country
+        in: query
+        description: The three letter country ISO code.
+        schema:
+          type: string
+          examples:
+          - GBR, DEU, USA
+      - name: name
+        in: query
+        description: The name of the country. Allows string wildcard search.
+        schema:
+          type: string
+          examples:
+          - australia, united*
+      - name: country_code
+        in: query
+        description: The telephony country code as per ITU standards.
+        schema:
+          type: string
+          examples:
+          - 32, 91, 49
+      - name: phnum_support
+        in: query
+        description: Add this flag to search for countries where phone numbers are available for purchase.
+        schema:
+          type: string
+          enum:
+          - 'yes'
+          - 'no'
+      - name: freetest
+        in: query
+        description: Flag to limit the results to countries where free test phone numbers are available.
+        schema:
+          type: string
+          enum:
+          - 'yes'
+          - 'no'
+      - name: type
+        in: query
+        description: Limit the response to a certain phone number type such as geographic or mobile. This is a multi-value filter.
+        schema:
+          type: string
+          enum:
+          - mobile
+          - national
+          - tollfree
+          - geographic
+      - name: sms_support
+        in: query
+        description: Flag to limit the results to countries where phone numbers support SMS
+        schema:
+          type: string
+          enum:
+          - 'yes'
+          - 'no'
+      - name: order_type
+        in: query
+        description: Limit results to number types that match this order_type (s). Multiple order types can be specified comma separated. Possible values `select-order`, `online-order`, `offline-order`.
+        schema:
+          type: string
+          examples:
+          - online-order,select-order
+      - name: freeplan
+        in: query
+        description: Flag to limit the results to countries where numbers are available free with [Sonetel's Premium and Business plans](https://www.sonetel.com/plans)
+        schema:
+          type: boolean
+      responses:
+        '200':
+          $ref: '#/components/responses/Country-response'
+      security: []
+      servers:
+      - url: https://public-api.sonetel.com/
+        description: Production
+      tags:
+      - Country
+    servers:
+    - url: https://public-api.sonetel.com/
+      description: Production
+components:
+  responses:
+    Country-response:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              resource:
+                type: string
+                description: Name of the resource accessed
+                minLength: 1
+              status:
+                type: string
+                description: Status of the response
+                minLength: 1
+              response:
+                type: array
+                description: The response object - contains a list of countries.
+                minItems: 1
+                uniqueItems: true
+                items:
+                  type: object
+                  properties:
+                    country:
+                      type: string
+                      description: The 3 letter ISO code of the country. For example, GBR for United Kingdom.
+                      minLength: 1
+                    country_code:
+                      type: string
+                      description: The telephone country code assigned to the user as per ITU standards.
+                      minLength: 1
+                    vat_applicable:
+                      type: boolean
+                      description: Boolean flag indicating whether VAT is applicable for this country or not. Only applicable for countries that are part of the European Union.
+                    phonenumbers:
+                      type: array
+                      description: Information about phone number types available from this country.
+                      minItems: 1
+                      uniqueItems: true
+                      items:
+                        type: object
+                        properties:
+                          phnum_support:
+                            type: string
+                            enum:
+                            - 'yes'
+                            - 'no'
+                            description: Flag that indicates whether this phone number type is supported in this country.
+                            readOnly: true
+                          type:
+                            type: string
+                            enum:
+                            - national
+                            - geographic
+                            - tollfree
+                            - mobile
+                            description: Indicates the type of phone number such as mobile or tollfree.
+                            readOnly: true
+                          freetest:
+                            type: string
+                            description: Flag specifying if numbers of this type are available for free test in this country
+                          freeplan:
+                            type: boolean
+                            description: Indicates whether the phone number can be assigned for free with the [Premium or Business plan](https://sonetel.com/plans)
+                            default: true
+                          fax_support:
+                            type: string
+                            description: Flag that specifies if this type of number can receive Fax. Not applicable to new phone numbers.
+                            readOnly: true
+                            x-deprecated: true
+                          sms_support:
+                            type: string
+                            description: Flag that specifies if phone numbers of this type can receive SMS
+                          addr_req:
+                            type: string
+                            description: Specifies if there are any local address and ID requirements to fulfill in order to use this type of phone number.
+                          addr_proof:
+                            type: string
+                            description: A flag that specifies if an address proof is required to be submitted for this type of phone number.
+                          access_restrictions:
+                            type: string
+                            description: Specifies the phone number reachability from different networks
+                          restrictions_desc:
+                            type: string
+                            description: A general text specifying restrictions applicable to numbers of the specific type within the country.
+                          order_type:
+                            type: string
+                            enum:
+                            - select-order
+                            - online-order
+                            - offline-order
+                            description: 'The order and purchase method available for this number type.
+
+
+                              `select-order` number types can be browsed via the [Available phone number API](reference/Phone Numbers.yaml/paths/~1numberstocksummary~1{country}~1availablephonenumber/get), and a phone number of choice can be ordered instantly and purchased via the API
+
+
+                              `online-order` number types cannot be browsed via the API but order and purchase can be done instantly for these numbers. A number is automatically assigned to your account
+
+
+                              `offline-order` number types can be ordered and purchased via the API. Sonetel team then manually assigns a number to your account. This may take up to 48-72 hours.'
+                    vat_percent:
+                      type: string
+                      description: Specifies the VAT that will be charged for customers that are from this country. Only applicable for countries that are part of the European Union.
+                      minLength: 1
+                    name:
+                      type: string
+                      description: The name of the country.
+                      minLength: 1
+                    description:
+                      type: string
+                      description: General text containing additional information about the country. For example, are phone numbers available for free with Premium or not.
+                      minLength: 1
+                    currency:
+                      type: string
+                      description: The currency set for the Sonetel prepaid account if the customer is from this country.
+                      minLength: 1
+                    time_zone:
+                      type: string
+                      description: The default timezone for accounts & users that set their location to this country.
+                      minLength: 1
+            x-examples:
+              example-1:
+                resource: string
+                status: string
+                response:
+                - country: string
+                  country_code: string
+                  vat_applicable: true
+                  phonenumbers:
+                  - {}
+                  vat_percent: string
+                  name: string
+                  description: string
+                  currency: string
+                  time_zone: string
+          examples:
+            /country?country=GBR:
+              value:
+                resource: country
+                response:
+                - country: GBR
+                  country_code: '44'
+                  vat_applicable: false
+                  phonenumbers:
+                  - phnum_support: 'yes'
+                    freetest: 'yes'
+                    fax_support: 'no'
+                    sms_support: 'no'
+                    addr_req: none
+                    access_restrictions: ''
+                    addr_proof: 'no'
+                    restrictions_desc: ''
+                    type: geographic
+                    order_type: online-order
+                  - phnum_support: 'yes'
+                    freetest: 'yes'
+                    fax_support: 'no'
+                    sms_support: 'no'
+                    addr_req: none
+                    access_restrictions: ''
+                    addr_proof: 'no'
+                    restrictions_desc: ''
+                    type: national
+                    order_type: select-order
+                  - phnum_support: 'yes'
+                    freetest: 'no'
+                    fax_support: 'no'
+                    sms_support: 'no'
+                    addr_req: none
+                    access_restrictions: payphone
+                    addr_proof: 'no'
+                    restrictions_desc: ''
+                    type: tollfree
+                    order_type: online-order
+                  - phnum_support: 'yes'
+                    freetest: 'no'
+                    fax_support: 'no'
+                    sms_support: 'yes'
+                    addr_req: none
+                    access_restrictions: ''
+                    addr_proof: 'no'
+                    restrictions_desc: ''
+                    type: mobile
+                    order_type: offline-order
+                  business_pkg_support: 'yes'
+                  vat_percent: '0'
+                  name: United Kingdom
+                  description: If you are on Premium, all types of numbers can be subscribed for free.<br>If you want a free number, select a City, National or Mobile number and use our free chat function at your website.
+                  currency: EUR
+                  time_zone: GMT
+                status: success
+x-refined-from:
+- phone_numbers.yaml
+- sonetel-phone-numbers-openapi.yml

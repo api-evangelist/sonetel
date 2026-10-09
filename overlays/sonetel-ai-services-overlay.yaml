@@ -1,0 +1,66 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist overlay for Sonetel AI Services API
+  version: 1.0.0
+extends: ../openapi/_original/sonetel-ai-services-openapi.yml
+x-generated: '2026-10-09'
+x-method: generated
+x-source: openapi/sonetel-ai-services-openapi.yml
+actions:
+- target: $.info
+  description: Record API Evangelist provenance.
+  update:
+    x-api-evangelist:
+      provider: sonetel
+      generated: '2026-10-09'
+      source: openapi/sonetel-ai-services-openapi.yml
+      upstream: https://github.com/Sonetel/sonetel-api-docs
+      documentation: https://docs.sonetel.com/
+- target: $
+  description: The upstream document declares no tags; add one tag naming this API so operations group
+    in renderers.
+  update:
+    tags:
+    - name: Sonetel AI Services
+      description: The Sonetel AI service API enables you to trigger the Sonetel AI platform and request
+        services from it.
+- target: $.paths['/ai-service/business-description'].post
+  description: Tag post-ai-service-business-description.
+  update:
+    tags:
+    - Sonetel AI Services
+- target: $.paths['/ai-service/blog-title-list'].post
+  description: Tag post-ai-service-blog-title-list.
+  update:
+    tags:
+    - Sonetel AI Services
+- target: $.paths['/ai-service/blog'].post
+  description: Tag post-ai-service-blog.
+  update:
+    tags:
+    - Sonetel AI Services
+- target: $.paths['/ai-service/meeting-minutes'].post
+  description: Tag post-ai-service-meeting-minutes.
+  update:
+    tags:
+    - Sonetel AI Services
+- target: $.paths['/ai-service/vm-summary'].post
+  description: Tag post-ai-service-vm-summary.
+  update:
+    tags:
+    - Sonetel AI Services
+- target: $.paths['/ai-service/call-summary'].post
+  description: Tag post-ai-service-call-summary.
+  update:
+    tags:
+    - Sonetel AI Services
+- target: $.paths['/ai-service/{service_id}'].get
+  description: Tag get-ai-service-status.
+  update:
+    tags:
+    - Sonetel AI Services
+- target: $.paths['/ai-service'].get
+  description: Tag get-ai-service.
+  update:
+    tags:
+    - Sonetel AI Services

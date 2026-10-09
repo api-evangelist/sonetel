@@ -1,0 +1,20 @@
+generated: '2026-10-09'
+method: searched
+source: https://docs.sonetel.com/docs/sonetel-documentation/b256d17c3213d-introduction
+name: Sonetel Packages
+packages:
+- name: sonetel
+  registry: pypi
+  url: https://pypi.org/project/sonetel/
+  language: python
+  official: true
+  version: 0.3.0
+  published: '2026-09-01'
+  repository: https://github.com/Sonetel/sonetel-python
+  evidence: 'Docs Introduction: "We have recently released our Python module on the Python Package Index." PyPI project_urls point at github.com/Sonetel/sonetel-python.'
+  note: Version and date from pypi.org/pypi/sonetel/json. Covers basic functions (tokens, account, numbers, callback calls), not the AI/text-manager surfaces.
+checked_absent:
+- registry: npm
+  names: [sonetel, sonetel-api, sonetel-python]
+  status: 404
+note: Sample scripts (Python, Node .mjs, PHP) are published in github.com/Sonetel/sonetel-api-docs/sample-scripts but are not packaged.

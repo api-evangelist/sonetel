@@ -1,0 +1,229 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/sonetel/main/json-schema/sonetel-account-get-schema.json",
+  "title": "Account-GET",
+  "description": "Your Sonetel account settings",
+  "x-generated": "2026-10-09",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/sonetel-account-openapi.yml#/components/schemas/Account-GET",
+  "type": "object",
+  "properties": {
+    "resource": {
+      "type": "string",
+      "description": "Name of the resource accessed"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "success",
+        "failed"
+      ],
+      "description": "The status of the request"
+    },
+    "response": {
+      "type": "object",
+      "properties": {
+        "account_id": {
+          "type": "string",
+          "description": "The unique account Id of the company account in Sonetel",
+          "readOnly": true
+        },
+        "area_code": {
+          "type": "string",
+          "description": "The telephone area code where the company is located."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the company"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "active",
+            "inactive",
+            "evaluation",
+            "disabled"
+          ],
+          "description": "The status of the account – “active”, “inactive”, “evaluation” or “disabled”",
+          "readOnly": true
+        },
+        "status_desc": {
+          "type": "string",
+          "description": "An additional description of the status of the account. For e.g. this could carry a text describing why the account was disabled",
+          "readOnly": true
+        },
+        "currency": {
+          "type": "string",
+          "enum": [
+            "usd",
+            "eur",
+            "sek"
+          ],
+          "description": "Currency for the account. The currency, once set, cannot be changed. All billing related transactions for the account are done in this currency.",
+          "readOnly": true
+        },
+        "address": {
+          "type": "string",
+          "description": "Company address, line 1."
+        },
+        "address2": {
+          "type": "string",
+          "description": "Company address, line 2."
+        },
+        "city": {
+          "type": "string",
+          "description": "Company address, city name."
+        },
+        "zipcode": {
+          "type": "string",
+          "description": "Company address, postal code."
+        },
+        "country": {
+          "type": "string",
+          "description": "The country where the company is located."
+        },
+        "credit_balance": {
+          "type": "string",
+          "description": "The prepaid balance in the account's currency. Specified upto 2 decimal places.",
+          "readOnly": true
+        },
+        "timezone": {
+          "type": "string",
+          "description": "Timezone name abbreviation in IANA format"
+        },
+        "language": {
+          "type": "string",
+          "description": "The account's defaut language in ISO language format."
+        },
+        "priceplan": {
+          "type": "string",
+          "enum": [
+            "premium",
+            "business",
+            "regular"
+          ],
+          "description": "Returns the paid plan that applies to this account. Accounts with Premium or Busines plan enabled, have this value set as \"premium\" or \"business\". For other accounts, this value is “regular\"."
+        },
+        "plan_details": {
+          "type": "string",
+          "description": "JSON block that is added to provide additional information about the current plan subscribed"
+        },
+        "website": {
+          "type": "object",
+          "description": "The URL of the website(s) where the chat widget associated with the customer's account has been detected.",
+          "properties": {
+            "website_status": {
+              "type": "string",
+              "description": "Status of the chat widget verification."
+            }
+          }
+        },
+        "daily_usage_limit": {
+          "type": "string",
+          "description": "The maximum amount of usage allowed in the account in a 24 hour period.\n\nThis value is in USD and is converted to the account's currency for calculation.\n\nDoes not include subscription renewals. To increase this contact suppor",
+          "readOnly": true
+        },
+        "vat_relevant": {
+          "type": "boolean",
+          "description": "Boolean indicating if the concept of VAT is applicable for this account. If the account country is from the European countries then this field is \"TRUE\"."
+        },
+        "user_count": {
+          "type": "number",
+          "description": "The number of users in the account."
+        },
+        "language_id": {
+          "type": "number",
+          "description": "3 character ISO code for language"
+        },
+        "timezone_details": {
+          "type": "object",
+          "description": "Details about the account timezone.",
+          "properties": {
+            "zone_name": {
+              "type": "string",
+              "description": "List of major cities to identify the timezone"
+            },
+            "zone_id": {
+              "type": "number",
+              "description": "Internal ID of the timezone"
+            }
+          }
+        },
+        "account_verified": {
+          "type": "boolean",
+          "description": "Boolean flag to indicate whether the account has been verified by Sonetel or not."
+        },
+        "current_country": {
+          "type": "string",
+          "description": "The current country set for the account. Affects how phone numbers are dialed in the local format."
+        },
+        "phnum_count": {
+          "type": "number",
+          "description": "The amount of phone number subscriptions linked to the account.",
+          "readOnly": true
+        },
+        "companyNameUpdated": {
+          "type": "boolean",
+          "description": "Boolean flag to indicate whether the company's name has been updated after signup."
+        },
+        "account_type": {
+          "type": "string",
+          "enum": [
+            "main_account",
+            "sub_account"
+          ],
+          "description": "The type of account. This is set to `main_account` for most users.",
+          "readOnly": true
+        },
+        "account_category": {
+          "type": "string",
+          "enum": [
+            "regular",
+            "reseller",
+            "affiliate"
+          ],
+          "description": "This is read only field that returns the category of the account.",
+          "readOnly": true
+        },
+        "service_settings": {
+          "$ref": "#/$defs/ServiceSettings"
+        }
+      }
+    }
+  },
+  "$defs": {
+    "ServiceSettings": {
+      "type": "object",
+      "title": "ServiceSettings",
+      "description": "An account's service settings",
+      "properties": {
+        "team_chat": {
+          "type": "boolean",
+          "description": "Specifies if the account has team chat service available and turned on",
+          "default": false
+        },
+        "customer_chat": {
+          "type": "boolean",
+          "description": "Specifies if the account has customer chat service available and and turned on",
+          "default": false
+        },
+        "ai_helper": {
+          "type": "boolean",
+          "description": "Specifies if the account has AI Helper services available and and turned on",
+          "default": false
+        },
+        "free_trial": {
+          "type": "string",
+          "enum": [
+            "inactive",
+            "active",
+            "used"
+          ],
+          "description": "Specifies the status of free trial of services. Free trial applies to services such as Team chat and Customer chat which are available for free trial for a limited duration\r\n\r\n`active`: Free trial is currently active\r\n\r\n`inactive`: Free trial has never been used and is inactive currently\r\n\r\n`used`: Free trial has been consumed and has expired",
+          "readOnly": true
+        }
+      }
+    }
+  }
+}

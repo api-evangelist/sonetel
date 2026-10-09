@@ -1,0 +1,35 @@
+generated: '2026-10-09'
+method: searched
+source: https://docs.sonetel.com/docs/sonetel-documentation/ZG9jOjE0NjUyMDIy-error-codes
+name: Sonetel Error Codes
+format: custom-envelope
+envelope:
+  shape: '{"response": {"detail": "Error string", "code": "Error code"}, "resource": "resource_name", "status": "failed"}'
+  http_status_note: 'Important: If the API request fails, the API will return a 200 OK with the status: "failed" in the response body.'
+  success_shape: '{"resource": resource_name, "status": "success", "response": {...}}'
+  responses_page: https://docs.sonetel.com/docs/sonetel-documentation/ZG9jOjE0NjUyMDIx-responses
+registry:
+  endpoint: https://api.sonetel.com/globaldata/errors
+  filter: resource (e.g. ?resource=Phonenumbersubscription)
+  probed_status: 200
+  probed_body: '[] (unauthenticated GET on 2026-10-09 returned an empty array)'
+problems:
+- status: 200
+  code: '10060000'
+  title: Create Phone number subscription failed - Internal server error
+  description: Generic exception caught at Phone Number Subscription controller
+  resource: Phonenumbersubscription
+  method: Create
+- status: 200
+  code: '10060002'
+  title: AccountId should be numeric
+  description: AccountId passed is non-numeric
+  resource: Phonenumbersubscription
+  method: Create
+- status: 200
+  code: '10060003'
+  title: AccountId should not be Empty
+  description: AccountId passed is empty
+  resource: Phonenumbersubscription
+  method: Create
+note: The docs page shows only these three example codes and points to /globaldata/errors for the complete list; the error codes travel inside an HTTP 200 body, so status 200 above is the transport status, not an error class.

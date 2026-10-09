@@ -1,0 +1,13 @@
+generated: '2026-10-09'
+method: none
+source: https://docs.sonetel.com/docs/sonetel-documentation/b256d17c3213d-introduction
+name: Sonetel Rate Limits
+limit_count: 0
+limits: []
+pages_checked:
+- https://docs.sonetel.com/docs/sonetel-documentation/b256d17c3213d-introduction
+- https://docs.sonetel.com/docs/sonetel-documentation/ZG9jOjE0NjUyMDIx-responses
+- https://docs.sonetel.com/docs/sonetel-documentation/ZG9jOjE0NjUyMDIy-error-codes
+- https://docs.sonetel.com/docs/sonetel-documentation/ZG9jOjE0NjU1NTI4-guidelines
+- https://docs.sonetel.com/docs/sonetel-documentation/862afa73a11f1-frequently-asked-questions
+note: No request rate limits, 429 behaviour or rate-limit headers are documented in the Getting Started pages or the OpenAPI contracts. The account object exposes a daily_usage_limit field (a spend limit, example "25"), which is not a request rate limit.

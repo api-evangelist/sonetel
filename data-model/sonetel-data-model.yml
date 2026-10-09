@@ -1,0 +1,424 @@
+generated: '2026-10-09'
+method: derived
+generator: derive-data-model.py
+source:
+- openapi/sonetel-account-openapi.yml
+- openapi/sonetel-ai-business-openapi.yml
+- openapi/sonetel-ai-file-manager-openapi.yml
+- openapi/sonetel-ai-functions-openapi.yml
+- openapi/sonetel-ai-prompt-manager-openapi.yml
+- openapi/sonetel-ai-services-openapi.yml
+- openapi/sonetel-ai-text-manager-openapi.yml
+- openapi/sonetel-app-view-settings-openapi.yml
+- openapi/sonetel-authentication-openapi.yml
+- openapi/sonetel-make-calls-openapi.yml
+- openapi/sonetel-phone-numbers-openapi.yml
+- openapi/sonetel-recorded-calls-openapi.yml
+notation: has_one = property $ref; has_many = array of $ref; belongs_to = <entity>_id field
+summary:
+  entities: 64
+  entities_in_spec: 64
+  relationships: 55
+entities:
+- name: Account-GET
+  fields: 3
+  description: Your Sonetel account settings
+- name: Account-PUT
+  fields: 4
+  description: Update your account settings
+- name: Account-context
+  fields: 3
+  description: Account, user and business information
+- name: AccountDataMgrCallRecSettings
+  fields: 2
+- name: AudioMetaData
+  fields: 4
+  description: Meta data for audio files
+- name: Blog
+  fields: 4
+  description: A blog article along with a bunch of information about it. Blog article is broken down into ordered
+    sections with text. Each section is assigned a type.
+- name: Blog-inputs
+  fields: 3
+  description: Inputs to service for generating a blog.
+- name: Blog-post-process
+  fields: 2
+  description: Optional settings and functions to be used while generating a Blog title list
+- name: Blog-title-list
+  fields: 3
+  description: List of blog titles
+- name: Blog-title-list-inputs
+  fields: 2
+  description: Inputs to service for generating blog title list
+- name: Business-description-inputs
+  fields: 5
+  description: Inputs to service for generating a business description
+- name: Call-analysis-other
+  fields: 1
+- name: Call-analysis-sales
+  fields: 5
+- name: Call-analysis-score
+  fields: 3
+  description: Scores from call analysis
+- name: Call-analysis-sentiment-customer
+  fields: 7
+- name: Call-analysis-suggestions
+  fields: 1
+- name: Call-analysis-support
+  fields: 6
+- name: Call-recording
+  fields: 3
+- name: Call-recording-list
+  fields: 3
+- name: Call-summary
+  fields: 10
+  description: Call summary text object
+- name: Call-summary-common
+  fields: 4
+- name: Create-Prompt
+  fields: 1
+- name: Create-Voiceapp
+  fields: 0
+  description: Referenced by this document but never defined in it. API Evangelist added this empty placeholder
+    so the document resolves; the shape is unknown and is NOT a claim about the API.
+- name: File-input
+  fields: 0
+  description: File either as a `file_id` or a file URL
+- name: File-single
+  fields: 0
+  description: A single file information
+- name: FileWithID
+  fields: 22
+  description: File meta data
+- name: ImageMetaData
+  fields: 4
+  description: Meta data for image files
+- name: List-PhnumSubscriptions
+  fields: 4
+  description: This is a list of subscriptions under an account
+- name: Meeting-minutes
+  fields: 9
+  description: Meeting minutes and meeting details including meeting name, agreement, summary, action items.
+- name: Meeting-minutes-inputs
+  fields: 1
+  description: Inputs for meeting minutes
+- name: Service-object
+  fields: 7
+  description: A service object along with its status
+- name: Service-status
+  fields: 4
+  description: The service status information including an overall status and progress information
+- name: ServiceSettings
+  fields: 4
+  description: An account's service settings
+- name: ServiceSettings-PUT
+  fields: 3
+  description: Service settings of an account that can be updated
+- name: Single-phone-number-subscription
+  fields: 3
+  description: Represents a single phone number subscribed by an account
+- name: Text
+  fields: 12
+  description: The text object with the latest version of the text
+- name: Text-data-simple
+  fields: 3
+  description: Simple text data with status
+- name: Text-info
+  fields: 10
+  description: Information about the text
+- name: Text-many-versions
+  fields: 13
+  description: The text object with the latest version of the text
+- name: Text-section
+  fields: 6
+  description: A section of text which is a part of a longer text. A section has a `type` and `status`
+- name: Text-version-object
+  fields: 9
+  description: A version of text with the various text data, status and meta-data
+- name: Text-version-object-no-Id
+  fields: 6
+  description: A version of text with the various text data, status and meta-data
+- name: User-Call-Settings
+  fields: 2
+  description: The object that defines the user's call settings
+- name: User-Data-settings
+  fields: 2
+  description: A user's Data settings
+- name: User-GET
+  fields: 3
+  description: User Schema
+- name: User-Update
+  fields: 11
+- name: VideoMetaData
+  fields: 8
+  description: Meta data for video files
+- name: Voiceapp
+  fields: 13
+- name: Voicemail-summary
+  fields: 9
+  description: Voicemail summary text object
+- name: Web-page
+  fields: 6
+  description: Web page information along with the URL, raw text references and additional fields
+- name: business-description
+  fields: 6
+  description: Business description with partially (still being written) or completed text. If status is `in_progress`,
+    `text_data` may have part of the text available. The `text_data` continues to get updated until
+- name: business-with-description
+  fields: 8
+  description: Business details without description
+- name: business-without-desc
+  fields: 7
+  description: The business details with business description
+- name: file
+  fields: 0
+  description: File to be transcribed must be specified either via a `file_id`, a URL or by providing the file data
+- name: gpt-settings
+  fields: 3
+  description: GPT specific settings for the prompt
+- name: layout_response
+  fields: 3
+- name: linked-prompts
+  fields: 2
+  description: A list of prompts linked to this prompt
+- name: prompt
+  fields: 13
+  description: A prompt object
+- name: prompt-tag
+  fields: 2
+  description: Prompt tag
+- name: prompt-version
+  fields: 8
+  description: A prompt version
+- name: prompt-version-no-id
+  fields: 6
+  description: Prompt version information
+- name: requested_by
+  fields: 5
+  description: Details of the service requesting transcription
+- name: view_settings
+  fields: 3
+- name: write_to
+  fields: 0
+  description: The destination where the transcript must be deposited. One of more destinations may be specified
+relationships:
+- from: Account-PUT
+  to: ServiceSettings-PUT
+  type: has_one
+  via: service_settings
+- from: business-with-description
+  to: business-description
+  type: has_one
+  via: description
+- from: business-description
+  to: Text
+  type: belongs_to
+  via: text_id
+- from: FileWithID
+  to: file
+  type: belongs_to
+  via: file_id
+- from: FileWithID
+  to: ImageMetaData
+  type: has_one
+  via: image_meta_data
+- from: FileWithID
+  to: VideoMetaData
+  type: has_one
+  via: video_meta_data
+- from: FileWithID
+  to: AudioMetaData
+  type: has_one
+  via: audio_meta_data
+- from: prompt
+  to: prompt-version-no-id
+  type: has_one
+  via: latest_version
+- from: prompt
+  to: gpt-settings
+  type: has_one
+  via: gpt_settings
+- from: prompt
+  to: linked-prompts
+  type: has_many
+  via: linked_prompts
+- from: prompt-version-no-id
+  to: prompt-tag
+  type: has_many
+  via: tags
+- from: prompt-version
+  to: prompt
+  type: belongs_to
+  via: prompt_id
+- from: prompt-version
+  to: prompt-tag
+  type: has_many
+  via: tags
+- from: Business-description-inputs
+  to: Text
+  type: belongs_to
+  via: text_id
+- from: Service-object
+  to: Account-context
+  type: has_one
+  via: account
+- from: Service-object
+  to: Text
+  type: belongs_to
+  via: text_id
+- from: Service-object
+  to: Service-status
+  type: has_one
+  via: status
+- from: Web-page
+  to: Text-data-simple
+  type: has_one
+  via: page_summary
+- from: Web-page
+  to: Text-info
+  type: has_one
+  via: text_info
+- from: Text-info
+  to: Text
+  type: belongs_to
+  via: text_id
+- from: Blog-title-list
+  to: Text-info
+  type: has_one
+  via: text_info
+- from: Blog
+  to: Text-section
+  type: has_many
+  via: sections
+- from: Blog
+  to: Text-info
+  type: has_one
+  via: text_info
+- from: Text-section
+  to: Text-data-simple
+  type: has_one
+  via: text_data
+- from: Meeting-minutes
+  to: Text-data-simple
+  type: has_one
+  via: transcript
+- from: Meeting-minutes
+  to: Text-section
+  type: has_many
+  via: minutes
+- from: Meeting-minutes
+  to: Text-info
+  type: has_one
+  via: text_info
+- from: Meeting-minutes
+  to: File-single
+  type: has_one
+  via: file
+- from: Call-summary
+  to: Text-data-simple
+  type: has_one
+  via: transcript
+- from: Call-summary
+  to: Text-section
+  type: has_many
+  via: summary
+- from: Call-summary
+  to: Call-analysis-support
+  type: has_one
+  via: analysis
+- from: Call-summary
+  to: Call-analysis-sales
+  type: has_one
+  via: analysis
+- from: Call-summary
+  to: Call-analysis-other
+  type: has_one
+  via: analysis
+- from: Call-summary
+  to: Text-section
+  type: has_many
+  via: follow_up_email
+- from: Call-summary
+  to: Text-info
+  type: has_one
+  via: text_info
+- from: Call-summary
+  to: File-single
+  type: has_one
+  via: file
+- from: Call-analysis-support
+  to: Call-summary-common
+  type: has_one
+  via: general
+- from: Call-analysis-support
+  to: Call-analysis-sentiment-customer
+  type: has_one
+  via: sentiment
+- from: Call-analysis-support
+  to: Call-analysis-score
+  type: has_one
+  via: score
+- from: Call-analysis-support
+  to: Call-analysis-suggestions
+  type: has_one
+  via: suggestion
+- from: Call-summary-common
+  to: Text-section
+  type: has_many
+  via: agreements
+- from: Call-analysis-sales
+  to: Call-summary-common
+  type: has_one
+  via: general
+- from: Call-analysis-sales
+  to: Call-analysis-sentiment-customer
+  type: has_one
+  via: sentiment
+- from: Call-analysis-sales
+  to: Call-analysis-score
+  type: has_one
+  via: score
+- from: Call-analysis-sales
+  to: Call-analysis-suggestions
+  type: has_one
+  via: suggestion
+- from: Call-analysis-other
+  to: Call-summary-common
+  type: has_one
+  via: general
+- from: Text
+  to: Text-version-object
+  type: has_one
+  via: latest_version
+- from: Text-many-versions
+  to: Text
+  type: belongs_to
+  via: text_id
+- from: Text-many-versions
+  to: Text-version-object
+  type: has_one
+  via: latest_version
+- from: Text-many-versions
+  to: Text-version-object
+  type: has_many
+  via: other_versions
+- from: Voicemail-summary
+  to: Text-data-simple
+  type: has_one
+  via: transcript
+- from: Voicemail-summary
+  to: Text-section
+  type: has_many
+  via: summary
+- from: Voicemail-summary
+  to: Text-info
+  type: has_one
+  via: text_info
+- from: Voicemail-summary
+  to: File-single
+  type: has_one
+  via: file
+- from: view_settings
+  to: layout_response
+  type: has_one
+  via: layout

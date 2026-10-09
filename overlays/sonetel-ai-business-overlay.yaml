@@ -1,0 +1,50 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist overlay for Sonetel Business API
+  version: 1.0.0
+extends: ../openapi/_original/sonetel-ai-business-openapi.yml
+x-generated: '2026-10-09'
+x-method: generated
+x-source: openapi/sonetel-ai-business-openapi.yml
+actions:
+- target: $.info
+  description: Record API Evangelist provenance.
+  update:
+    x-api-evangelist:
+      provider: sonetel
+      generated: '2026-10-09'
+      source: openapi/sonetel-ai-business-openapi.yml
+      upstream: https://github.com/Sonetel/sonetel-api-docs
+      documentation: https://docs.sonetel.com/
+- target: $
+  description: The upstream document declares no tags; add one tag naming this API so operations group
+    in renderers.
+  update:
+    tags:
+    - name: Sonetel Business
+      description: The API allows to manage business profile for each account.
+- target: $.paths['/business'].get
+  description: Tag get-business.
+  update:
+    tags:
+    - Sonetel Business
+- target: $.paths['/business'].post
+  description: Tag post-business.
+  update:
+    tags:
+    - Sonetel Business
+- target: $.paths['/business/{business_id}'].put
+  description: Tag put-business-id.
+  update:
+    tags:
+    - Sonetel Business
+- target: $.paths['/business/{business_id}'].get
+  description: Tag get-ai-business-business-business-id.
+  update:
+    tags:
+    - Sonetel Business
+- target: $.paths['/business/{business_id}'].delete
+  description: Tag delete-business-id.
+  update:
+    tags:
+    - Sonetel Business

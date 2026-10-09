@@ -1,0 +1,72 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist overlay for Sonetel Users API
+  version: 1.0.0
+extends: ../openapi/_original/sonetel-users-openapi.yml
+x-generated: '2026-10-09'
+x-method: generated
+x-source: openapi/sonetel-users-openapi.yml
+actions:
+- target: $.info
+  description: Record API Evangelist provenance.
+  update:
+    x-api-evangelist:
+      provider: sonetel
+      generated: '2026-10-09'
+      source: openapi/sonetel-users-openapi.yml
+      upstream: https://github.com/Sonetel/sonetel-api-docs
+      documentation: https://docs.sonetel.com/
+- target: $
+  description: The upstream document declares no tags; add one tag naming this API so operations group
+    in renderers.
+  update:
+    tags:
+    - name: Sonetel Users
+      description: Every user in your account is available as a resource via the API. All users have a
+        unique identity, a userId, which can be used to access this resource as well as other resources
+        that are linked to the user.
+- target: $.paths['/account/{accountid}/user'].post
+  description: Tag post-user.
+  update:
+    tags:
+    - Sonetel Users
+- target: $.paths['/account/{accountid}/user'].get
+  description: Tag getaccount-accountid-user.
+  update:
+    tags:
+    - Sonetel Users
+- target: $.paths['/account/{accountid}/user/{userid}'].get
+  description: Tag get-account-accountid-user-userid.
+  update:
+    tags:
+    - Sonetel Users
+- target: $.paths['/account/{accountid}/user/{userid}'].put
+  description: Tag put-account-accountid-user-userid.
+  update:
+    tags:
+    - Sonetel Users
+- target: $.paths['/account/{accountid}/user/{userid}'].delete
+  description: Tag delete-account-accountid-user-userid.
+  update:
+    tags:
+    - Sonetel Users
+- target: $.paths['/account/{accountid}/user/{userid}/call'].post
+  description: Tag post-account-accountid-user-userid-call.
+  update:
+    tags:
+    - Sonetel Users
+- target: $.paths['/account/{accountid}/user/{userid}/call'].get
+  description: Tag get-account-accountid-user-userid-call.
+  update:
+    tags:
+    - Sonetel Users
+- target: $.paths['/user/{userid}/settings/data-mgr'].get
+  description: Tag get-user-userid-ai-settings.
+  update:
+    tags:
+    - Sonetel Users
+- target: $.paths['/user/{userid}/settings/data-mgr'].put
+  description: Tag put-user-userid-ai-settings.
+  update:
+    tags:
+    - Sonetel Users

@@ -1,0 +1,49 @@
+generated: '2026-10-09'
+method: generated
+source: Agent Skills generated from the Sonetel OpenAPI files under openapi/, which come from github.com/Sonetel/sonetel-api-docs.
+  The flows follow that repo's sample-scripts directories. Every operationId was checked against the spec. No provider-published
+  skills or AGENTS.md were found in the Sonetel GitHub org.
+skills:
+- file: sonetel-get-an-access-token.md
+  name: sonetel-get-an-access-token
+  api: openapi/sonetel-authentication-openapi.yml
+  operations:
+  - create-JWT-token
+- file: sonetel-buy-a-phone-number.md
+  name: sonetel-buy-a-phone-number
+  api: openapi/sonetel-phone-numbers-openapi.yml
+  operations:
+  - get-country
+  - get-stock
+  - get-numberstocksummary-country-availablephonenumber
+  - postaccount-accountid-phonenumbersubscription
+  - putaccount-accountid-phonenumbersubscription-phnum
+  - get-subscribed-numbers
+- file: sonetel-make-a-callback-call.md
+  name: sonetel-make-a-callback-call
+  api: openapi/sonetel-make-calls-openapi.yml
+  operations:
+  - post-make-calls-call-call-back
+- file: sonetel-manage-call-recordings.md
+  name: sonetel-manage-call-recordings
+  api: openapi/sonetel-recorded-calls-openapi.yml
+  operations:
+  - get-call-recording
+  - get-recording-recordingId
+  - get-call-recording-recording-id-summarize
+  - delete-call-recording-recording-id
+- file: sonetel-transcribe-an-audio-file.md
+  name: sonetel-transcribe-an-audio-file
+  api: openapi/sonetel-transcription-openapi.yml
+  operations:
+  - transcribeFile
+  - get-transcription-transcribe_async-req_id
+- file: sonetel-create-an-ivr-voice-app.md
+  name: sonetel-create-an-ivr-voice-app
+  api: openapi/sonetel-voice-apps-openapi.yml
+  operations:
+  - create-voiceapp-account
+  - get-voiceapps-account
+  - update-account-voiceappid
+  - post-user
+  - upload-message

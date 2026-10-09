@@ -1,0 +1,1116 @@
+openapi: 3.2.0
+info:
+  title: Sonetel Prompt API
+  termsOfService: https://sonetel.com/en/help/help-topics/terms-conditions/terms-conditions/
+  version: '1.0'
+  description: 'Operations tagged Prompt across 4 of this provider''s published API definitions: 5_voice_apps.yaml, ai_promptmanager.yaml, sonetel-ai-prompt-manager-openapi.yml, sonetel-voice-apps-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://public-api.sonetel.com
+  description: Production
+- url: http://api.sonetel.com/promptmgr
+  description: Sonetel API
+tags:
+- name: Prompt
+paths:
+  /prompt/{promptid}/message:
+    post:
+      summary: Add custom message to a prompt
+      description: '# Add custom message to a prompt
+
+
+        Use this endpoint to add a voice message to a newly created prompt or update an existing prompt.
+
+
+        To upload the message, issue a POST request to `/prompt/{promptid}/message` with the Content-Type as `multipart/form-data`.
+
+
+        You can get the `promptid` by issuing a GET request to the `/account/{accountid}/voiceapp/{voiceappid}/prompt` endpoint.
+
+
+        Here is a sample cURL request. A successful response contains details of the updated prompt.
+
+
+        ```c
+
+        curl \
+
+        --location \
+
+        --request POST ''https://public-api.sonetel.com/prompt/{promptid}/message'' \
+
+        --header ''Accept: application/json, text/plain, */*'' \
+
+        --header ''Authorization: Bearer '' \
+
+        --header ''Content-Type: multipart/form-data; boundary={boundary_id}''
+
+        --form ''file=@"{/path/to/file}"''
+
+        ```
+
+
+        ### Other ways to change a voice message
+
+
+        In addition to uploading a pre-recorded audio file, you can also use our recording function to change the voice message for a prompt.
+
+
+        Follow these instructions to record the prompt in your own voice.
+
+
+        1. Issue a GET request to `/account/{accountid}/voiceapp/{voiceappid}/prompt` and note down the prompt''s `record_path`. It will look like `record#PROMPT_ID@prompts.sonetel.com`.
+
+        The record path is a SIP address that you can call in order to record a specific prompt.
+
+        2. Register your Sonetel account using a SIP phone (such as Zoiper) and call the `record_path`
+
+        3. Start speaking after you hear a beep.
+
+        For best results, make sure you are in a quiet room and using a good quality microphone.
+
+        3. Once you have finished speaking, press # and follow the instructions in the call to save, discard or listen to the recorded message.
+
+
+        > To listen to the existing voice message linked to a prompt, call the prompt''s `play_path` from a SIP phone or download the audio file (.wav) from the `message_url`.
+
+
+        > Default prompts can also be customized in the same way as custom prompts, by uploading a voice file or via the prompt recording function.'
+      operationId: upload-message
+      parameters:
+      - name: Content-Type
+        in: header
+        description: multipart/form-data; boundary=<boundary_id>
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: Bearer <access_token>
+        required: true
+        schema:
+          type: string
+      - name: promptid
+        in: path
+        description: The unique ID of the prompt you wish to update.
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: ''
+        content:
+          multipart/form-data:
+            schema: {}
+      responses:
+        '200':
+          $ref: '#/components/responses/List-prompt'
+      security:
+      - Production: []
+      servers:
+      - url: https://public-api.sonetel.com
+        description: Production
+      tags:
+      - Prompt
+    servers:
+    - url: https://public-api.sonetel.com
+      description: Production
+  /prompt:
+    get:
+      summary: List prompts
+      description: 'List prompt objects based on various criteria.
+
+
+        The prompt objects returned have details of the latest version of the prompt text in the language specified in the request.'
+      operationId: get-prompt
+      parameters:
+      - name: account_id
+        in: query
+        description: List prompt objects created as custom prompts for an account_id
+        schema:
+          type: string
+          examples:
+          - jmn4yht27j
+        examples:
+          default:
+            value: jmn4yht27j
+      - name: language
+        in: query
+        description: Language ([2 char ISO](https://en.wikipedia.org/wiki/ISO_639-1) or [IETF language tags](https://en.wikipedia.org/wiki/IETF_language_tag)) in which the prompt text in the prompt object should be returned. If not specified, the prompt text is returned in the original language (`language_orig`) it was specified in
+        schema:
+          type: string
+          examples:
+          - en-en
+      - name: create_date
+        in: query
+        description: List prompt objects based on create date of the latest version of the prompt. Filter with operators `*__gte*` (Greater than or equal to), `*__lte*` (Less than or equal to), or `*=*`.
+        schema:
+          type: string
+          examples:
+          - create_date__gte'2019-08-24T14:15:22Z'
+      - name: service_type
+        in: query
+        description: List prompts for an [AI service type](reference/12_ai_services.yaml)
+        schema:
+          type: string
+          enum:
+          - business-description
+          - blog-title-list
+          - blog
+          - vmail-summary
+          - call-summary
+          - meeting-minutes
+          examples:
+          - blog
+      - name: slug
+        in: query
+        description: Find prompt based on the prompt `slug`
+        schema:
+          type: string
+          pattern: ^[a-zA-Z0-9][a-zA-Z0-9-]*$
+          minLength: 3
+          maxLength: 50
+          examples:
+          - write-blog
+      responses:
+        '200':
+          $ref: '#/components/responses/List-prompts'
+        '400':
+          description: Bad Request. Invalid parameters
+        '404':
+          description: Not Found
+      security:
+      - Sonetel: []
+      servers:
+      - url: http://api.sonetel.com/promptmgr
+        description: Sonetel API
+      tags:
+      - Prompt
+    post:
+      summary: Create a prompt
+      description: 'Create a new prompt. Creating a prompt automatically creates the first version of the prompt.
+
+        The language of the prompt text in the request is set as the `language_orig`.
+
+        The newly created prompt object, with the unqiue `prompt_id` and details of the version is returned.'
+      operationId: post-prompt
+      requestBody:
+        $ref: '#/components/requestBodies/post-prompt'
+      responses:
+        '200':
+          $ref: '#/components/responses/Get-prompt-by-Id'
+        '400':
+          description: Bad Request. Invalid or missing parameter or parameter values
+      security:
+      - Sonetel: []
+      servers:
+      - url: http://api.sonetel.com/promptmgr
+        description: Sonetel API
+      tags:
+      - Prompt
+    servers:
+    - url: http://api.sonetel.com/promptmgr
+      description: Sonetel API
+  /prompt/{prompt_id}:
+    get:
+      summary: Fetch a prompt
+      description: 'Get prompt object by Id. This retrieves the prompt object with the latest version of the prompt.
+
+        The prompt text is returned in the requested language
+
+        To get and manage other versions of a prompt, use the prompt version endpoints'
+      operationId: get-prompt-id
+      parameters:
+      - name: language
+        in: query
+        description: The language ([2 char ISO](https://en.wikipedia.org/wiki/ISO_639-1) or [IETF language tags)](https://en.wikipedia.org/wiki/IETF_language_tag) in which the prompt text should be returned
+        schema:
+          type: string
+          default: en
+          examples:
+          - en-us
+      - name: prompt_id
+        in: path
+        description: The prompt Id
+        required: true
+        schema:
+          type: string
+          examples:
+          - t3uyh49j
+        examples:
+          default:
+            value: t3uyh49j
+      responses:
+        '200':
+          $ref: '#/components/responses/Get-prompt-by-Id'
+        '404':
+          description: Not Found
+      security:
+      - Sonetel: []
+      servers:
+      - url: http://api.sonetel.com/promptmgr
+        description: Sonetel API
+      tags:
+      - Prompt
+    delete:
+      summary: Delete a prompt
+      description: Delete a prompt. This deletes the prompt object and all its versions
+      operationId: delete-prompt-prompt_id
+      parameters:
+      - name: prompt_id
+        in: path
+        description: The prompt Id
+        required: true
+        schema:
+          type: string
+          examples:
+          - t3uyh49j
+        examples:
+          default:
+            value: t3uyh49j
+      responses:
+        '200':
+          $ref: '#/components/responses/Get-prompt-by-Id'
+        '404':
+          description: Not Found
+      security:
+      - Sonetel: []
+      servers:
+      - url: http://api.sonetel.com/promptmgr
+        description: Sonetel API
+      tags:
+      - Prompt
+    put:
+      summary: Update prompt
+      description: Update a prompt. Only the prompt description can be updated
+      operationId: put-prompt-prompt_id
+      parameters:
+      - name: prompt_id
+        in: path
+        description: The prompt Id
+        required: true
+        schema:
+          type: string
+          examples:
+          - t3uyh49j
+        examples:
+          default:
+            value: t3uyh49j
+      requestBody:
+        $ref: '#/components/requestBodies/put-prompt'
+      responses:
+        '200':
+          $ref: '#/components/responses/Get-prompt-by-Id'
+        '400':
+          description: Bad Request
+      security:
+      - Sonetel: []
+      servers:
+      - url: http://api.sonetel.com/promptmgr
+        description: Sonetel API
+      tags:
+      - Prompt
+    servers:
+    - url: http://api.sonetel.com/promptmgr
+      description: Sonetel API
+  /prompt/{prompt_id}/version:
+    get:
+      summary: List prompt versions
+      description: 'List versions of a prompt.
+
+        The prompt text is returned in the language specified in the request.'
+      operationId: get-prompt-prompt_id-version
+      parameters:
+      - name: create_date
+        in: query
+        description: List prompt versions based on create date of the version. Filter with operators `*__gte*` (Greater than or equal to), `*__lte*` (Less than or equal to), or `*=*`
+        schema:
+          type: string
+          examples:
+          - create_date__gte'2019-08-24T14:15:22Z'
+        examples:
+          default:
+            value: create_date__gte'2019-08-24T14:15:22Z'
+      - name: language
+        in: query
+        description: The language ([2 char ISO](https://en.wikipedia.org/wiki/ISO_639-1) or [IETF language tags)](https://en.wikipedia.org/wiki/IETF_language_tag) in which the text in the prompt version should be returned. Text is returned in `language_orig` if unspecified
+        schema:
+          type: string
+          examples:
+          - en
+      - name: slug
+        in: query
+        description: List prompt versions based on the prompt `slug`
+        schema:
+          type: string
+          pattern: ^[a-zA-Z0-9][a-zA-Z0-9-]*$
+          minLength: 3
+          maxLength: 50
+          examples:
+          - write-blog
+      - name: prompt_id
+        in: path
+        description: The prompt Id
+        required: true
+        schema:
+          type: string
+          examples:
+          - t3uyh49j
+        examples:
+          default:
+            value: t3uyh49j
+      responses:
+        '200':
+          $ref: '#/components/responses/List-prompt-versions'
+        '404':
+          description: Not Found
+      servers:
+      - url: http://api.sonetel.com/promptmgr
+        description: Sonetel API
+      tags:
+      - Prompt
+    post:
+      summary: Create prompt version
+      description: 'Create a new version of a prompt. Creating a version also sets that version as the latest version
+
+        The prompt text must be provided in the `language_orig` of the prompt'
+      operationId: post-prompt-prompt_id-version
+      parameters:
+      - name: prompt_id
+        in: path
+        description: The prompt Id
+        required: true
+        schema:
+          type: string
+          examples:
+          - t3uyh49j
+        examples:
+          default:
+            value: t3uyh49j
+      requestBody:
+        $ref: '#/components/requestBodies/post-prompt-version'
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+        '404':
+          description: Not Found
+      security:
+      - Sonetel: []
+      servers:
+      - url: http://api.sonetel.com/promptmgr
+        description: Sonetel API
+      tags:
+      - Prompt
+    servers:
+    - url: http://api.sonetel.com/promptmgr
+      description: Sonetel API
+  /prompt/{prompt_id}/version/{version}:
+    get:
+      summary: Get a prompt version
+      description: 'Fetch a prompt version by its version number.
+
+        Prompt text is fetched in the language specified in the request'
+      operationId: get-prompt-prompt_id-version-version
+      parameters:
+      - name: language
+        in: query
+        description: The language ([2 char ISO](https://en.wikipedia.org/wiki/ISO_639-1) or [IETF language tags)](https://en.wikipedia.org/wiki/IETF_language_tag) in which the text in the prompt version should be returned. Text is returned in `language_orig` if unspecified
+        schema:
+          type: string
+      - name: prompt_id
+        in: path
+        description: The prompt Id
+        required: true
+        schema:
+          type: string
+          examples:
+          - t3uyh49j
+        examples:
+          default:
+            value: t3uyh49j
+      - name: version
+        in: path
+        description: The version of the prompt
+        required: true
+        schema:
+          type: integer
+          minimum: 2
+          examples:
+          - 2
+      responses:
+        '200':
+          $ref: '#/components/responses/Get-prompt-version'
+        '400':
+          description: Invalid parameters in request
+        '404':
+          description: Not Found
+      security:
+      - Sonetel: []
+      servers:
+      - url: http://api.sonetel.com/promptmgr
+        description: Sonetel API
+      tags:
+      - Prompt
+    delete:
+      summary: Delete prompt version
+      description: 'Delete a prompt version. Deleting a version automatically deletes all versions after this prompt.
+
+        The first version of the prompt cannot be deleted.'
+      operationId: delete-prompt-prompt_id-version-version
+      parameters:
+      - name: prompt_id
+        in: path
+        description: The prompt Id
+        required: true
+        schema:
+          type: string
+          examples:
+          - t3uyh49j
+        examples:
+          default:
+            value: t3uyh49j
+      - name: version
+        in: path
+        description: The version of the prompt
+        required: true
+        schema:
+          type: integer
+          minimum: 2
+          examples:
+          - 2
+      responses:
+        '200':
+          $ref: '#/components/responses/Get-prompt-version'
+        '404':
+          description: Not Found
+      security:
+      - Sonetel: []
+      servers:
+      - url: http://api.sonetel.com/promptmgr
+        description: Sonetel API
+      tags:
+      - Prompt
+    put:
+      summary: Update prompt version
+      description: 'Update a prompt version
+
+
+        Description of a prompt can be updated
+
+
+        Auto-generated (auto-translated) prompt texts can be changed with replacement texts. However, prompt text specified in the original language (`language_orig`) for a version cannot be updated. New version of a prompt must be created in such a case.'
+      operationId: put-prompt-prompt_id-version-version
+      parameters:
+      - name: prompt_id
+        in: path
+        description: The prompt Id
+        required: true
+        schema:
+          type: string
+          examples:
+          - t3uyh49j
+        examples:
+          default:
+            value: t3uyh49j
+      - name: version
+        in: path
+        description: The version of the prompt
+        required: true
+        schema:
+          type: integer
+          minimum: 2
+          examples:
+          - 2
+      requestBody:
+        $ref: '#/components/requestBodies/put-prompt-version'
+      responses:
+        '200':
+          $ref: '#/components/responses/Get-prompt-version'
+        '400':
+          description: Bad Request
+        '404':
+          description: Not Found
+      security:
+      - Sonetel: []
+      servers:
+      - url: http://api.sonetel.com/promptmgr
+        description: Sonetel API
+      tags:
+      - Prompt
+    servers:
+    - url: http://api.sonetel.com/promptmgr
+      description: Sonetel API
+components:
+  responses:
+    List-prompt:
+      description: ''
+      content:
+        application/json:
+          schema:
+            type: array
+            minItems: 1
+            uniqueItems: true
+            items:
+              type: object
+              description: Object containing the prompt's details
+              properties:
+                prompt_id:
+                  type: string
+                  description: The unique Id of the prompt
+                  minLength: 1
+                type:
+                  type: string
+                  enum:
+                  - custom
+                  - standard
+                  description: standard”. Specifies if the associated voice message is a custom message or a standard message. A custom message is one that has been recorded or uploaded by the customer, while a standard message is a pre-recorded message provided by Sonetel
+                  minLength: 1
+                name:
+                  type: string
+                  description: A descriptive name of the prompt.
+                  minLength: 1
+                app_id:
+                  type: string
+                  description: The unique ID of the voice app that the prompt belongs to.
+                  minLength: 1
+                account_id:
+                  type: string
+                  description: Your Sonetel account ID
+                  minLength: 1
+                record_id:
+                  type: string
+                  description: 'The ID of the prompt that can be dialed via DTMF digits when updating the voice message from the recording function (*22).
+
+
+                    Dial *22 from a SIP phone registered with Sonetel and enter the record ID to record over the existing message.'
+                  minLength: 1
+                exists:
+                  type: string
+                  description: 'A flag that specifies if the associated voice message for this prompt exists. This flag is only relevant in case of custom prompts.
+
+
+                    For default prompts, the flag is always “yes” since there is always a voice message associated with them.'
+                  minLength: 1
+                file_name:
+                  type: string
+                  description: The name of the audio file uploaded by the customer. The field is empty if no file has been uploaded.
+                file_details:
+                  type: string
+                  description: This lists details of the recording file, Empty if it is standard or non-existing. `Recorded by phone` if it is recorded. `uploaded` if it is uploaded, `Text to speech` if it is  TTS converted file.
+                play_path:
+                  type: string
+                  description: This field carries the prompt sip_uri that can be used to call to play the prompt. (play#prompt-id@prompts.sonetel.com)
+                record_path:
+                  type: string
+                  description: This field carries the prompt sip_url that can be used to record the prompt. (record#prompt-id@prompts.sonetel.com)
+                audio_length:
+                  type: string
+                  description: The length of the audio in seconds.
+                size:
+                  type: string
+                  description: The size of the file in kilobytes.
+                message_url:
+                  type: string
+                  description: The URL of the voice message of the prompt. This is the URL where the voice file for the prompt can be accessed and uploaded.
+                create_date:
+                  type: string
+                  description: The date and time when the prompt was created.
+                  format: date-time
+            x-examples:
+              example-1:
+              - record_id: '1001'
+                account_id: YOUR_ACCOUNT_ID
+                name: Welcome
+                exists: 'yes'
+                prompt_id: PRio9aaaaaaa
+                type: standard
+                app_id: AB0cdefghij
+              - record_id: '1002'
+                account_id: YOUR_ACCOUNT_ID
+                name: Main Menu
+                exists: 'yes'
+                prompt_id: PRio9aaaaaab
+                type: standard
+                app_id: AB0cdefghij
+              - record_id: '1007'
+                account_id: YOUR_ACCOUNT_ID
+                name: Invalid Menu Entry
+                exists: 'yes'
+                prompt_id: PRio9aaaaaac
+                type: standard
+                app_id: AB0cdefghij
+              - record_id: '1008'
+                account_id: YOUR_ACCOUNT_ID
+                name: Please Wait
+                exists: 'yes'
+                prompt_id: PRio9aaaaaad
+                type: standard
+                app_id: AB0cdefghij
+              - record_id: '1030'
+                account_id: YOUR_ACCOUNT_ID
+                name: Information
+                exists: 'yes'
+                prompt_id: PRio9aaaaaae
+                type: custom
+                app_id: AB0cdefghij
+              - record_id: '1003'
+                account_id: YOUR_ACCOUNT_ID
+                name: Office closed
+                exists: 'yes'
+                prompt_id: PRio9aaaaaaf
+                type: standard
+                app_id: AB0cdefghij
+              - record_id: '1004'
+                account_id: YOUR_ACCOUNT_ID
+                name: Info message 1
+                exists: 'yes'
+                prompt_id: PRio9aaaaaag
+                type: standard
+                app_id: AB0cdefghij
+              - record_id: '1005'
+                account_id: YOUR_ACCOUNT_ID
+                name: Enter Extension
+                exists: 'yes'
+                prompt_id: PRio9aaaaaah
+                type: standard
+                app_id: AB0cdefghij
+              - record_id: '1006'
+                account_id: YOUR_ACCOUNT_ID
+                name: Invalid Extension
+                exists: 'yes'
+                prompt_id: PRio9aaaaaai
+                type: standard
+                app_id: AB0cdefghij
+          examples:
+            Prompt:
+              value:
+                record_id: '1001'
+                account_id: YOUR_ACCOUNT_ID
+                name: Welcome
+                exists: 'yes'
+                prompt_id: PRio9aaaaaaa
+                type: standard
+                app_id: AB0cdefghij
+            Prompt with message details:
+              value:
+                prompt_id: PRia0abcdefGh
+                type: standard
+                name: Welcome
+                app_id: VAfgte45a2Gh
+                account_id: '200000000'
+                record_id: '7001'
+                exists: true
+                file_name: response.wav
+                file_details: Uploaded
+                play_path: play#PRia0abcdefGh@prompts.sonetel.com
+                record_path: record#PRia0abcdefGh@prompts.sonetel.com
+                audio_length: '10.0'
+                size: '157.92'
+                message_url: https://audio-prompts.sonetel.com/PRia0abcdefGh-00000a00-0000-aaaa-0000-aaaa0000b1b1.wav
+                create_date: 20210727T00:00:00Z
+      headers:
+        Content-Type:
+          schema:
+            type: string
+          description: application/json;charset=UTF-8
+    List-prompts:
+      description: List of prompts
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/prompt'
+    List-prompt-versions:
+      description: List of prompt versions
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/prompt-version'
+    Get-prompt-version:
+      description: A prompt version
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/prompt-version'
+    Get-prompt-by-Id:
+      description: Prompt details
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/prompt'
+  schemas:
+    prompt:
+      type: object
+      title: prompt
+      description: A prompt object
+      properties:
+        prompt_id:
+          type: string
+          description: The prompt Id
+          readOnly: true
+          examples:
+          - t3uyh49j
+        language_orig:
+          type: string
+          description: The language ([2 char ISO](https://en.wikipedia.org/wiki/ISO_639-1) or [IETF language tags)](https://en.wikipedia.org/wiki/IETF_language_tag) in which the prompt text is originally specified. Prompts may be translated to various languages on the fly automatically.
+        description:
+          type: string
+          description: A textual description of the prompt
+          examples:
+          - This prompt is used by the blog writer to write a blog based on a title with no user feedback
+        service_type:
+          type: string
+          enum:
+          - business-description
+          - blog-title-list
+          - blog
+          - meeting-minutes
+          - vmail-summary
+          - call-summary
+          description: The [AI service type](reference/12_ai_services.yaml) to which this prompt applies
+          examples:
+          - blog
+        ai_platform:
+          type: string
+          enum:
+          - gpt
+          - bard
+          description: The third party AI platform with which this prompt is used
+          default: gpt
+          examples:
+          - gpt
+        latest_version:
+          $ref: '#/components/schemas/prompt-version-no-id'
+          description: The latest version of the prompt
+        version_count:
+          type: integer
+          description: The count of versions of this prompt
+          minimum: 1
+          default: 1
+          examples:
+          - 2
+        create_date:
+          type: string
+          description: The date/time when the latest prompt version was created
+          format: date-time
+          examples:
+          - '2019-08-24T14:15:22Z'
+        account_id:
+          type: string
+          description: Optional Sonetel account Id, if the prompt applies to a specific account.
+          examples:
+          - jmn4yht27j
+        created_by:
+          type: string
+          description: The user_id of the Sonetel user that created the prompt
+          examples:
+          - jn4iu976
+        gpt_settings:
+          $ref: '#/components/schemas/gpt-settings'
+          description: GPT settings. Applies when `ai_platform` is set to gpt
+        linked_prompts:
+          type: array
+          description: A list of prompts linked to this prompt
+          items:
+            $ref: '#/components/schemas/linked-prompts'
+        slug:
+          type: string
+          description: 'A textual name given to this prompt to search and identify the prompt.
+
+            `slug` may be alphanumeric or contain `-`
+
+            Slugs assigned to custom prompts must always begin with `cstm-<service_id>-`'
+          pattern: ^[a-zA-Z0-9][a-zA-Z0-9-]*$
+          minLength: 3
+          maxLength: 50
+          examples:
+          - write-blog
+    prompt-version:
+      type: object
+      title: prompt-version
+      description: A prompt version
+      properties:
+        version:
+          type: integer
+          description: The prompt version
+          minimum: 1
+          default: 1
+          examples:
+          - 2
+        prompt_id:
+          type: string
+          description: The prompt Id
+          examples:
+          - t3uyh49j
+        prompt_text:
+          type: string
+          description: The text of the prompt
+          examples:
+          - Write a blog in less than 300 words for the title \"[%bltle%]\"
+        language:
+          type: string
+          description: The language ([2 char ISO](https://en.wikipedia.org/wiki/ISO_639-1) or [IETF language tags)](https://en.wikipedia.org/wiki/IETF_language_tag) of the text in the prompt version
+        create_date:
+          type: string
+          description: The date/time when this version of the prompt was created
+          examples:
+          - '2019-08-24T14:15:22Z'
+        translate_mode:
+          type: string
+          enum:
+          - manual
+          - auto
+          description: '`manual` if prompt version text is human generated. `auto` if the prompt text is translated and automatically generated'
+          examples:
+          - manual
+        version_desc:
+          type: string
+          description: A description of this version of the prompt
+        tags:
+          type: array
+          description: List of prompt tags applicable to this version
+          items:
+            $ref: '#/components/schemas/prompt-tag'
+    prompt-version-no-id:
+      type: object
+      title: prompt-version-no-id
+      description: Prompt version information
+      properties:
+        version:
+          type: integer
+          description: The prompt version
+        prompt_text:
+          type: string
+          description: The text of the prompt
+          examples:
+          - Write a blog in less than 300 words for the title \"[%bltle%]\"
+        language:
+          type: string
+          description: The language ([2 char ISO](https://en.wikipedia.org/wiki/ISO_639-1) or [IETF language tags)](https://en.wikipedia.org/wiki/IETF_language_tag) of the text in the prompt version
+        translate_mode:
+          type: string
+          enum:
+          - auto
+          - manual
+          description: '`manual` if prompt version text is human generated. `auto` if the prompt text is translated and automatically generated'
+          examples:
+          - manual
+        version_desc:
+          type: string
+          description: A description of this version of the prompt
+        tags:
+          type: array
+          description: List of tags that apply to this prompt version
+          items:
+            $ref: '#/components/schemas/prompt-tag'
+    linked-prompts:
+      type: object
+      title: linked-prompts
+      description: A list of prompts linked to this prompt
+      properties:
+        l_prompt_id:
+          type: string
+          description: Id of the linked prompt
+          examples:
+          - g3nj46yt
+        type:
+          const: assembly
+          description: 'The type of link between this prompt and the linked prompt
+
+
+            `assembly`: A linked assembly prompt helps in assembling multiple pieces of AI generated text into a single text. This is used in cases when long texts, more than limitations of an AI model or API are generated and must be assembled together after generation.'
+          examples:
+          - assembly
+    gpt-settings:
+      type: object
+      title: gpt-settings
+      description: GPT specific settings for the prompt
+      properties:
+        model:
+          type: string
+          description: The OpenAI [GPT model](https://platform.openai.com/docs/models) to be used. The model must match one of the model values supported by OpenAI.
+          default: gpt-3.5-turbo
+        max_tokens:
+          type: integer
+          description: The maximum tokens settings for completion requests  using this prompt
+          format: int32
+          examples:
+          - 5000
+        temperature:
+          type: number
+          description: The [temperature settings](https://platform.openai.com/docs/introduction/overview) for this prompt
+          format: float
+          minimum: 0
+          maximum: 1
+          examples:
+          - 0.2
+    prompt-tag:
+      type: object
+      title: prompt-tag
+      description: Prompt tag
+      properties:
+        name:
+          type: string
+          description: Tag name
+        type:
+          type: string
+          enum:
+          - value
+          - text_id
+          description: Tag type. Type `value` indicates that the tag is specified by value. `text_id` indicates that the tag is specified as the reference Id of the text .
+  requestBodies:
+    put-prompt:
+      description: Request to update a prompt
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              description:
+                type: string
+                description: A textual description of the prompt
+                examples:
+                - This prompt is used by the blog writer to write a blog based on a title with no user feedback
+              gpt_settings:
+                $ref: '#/components/schemas/gpt-settings'
+                description: GPT settings. Applies if `ai_platform` is `gpt`
+              linked_prompts:
+                type: array
+                items:
+                  $ref: '#/components/schemas/linked-prompts'
+              slug:
+                type: string
+                description: 'A textual name given to this prompt to search and identify the prompt.
+
+                  `slug` may be alphanumeric or contain `-`
+
+                  Slugs assigned to custom prompts must always begin with `cstm-<service_id>-`'
+                pattern: ^[a-zA-Z0-9][a-zA-Z0-9-]*$
+                minLength: 3
+                maxLength: 50
+                examples:
+                - write-blog
+    post-prompt:
+      description: Request to create a prompt
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              prompt_text:
+                type: string
+                description: The text of the prompt
+                examples:
+                - Write a blog in less than 300 words for the title {%__blog_title}
+              language:
+                type: string
+                description: The language([2 char ISO](https://en.wikipedia.org/wiki/ISO_639-1) or [IETF language tags](https://en.wikipedia.org/wiki/IETF_language_tag) of the prompt. The language is also set as the field `language_orig`
+                examples:
+                - en-en
+              description:
+                type: string
+                description: A textual description of the prompt
+                examples:
+                - This prompt is used by the blog writer to write a blog based on a title with no user feedback
+              service_type:
+                type: string
+                enum:
+                - business-description
+                - blog-title-list
+                - blog
+                - meeting-minutes
+                - vmail-summary
+                - call-summary
+                description: The [AI service type](reference/12_ai_serviceso.yaml) with which this prompt is used
+                examples:
+                - blog
+              ai_platform:
+                type: string
+                enum:
+                - gpt
+                - bard
+                description: The third party AI platform with which this prompt is used
+                default: gpt
+                examples:
+                - gpt
+              account_id:
+                type: string
+                description: The Sonetel account Id in case the prompt is created as a custom prompt for an account
+                examples:
+                - jmn4yht27j
+              gpt_settings:
+                $ref: '#/components/schemas/gpt-settings'
+                description: GPT settings if `ai_platform` is set to `gpt`
+              slug:
+                type: string
+                description: 'A textual name given to this prompt to search and identify the prompt.
+
+                  `slug` may be alphanumeric or contain `-`
+
+                  Slugs assigned to custom prompts must always begin with `cstm-<service_id>-`'
+                pattern: ^[a-zA-Z0-9][a-zA-Z0-9-]*$
+                minLength: 3
+                maxLength: 50
+                examples:
+                - write-blog
+            required:
+            - prompt_text
+            - language
+            - service_type
+            - ai_platform
+    put-prompt-version:
+      description: Update prompt version
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              version_desc:
+                type: string
+                description: A textual description of the prompt
+              prompt_text:
+                type: string
+                description: The text of the prompt
+              language:
+                type: string
+                description: The language ([2 char ISO](https://en.wikipedia.org/wiki/ISO_639-1) or [IETF language tags)](https://en.wikipedia.org/wiki/IETF_language_tag) of the text in the prompt version
+    post-prompt-version:
+      description: Prompt version details
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              prompt_text:
+                type: string
+                description: The text of the prompt
+                examples:
+                - Write a blog in less than 300 words for the title {%__blog_title}
+              version_desc:
+                type: string
+                description: A textual description of the prompt version
+                examples:
+                - This prompt is used by the blog writer to write a blog based on a title with no user feedback
+  securitySchemes:
+    Production:
+      type: oauth2
+      flows:
+        password:
+          refreshUrl: https://api.sonetel.com/SonetelAuth/beta/oauth/token
+          tokenUrl: https://api.sonetel.com/SonetelAuth/beta/oauth/token
+          scopes: {}
+    Sonetel:
+      type: oauth2
+      flows:
+        password:
+          refreshUrl: ''
+          tokenUrl: ''
+          scopes: {}
+x-refined-from:
+- 5_voice_apps.yaml
+- ai_promptmanager.yaml
+- sonetel-ai-prompt-manager-openapi.yml
+- sonetel-voice-apps-openapi.yml

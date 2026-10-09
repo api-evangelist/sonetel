@@ -1,0 +1,259 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/sonetel/main/json-schema/sonetel-call-recording-list-schema.json",
+  "title": "Call-recording-list",
+  "x-generated": "2026-10-09",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/sonetel-recorded-calls-openapi.yml#/components/schemas/Call-recording-list",
+  "type": "object",
+  "properties": {
+    "resource": {
+      "type": "string",
+      "description": "The name of the resource this response is from.",
+      "minLength": 1
+    },
+    "status": {
+      "type": "string",
+      "description": "The status of the response i.e. success or failed.",
+      "minLength": 1
+    },
+    "response": {
+      "type": "array",
+      "description": "Response object with the details of the call recordings",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "properties": {
+          "call_recording_id": {
+            "type": "string",
+            "description": "Unique ID assigned to identify each call recording.",
+            "minLength": 1
+          },
+          "type": {
+            "type": "string",
+            "description": "The type of call recording. Only `voice_call` supported at the moment.",
+            "minLength": 1
+          },
+          "account_id": {
+            "type": "number",
+            "description": "Your Sonetel account ID"
+          },
+          "user_id": {
+            "type": "string",
+            "description": "If the call recording is assigned to a user, this property lists the user_id."
+          },
+          "created_date": {
+            "type": "string",
+            "description": "The timestamp when the call recording was created.",
+            "minLength": 1
+          },
+          "file": {
+            "type": "object",
+            "description": "Details of the call recording file object such as the size, download URL and so on.",
+            "properties": {
+              "type": {
+                "type": "string",
+                "description": "File type such as mp3, etc.",
+                "minLength": 1
+              },
+              "size": {
+                "type": "number",
+                "description": "File size in bytes."
+              },
+              "file_id": {
+                "type": "string",
+                "description": "Unique file ID.",
+                "minLength": 1
+              },
+              "file_access_details": {
+                "type": "object",
+                "properties": {
+                  "url": {
+                    "type": "string",
+                    "description": "Link to download the file.",
+                    "minLength": 1
+                  },
+                  "issued_at": {
+                    "type": "string",
+                    "description": "Timestamp when the download link was created.",
+                    "minLength": 1
+                  },
+                  "expires_at": {
+                    "type": "string",
+                    "description": "Timestamp when the download link will expire.",
+                    "minLength": 1
+                  }
+                },
+                "required": [
+                  "url",
+                  "issued_at",
+                  "expires_at"
+                ]
+              }
+            },
+            "required": [
+              "type",
+              "size",
+              "file_id",
+              "file_access_details"
+            ]
+          },
+          "voice_call_details": {
+            "type": "object",
+            "description": "Details of the call that was recorded.",
+            "properties": {
+              "from": {
+                "type": "string",
+                "description": "'The entity that initiated the call. Can be a PSTN number, a user, etc.",
+                "minLength": 1
+              },
+              "to": {
+                "type": "string",
+                "description": "The entity to which the call was placed.",
+                "minLength": 1
+              },
+              "codec": {
+                "type": "string",
+                "description": "The codec that was use to connect the call.",
+                "minLength": 1
+              },
+              "usage_record_id": {
+                "type": "number",
+                "description": "Unique ID assigned to this call record (CDR)"
+              },
+              "start_time": {
+                "type": "string",
+                "description": "The time when the call started."
+              },
+              "end_time": {
+                "type": "string",
+                "description": "The time when the call ended.",
+                "minLength": 1
+              },
+              "call_length": {
+                "type": "number",
+                "description": "The duration of the call in seconds."
+              },
+              "from_type": {
+                "type": "string",
+                "description": "The type of entity that initiated the call. For example `user`, `phonenumber`.",
+                "minLength": 1
+              },
+              "from_name": {
+                "type": "string",
+                "description": "If a user initiated the call, their name is listed here otherwise it shows the phone number of the source.",
+                "minLength": 1
+              },
+              "caller_id": {
+                "type": "string",
+                "description": "The caller ID that was displayed to the recipient.",
+                "minLength": 1
+              },
+              "to_type": {
+                "type": "string",
+                "description": "The entity that answered the call such as `user`, `phonenumber`, etc.",
+                "minLength": 1
+              },
+              "to_name": {
+                "type": "string",
+                "description": "A name or phone number identifying the destination.",
+                "minLength": 1
+              },
+              "to_orig": {
+                "type": "string",
+                "description": "A unique identifier for the destination.",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "from",
+              "to",
+              "codec",
+              "usage_record_id",
+              "start_time",
+              "end_time",
+              "call_length",
+              "from_type",
+              "from_name",
+              "caller_id",
+              "to_type",
+              "to_name",
+              "to_orig"
+            ]
+          },
+          "summary": {
+            "$ref": "#/$defs/Call-summary",
+            "description": "The Sonetel AI generated call summary.\r\nIf this object is not included in the response, it indicates that the summary was not requested or possible"
+          }
+        },
+        "required": [
+          "call_recording_id",
+          "type",
+          "account_id",
+          "user_id",
+          "created_date"
+        ]
+      }
+    }
+  },
+  "required": [
+    "resource",
+    "status",
+    "response"
+  ],
+  "$defs": {
+    "Call-summary": {
+      "type": "object",
+      "title": "Call-summary",
+      "description": "Call summary generated by Sonetel AI",
+      "properties": {
+        "text_id": {
+          "type": "string",
+          "description": "The unique `text_id` of the call summary.\r\nThe text_id can be used to retrieve details of the summary from the [Sonetel Text manager](reference/13_ai_textmanager.yaml)",
+          "readOnly": true
+        },
+        "file_id": {
+          "type": "string",
+          "description": "The unique `file_id` of the call recording in the [Sonetel file manager](reference/15_ai_filemanager.yaml)\r\nFile_id is used by Sonetel AI services as a reference to the call recording for generating summaries.",
+          "readOnly": true
+        },
+        "about": {
+          "type": "string",
+          "description": "A short Sonetel AI generated string that identifies what the call is about.",
+          "readOnly": true
+        },
+        "score": {
+          "type": "number",
+          "description": "A score(1 to 5) assigned by Sonetel AI to the call recording based on an analysis of the call.",
+          "format": "float",
+          "minimum": 0,
+          "maximum": 5,
+          "readOnly": true
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "not_requested",
+            "in_progress",
+            "ready",
+            "failed",
+            "retry"
+          ],
+          "description": "The status of the call summary generation\r\n\r\n`not_requested`: The summary has not yet been not_requested\r\n\r\n`in_progress`: The summary generation is in progress\r\n\r\n`ready`: The summary is ready. The summary can be fetched using the `text_id` from the [text manager](reference/13_ai_textmanager.yaml)\r\n\r\n`failed`: The summary was requested and has failed. It is not possible to summarize this recording.\r\n\r\n`retry`: The summary was requested and failed. The summary can be requested again.",
+          "readOnly": true
+        },
+        "error_code": {
+          "type": "string",
+          "description": "An error code that identifies the last error during summary generation."
+        },
+        "error_date": {
+          "type": "string",
+          "description": "The date and time when the last error occured during summary generation",
+          "format": "date-time"
+        }
+      }
+    }
+  }
+}

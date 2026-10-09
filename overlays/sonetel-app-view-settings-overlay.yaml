@@ -1,0 +1,30 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist overlay for Sonetel App Settings API
+  version: 1.0.0
+extends: ../openapi/_original/sonetel-app-view-settings-openapi.yml
+x-generated: '2026-10-09'
+x-method: generated
+x-source: openapi/sonetel-app-view-settings-openapi.yml
+actions:
+- target: $.info
+  description: Record API Evangelist provenance.
+  update:
+    x-api-evangelist:
+      provider: sonetel
+      generated: '2026-10-09'
+      source: openapi/sonetel-app-view-settings-openapi.yml
+      upstream: https://github.com/Sonetel/sonetel-api-docs
+      documentation: https://docs.sonetel.com/
+- target: $
+  description: The upstream document declares no tags; add one tag naming this API so operations group
+    in renderers.
+  update:
+    tags:
+    - name: Sonetel App Settings
+      description: App Settings
+- target: $.paths['/app-view-settings'].get
+  description: Tag get-app-view-settings.
+  update:
+    tags:
+    - Sonetel App Settings

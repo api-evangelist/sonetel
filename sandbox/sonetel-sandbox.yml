@@ -1,0 +1,15 @@
+generated: '2026-10-09'
+method: searched
+source: https://docs.sonetel.com/docs/sonetel-documentation/b256d17c3213d-introduction
+name: Sonetel Sandbox
+description: 'The Introduction states "Sonetel offers separate sandbox and production environments to help you develop your application without affecting your production data." but lists only "Production - https://public-api.sonetel.com/"; no sandbox base URL, test credentials or test numbers are published. The Stoplight reference pages expose a Stoplight mock server per API.'
+docs: https://docs.sonetel.com/docs/sonetel-documentation/b256d17c3213d-introduction
+environments:
+- name: production
+  url: https://public-api.sonetel.com/
+- name: mock (Stoplight)
+  url: https://stoplight.io/mocks/sonetel/sonetel-documentation/11327437
+  scope: Authentication API reference page
+  evidence_url: https://docs.sonetel.com/docs/sonetel-documentation/143990db3cda3-authentication
+test_values: []
+note: No live sandbox host is documented despite the sentence claiming one; developer accounts are free but calls and numbers are charged from prepaid credit (FAQ).

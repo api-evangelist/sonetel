@@ -1,0 +1,38 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist overlay for Sonetel Sonetel Transcription API API
+  version: 1.0.0
+extends: ../openapi/_original/sonetel-transcription-openapi.yml
+x-generated: '2026-10-09'
+x-method: generated
+x-source: openapi/sonetel-transcription-openapi.yml
+actions:
+- target: $.info
+  description: Record API Evangelist provenance.
+  update:
+    x-api-evangelist:
+      provider: sonetel
+      generated: '2026-10-09'
+      source: openapi/sonetel-transcription-openapi.yml
+      upstream: https://github.com/Sonetel/sonetel-api-docs
+      documentation: https://docs.sonetel.com/
+- target: $
+  description: The upstream document declares no tags; add one tag naming this API so operations group
+    in renderers.
+  update:
+    tags:
+    - name: Sonetel Transcription API
+      description: The Sonetel Transcription API allows developers to transcribe audio or video files
+        asynchronously. Users can submit a request to transcribe a file by specifying either a file ID,
+        file URL, or file data. A transcription profile can be used to set pre-defined instructions for
+        transcription services, i
+- target: $.paths['/transcription/transcribe_async'].post
+  description: Tag transcribeFile.
+  update:
+    tags:
+    - Sonetel Transcription API
+- target: $.paths['/transcription/transcribe_async/{req_id}'].get
+  description: Tag get-transcription-transcribe_async-req_id.
+  update:
+    tags:
+    - Sonetel Transcription API

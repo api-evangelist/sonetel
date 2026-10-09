@@ -1,0 +1,195 @@
+openapi: 3.2.0
+info:
+  title: Sonetel OAuth API
+  version: '2.0'
+  contact:
+    name: Sonetel API Support
+    email: api.support@sonetel.com
+  termsOfService: https://sonetel.com/en/help/help-topics/terms-conditions/terms-conditions/
+  description: 'Operations tagged Oauth across 2 of this provider''s published API definitions: Authentication.yaml, sonetel-authentication-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.sonetel.com/SonetelAuth/beta/
+  description: Production
+security:
+- {}
+tags:
+- name: OAuth
+paths:
+  /oauth/token:
+    post:
+      summary: Create token
+      description: Use this endpoint to generate tokens needed to authenticate API requests.
+      operationId: create-JWT-token
+      parameters:
+      - name: Content-Type
+        in: header
+        description: multipart/form-data
+        required: true
+        schema:
+          type: string
+          default: multipart/form-data
+      - name: Authorization
+        in: header
+        description: Use `sonetel-api` as both username and password
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: 'The `username` & `password` in the request body are the email address & password that are used to login at [app.sonetel.com](https://app.sonetel.com).
+
+
+          In accordance with [OAuth2](https://oauth.net/2/) guidelines, you are also required to specify the `grant_type` in the request body. If requesting for a new token, set it to `password` otherwise set it to `refresh_token` to refresh an expired access token.'
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                grant_type:
+                  type: string
+                  enum:
+                  - password
+                  - refresh_token
+                  description: The OAuth2 grant type, usually set to 'password' to generate a new token.
+                  default: password
+                password:
+                  type: string
+                  description: The password you use to login at app.sonetel.com
+                  format: password
+                refresh:
+                  type: string
+                  enum:
+                  - 'yes'
+                  - 'no'
+                  description: Optional. Flag to control whether or not a refresh token is included in the response.
+                  default: 'yes'
+                username:
+                  type: string
+                  description: Your email address registered with Sonetel.
+                  format: email
+                refresh_token:
+                  type: string
+                  description: Optional. Pass the refresh_token in this field to generate a new access_token.
+              required:
+              - grant_type
+              - refresh
+            examples:
+              New Token:
+                value:
+                  grant_type: password
+                  password: pa$$word
+                  refresh: 'yes'
+                  username: user@example.com
+              Refresh Token:
+                value:
+                  grant_type: refresh_token
+                  password: pa$$word
+                  refresh: 'yes'
+                  username: user@example.com
+                  refresh_token: refresh_token_from_old_request
+      responses:
+        '200':
+          description: '**OK**
+
+
+            A successful request returns a 200 OK response along with a JSON body that contains the `access_token`, `refresh_token` (if requested) and `token_type`'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  access_token:
+                    type: string
+                    description: The OAuth2 token that you can use to authenticate API requests.
+                  token_type:
+                    type: string
+                    description: 'Specifies the type of token returned. '
+                    examples:
+                    - bearer
+                  refresh_token:
+                    type: string
+                    description: Contains the refresh token if requested
+                x-examples:
+                  example-1:
+                    access_token: ACCESS_TOKEN
+                    token_type: bearer
+                    refresh_token: REFRESH_TOKEN
+              examples:
+                Example:
+                  value:
+                    access_token: ACCESS_TOKEN
+                    token_type: bearer
+                    refresh_token: REFRESH_TOKEN
+        '400':
+          description: '**Bad Request**
+
+
+            This error is returned if the request is incorrect or incomplete.
+
+
+            For example, the `grant_type` field may be missing in the body or the `Content-Type` header may be incorrect.
+
+            '
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    minLength: 1
+                  error_description:
+                    type: string
+                    minLength: 1
+                required:
+                - error
+                - error_description
+                x-examples:
+                  example-1:
+                    error: invalid_request
+                    error_description: Missing grant type
+              examples:
+                Example:
+                  value:
+                    error: invalid_request
+                    error_description: Missing grant type
+        '401':
+          description: '**Unauthorized**
+
+
+            Please check that you have included the correct `username` and `password` in the request body.
+
+            '
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    minLength: 1
+                  error_description:
+                    type: string
+                    minLength: 1
+                required:
+                - error
+                - error_description
+                x-examples:
+                  example-1:
+                    error: unauthorized
+                    error_description: User with name user@example.com not found
+              examples:
+                Example:
+                  value:
+                    error: unauthorized
+                    error_description: User with name user@example.com not found
+      servers:
+      - url: https://api.sonetel.com/SonetelAuth/beta/
+        description: Production
+      tags:
+      - OAuth
+    servers:
+    - url: https://api.sonetel.com/SonetelAuth/beta/
+      description: Production
+x-refined-from:
+- Authentication.yaml
+- sonetel-authentication-openapi.yml

@@ -1,0 +1,56 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist overlay for Sonetel Personalize suggested answers API
+  version: 1.0.0
+extends: ../openapi/_original/sonetel-ai-functions-openapi.yml
+x-generated: '2026-10-09'
+x-method: generated
+x-source: openapi/sonetel-ai-functions-openapi.yml
+actions:
+- target: $.info
+  description: Record API Evangelist provenance.
+  update:
+    x-api-evangelist:
+      provider: sonetel
+      generated: '2026-10-09'
+      source: openapi/sonetel-ai-functions-openapi.yml
+      upstream: https://github.com/Sonetel/sonetel-api-docs
+      documentation: https://docs.sonetel.com/
+- target: $
+  description: The upstream document declares no tags; add one tag naming this API so operations group
+    in renderers.
+  update:
+    tags:
+    - name: Sonetel Personalize suggested answers
+      description: Our free customer service solution provides an easy way for answering customer questions
+        with the assistance of Artificial Intelligence (AI).
+- target: $.paths['/ai-integration/customer_faq/faq_template'].get
+  description: Tag get-ai-integration-customer_faq-faq_template.
+  update:
+    tags:
+    - Sonetel Personalize suggested answers
+- target: $.paths['/ai-integration/customer_faq/faq'].get
+  description: Tag get-faq.
+  update:
+    tags:
+    - Sonetel Personalize suggested answers
+- target: $.paths['/ai-integration/customer_faq/faq'].post
+  description: Tag post-faq.
+  update:
+    tags:
+    - Sonetel Personalize suggested answers
+- target: $.paths['/ai-integration/customer_faq/faq'].delete
+  description: Tag delete-faq.
+  update:
+    tags:
+    - Sonetel Personalize suggested answers
+- target: $.paths['/ai-integration/customer_faq/faq_csv'].get
+  description: Tag get-customer_faq-csv.
+  update:
+    tags:
+    - Sonetel Personalize suggested answers
+- target: $.paths['/ai-integration/customer_faq/suggested-answers'].get
+  description: Tag get-suggested-answers.
+  update:
+    tags:
+    - Sonetel Personalize suggested answers

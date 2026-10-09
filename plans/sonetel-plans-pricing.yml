@@ -1,0 +1,44 @@
+generated: '2026-10-09'
+method: searched
+source: https://sonetel.com/en/prices/plans/
+name: Sonetel Plans
+audience: business-product
+pricing_basis: tiered-subscription
+published: true
+currency: USD
+delivery:
+  delivery: managed
+api_access: 'Signing up for a developer account is completely free. There are no charges for accessing the API. You only pay for the services i.e. calls, phone numbers, etc that you use.'
+api_access_source: https://docs.sonetel.com/docs/sonetel-documentation/862afa73a11f1-frequently-asked-questions
+billing_note: Prices shown per month when billed annually.
+plan_count: 3
+plans:
+- name: Basic
+  price: 0.00
+  price_text: $0.00 /month
+  features:
+  - SMS-to-email
+  limits: []
+- name: Premium
+  price: 9.95
+  price_text: $9.95 /month
+  features:
+  - Free calls to +40 countries
+  - Show my number (CLI)
+  - Call transcription
+  - Call recording
+  - SMS-to-email
+  limits:
+  - 'Free phone numbers per user — 1'
+- name: Business
+  price: 29.95
+  price_text: $29.95 /month
+  features:
+  - Free calls to +40 countries
+  - Show my number (CLI)
+  - Call transcription
+  - Call recording
+  - SMS-to-email
+  limits:
+  - 'Free phone numbers per user — 5'
+note: Page rendered in JavaScript (read via headless render, USD selected; EUR and SEK also offered). Per-minute call rates and number prices are separate lists at /en/prices/ (call rates, phone numbers); usage is charged from prepaid credit.

@@ -1,0 +1,17 @@
+generated: '2026-10-09'
+method: searched
+source: https://docs.sonetel.com/docs/sonetel-documentation/143990db3cda3-authentication
+name: Sonetel Lifecycle
+versioning:
+  scheme: per-API info.version in the OpenAPI documents (mostly 2.0; file manager 1.0.0, prompt manager 1.0, transcription 1.1.0)
+  in_url: false
+  note: Reference pages show "v2.0". The authentication base URL carries a beta path segment (https://api.sonetel.com/SonetelAuth/beta/). No versioning policy is published.
+deprecation:
+  policy: null
+  sunset_headers: null
+  deprecated_operations: []
+  note: No deprecation policy, Sunset/Deprecation headers or deprecated operations found in the docs or contracts.
+status_page: https://status.sonetel.com/
+sla: null
+support: dev.support@sonetel.com
+support_source: https://docs.sonetel.com/docs/sonetel-documentation/862afa73a11f1-frequently-asked-questions

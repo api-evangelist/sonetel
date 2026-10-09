@@ -1,0 +1,695 @@
+{
+  "@context": {
+    "@vocab": "https://sonetel.com/schema#",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dcterms": "http://purl.org/dc/terms/",
+    "sonetel": "https://sonetel.com/schema#",
+    "Account-GET": "sonetel:Account-GET",
+    "resource": {
+      "@id": "sonetel:resource",
+      "@type": "xsd:string"
+    },
+    "status": {
+      "@id": "sonetel:status",
+      "@type": "xsd:string"
+    },
+    "response": {
+      "@id": "sonetel:response"
+    },
+    "ServiceSettings": "sonetel:ServiceSettings",
+    "team_chat": {
+      "@id": "sonetel:team_chat",
+      "@type": "xsd:boolean"
+    },
+    "customer_chat": {
+      "@id": "sonetel:customer_chat",
+      "@type": "xsd:boolean"
+    },
+    "ai_helper": {
+      "@id": "sonetel:ai_helper",
+      "@type": "xsd:boolean"
+    },
+    "free_trial": {
+      "@id": "sonetel:free_trial",
+      "@type": "xsd:string"
+    },
+    "Account-PUT": "sonetel:Account-PUT",
+    "name": {
+      "@id": "sonetel:name",
+      "@type": "xsd:string"
+    },
+    "language": {
+      "@id": "sonetel:language",
+      "@type": "xsd:string"
+    },
+    "timezone_details": {
+      "@id": "sonetel:timezone_details"
+    },
+    "service_settings": {
+      "@id": "sonetel:service_settings",
+      "@type": "@id"
+    },
+    "ServiceSettings-PUT": "sonetel:ServiceSettings-PUT",
+    "AccountDataMgrCallRecSettings": "sonetel:AccountDataMgrCallRecSettings",
+    "auto_delete": {
+      "@id": "sonetel:auto_delete",
+      "@type": "xsd:string"
+    },
+    "auto_delete_time": {
+      "@id": "sonetel:auto_delete_time",
+      "@type": "xsd:string"
+    },
+    "business-with-description": "sonetel:business-with-description",
+    "business_id": {
+      "@id": "sonetel:business_id",
+      "@type": "xsd:string"
+    },
+    "account_id": {
+      "@id": "sonetel:account_id",
+      "@type": "xsd:string"
+    },
+    "website": {
+      "@id": "sonetel:website",
+      "@type": "xsd:string"
+    },
+    "description": {
+      "@id": "sonetel:description",
+      "@type": "@id"
+    },
+    "default": {
+      "@id": "sonetel:default",
+      "@type": "xsd:boolean"
+    },
+    "create_date": {
+      "@id": "sonetel:create_date",
+      "@type": "xsd:dateTime"
+    },
+    "update_date": {
+      "@id": "sonetel:update_date",
+      "@type": "xsd:dateTime"
+    },
+    "business-description": "sonetel:business-description",
+    "text_id": {
+      "@id": "sonetel:text_id",
+      "@type": "xsd:string"
+    },
+    "text_data": {
+      "@id": "sonetel:text_data",
+      "@type": "xsd:string"
+    },
+    "error": {
+      "@id": "sonetel:error"
+    },
+    "version": {
+      "@id": "sonetel:version",
+      "@type": "xsd:integer"
+    },
+    "user_input": {
+      "@id": "sonetel:user_input",
+      "@type": "xsd:string"
+    },
+    "business-without-desc": "sonetel:business-without-desc",
+    "FileWithID": "sonetel:FileWithID",
+    "file_id": {
+      "@id": "sonetel:file_id",
+      "@type": "xsd:string"
+    },
+    "type": {
+      "@id": "sonetel:type",
+      "@type": "xsd:string"
+    },
+    "size": {
+      "@id": "sonetel:size",
+      "@type": "xsd:integer"
+    },
+    "storage": {
+      "@id": "sonetel:storage",
+      "@type": "xsd:string"
+    },
+    "extension": {
+      "@id": "sonetel:extension",
+      "@type": "xsd:string"
+    },
+    "mime_type": {
+      "@id": "sonetel:mime_type",
+      "@type": "xsd:string"
+    },
+    "public_url": {
+      "@id": "sonetel:public_url",
+      "@type": "xsd:string"
+    },
+    "modify_date": {
+      "@id": "sonetel:modify_date",
+      "@type": "xsd:dateTime"
+    },
+    "visibility": {
+      "@id": "sonetel:visibility",
+      "@type": "xsd:string"
+    },
+    "image_meta_data": {
+      "@id": "sonetel:image_meta_data",
+      "@type": "@id"
+    },
+    "video_meta_data": {
+      "@id": "sonetel:video_meta_data",
+      "@type": "@id"
+    },
+    "audio_meta_data": {
+      "@id": "sonetel:audio_meta_data",
+      "@type": "@id"
+    },
+    "user_id": {
+      "@id": "sonetel:user_id",
+      "@type": "xsd:string"
+    },
+    "in_use_with": {
+      "@id": "sonetel:in_use_with",
+      "@type": "@id"
+    },
+    "temp_url": {
+      "@id": "sonetel:temp_url",
+      "@type": "@id"
+    },
+    "created_by": {
+      "@id": "sonetel:created_by",
+      "@type": "xsd:string"
+    },
+    "store_obj_id": {
+      "@id": "sonetel:store_obj_id",
+      "@type": "xsd:string"
+    },
+    "ImageMetaData": "sonetel:ImageMetaData",
+    "resolution": {
+      "@id": "sonetel:resolution",
+      "@type": "xsd:string"
+    },
+    "color_space": {
+      "@id": "sonetel:color_space",
+      "@type": "xsd:string"
+    },
+    "image_format": {
+      "@id": "sonetel:image_format",
+      "@type": "xsd:string"
+    },
+    "bit_depth": {
+      "@id": "sonetel:bit_depth",
+      "@type": "xsd:integer"
+    },
+    "VideoMetaData": "sonetel:VideoMetaData",
+    "duration": {
+      "@id": "sonetel:duration",
+      "@type": "xsd:integer"
+    },
+    "codec": {
+      "@id": "sonetel:codec",
+      "@type": "xsd:string"
+    },
+    "bitrate": {
+      "@id": "sonetel:bitrate",
+      "@type": "xsd:integer"
+    },
+    "frame_rate": {
+      "@id": "sonetel:frame_rate",
+      "@type": "xsd:integer"
+    },
+    "audio_codec": {
+      "@id": "sonetel:audio_codec",
+      "@type": "xsd:string"
+    },
+    "audio_channels": {
+      "@id": "sonetel:audio_channels",
+      "@type": "xsd:integer"
+    },
+    "AudioMetaData": "sonetel:AudioMetaData",
+    "sampling_rate": {
+      "@id": "sonetel:sampling_rate"
+    },
+    "gpt-settings": "sonetel:gpt-settings",
+    "model": {
+      "@id": "sonetel:model",
+      "@type": "xsd:string"
+    },
+    "max_tokens": {
+      "@id": "sonetel:max_tokens",
+      "@type": "xsd:integer"
+    },
+    "temperature": {
+      "@id": "sonetel:temperature",
+      "@type": "xsd:decimal"
+    },
+    "linked-prompts": "sonetel:linked-prompts",
+    "l_prompt_id": {
+      "@id": "sonetel:l_prompt_id",
+      "@type": "xsd:string"
+    },
+    "prompt": "sonetel:prompt",
+    "prompt_id": {
+      "@id": "sonetel:prompt_id",
+      "@type": "xsd:string"
+    },
+    "language_orig": {
+      "@id": "sonetel:language_orig",
+      "@type": "xsd:string"
+    },
+    "service_type": {
+      "@id": "sonetel:service_type",
+      "@type": "xsd:string"
+    },
+    "ai_platform": {
+      "@id": "sonetel:ai_platform",
+      "@type": "xsd:string"
+    },
+    "latest_version": {
+      "@id": "sonetel:latest_version",
+      "@type": "@id"
+    },
+    "version_count": {
+      "@id": "sonetel:version_count",
+      "@type": "xsd:integer"
+    },
+    "gpt_settings": {
+      "@id": "sonetel:gpt_settings",
+      "@type": "@id"
+    },
+    "linked_prompts": {
+      "@id": "sonetel:linked_prompts",
+      "@container": "@list"
+    },
+    "slug": {
+      "@id": "sonetel:slug",
+      "@type": "xsd:string"
+    },
+    "prompt-version-no-id": "sonetel:prompt-version-no-id",
+    "prompt_text": {
+      "@id": "sonetel:prompt_text",
+      "@type": "xsd:string"
+    },
+    "translate_mode": {
+      "@id": "sonetel:translate_mode",
+      "@type": "xsd:string"
+    },
+    "version_desc": {
+      "@id": "sonetel:version_desc",
+      "@type": "xsd:string"
+    },
+    "tags": {
+      "@id": "sonetel:tags",
+      "@container": "@list"
+    },
+    "prompt-tag": "sonetel:prompt-tag",
+    "prompt-version": "sonetel:prompt-version",
+    "Account-context": "sonetel:Account-context",
+    "Business-description-inputs": "sonetel:Business-description-inputs",
+    "url": {
+      "@id": "sonetel:url",
+      "@type": "xsd:string"
+    },
+    "Blog-title-list-inputs": "sonetel:Blog-title-list-inputs",
+    "business_description": {
+      "@id": "sonetel:business_description"
+    },
+    "Blog-inputs": "sonetel:Blog-inputs",
+    "blog_title": {
+      "@id": "sonetel:blog_title"
+    },
+    "blog": {
+      "@id": "sonetel:blog"
+    },
+    "Blog-post-process": "sonetel:Blog-post-process",
+    "photos": {
+      "@id": "sonetel:photos"
+    },
+    "links": {
+      "@id": "sonetel:links"
+    },
+    "Meeting-minutes-inputs": "sonetel:Meeting-minutes-inputs",
+    "file": {
+      "@id": "sonetel:file"
+    },
+    "Service-object": "sonetel:Service-object",
+    "service_id": {
+      "@id": "sonetel:service_id",
+      "@type": "xsd:string"
+    },
+    "account": {
+      "@id": "sonetel:account",
+      "@type": "@id"
+    },
+    "Service-status": "sonetel:Service-status",
+    "steps_total": {
+      "@id": "sonetel:steps_total",
+      "@type": "xsd:integer"
+    },
+    "steps_done": {
+      "@id": "sonetel:steps_done",
+      "@type": "xsd:integer"
+    },
+    "last_step_time": {
+      "@id": "sonetel:last_step_time",
+      "@type": "xsd:dateTime"
+    },
+    "Text-version-object-no-Id": "sonetel:Text-version-object-no-Id",
+    "processed_text": {
+      "@id": "sonetel:processed_text",
+      "@type": "xsd:string"
+    },
+    "completion_text": {
+      "@id": "sonetel:completion_text",
+      "@type": "xsd:string"
+    },
+    "meta_data": {
+      "@id": "sonetel:meta_data",
+      "@type": "@id"
+    },
+    "Text-data-simple": "sonetel:Text-data-simple",
+    "Web-page": "sonetel:Web-page",
+    "page_summary": {
+      "@id": "sonetel:page_summary",
+      "@type": "@id"
+    },
+    "page_type": {
+      "@id": "sonetel:page_type",
+      "@type": "xsd:string"
+    },
+    "meta_description": {
+      "@id": "sonetel:meta_description",
+      "@type": "xsd:string"
+    },
+    "title": {
+      "@id": "sonetel:title",
+      "@type": "xsd:string"
+    },
+    "text_info": {
+      "@id": "sonetel:text_info",
+      "@type": "@id"
+    },
+    "Text-info": "sonetel:Text-info",
+    "Blog-title-list": "sonetel:Blog-title-list",
+    "titles": {
+      "@id": "sonetel:titles",
+      "@container": "@list"
+    },
+    "Blog": "sonetel:Blog",
+    "seo_keywords": {
+      "@id": "sonetel:seo_keywords",
+      "@type": "xsd:string"
+    },
+    "sections": {
+      "@id": "sonetel:sections",
+      "@container": "@list"
+    },
+    "Text-section": "sonetel:Text-section",
+    "id": {
+      "@id": "sonetel:id",
+      "@type": "xsd:string"
+    },
+    "text_list": {
+      "@id": "sonetel:text_list",
+      "@container": "@list"
+    },
+    "next_id": {
+      "@id": "sonetel:next_id",
+      "@type": "xsd:string"
+    },
+    "is_first": {
+      "@id": "sonetel:is_first",
+      "@type": "xsd:boolean"
+    },
+    "Meeting-minutes": "sonetel:Meeting-minutes",
+    "meeting_date": {
+      "@id": "sonetel:meeting_date",
+      "@type": "xsd:dateTime"
+    },
+    "participants": {
+      "@id": "sonetel:participants",
+      "@container": "@list"
+    },
+    "transcript": {
+      "@id": "sonetel:transcript",
+      "@type": "@id"
+    },
+    "minutes": {
+      "@id": "sonetel:minutes",
+      "@container": "@list"
+    },
+    "notes": {
+      "@id": "sonetel:notes",
+      "@type": "xsd:string"
+    },
+    "word_count": {
+      "@id": "sonetel:word_count",
+      "@type": "xsd:string"
+    },
+    "Call-summary": "sonetel:Call-summary",
+    "call_rec_id": {
+      "@id": "sonetel:call_rec_id",
+      "@type": "xsd:string"
+    },
+    "summary": {
+      "@id": "sonetel:summary",
+      "@container": "@list"
+    },
+    "call_details": {
+      "@id": "sonetel:call_details"
+    },
+    "classification": {
+      "@id": "sonetel:classification"
+    },
+    "analysis": {
+      "@id": "sonetel:analysis"
+    },
+    "follow_up_email": {
+      "@id": "sonetel:follow_up_email",
+      "@container": "@list"
+    },
+    "Call-analysis-support": "sonetel:Call-analysis-support",
+    "general": {
+      "@id": "sonetel:general",
+      "@type": "@id"
+    },
+    "sentiment": {
+      "@id": "sonetel:sentiment",
+      "@type": "@id"
+    },
+    "score": {
+      "@id": "sonetel:score",
+      "@type": "@id"
+    },
+    "suggestion": {
+      "@id": "sonetel:suggestion",
+      "@type": "@id"
+    },
+    "tactics": {
+      "@id": "sonetel:tactics",
+      "@type": "@id"
+    },
+    "Call-summary-common": "sonetel:Call-summary-common",
+    "topics": {
+      "@id": "sonetel:topics"
+    },
+    "agreements": {
+      "@id": "sonetel:agreements",
+      "@container": "@list"
+    },
+    "action_items": {
+      "@id": "sonetel:action_items",
+      "@container": "@list"
+    },
+    "Call-analysis-sentiment-customer": "sonetel:Call-analysis-sentiment-customer",
+    "overall": {
+      "@id": "sonetel:overall",
+      "@type": "xsd:decimal"
+    },
+    "agent": {
+      "@id": "sonetel:agent",
+      "@type": "xsd:decimal"
+    },
+    "customer": {
+      "@id": "sonetel:customer",
+      "@type": "xsd:decimal"
+    },
+    "customer_h1": {
+      "@id": "sonetel:customer_h1",
+      "@type": "xsd:decimal"
+    },
+    "customer_h2": {
+      "@id": "sonetel:customer_h2",
+      "@type": "xsd:decimal"
+    },
+    "sentiment_decline_reason": {
+      "@id": "sonetel:sentiment_decline_reason",
+      "@type": "xsd:string"
+    },
+    "header": {
+      "@id": "sonetel:header",
+      "@type": "xsd:string"
+    },
+    "Call-analysis-score": "sonetel:Call-analysis-score",
+    "scores": {
+      "@id": "sonetel:scores",
+      "@container": "@list"
+    },
+    "Call-analysis-suggestions": "sonetel:Call-analysis-suggestions",
+    "list": {
+      "@id": "sonetel:list",
+      "@container": "@list"
+    },
+    "Call-analysis-sales": "sonetel:Call-analysis-sales",
+    "Call-analysis-other": "sonetel:Call-analysis-other",
+    "Text": "sonetel:Text",
+    "created_date": {
+      "@id": "sonetel:created_date",
+      "@type": "xsd:dateTime"
+    },
+    "updated_date": {
+      "@id": "sonetel:updated_date",
+      "@type": "xsd:dateTime"
+    },
+    "parent_text_id": {
+      "@id": "sonetel:parent_text_id",
+      "@type": "xsd:string"
+    },
+    "Text-version-object": "sonetel:Text-version-object",
+    "Text-many-versions": "sonetel:Text-many-versions",
+    "other_versions": {
+      "@id": "sonetel:other_versions",
+      "@container": "@list"
+    },
+    "Voicemail-summary": "sonetel:Voicemail-summary",
+    "vmail_id": {
+      "@id": "sonetel:vmail_id",
+      "@type": "xsd:string"
+    },
+    "caller_name": {
+      "@id": "sonetel:caller_name",
+      "@type": "xsd:string"
+    },
+    "company_name": {
+      "@id": "sonetel:company_name",
+      "@type": "xsd:string"
+    },
+    "List-PhnumSubscriptions": "sonetel:List-PhnumSubscriptions",
+    "page_metadata": {
+      "@id": "sonetel:page_metadata"
+    },
+    "Single-phone-number-subscription": "sonetel:Single-phone-number-subscription",
+    "Call-recording": "sonetel:Call-recording",
+    "Call-recording-list": "sonetel:Call-recording-list",
+    "requested_by": "sonetel:requested_by",
+    "service": {
+      "@id": "sonetel:service",
+      "@type": "xsd:string"
+    },
+    "ref_id": {
+      "@id": "sonetel:ref_id",
+      "@type": "xsd:string"
+    },
+    "User-Update": "sonetel:User-Update",
+    "user_fname": {
+      "@id": "sonetel:user_fname",
+      "@type": "xsd:string"
+    },
+    "max_conversations": {
+      "@id": "sonetel:max_conversations",
+      "@type": "xsd:decimal"
+    },
+    "phones": {
+      "@id": "sonetel:phones",
+      "@container": "@list"
+    },
+    "language_id": {
+      "@id": "sonetel:language_id",
+      "@type": "xsd:decimal"
+    },
+    "user_lname": {
+      "@id": "sonetel:user_lname",
+      "@type": "xsd:string"
+    },
+    "location": {
+      "@id": "sonetel:location"
+    },
+    "email": {
+      "@id": "sonetel:email",
+      "@type": "xsd:string"
+    },
+    "password": {
+      "@id": "sonetel:password",
+      "@type": "xsd:string"
+    },
+    "User-GET": "sonetel:User-GET",
+    "User-Call-Settings": "sonetel:User-Call-Settings",
+    "incoming": {
+      "@id": "sonetel:incoming"
+    },
+    "outgoing": {
+      "@id": "sonetel:outgoing"
+    },
+    "User-Data-settings": "sonetel:User-Data-settings",
+    "meeting-minutes": {
+      "@id": "sonetel:meeting-minutes"
+    },
+    "call_summary": {
+      "@id": "sonetel:call_summary"
+    },
+    "Voiceapp": "sonetel:Voiceapp",
+    "app_type": {
+      "@id": "sonetel:app_type",
+      "@type": "xsd:string"
+    },
+    "play_menu": {
+      "@id": "sonetel:play_menu",
+      "@type": "xsd:string"
+    },
+    "voice": {
+      "@id": "sonetel:voice",
+      "@type": "xsd:string"
+    },
+    "play_welcome": {
+      "@id": "sonetel:play_welcome",
+      "@type": "xsd:string"
+    },
+    "get_extension": {
+      "@id": "sonetel:get_extension",
+      "@type": "xsd:string"
+    },
+    "final_action": {
+      "@id": "sonetel:final_action"
+    },
+    "menu": {
+      "@id": "sonetel:menu"
+    },
+    "error_voice": {
+      "@id": "sonetel:error_voice",
+      "@type": "xsd:string"
+    },
+    "greeting_prompt": {
+      "@id": "sonetel:greeting_prompt",
+      "@type": "xsd:string"
+    },
+    "goodbye_prompt": {
+      "@id": "sonetel:goodbye_prompt",
+      "@type": "xsd:string"
+    },
+    "deliver_to": {
+      "@id": "sonetel:deliver_to",
+      "@type": "xsd:string"
+    },
+    "deliver_to_details": {
+      "@id": "sonetel:deliver_to_details",
+      "@type": "xsd:string"
+    },
+    "Create-Prompt": "sonetel:Create-Prompt"
+  },
+  "@type": "schema:Dataset",
+  "schema:name": "Sonetel API JSON-LD context",
+  "schema:description": "A JSON-LD @context for the objects Sonetel's own API contract declares: one class per component schema, one property per declared field, typed from the contract. Derived by script (derive-json-ld.py, 2026-10-09) from openapi/sonetel-account-openapi.yml, openapi/sonetel-ai-business-openapi.yml, openapi/sonetel-ai-file-manager-openapi.yml.",
+  "dcterms:created": "2026-10-09",
+  "dcterms:source": [
+    "openapi/sonetel-account-openapi.yml",
+    "openapi/sonetel-ai-business-openapi.yml",
+    "openapi/sonetel-ai-file-manager-openapi.yml",
+    "openapi/sonetel-ai-functions-openapi.yml",
+    "openapi/sonetel-ai-prompt-manager-openapi.yml"
+  ]
+}

@@ -1,0 +1,450 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/sonetel/main/json-schema/sonetel-list-phnum-subscriptions-schema.json",
+  "title": "List my phone number subscriptions",
+  "description": "This is a list of subscriptions under an account",
+  "x-generated": "2026-10-09",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/sonetel-phone-numbers-openapi.yml#/components/schemas/List-PhnumSubscriptions",
+  "type": "object",
+  "properties": {
+    "page_metadata": {
+      "type": "object",
+      "description": "Pagination information in case the results span across more than 1 page.",
+      "properties": {
+        "pagination_type": {
+          "type": "string",
+          "description": "Describes the pagination type",
+          "minLength": 1
+        },
+        "count": {
+          "type": "string",
+          "description": "Number of objects in the response",
+          "minLength": 1
+        },
+        "page_count": {
+          "type": "string",
+          "description": "The total number of pages in the result",
+          "minLength": 1
+        },
+        "previous": {
+          "type": "string",
+          "description": "Link to the previous result page.",
+          "minLength": 1
+        },
+        "next": {
+          "type": "string",
+          "description": "Link to the next result page.",
+          "minLength": 1
+        },
+        "page": {
+          "type": "string",
+          "description": "Link to the current page.",
+          "minLength": 1
+        },
+        "first": {
+          "type": "string",
+          "description": "Link to the first page in the results.",
+          "minLength": 1
+        },
+        "last": {
+          "type": "string",
+          "description": "Link to the last page in the results.",
+          "minLength": 1
+        },
+        "sort": {
+          "type": "object",
+          "description": "Sort order of the results",
+          "properties": {
+            "property": {
+              "type": "string",
+              "minLength": 1
+            },
+            "ignoreCase": {
+              "type": "boolean"
+            },
+            "nullHandling": {
+              "type": "string",
+              "minLength": 1
+            },
+            "descending": {
+              "type": "boolean"
+            },
+            "ascending": {
+              "type": "boolean"
+            }
+          }
+        }
+      }
+    },
+    "resource": {
+      "type": "string",
+      "description": "Name of the resource accessed",
+      "minLength": 1
+    },
+    "status": {
+      "type": "string",
+      "description": "Status of the response",
+      "minLength": 1
+    },
+    "response": {
+      "type": "array",
+      "description": "The response object.",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "properties": {
+          "account_id": {
+            "type": "string",
+            "description": "The account_id is the account to which the number is currently assigned.",
+            "minLength": 1
+          },
+          "country_code": {
+            "type": "string",
+            "description": "The telephony country code as per ITU standards.",
+            "minLength": 1
+          },
+          "area_code": {
+            "type": "string",
+            "description": "The telephone area code of the phone number",
+            "minLength": 1
+          },
+          "country": {
+            "type": "string",
+            "description": "The country where the number is from.",
+            "minLength": 1
+          },
+          "is_part_of_series": {
+            "type": "string",
+            "description": "A Boolean that specifies if the number is a part of a number series",
+            "minLength": 1
+          },
+          "range": {
+            "type": "string",
+            "description": "Applicable if the phone number subscription is of a number that is a part of a phone number series. The value specifies the quantity of phone numbers in the number series of which this phone number is a part of",
+            "minLength": 1
+          },
+          "city": {
+            "type": "string",
+            "description": "Name of the city where the number is. The name is descriptive and does not follow any standard.",
+            "minLength": 1
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "national",
+              "geographic",
+              "tollfree",
+              "mobile"
+            ],
+            "description": "Type of number – This can be either “national”, “geographic”, or “tollfree”",
+            "minLength": 1,
+            "readOnly": true
+          },
+          "one_time_fee": {
+            "type": "string",
+            "description": "One-time fee for the number/series. Up to 2 decimals.",
+            "minLength": 1
+          },
+          "recurring_fee": {
+            "type": "string",
+            "description": "Current recurring fee for the number/series. Up to 2 decimals",
+            "minLength": 1
+          },
+          "recurrence_interval": {
+            "type": "string",
+            "description": "Current recurrence interval for the recurring fee. Specified in days(e.g. 15d) or months(e.g. 3m).",
+            "minLength": 1
+          },
+          "per_call_fee": {
+            "type": "string",
+            "description": "The per call fee applicable to the number. Up to 2 decimals",
+            "format": "float",
+            "readOnly": true
+          },
+          "per_min_fee": {
+            "type": "string",
+            "description": "The charge per minute fee for calls. Up to 2 decimals",
+            "minLength": 1
+          },
+          "charge_interval": {
+            "type": "string",
+            "description": "The charge interval in seconds",
+            "minLength": 1
+          },
+          "per_sms_fee": {
+            "type": "string",
+            "description": "The per SMS receiving fee applicable. Up to 2 decimals",
+            "minLength": 1
+          },
+          "per_fax_fee": {
+            "type": "string",
+            "description": "The per FAX receiving fee applicable. Up to 2 decimals"
+          },
+          "currency": {
+            "type": "string",
+            "description": "The currency in which the fee is specified",
+            "minLength": 1
+          },
+          "price_category": {
+            "type": "string",
+            "description": "The price category of the number/series. The allowed values are 1- regular, 2- gold, 3 - gold+, 4 - gold++, 5 -gold+++",
+            "minLength": 1
+          },
+          "connect_to_type": {
+            "type": "string",
+            "enum": [
+              "user",
+              "phnum",
+              "sip",
+              "app",
+              "csg"
+            ],
+            "description": "The destination to which this number is connected. The supported values are user, phnum, sip,app, csg",
+            "minLength": 1
+          },
+          "connect_to": {
+            "type": "string",
+            "description": "The id of the connected to entity",
+            "minLength": 1
+          },
+          "activation_date": {
+            "type": "string",
+            "description": "The date/time the number/series was activated.",
+            "minLength": 1
+          },
+          "next_fee_date": {
+            "type": "string",
+            "description": "The date/time that the next recurring fee is to be charged",
+            "minLength": 1
+          },
+          "reclaim_date": {
+            "type": "string",
+            "description": "The date/time an inactive number will be automatically removed from your account if it is inactive due to insufficient balance in the account.",
+            "minLength": 1
+          },
+          "status": {
+            "type": "string",
+            "description": "The number/series status. Can take values “active” or “inactive”",
+            "minLength": 1
+          },
+          "status_desc": {
+            "type": "string",
+            "description": "The text reason specification. Applies in case the number is inactive."
+          },
+          "freetest": {
+            "type": "string",
+            "description": "Booleanthat specifies if this subscription is currently under free testing. Takes Boolean values.",
+            "minLength": 1
+          },
+          "branded": {
+            "type": "boolean",
+            "description": "Flag that specifies whether the number is a branded number i.e. free with the website chat widget."
+          },
+          "freeplan": {
+            "type": "boolean",
+            "description": "Flag that specifies whether the number is included for free with [paid plans](https://sonetel.com/plans)."
+          },
+          "sms_enabled": {
+            "type": "string",
+            "description": "Numbers that have SMS enabled.",
+            "minLength": 1
+          },
+          "sms_supported": {
+            "type": "string",
+            "description": "Numbers that support SMS.",
+            "minLength": 1
+          },
+          "phnum": {
+            "type": "string",
+            "description": "The number in E164 format without ‘+’",
+            "minLength": 1
+          },
+          "free_test_expiry_date": {
+            "type": "string",
+            "description": "The date/time when the free testing period ends."
+          },
+          "sms_settings": {
+            "type": "object",
+            "description": "SMS delivery settings for the number.",
+            "properties": {
+              "delivery_methods": {
+                "type": "array",
+                "minItems": 1,
+                "uniqueItems": true,
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "dest_type": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  },
+                  "required": [
+                    "dest_type"
+                  ]
+                }
+              }
+            }
+          },
+          "plan_details": {
+            "type": "object",
+            "description": "The plan details of the number. Only the `next_renew_mode` can be updated",
+            "properties": {
+              "current_renew_mode": {
+                "type": "string",
+                "enum": [
+                  "1m",
+                  "1y",
+                  "3y"
+                ],
+                "description": "This is a readonly property that holds values of 1m,1y,3y. 1m stands for one month, 1y stands for one year and 3y stands for 3 years renewal period",
+                "minLength": 1,
+                "readOnly": true
+              },
+              "next_renew_mode": {
+                "type": "string",
+                "enum": [
+                  "1m",
+                  "1y",
+                  "3y"
+                ],
+                "description": "When the number renews on `next_fee_date` how long should it renew for.",
+                "minLength": 1
+              },
+              "activation_date": {
+                "type": "string",
+                "description": "The date of creation of the phone number subscription.",
+                "format": "date-time",
+                "minLength": 1,
+                "readOnly": true
+              },
+              "next_fee_date": {
+                "type": "string",
+                "description": "The date on which the next renewal fee is due.",
+                "minLength": 1
+              },
+              "deactivate_date": {
+                "type": "string",
+                "description": "The date on which the number will be deactivated if your account does not have enough credit to apply the `next_recurring_fee`. This date includes a grace period.",
+                "format": "date-time",
+                "minLength": 1,
+                "readOnly": true
+              },
+              "next_recurring_fee": {
+                "type": "string",
+                "description": "The cost of the next renewal. (upto 2 decimals)",
+                "minLength": 1,
+                "readOnly": true
+              }
+            }
+          },
+          "show": {
+            "type": "string",
+            "enum": [
+              "caller",
+              "called"
+            ],
+            "description": "This field lists what to show in the CLI if the phone number is not connected to a user. Valid values are \"caller\", \"called\". ",
+            "minLength": 1
+          },
+          "rule_set_id": {
+            "type": "string",
+            "description": "The Id of the rule set if exceptions are defined for call processing. This field is empty if no exceptions are defined."
+          },
+          "state": {
+            "type": "string",
+            "description": "If the phone number is from USA, then this will hold the name of the state",
+            "minLength": 1,
+            "readOnly": true
+          },
+          "addr_req": {
+            "type": "string",
+            "description": "Flag indicating whether there are any address requirements for this number. Can take values 'yes', 'no'",
+            "minLength": 1,
+            "readOnly": true
+          },
+          "addr_proof": {
+            "type": "string",
+            "description": "Flag indicating whether submission of address proof is required for this number. Can take values 'yes', 'no'",
+            "minLength": 1,
+            "readOnly": true
+          },
+          "access_restrictions": {
+            "type": "string",
+            "description": "Indicates if there are any access restriction from any provider on this number.",
+            "minLength": 1,
+            "readOnly": true
+          },
+          "restrictions_desc": {
+            "type": "string",
+            "description": "Any additional restrictions applicable on this number.",
+            "minLength": 1
+          },
+          "cli_support": {
+            "type": "string",
+            "enum": [
+              "yes",
+              "no",
+              "add_on"
+            ],
+            "description": "Indicates whethe the phone number can be shown as caller ID (CLI) in calls.\n\n- no  → can never be used for CLI\n- yes → number can be used for CLI\n- add_on → can be used as CLI with a package",
+            "minLength": 1,
+            "readOnly": true
+          },
+          "business_pkg_support": {
+            "type": "string",
+            "enum": [
+              "yes",
+              "no"
+            ],
+            "description": "Indicates whether business package is supported on this number. ",
+            "minLength": 1,
+            "readOnly": true,
+            "x-deprecated": true
+          },
+          "package": {
+            "type": "string",
+            "enum": [
+              "regular",
+              "standard",
+              "business"
+            ],
+            "description": "Describes the current package on this number. Available values \"regular\", \"standard\", \"business\"",
+            "minLength": 1
+          },
+          "call_recording_allowed": {
+            "type": "string",
+            "enum": [
+              "yes",
+              "no",
+              "add_on"
+            ],
+            "description": "This property indicates whether call recording can be enabled on this number. Available values \"yes\", \"no\" \"add-on\".",
+            "minLength": 1
+          },
+          "voiceapp_connect": {
+            "type": "string",
+            "enum": [
+              "yes",
+              "no"
+            ],
+            "description": "Indicates whether this number can be allowed to connect to a voice app",
+            "minLength": 1
+          },
+          "csg_connect": {
+            "type": "string",
+            "enum": [
+              "yes",
+              "no"
+            ],
+            "description": "Indicates whether this number can be allowed to connect to a team.",
+            "minLength": 1
+          }
+        }
+      }
+    }
+  }
+}

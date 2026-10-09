@@ -1,0 +1,31 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist overlay for Sonetel Authentication API
+  version: 1.0.0
+extends: ../openapi/_original/sonetel-authentication-openapi.yml
+x-generated: '2026-10-09'
+x-method: generated
+x-source: openapi/sonetel-authentication-openapi.yml
+actions:
+- target: $.info
+  description: Record API Evangelist provenance.
+  update:
+    x-api-evangelist:
+      provider: sonetel
+      generated: '2026-10-09'
+      source: openapi/sonetel-authentication-openapi.yml
+      upstream: https://github.com/Sonetel/sonetel-api-docs
+      documentation: https://docs.sonetel.com/
+- target: $
+  description: The upstream document declares no tags; add one tag naming this API so operations group
+    in renderers.
+  update:
+    tags:
+    - name: Sonetel Authentication
+      description: All API requests that deal with private data such as user details, phone number subscriptions
+        and so on require authentication in the form of a [bearer token](https://www.oauth.com/oauth2-servers/differences-between-oauth-1-2/bearer-tokens/).
+- target: $.paths['/oauth/token'].post
+  description: Tag create-JWT-token.
+  update:
+    tags:
+    - Sonetel Authentication

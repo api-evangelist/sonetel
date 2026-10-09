@@ -1,23 +1,1038 @@
 aid: sonetel
 name: Sonetel
-description: 'Sonetel is a company surfaced via the API Evangelist harvest backlog (source: spectral-ruleset-github)
-  and added to the network as a stub for full-pipeline profiling.'
+description: Sonetel provides business phone numbers and communication services for entrepreneurs and small businesses, offering local phone numbers
+  in 78 countries that ring in the Sonetel app for iPhone and Android or forward to any phone worldwide, with SMS on some number types, call recording,
+  AI call summaries, call scoring and suggested follow-up emails. Sonetel publishes a developer API documented at docs.sonetel.com (Stoplight-hosted),
+  with its API docs source maintained in the Sonetel GitHub organization.
 url: https://raw.githubusercontent.com/api-evangelist/sonetel/refs/heads/main/apis.yml
 x-type: company
 x-source: harvest:spectral-ruleset-github
-x-tier: stub
-x-tier-reason: harvest
+x-tier: profiled
+x-tier-reason: enrichment pass 2026-10-09 (modular-v1; was harvest)
 specificationVersion: '0.20'
 created: '2026-10-09'
 modified: '2026-10-09'
 tags:
 - Company
-apis: []
+- Telephony
+- Phone Numbers
+- VoIP
+- Communications
+- SMS
+- Call Recording
+- Small Business
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
+image: https://sonetel.com/images/help/home-page-featured-image.png
 common:
+- type: AgenticAccess
+  url: agentic-access/sonetel-agentic-access.yml
+- type: Plans
+  url: plans/sonetel-plans-pricing.yml
+- type: Spectral
+  url: rules/sonetel-sonetel-api-docs-spectral-rules.yml
+- type: Spectral
+  url: rules/sonetel-rules.yml
+- type: JSONLD
+  url: json-ld/sonetel-context.jsonld
+- type: Vocabulary
+  url: vocabulary/sonetel-vocabulary.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: DataModel
+  url: data-model/sonetel-data-model.yml
+- type: Conventions
+  url: conventions/sonetel-conventions.yml
+- type: Sandbox
+  url: sandbox/sonetel-sandbox.yml
+- type: Lifecycle
+  url: lifecycle/sonetel-lifecycle.yml
+- type: ErrorCatalog
+  url: errors/sonetel-error-codes.yml
+- type: ErrorCatalog
+  url: errors/sonetel-problem-types.yml
+- type: Conformance
+  url: conformance/sonetel-conformance.yml
+- type: Overlay
+  url: overlays/sonetel-account-overlay.yaml
+- type: LLMsTxt
+  url: llms/sonetel-llms.txt
+- type: Hosts
+  url: hosts/sonetel-hosts.yml
+- type: Vendors
+  url: vendors/sonetel-vendors.yml
+- type: SDKs
+  url: packages/sonetel-packages.yml
+- type: Packages
+  url: packages/sonetel-packages.yml
+- type: OAuthScopes
+  url: scopes/sonetel-scopes.yml
+- type: Authentication
+  url: authentication/sonetel-authentication.yml
+- type: DomainSecurity
+  url: security/sonetel-domain-security.yml
 - type: Website
   url: https://sonetel.com/
+- type: SpectralRules
+  url: https://github.com/Sonetel/sonetel-api-docs/blob/fb88f324a5a3acaae635bc61020de53e634de9c0/reference/.spectral.yaml
+- type: Documentation
+  url: https://docs.sonetel.com/
+- type: Login
+  url: https://portal.sonetel.com/
+- type: GettingStarted
+  url: https://sonetel.com/en/get-started/
+- type: Support
+  url: https://sonetel.com/en/help/
+- type: Blog
+  url: https://sonetel.com/en/blog/
+- type: GitHubOrganization
+  url: https://github.com/Sonetel
+- type: Pricing
+  url: https://sonetel.com/en/prices/
+- type: SignUp
+  url: https://sonetel.com/en/sign-up/
+- type: TermsOfService
+  url: https://sonetel.com/en/help/help-topics/terms-conditions/terms-conditions/
+- type: PrivacyPolicy
+  url: https://sonetel.com/en/privacy/
+- type: StatusPage
+  url: https://status.sonetel.com/
+- type: Leadership
+  url: https://sonetel.com/en/investor-relations/leadership/
+- type: LinkedIn
+  url: https://www.linkedin.com/company/sonetel
+apis:
+- aid: sonetel:sonetel-account-api
+  name: Sonetel Account API
+  description: The Account API from Sonetel — 11 operation(s) for account.
+  humanURL: https://docs.sonetel.com/
+  baseURL: https://api.sonetel.com/SonetelAuth/beta
+  tags:
+  - Account
+  properties:
+  - type: OpenAPI
+    url: openapi/sonetel-account-api-openapi.yml
+  - type: Documentation
+    url: https://docs.sonetel.com/
+  - type: JSONSchema
+    url: json-schema/sonetel-account-get-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-account-put-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-account-data-mgr-call-rec-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-user-get-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-user-call-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-user-update-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-single-phone-number-subscription-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-list-phnum-subscriptions-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-call-recording-list-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-call-recording-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-voiceapp-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-create-prompt-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-requested-by-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-file-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-write-to-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-account-context-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-file-input-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-file-with-id-schema.json
+- aid: sonetel:sonetel-ai-integration-api
+  name: Sonetel Ai Integration API
+  description: The Ai Integration API from Sonetel — 4 operation(s) for ai integration.
+  humanURL: https://docs.sonetel.com/
+  baseURL: https://api.sonetel.com/SonetelAuth/beta
+  tags:
+  - Ai Integration
+  properties:
+  - type: OpenAPI
+    url: openapi/sonetel-ai-integration-api-openapi.yml
+  - type: Documentation
+    url: https://docs.sonetel.com/
+  - type: JSONSchema
+    url: json-schema/sonetel-account-get-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-account-put-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-account-data-mgr-call-rec-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-user-get-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-user-call-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-user-update-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-single-phone-number-subscription-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-list-phnum-subscriptions-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-call-recording-list-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-call-recording-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-voiceapp-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-create-prompt-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-requested-by-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-file-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-write-to-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-account-context-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-file-input-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-file-with-id-schema.json
+- aid: sonetel:sonetel-ai-service-api
+  name: Sonetel Ai Service API
+  description: The Ai Service API from Sonetel — 8 operation(s) for ai service.
+  humanURL: https://docs.sonetel.com/
+  baseURL: https://api.sonetel.com/SonetelAuth/beta
+  tags:
+  - Ai Service
+  properties:
+  - type: OpenAPI
+    url: openapi/sonetel-ai-service-api-openapi.yml
+  - type: Documentation
+    url: https://docs.sonetel.com/
+  - type: JSONSchema
+    url: json-schema/sonetel-account-get-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-account-put-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-account-data-mgr-call-rec-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-user-get-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-user-call-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-user-update-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-single-phone-number-subscription-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-list-phnum-subscriptions-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-call-recording-list-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-call-recording-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-voiceapp-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-create-prompt-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-requested-by-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-file-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-write-to-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-account-context-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-file-input-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-file-with-id-schema.json
+- aid: sonetel:sonetel-app-view-settings-api
+  name: Sonetel App View Settings API
+  description: The App View Settings API from Sonetel — 1 operation(s) for app view settings.
+  humanURL: https://docs.sonetel.com/
+  baseURL: https://api.sonetel.com/SonetelAuth/beta
+  tags:
+  - App View Settings
+  properties:
+  - type: OpenAPI
+    url: openapi/sonetel-app-view-settings-api-openapi.yml
+  - type: Documentation
+    url: https://docs.sonetel.com/
+  - type: JSONSchema
+    url: json-schema/sonetel-account-get-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-account-put-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-account-data-mgr-call-rec-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-user-get-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-user-call-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-user-update-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-single-phone-number-subscription-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-list-phnum-subscriptions-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-call-recording-list-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-call-recording-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-voiceapp-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-create-prompt-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-requested-by-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-file-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-write-to-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-account-context-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-file-input-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-file-with-id-schema.json
+- aid: sonetel:sonetel-business-api
+  name: Sonetel Business API
+  description: The Business API from Sonetel — 2 operation(s) for business.
+  humanURL: https://docs.sonetel.com/
+  baseURL: https://api.sonetel.com/SonetelAuth/beta
+  tags:
+  - Business
+  properties:
+  - type: OpenAPI
+    url: openapi/sonetel-business-api-openapi.yml
+  - type: Documentation
+    url: https://docs.sonetel.com/
+  - type: JSONSchema
+    url: json-schema/sonetel-account-get-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-account-put-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-account-data-mgr-call-rec-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-user-get-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-user-call-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-user-update-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-single-phone-number-subscription-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-list-phnum-subscriptions-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-call-recording-list-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-call-recording-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-voiceapp-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-create-prompt-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-requested-by-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-file-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-write-to-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-account-context-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-file-input-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-file-with-id-schema.json
+- aid: sonetel:sonetel-call-recording-api
+  name: Sonetel Call Recording API
+  description: The Call Recording API from Sonetel — 4 operation(s) for call recording.
+  humanURL: https://docs.sonetel.com/
+  baseURL: https://api.sonetel.com/SonetelAuth/beta
+  tags:
+  - Call Recording
+  properties:
+  - type: OpenAPI
+    url: openapi/sonetel-call-recording-api-openapi.yml
+  - type: Documentation
+    url: https://docs.sonetel.com/
+  - type: JSONSchema
+    url: json-schema/sonetel-account-get-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-account-put-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-account-data-mgr-call-rec-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-user-get-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-user-call-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-user-update-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-single-phone-number-subscription-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-list-phnum-subscriptions-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-call-recording-list-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-call-recording-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-voiceapp-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-create-prompt-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-requested-by-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-file-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-write-to-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-account-context-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-file-input-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-file-with-id-schema.json
+- aid: sonetel:sonetel-country-api
+  name: Sonetel Country API
+  description: The Country API from Sonetel — 1 operation(s) for country.
+  humanURL: https://docs.sonetel.com/
+  baseURL: https://api.sonetel.com/SonetelAuth/beta
+  tags:
+  - Country
+  properties:
+  - type: OpenAPI
+    url: openapi/sonetel-country-api-openapi.yml
+  - type: Documentation
+    url: https://docs.sonetel.com/
+  - type: JSONSchema
+    url: json-schema/sonetel-account-get-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-account-put-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-account-data-mgr-call-rec-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-user-get-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-user-call-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-user-update-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-single-phone-number-subscription-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-list-phnum-subscriptions-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-call-recording-list-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-call-recording-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-voiceapp-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-create-prompt-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-requested-by-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-file-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-write-to-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-account-context-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-file-input-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-file-with-id-schema.json
+- aid: sonetel:sonetel-filemgr-api
+  name: Sonetel Filemgr API
+  description: The Filemgr API from Sonetel — 6 operation(s) for filemgr.
+  humanURL: https://docs.sonetel.com/
+  baseURL: https://api.sonetel.com/SonetelAuth/beta
+  tags:
+  - Filemgr
+  properties:
+  - type: OpenAPI
+    url: openapi/sonetel-filemgr-api-openapi.yml
+  - type: Documentation
+    url: https://docs.sonetel.com/
+  - type: JSONSchema
+    url: json-schema/sonetel-account-get-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-account-put-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-account-data-mgr-call-rec-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-user-get-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-user-call-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-user-update-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-single-phone-number-subscription-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-list-phnum-subscriptions-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-call-recording-list-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-call-recording-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-voiceapp-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-create-prompt-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-requested-by-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-file-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-write-to-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-account-context-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-file-input-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-file-with-id-schema.json
+- aid: sonetel:sonetel-globaldata-api
+  name: Sonetel Globaldata API
+  description: The Globaldata API from Sonetel — 3 operation(s) for globaldata.
+  humanURL: https://docs.sonetel.com/
+  baseURL: https://api.sonetel.com/SonetelAuth/beta
+  tags:
+  - Globaldata
+  properties:
+  - type: OpenAPI
+    url: openapi/sonetel-globaldata-api-openapi.yml
+  - type: Documentation
+    url: https://docs.sonetel.com/
+  - type: JSONSchema
+    url: json-schema/sonetel-account-get-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-account-put-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-account-data-mgr-call-rec-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-user-get-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-user-call-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-user-update-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-single-phone-number-subscription-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-list-phnum-subscriptions-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-call-recording-list-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-call-recording-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-voiceapp-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-create-prompt-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-requested-by-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-file-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-write-to-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-account-context-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-file-input-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-file-with-id-schema.json
+- aid: sonetel:sonetel-internal-api
+  name: Sonetel Internal API
+  description: The Internal API from Sonetel — 2 operation(s) for internal.
+  humanURL: https://docs.sonetel.com/
+  baseURL: https://api.sonetel.com/SonetelAuth/beta
+  tags:
+  - Internal
+  properties:
+  - type: OpenAPI
+    url: openapi/sonetel-internal-api-openapi.yml
+  - type: Documentation
+    url: https://docs.sonetel.com/
+  - type: JSONSchema
+    url: json-schema/sonetel-account-get-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-account-put-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-account-data-mgr-call-rec-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-user-get-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-user-call-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-user-update-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-single-phone-number-subscription-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-list-phnum-subscriptions-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-call-recording-list-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-call-recording-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-voiceapp-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-create-prompt-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-requested-by-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-file-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-write-to-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-account-context-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-file-input-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-file-with-id-schema.json
+- aid: sonetel:sonetel-make-calls-api
+  name: Sonetel Make Calls API
+  description: The Make Calls API from Sonetel — 1 operation(s) for make calls.
+  humanURL: https://docs.sonetel.com/
+  baseURL: https://api.sonetel.com/SonetelAuth/beta
+  tags:
+  - Make Calls
+  properties:
+  - type: OpenAPI
+    url: openapi/sonetel-make-calls-api-openapi.yml
+  - type: Documentation
+    url: https://docs.sonetel.com/
+  - type: JSONSchema
+    url: json-schema/sonetel-account-get-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-account-put-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-account-data-mgr-call-rec-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-user-get-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-user-call-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-user-update-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-single-phone-number-subscription-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-list-phnum-subscriptions-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-call-recording-list-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-call-recording-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-voiceapp-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-create-prompt-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-requested-by-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-file-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-write-to-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-account-context-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-file-input-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-file-with-id-schema.json
+- aid: sonetel:sonetel-numberstocksummary-api
+  name: Sonetel Numberstocksummary API
+  description: The Numberstocksummary API from Sonetel — 2 operation(s) for numberstocksummary.
+  humanURL: https://docs.sonetel.com/
+  baseURL: https://api.sonetel.com/SonetelAuth/beta
+  tags:
+  - Numberstocksummary
+  properties:
+  - type: OpenAPI
+    url: openapi/sonetel-numberstocksummary-api-openapi.yml
+  - type: Documentation
+    url: https://docs.sonetel.com/
+  - type: JSONSchema
+    url: json-schema/sonetel-account-get-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-account-put-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-account-data-mgr-call-rec-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-user-get-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-user-call-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-user-update-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-single-phone-number-subscription-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-list-phnum-subscriptions-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-call-recording-list-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-call-recording-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-voiceapp-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-create-prompt-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-requested-by-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-file-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-write-to-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-account-context-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-file-input-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-file-with-id-schema.json
+- aid: sonetel:sonetel-oauth-api
+  name: Sonetel OAuth API
+  description: The Oauth API from Sonetel — 1 operation(s) for oauth.
+  humanURL: https://docs.sonetel.com/
+  baseURL: https://api.sonetel.com/SonetelAuth/beta
+  tags:
+  - Oauth
+  properties:
+  - type: OpenAPI
+    url: openapi/sonetel-oauth-api-openapi.yml
+  - type: Documentation
+    url: https://docs.sonetel.com/
+  - type: JSONSchema
+    url: json-schema/sonetel-account-get-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-account-put-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-account-data-mgr-call-rec-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-user-get-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-user-call-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-user-update-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-single-phone-number-subscription-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-list-phnum-subscriptions-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-call-recording-list-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-call-recording-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-voiceapp-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-create-prompt-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-requested-by-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-file-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-write-to-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-account-context-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-file-input-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-file-with-id-schema.json
+- aid: sonetel:sonetel-prompt-api
+  name: Sonetel Prompt API
+  description: The Prompt API from Sonetel — 5 operation(s) for prompt.
+  humanURL: https://docs.sonetel.com/
+  baseURL: https://api.sonetel.com/SonetelAuth/beta
+  tags:
+  - Prompt
+  properties:
+  - type: OpenAPI
+    url: openapi/sonetel-prompt-api-openapi.yml
+  - type: Documentation
+    url: https://docs.sonetel.com/
+  - type: JSONSchema
+    url: json-schema/sonetel-account-get-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-account-put-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-account-data-mgr-call-rec-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-user-get-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-user-call-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-user-update-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-single-phone-number-subscription-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-list-phnum-subscriptions-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-call-recording-list-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-call-recording-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-voiceapp-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-create-prompt-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-requested-by-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-file-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-write-to-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-account-context-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-file-input-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-file-with-id-schema.json
+- aid: sonetel:sonetel-textmgr-api
+  name: Sonetel Textmgr API
+  description: The Textmgr API from Sonetel — 19 operation(s) for textmgr.
+  humanURL: https://docs.sonetel.com/
+  baseURL: https://api.sonetel.com/SonetelAuth/beta
+  tags:
+  - Textmgr
+  properties:
+  - type: OpenAPI
+    url: openapi/sonetel-textmgr-api-openapi.yml
+  - type: Documentation
+    url: https://docs.sonetel.com/
+  - type: JSONSchema
+    url: json-schema/sonetel-account-get-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-account-put-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-account-data-mgr-call-rec-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-user-get-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-user-call-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-user-update-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-single-phone-number-subscription-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-list-phnum-subscriptions-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-call-recording-list-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-call-recording-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-voiceapp-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-create-prompt-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-requested-by-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-file-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-write-to-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-account-context-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-file-input-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-file-with-id-schema.json
+- aid: sonetel:sonetel-transcription-api
+  name: Sonetel Transcription API
+  description: The Transcription API from Sonetel — 2 operation(s) for transcription.
+  humanURL: https://docs.sonetel.com/
+  baseURL: https://api.sonetel.com/SonetelAuth/beta
+  tags:
+  - Transcription
+  properties:
+  - type: OpenAPI
+    url: openapi/sonetel-transcription-api-openapi.yml
+  - type: Documentation
+    url: https://docs.sonetel.com/
+  - type: JSONSchema
+    url: json-schema/sonetel-account-get-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-account-put-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-account-data-mgr-call-rec-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-user-get-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-user-call-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-user-update-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-single-phone-number-subscription-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-list-phnum-subscriptions-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-call-recording-list-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-call-recording-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-voiceapp-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-create-prompt-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-requested-by-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-file-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-write-to-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-account-context-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-file-input-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-file-with-id-schema.json
+- aid: sonetel:sonetel-tts-api
+  name: Sonetel Tts API
+  description: The Tts API from Sonetel — 2 operation(s) for tts.
+  humanURL: https://docs.sonetel.com/
+  baseURL: https://api.sonetel.com/SonetelAuth/beta
+  tags:
+  - Tts
+  properties:
+  - type: OpenAPI
+    url: openapi/sonetel-tts-api-openapi.yml
+  - type: Documentation
+    url: https://docs.sonetel.com/
+  - type: JSONSchema
+    url: json-schema/sonetel-account-get-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-account-put-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-account-data-mgr-call-rec-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-user-get-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-user-call-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-user-update-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-single-phone-number-subscription-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-list-phnum-subscriptions-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-call-recording-list-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-call-recording-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-voiceapp-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-create-prompt-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-requested-by-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-file-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-write-to-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-account-context-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-file-input-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-file-with-id-schema.json
+- aid: sonetel:sonetel-usage-api
+  name: Sonetel Usage API
+  description: The Usage API from Sonetel — 2 operation(s) for usage.
+  humanURL: https://docs.sonetel.com/
+  baseURL: https://api.sonetel.com/SonetelAuth/beta
+  tags:
+  - Usage
+  properties:
+  - type: OpenAPI
+    url: openapi/sonetel-usage-api-openapi.yml
+  - type: Documentation
+    url: https://docs.sonetel.com/
+  - type: JSONSchema
+    url: json-schema/sonetel-account-get-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-account-put-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-account-data-mgr-call-rec-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-user-get-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-user-call-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-user-update-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-single-phone-number-subscription-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-list-phnum-subscriptions-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-call-recording-list-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-call-recording-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-voiceapp-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-create-prompt-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-requested-by-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-file-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-write-to-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-account-context-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-file-input-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-file-with-id-schema.json
+- aid: sonetel:sonetel-user-api
+  name: Sonetel User API
+  description: The User API from Sonetel — 1 operation(s) for user.
+  humanURL: https://docs.sonetel.com/
+  baseURL: https://api.sonetel.com/SonetelAuth/beta
+  tags:
+  - User
+  properties:
+  - type: OpenAPI
+    url: openapi/sonetel-user-api-openapi.yml
+  - type: Documentation
+    url: https://docs.sonetel.com/
+  - type: JSONSchema
+    url: json-schema/sonetel-account-get-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-account-put-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-account-data-mgr-call-rec-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-user-get-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-user-call-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-user-update-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-single-phone-number-subscription-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-list-phnum-subscriptions-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-call-recording-list-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-call-recording-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-voiceapp-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-create-prompt-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-requested-by-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-file-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-write-to-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-account-context-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-file-input-schema.json
+  - type: JSONSchema
+    url: json-schema/sonetel-file-with-id-schema.json
+x-enrichment:
+  date: '2026-10-09'
+  status: enriched
+  artifacts_added: 135
+  pass: modular-v1
+  engine: identity=anthropic,contract=anthropic,surfaces=anthropic,docs=anthropic,regulatory=anthropic
+x-coverage:
+  state: covered
+  reason: identity-verified
+  detail: 'Enriched 2026-10-09: website and identity verified (verified) from the provider''s own pages; probed URLs below.'
+  evidence:
+  - url: https://sonetel.com/en/
+    status: 200
+  - url: https://docs.sonetel.com/
+    status: 200
+  - url: https://github.com/Sonetel
+    status: 200
+  - url: https://www.linkedin.com/company/sonetel
+    status: null

@@ -1,0 +1,41 @@
+generated: '2026-10-09'
+method: searched
+source: https://docs.sonetel.com/docs/sonetel-documentation/ZG9jOjE0NjU1NTI4-guidelines
+name: Sonetel Conformance
+standards:
+- id: oauth2
+  conforms: partial
+  evidence: 'Authentication page: OAuth2 token endpoint /SonetelAuth/oauth/token with grant_type=password and grant_type=refresh_token, client
+    HTTP Basic sonetel-api:sonetel-api (https://docs.sonetel.com/docs/sonetel-documentation/143990db3cda3-authentication). Resource-owner password
+    grant only.'
+- id: iso-3166-1
+  conforms: true
+  evidence: 'Guidelines: "Countries are specified using the standard ISO codes as per ISO 3166-1."'
+- id: iso-4217
+  conforms: true
+  evidence: 'Guidelines: "Currencies are specified as per the standard ISO 4217."'
+- id: iso-8601
+  conforms: true
+  evidence: 'Guidelines: "The time format is used as per ISO 8601. The basic time format is the default format i.e. YYYYMMDDThh:mm:ssZ."'
+- id: itu-e164
+  conforms: partial
+  evidence: 'Guidelines: "Phone numbers are specified in the E164 notation. For example, the number +1 (202) 555 1234 will be represented as 12025551234."
+    (leading + omitted)'
+- id: rfc9457
+  conforms: false
+  evidence: Errors use a custom envelope returned with HTTP 200 and status "failed" (https://docs.sonetel.com/docs/sonetel-documentation/ZG9jOjE0NjUyMDIy-error-codes).
+- id: idempotency
+  conforms: false
+  evidence: No idempotency key documented or declared in the contracts.
+- id: openapi-3.0
+  conforms: true
+  evidence: the document declares 3.0.0
+- id: openapi-3.1
+  conforms: true
+  evidence: the document declares 3.1.0
+- id: swagger-2.0
+  conforms: true
+  evidence: the document declares swagger-2.0
+- id: pagination
+  conforms: true
+  evidence: list operations take page_type

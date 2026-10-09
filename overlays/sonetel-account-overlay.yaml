@@ -1,0 +1,46 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist overlay for Sonetel Account API
+  version: 1.0.0
+extends: ../openapi/_original/sonetel-account-openapi.yml
+x-generated: '2026-10-09'
+x-method: generated
+x-source: openapi/sonetel-account-openapi.yml
+actions:
+- target: $.info
+  description: Record API Evangelist provenance.
+  update:
+    x-api-evangelist:
+      provider: sonetel
+      generated: '2026-10-09'
+      source: openapi/sonetel-account-openapi.yml
+      upstream: https://github.com/Sonetel/sonetel-api-docs
+      documentation: https://docs.sonetel.com/
+- target: $
+  description: The upstream document declares no tags; add one tag naming this API so operations group
+    in renderers.
+  update:
+    tags:
+    - name: Sonetel Account
+      description: The account resource represents the Sonetel account for your company. Use it to fetch
+        your company wide settings, account status, prepaid credit etc.
+- target: $.paths['/account/{accountId}'].get
+  description: Tag get-users-userId.
+  update:
+    tags:
+    - Sonetel Account
+- target: $.paths['/account/{accountId}'].put
+  description: Tag put-account-accountId.
+  update:
+    tags:
+    - Sonetel Account
+- target: $.paths['/account/{accountId}/settings/data-mgr/call-recording'].get
+  description: Tag get-account-accountId-settings-data-mgr-call-recording.
+  update:
+    tags:
+    - Sonetel Account
+- target: $.paths['/account/{accountId}/settings/data-mgr/call-recording'].put
+  description: Tag put-account-accountId-settings-data-mgr-call-recording.
+  update:
+    tags:
+    - Sonetel Account

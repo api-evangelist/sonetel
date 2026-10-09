@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/sonetel/main/json-schema/sonetel-account-data-mgr-call-rec-settings-schema.json",
+  "title": "AccountDataMgrCallRecSettings",
+  "x-generated": "2026-10-09",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/sonetel-account-openapi.yml#/components/schemas/AccountDataMgrCallRecSettings",
+  "type": "object",
+  "properties": {
+    "auto_delete": {
+      "type": "string",
+      "enum": [
+        "none",
+        "all",
+        "voice-files"
+      ],
+      "description": "Specifies if `all` data or just `voice-files` must be automatically deleted"
+    },
+    "auto_delete_time": {
+      "type": "string",
+      "enum": [
+        "immediate",
+        "1m",
+        "3m",
+        "1y"
+      ],
+      "description": "`immediate`: Delete immediately after the service data is generated\r\n\r\n`1m`: Delete 1 months after the service data is generated\r\n\r\n`3m`: Delete 3 months after the service data is generated\r\n\r\n`1y`: Delete 1 year after the service data is generated"
+    }
+  }
+}

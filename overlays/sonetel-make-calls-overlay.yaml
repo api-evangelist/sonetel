@@ -1,0 +1,31 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist overlay for Sonetel Make Calls API
+  version: 1.0.0
+extends: ../openapi/_original/sonetel-make-calls-openapi.yml
+x-generated: '2026-10-09'
+x-method: generated
+x-source: openapi/sonetel-make-calls-openapi.yml
+actions:
+- target: $.info
+  description: Record API Evangelist provenance.
+  update:
+    x-api-evangelist:
+      provider: sonetel
+      generated: '2026-10-09'
+      source: openapi/sonetel-make-calls-openapi.yml
+      upstream: https://github.com/Sonetel/sonetel-api-docs
+      documentation: https://docs.sonetel.com/
+- target: $
+  description: The upstream document declares no tags; add one tag naming this API so operations group
+    in renderers.
+  update:
+    tags:
+    - name: Sonetel Make Calls
+      description: Use the callback service offered by Sonetel to make latency-free international calls
+        using your mobile phones at the cost of a [local call](https://sonetel.com/callprices/).
+- target: $.paths['/make-calls/call/call-back'].post
+  description: Tag post-make-calls-call-call-back.
+  update:
+    tags:
+    - Sonetel Make Calls

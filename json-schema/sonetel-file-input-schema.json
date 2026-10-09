@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/sonetel/main/json-schema/sonetel-file-input-schema.json",
+  "title": "File-input",
+  "description": "File either as a `file_id` or a file URL",
+  "x-generated": "2026-10-09",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/sonetel-ai-services-openapi.yml#/components/schemas/File-input",
+  "type": "object",
+  "oneOf": [
+    {
+      "type": "object",
+      "properties": {
+        "file_id": {
+          "type": "string",
+          "description": "Unique file_id of a file managed by the [File managemer](reference/15_ai_filemanager.yaml)"
+        }
+      }
+    },
+    {
+      "type": "object",
+      "properties": {
+        "file_url": {
+          "type": "string",
+          "description": "File URL of a file",
+          "format": "uri"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+# Sonetel
+
+> Sonetel sells virtual phone numbers and calling plans for founders, freelancers, and small teams worldwide (~70% of customers are solopreneurs or teams under 10, per a 2020 customer survey). Numbers are available in 78 countries (geographic, mobile, toll-free, national) on three plans — Basic (pay-as-you-go, no plan fee), Premium, and Business. Per Google Ads search-terms data for 2025 Q4–2026 Q1, the top converting use cases are a WhatsApp Business presence and an international virtual number.
+>
+> A Sonetel number rings in the Sonetel mobile app, so an incoming call does not have to be forwarded to another phone — answering in the app avoids the call-forwarding cost on every plan, though numbers that carry a per-minute fee for incoming calls keep it wherever the call is answered. Forwarding remains one routing option among several. Two-way SMS is available from numbers in 15 of the 78 countries. Call recording, transcription and AI call summaries are included with the Premium and Business plans and are metered in AI credits, and pay-as-you-go accounts get a one-time credit allowance at signup that lets them try the AI features until it runs out.
+>
+> Two conditions to know before quoting availability: a purchased number is switched on once the account's billing address and ID number are approved, and a free trial number cannot send or receive SMS and does not deliver voicemail.
+>
+> Pricing is transparent and shown live on the pricing pages — no separate sales process.
+
+## Pricing
+
+- [Plans and pricing](https://sonetel.com/en/prices/): Basic (pay-as-you-go), Premium, Business — what's included and current pricing
+- [Plan comparison](https://sonetel.com/en/prices/plans/): side-by-side feature matrix
+- [Phone number prices by country](https://sonetel.com/en/prices/full-list/): per-country prices for all available number types
+- [International call rates](https://sonetel.com/en/prices/international-calls/): outbound rates per destination
+- [Number porting](https://sonetel.com/en/prices/bring-your-old-numbers/): keeping an existing number on Sonetel
+
+## Features
+
+- [Sonetel mobile app for iOS and Android](https://sonetel.com/en/mobile-app/): your Sonetel number rings in the app, so you answer business calls on your phone without forwarding them to another number
+- [Two-way SMS](https://sonetel.com/en/help/help-topics/telephony/can-i-send-and-receive-sms/): send and receive text messages from your business number — sending is available from numbers in 15 of the 78 countries
+- [AI call summaries](https://sonetel.com/en/help/help-topics/telephony/call-summaries/): a written summary of each conversation, included with the Premium and Business plans and paid for in AI credits
+- [Call recording and transcription](https://sonetel.com/en/help/help-topics/telephony/free-call-recording/): record and transcribe calls on a paid plan — off by default, and subject to the recording laws of the countries a call touches
+- [WhatsApp Business numbers](https://sonetel.com/en/help/help-topics/telephony/phone-number-for-whatsapp/): use a Sonetel virtual number to register WhatsApp Business
+- [Click-to-call](https://sonetel.com/en/help/help-topics/telephony/click-to-call/): website button that connects callers to your team
+- [Call routing and forwarding](https://sonetel.com/en/help/help-topics/telephony/receive-calls/): ring the app, or forward calls to any device worldwide
+- [OpenPhone alternatives](https://sonetel.com/en/blog/openphone-alternatives/): how Sonetel compares to Quo (formerly OpenPhone) on country coverage and per-number vs per-seat billing, with a sourced comparison table and dated figures
+
+## How to buy and set up
+
+- [Help center](https://sonetel.com/en/help/): guides for getting started, telephony setup, billing, account management
+- [Getting started](https://sonetel.com/en/help/help-topics/getting-started/): first steps after signing up
+- [Telephony](https://sonetel.com/en/help/help-topics/telephony/): configuring numbers, forwarding, voicemail
+
+## About
+
+- [About Sonetel](https://sonetel.com/en/about/): company background, founded 2008, headquartered in Stockholm
+- [Investor relations](https://sonetel.com/en/investor-relations/): financial reports, press releases, share information
+- [Blog](https://sonetel.com/en/blog/): product updates, customer stories
+
+## Optional
+
+- [Homepage](https://sonetel.com/en/): product overview and getting started
+- [Sitemap](https://sonetel.com/sitemap.xml): full list of indexable pages

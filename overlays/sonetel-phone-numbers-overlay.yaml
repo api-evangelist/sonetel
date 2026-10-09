@@ -1,0 +1,82 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist overlay for Sonetel Phone Numbers API
+  version: 1.0.0
+extends: ../openapi/_original/sonetel-phone-numbers-openapi.yml
+x-generated: '2026-10-09'
+x-method: generated
+x-source: openapi/sonetel-phone-numbers-openapi.yml
+actions:
+- target: $.info
+  description: Record API Evangelist provenance.
+  update:
+    x-api-evangelist:
+      provider: sonetel
+      generated: '2026-10-09'
+      source: openapi/sonetel-phone-numbers-openapi.yml
+      upstream: https://github.com/Sonetel/sonetel-api-docs
+      documentation: https://docs.sonetel.com/
+- target: $
+  description: The upstream document declares no tags; add one tag naming this API so operations group
+    in renderers.
+  update:
+    tags:
+    - name: Sonetel Phone Numbers
+      description: These API endpoints allow you to change the settings for your existing phone numbers,
+        browse our available phone number stock, purchase new phone numbers and remove numbers from your
+        account.
+- target: $.paths['/country'].get
+  description: Tag get-country.
+  update:
+    tags:
+    - Sonetel Phone Numbers
+- target: $.paths['/numberstocksummary/{country}'].get
+  description: Tag get-stock.
+  update:
+    tags:
+    - Sonetel Phone Numbers
+- target: $.paths['/numberstocksummary/{country}/availablephonenumber'].get
+  description: Tag get-numberstocksummary-country-availablephonenumber.
+  update:
+    tags:
+    - Sonetel Phone Numbers
+- target: $.paths['/account/{accountid}/phonenumbersubscription'].get
+  description: Tag get-subscribed-numbers.
+  update:
+    tags:
+    - Sonetel Phone Numbers
+- target: $.paths['/account/{accountid}/phonenumbersubscription'].post
+  description: Tag postaccount-accountid-phonenumbersubscription.
+  update:
+    tags:
+    - Sonetel Phone Numbers
+- target: $.paths['/account/{accountid}/phonenumbersubscription/{phnum}'].put
+  description: Tag putaccount-accountid-phonenumbersubscription-phnum.
+  update:
+    tags:
+    - Sonetel Phone Numbers
+- target: $.paths['/account/{accountid}/phonenumbersubscription/{phnum}'].get
+  description: Tag getaccount-accountid-phonenumbersubscription-phnum.
+  update:
+    tags:
+    - Sonetel Phone Numbers
+- target: $.paths['/account/{accountid}/phonenumbersubscription/{phnum}'].delete
+  description: Tag deleteaccount-accountid-phonenumbersubscription-phnum.
+  update:
+    tags:
+    - Sonetel Phone Numbers
+- target: $.components
+  description: Upstream declares no securitySchemes although the Sonetel docs (docs/Getting Started/1-Introduction.md)
+    require an access token from the Authentication API. Add the same oauth2 password-flow scheme the
+    sibling Sonetel specs (e.g. Account) declare. Operation-level `security` values are left untouched.
+  update:
+    securitySchemes:
+      SonetelToken:
+        type: oauth2
+        description: 'Sonetel access token (JWT) obtained from POST /oauth/token (create-JWT-token) on
+          https://api.sonetel.com/SonetelAuth/beta/; sent as `Authorization: Bearer <token>`.'
+        flows:
+          password:
+            tokenUrl: https://api.sonetel.com/SonetelAuth/beta/oauth/token
+            refreshUrl: https://api.sonetel.com/SonetelAuth/beta/oauth/token
+            scopes: {}

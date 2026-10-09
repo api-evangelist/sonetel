@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/sonetel/main/json-schema/sonetel-account-put-schema.json",
+  "title": "Account-PUT",
+  "description": "Update your account settings",
+  "x-generated": "2026-10-09",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/sonetel-account-openapi.yml#/components/schemas/Account-PUT",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The new name of your company."
+    },
+    "language": {
+      "type": "string",
+      "description": "The 3 letter ISO language code such as `deu` for German or `swa` for Swahili.\n\nGet a list of all the language codes from https://beta-api.sonetel.com/globaldata/language"
+    },
+    "timezone_details": {
+      "type": "object",
+      "description": "The object containing the updated timezone.",
+      "properties": {
+        "zone_id": {
+          "type": "string",
+          "description": "Two digit timezone identifier."
+        }
+      },
+      "required": [
+        "zone_id"
+      ]
+    },
+    "service_settings": {
+      "$ref": "#/$defs/ServiceSettings-PUT",
+      "description": "Specify values that are changed. Values that are not provided remain un-altered"
+    }
+  },
+  "$defs": {
+    "ServiceSettings-PUT": {
+      "type": "object",
+      "title": "ServiceSettings-PUT",
+      "description": "Service settings of an account that can be updated",
+      "properties": {
+        "team_chat": {
+          "type": "boolean",
+          "description": "Specify if team chat service must be turned on (true) for the account",
+          "default": false
+        },
+        "customer_chat": {
+          "type": "boolean",
+          "description": "Specify if customer chat service must be turned on (true) for the account",
+          "default": false
+        },
+        "ai_helper": {
+          "type": "boolean",
+          "description": "Specify if AI helper service must be turned on (true) for the account",
+          "default": false
+        }
+      }
+    }
+  }
+}

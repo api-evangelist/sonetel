@@ -1,0 +1,390 @@
+openapi: 3.2.0
+info:
+  title: Sonetel Business API
+  version: '2.0'
+  description: 'Operations tagged Business across 2 of this provider''s published API definitions: 14_ai_business.yaml, sonetel-ai-business-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://public-api.sonetel.com
+  description: Production
+tags:
+- name: Business
+paths:
+  /business:
+    get:
+      summary: List businesses
+      description: Fetch list of businesses for a Sonetel account
+      operationId: get-business
+      parameters:
+      - name: account_id
+        in: query
+        description: List businesses with this account id
+        schema:
+          type: string
+          examples:
+          - Tg2hentr
+      - name: name
+        in: query
+        description: List businesses with this name. Search is done using [Lucene search syntax](https://lucene.apache.org/core/2_9_4/queryparsersyntax.html)
+        schema:
+          type: string
+          examples:
+          - Sonete*
+        examples:
+          default:
+            value: Sonete*
+      - name: website
+        in: query
+        description: List businesses with this website URL. Search is done using [Lucene search syntax](https://lucene.apache.org/core/2_9_4/queryparsersyntax.html)
+        schema:
+          type: string
+          format: uri-reference
+          examples:
+          - www.sonet*.com
+        examples:
+          default:
+            value: www.sonet*.com
+      - name: create_date
+        in: query
+        description: List business based on create_date, filtering with operators `*__gte*` (Greater than or equal to), `*__lte*` (Less than or equal to), or `*=*`
+        schema:
+          type: string
+          examples:
+          - create_date__lte'2019-08-24T14:15:22Z'
+        examples:
+          default:
+            value: create_date__lte'2019-08-24T14:15:22Z'
+      - name: update_date
+        in: query
+        description: List business based on update_date, filtering with operators `*__gte*` (Greater than or equal to), `*__lte*` (Less than or equal to), or `*=*`
+        schema:
+          type: string
+          examples:
+          - update_date__lte'2019-08-24T14:15:22Z'
+        examples:
+          default:
+            value: update_date__lte'2019-08-24T14:15:22Z'
+      - name: default
+        in: query
+        description: List/Find the default business in the account
+        schema:
+          type: boolean
+      responses:
+        '200':
+          $ref: '#/components/responses/Get-business-list'
+      security:
+      - Sonetel: []
+      servers:
+      - url: https://public-api.sonetel.com
+        description: Production
+      x-internal: false
+      tags:
+      - Business
+    post:
+      summary: Create a business profile
+      description: Create a new business in an account
+      operationId: post-business
+      requestBody:
+        $ref: '#/components/requestBodies/Post-business'
+      responses:
+        '200':
+          $ref: '#/components/responses/Post-business'
+      security:
+      - Sonetel: []
+      servers:
+      - url: https://public-api.sonetel.com
+        description: Production
+      tags:
+      - Business
+    servers:
+    - url: https://public-api.sonetel.com
+      description: Production
+  /business/{business_id}:
+    put:
+      summary: Update a business profile
+      description: Update a business
+      operationId: put-business-id
+      parameters:
+      - name: business_id
+        in: path
+        description: Id of the business
+        required: true
+        schema:
+          type: string
+          examples:
+          - bT54eikjhy
+        examples:
+          default:
+            value: bT54eikjhy
+      requestBody:
+        $ref: '#/components/requestBodies/Post-business'
+      responses:
+        '200':
+          $ref: '#/components/responses/Post-business'
+      security:
+      - Sonetel: []
+      servers:
+      - url: https://public-api.sonetel.com
+        description: Production
+      tags:
+      - Business
+    get:
+      summary: Get a business by id
+      description: Fetch a business based on ID
+      operationId: get-ai-business-business-business-id
+      parameters:
+      - name: fields
+        in: query
+        description: List of fields that must be returned
+        schema:
+          const: description
+          examples:
+          - description
+      - name: business_id
+        in: path
+        description: Id of the business
+        required: true
+        schema:
+          type: string
+          examples:
+          - bT54eikjhy
+        examples:
+          default:
+            value: bT54eikjhy
+      responses:
+        '200':
+          $ref: '#/components/responses/Get-business-by-id'
+      security:
+      - Sonetel: []
+      servers:
+      - url: https://public-api.sonetel.com
+        description: Production
+      tags:
+      - Business
+    delete:
+      summary: Delete a business
+      operationId: delete-business-id
+      parameters:
+      - name: business_id
+        in: path
+        description: Id of the business
+        required: true
+        schema:
+          type: string
+          examples:
+          - bT54eikjhy
+        examples:
+          default:
+            value: bT54eikjhy
+      responses:
+        '200':
+          $ref: '#/components/responses/Post-business'
+      security:
+      - Sonetel: []
+      servers:
+      - url: https://public-api.sonetel.com
+        description: Production
+      tags:
+      - Business
+    servers:
+    - url: https://public-api.sonetel.com
+      description: Production
+components:
+  schemas:
+    business-without-desc:
+      type: object
+      title: business-without-desc
+      description: The business details with business description
+      properties:
+        business_id:
+          type: string
+          description: The unique Id of the business
+          examples:
+          - bT54eikjhy
+        account_id:
+          type: string
+          description: The Sonetel account Id
+          examples:
+          - Tg2hentr
+        name:
+          type: string
+          description: The business name
+          examples:
+          - Sonetel
+        website:
+          type: string
+          description: Business website URL
+          format: uri-reference
+          examples:
+          - www.sonetel.com
+        create_date:
+          type: string
+          format: date-time
+          examples:
+          - '2019-08-24T14:15:22Z'
+        update_date:
+          type: string
+          format: date-time
+          examples:
+          - '2019-08-25T14:15:22Z'
+        default:
+          type: boolean
+          description: If `true`, the business is the default for this account
+      required:
+      - business_id
+      - account_id
+    business-description:
+      type: object
+      title: business-description
+      description: Business description with partially (still being written) or completed text. If status is `in_progress`, `text_data` may have part of the text available. The `text_data` continues to get updated until the status changes to ready.
+      properties:
+        text_id:
+          type: string
+          description: Text Id of the business description. This may be empty if the description text_id isn't created yet
+        text_data:
+          type: string
+          description: The completed or partially ready (still being written) business description
+        status:
+          type: string
+          enum:
+          - ready
+          - ready-limited
+          - not_started
+          - in_progress
+          - failed
+          description: "The status of the text data.\n\n`ready`: Text is fully ready and available on `text_data`\n<br>`ready-limited`: Text is ready, but API only returns a part of the text or no text. This is due to restrictions with your account. An upgrade or purchase may be required to get access to full text.\n<br>`not_started`: no part of text is available yet\n<br>`in_progress`: text is being written. The `text_data` may have partially written text\nhis text) \n<br>`failed`: Text generation has failed. The `error_code` and `error_description` provide more details"
+        error:
+          type: object
+          description: Error details if status indicates `failed`. The list of error codes are available [here](14_ai_business.yaml)
+          properties:
+            code:
+              type: string
+              description: The error code in case of failure
+              examples:
+              - 4001233-yt
+            error_description:
+              type: string
+              description: A textual description of the error
+              examples:
+              - Not enough AI credits
+        version:
+          type: integer
+          description: Version number of the business description text
+          minimum: 1
+          examples:
+          - 2
+        user_input:
+          type: string
+          description: User feedback provided for generating description
+    business-with-description:
+      type: object
+      title: business-with-description
+      description: Business details without description
+      properties:
+        business_id:
+          type: string
+          description: The unique Id of the business
+          examples:
+          - bT54eikjhy
+        account_id:
+          type: string
+          description: The Sonetel account Id
+          examples:
+          - Tg2hentr
+        name:
+          type: string
+          description: The business name
+          examples:
+          - Sonetel
+        website:
+          type: string
+          description: Business website URL
+          format: uri-reference
+          examples:
+          - www.sonetel.com
+        description:
+          $ref: '#/components/schemas/business-description'
+        default:
+          type: boolean
+          description: If `true`, this business is default for this account
+        create_date:
+          type: string
+          format: date-time
+          examples:
+          - '2019-08-24T14:15:22Z'
+        update_date:
+          type: string
+          format: date-time
+          examples:
+          - '2019-08-25T14:15:22Z'
+      required:
+      - business_id
+      - account_id
+  requestBodies:
+    Post-business:
+      description: The business properties
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              account_id:
+                type: string
+                description: The Sonetel account Id
+                examples:
+                - Tg2hentr
+              name:
+                type: string
+                description: The name of the business
+                examples:
+                - Sonetel
+              website:
+                type: string
+                description: The business website
+                format: uri-reference
+                examples:
+                - www.sonetel.com
+            required:
+            - account_id
+            - name
+        application/xml:
+          schema:
+            type: object
+  responses:
+    Get-business-list:
+      description: List of business details
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/business-with-description'
+    Post-business:
+      description: Details of business
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/business-without-desc'
+    Get-business-by-id:
+      description: Business details
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/business-with-description'
+        application/xml:
+          schema:
+            type: object
+        multipart/form-data:
+          schema:
+            type: object
+  securitySchemes:
+    Sonetel:
+      type: oauth2
+      description: Get an access token from the `/oauth/token` and pass it as a Bearer token in the `Authorization` header.
+      flows:
+        password:
+          refreshUrl: https://api.sonetel.com/SonetelAuth/beta/oauth/token
+          tokenUrl: https://api.sonetel.com/SonetelAuth/beta/oauth/token
+          scopes: {}
+x-refined-from:
+- 14_ai_business.yaml
+- sonetel-ai-business-openapi.yml

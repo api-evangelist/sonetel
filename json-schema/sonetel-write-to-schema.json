@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/sonetel/main/json-schema/sonetel-write-to-schema.json",
+  "title": "write_to",
+  "description": "The destination where the transcript must be deposited. One of more destinations may be specified",
+  "x-generated": "2026-10-09",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/sonetel-transcription-openapi.yml#/components/schemas/write_to",
+  "type": "object",
+  "anyOf": [
+    {
+      "type": "object",
+      "properties": {
+        "text_id": {
+          "type": "string",
+          "description": "Text_Id where the transcription should be written"
+        }
+      }
+    },
+    {
+      "type": "object",
+      "properties": {
+        "callback_url": {
+          "type": "string",
+          "description": "URL to which the transcript will be posted via HTTP POST request.",
+          "format": "uri"
+        }
+      }
+    }
+  ]
+}

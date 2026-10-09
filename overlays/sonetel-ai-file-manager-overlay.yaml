@@ -1,0 +1,76 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist overlay for Sonetel File Manager API API
+  version: 1.0.0
+extends: ../openapi/_original/sonetel-ai-file-manager-openapi.yml
+x-generated: '2026-10-09'
+x-method: generated
+x-source: openapi/sonetel-ai-file-manager-openapi.yml
+actions:
+- target: $.info
+  description: Record API Evangelist provenance.
+  update:
+    x-api-evangelist:
+      provider: sonetel
+      generated: '2026-10-09'
+      source: openapi/sonetel-ai-file-manager-openapi.yml
+      upstream: https://github.com/Sonetel/sonetel-api-docs
+      documentation: https://docs.sonetel.com/
+- target: $
+  description: The upstream document declares no tags; add one tag naming this API so operations group
+    in renderers.
+  update:
+    tags:
+    - name: Sonetel File Manager API
+      description: Sonetel File Manager is an API for viewing, storing and managing files used with Sonetel
+        services.
+- target: $.paths['/filemgr/upload'].post
+  description: Tag post-filemgr-upload.
+  update:
+    tags:
+    - Sonetel File Manager API
+- target: $.paths['/filemgr/upload-url'].post
+  description: Tag post-filemgr-upload-url.
+  update:
+    tags:
+    - Sonetel File Manager API
+- target: $.paths['/filemgr/upload-url/complete'].post
+  description: Tag post-filemgr-upload-url-complete.
+  update:
+    tags:
+    - Sonetel File Manager API
+- target: $.paths['/filemgr/file/{file_id}'].get
+  description: Tag get-filemgr-file_id.
+  update:
+    tags:
+    - Sonetel File Manager API
+- target: $.paths['/filemgr/file/{file_id}'].delete
+  description: Tag delete-filemgr-file-file_id.
+  update:
+    tags:
+    - Sonetel File Manager API
+- target: $.paths['/filemgr/file/{file_id}/meta-data'].get
+  description: Tag get-filemgr-file-file_id-meta-data.
+  update:
+    tags:
+    - Sonetel File Manager API
+- target: $.paths['/filemgr/file/{file_id}/meta-data'].put
+  description: Tag put-filemgr-file-file_id-meta-data.
+  update:
+    tags:
+    - Sonetel File Manager API
+- target: $.paths['/filemgr/file'].get
+  description: Tag get-filemgr-file.
+  update:
+    tags:
+    - Sonetel File Manager API
+- target: $.paths['/internal/filemgr/upload-url'].post
+  description: Tag post-internal-filemgr-upload-url.
+  update:
+    tags:
+    - Sonetel File Manager API
+- target: $.paths['/internal/filemgr/file'].post
+  description: Tag post-internal-filemgr-file.
+  update:
+    tags:
+    - Sonetel File Manager API

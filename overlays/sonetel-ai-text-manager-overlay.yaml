@@ -1,0 +1,161 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist overlay for Sonetel Text Manager API
+  version: 1.0.0
+extends: ../openapi/_original/sonetel-ai-text-manager-openapi.yml
+x-generated: '2026-10-09'
+x-method: generated
+x-source: openapi/sonetel-ai-text-manager-openapi.yml
+actions:
+- target: $.info
+  description: Record API Evangelist provenance.
+  update:
+    x-api-evangelist:
+      provider: sonetel
+      generated: '2026-10-09'
+      source: openapi/sonetel-ai-text-manager-openapi.yml
+      upstream: https://github.com/Sonetel/sonetel-api-docs
+      documentation: https://docs.sonetel.com/
+- target: $
+  description: The upstream document declares no tags; add one tag naming this API so operations group
+    in renderers.
+  update:
+    tags:
+    - name: Sonetel Text Manager
+      description: The Sonetel Text manager is where AI generated text, created and processed, by the
+        Sonetel /ai-services is stored and managed.
+- target: $.paths['/textmgr/text'].get
+  description: Tag get-textmgr-text.
+  update:
+    tags:
+    - Sonetel Text Manager
+- target: $.paths['/textmgr/text'].post
+  description: Tag post-textmgr-text.
+  update:
+    tags:
+    - Sonetel Text Manager
+- target: $.paths['/textmgr/text'].delete
+  description: Tag delete-textmgr-text.
+  update:
+    tags:
+    - Sonetel Text Manager
+- target: $.paths['/textmgr/text/{text_id}'].get
+  description: Tag get-textmgr-text-text-id.
+  update:
+    tags:
+    - Sonetel Text Manager
+- target: $.paths['/textmgr/text/{text_id}'].put
+  description: Tag put-ai-textman-text-text-id.
+  update:
+    tags:
+    - Sonetel Text Manager
+- target: $.paths['/textmgr/text/{text_id}'].delete
+  description: Tag delete-ai-textmgr-text-text-id.
+  update:
+    tags:
+    - Sonetel Text Manager
+- target: $.paths['/textmgr/text/{text_id}/version'].post
+  description: Tag post-textmgr-text-text-id-version.
+  update:
+    tags:
+    - Sonetel Text Manager
+- target: $.paths['/textmgr/text/{text_id}/version/{version}'].put
+  description: Tag put-textmgr-text-text-id-version-version-id.
+  update:
+    tags:
+    - Sonetel Text Manager
+- target: $.paths['/textmgr/text/{text_id}/version/{version}'].delete
+  description: Tag delete-textmgr-text-text-id-version-version-id.
+  update:
+    tags:
+    - Sonetel Text Manager
+- target: $.paths['/textmgr/text/{text_id}/write'].post
+  description: Tag post-textmgr-text-text-id-write.
+  update:
+    tags:
+    - Sonetel Text Manager
+- target: $.paths['/textmgr/text/{text_id}/business-description'].get
+  description: Tag get-textmgr-text-id-business-description.
+  update:
+    tags:
+    - Sonetel Text Manager
+- target: $.paths['/textmgr/business-description'].get
+  description: Tag get-txtmgr-business-description.
+  update:
+    tags:
+    - Sonetel Text Manager
+- target: $.paths['/textmgr/text/{text-id}/webpage'].get
+  description: Tag get-textmgr-text-text-id-webpage.
+  update:
+    tags:
+    - Sonetel Text Manager
+- target: $.paths['/textmgr/webpage'].get
+  description: Tag get-textmgr-webpage.
+  update:
+    tags:
+    - Sonetel Text Manager
+- target: $.paths['/textmgr/text/{text_id}/blog-title-list'].get
+  description: Tag get-textmgr-text-text_id-blog-title-list.
+  update:
+    tags:
+    - Sonetel Text Manager
+- target: $.paths['/textmgr/blog-title-list'].get
+  description: Tag get-textmgr-blog-title-list.
+  update:
+    tags:
+    - Sonetel Text Manager
+- target: $.paths['/textmgr/text/{text_id}/blog'].get
+  description: Tag get-textmgr-text-text_id-blog.
+  update:
+    tags:
+    - Sonetel Text Manager
+- target: $.paths['/textmgr/blog'].get
+  description: Tag get-textmgr-blog.
+  update:
+    tags:
+    - Sonetel Text Manager
+- target: $.paths['/textmgr/text/{text_id}/meeting-minutes'].get
+  description: Tag get-textmgr-text-text_id-meeting-minutes.
+  update:
+    tags:
+    - Sonetel Text Manager
+- target: $.paths['/textmgr/text/{text_id}/meeting-minutes'].delete
+  description: Tag delete-textmgr-text-text_id-meeting-minutes.
+  update:
+    tags:
+    - Sonetel Text Manager
+- target: $.paths['/textmgr/text/{text_id}/meeting-minutes'].put
+  description: Tag put-textmgr-text-text_id-meeting-minutes.
+  update:
+    tags:
+    - Sonetel Text Manager
+- target: $.paths['/textmgr/meeting-minutes'].get
+  description: Tag get-textmgr-meeting-minutes.
+  update:
+    tags:
+    - Sonetel Text Manager
+- target: $.paths['/textmgr/text/{text_id}/vm-summary'].get
+  description: Tag get-textmgr-text-text_id-vm-summary.
+  update:
+    tags:
+    - Sonetel Text Manager
+- target: $.paths['/textmgr/vm-summary'].get
+  description: Tag get-textmgr-vm-summary.
+  update:
+    tags:
+    - Sonetel Text Manager
+- target: $.paths['/textmgr/text/{text_id}/call-summary'].get
+  description: Tag get-textmgr-text-text_id-call-summary.
+  update:
+    tags:
+    - Sonetel Text Manager
+- target: $.paths['/textmgr/text/{text_id}/call-summary'].delete
+  description: Tag delete-textmgr-text-call-summary-text_id.
+  update:
+    tags:
+    - Sonetel Text Manager
+- target: $.paths['/textmgr/call-summary'].get
+  description: Tag get-textmgr-call-summary.
+  update:
+    tags:
+    - Sonetel Text Manager

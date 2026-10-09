@@ -1,0 +1,69 @@
+generated: '2026-10-09'
+method: searched
+source:
+- https://sonetel.com/en/privacy/
+- https://sonetel.com/en/accessibility/
+- https://sonetel.com/en/help/help-topics/terms-conditions/terms-conditions/
+name: Sonetel Regulatory Posture
+signals:
+  data_subject_request:
+    url: https://sonetel.com/en/privacy/
+    section: Your rights
+    note: Privacy policy grants GDPR access, rectification, erasure, restriction, objection and portability rights, with complaint to the Swedish Data Protection Authority.
+    evidence:
+    - source: https://sonetel.com/en/privacy/
+      http_status: 200
+      fetched: '2026-10-09'
+      quote: In accordance with applicable data protection regulation, you have the right of access to the personal data we process regarding you, and have the right to request rectification of your personal data.
+    - source: https://sonetel.com/en/privacy/
+      http_status: 200
+      fetched: '2026-10-09'
+      quote: Furthermore, during certain circumstances, you are entitled to receive the personal data concerning you in a structured, commonly used and machine-readable format and have the right to transmit the personal data to another data controller.
+  subprocessors:
+    url: https://sonetel.com/en/privacy/
+    section: Who may get access to your personal data?
+    note: Names its data processors inline in the privacy policy (Sonetel Software Service pvt ltd, Google, Facebook, Twitter, Microsoft, Amazon web services, Hotjar, Optimizely, MixPanel, SnapEngage, Sendgrid, Bambora, PayPal, Perfect Money); no separate subprocessor page found.
+    evidence:
+    - source: https://sonetel.com/en/privacy/
+      http_status: 200
+      fetched: '2026-10-09'
+      quote: 'Your personal data will be shared with actors who process your personal data on our behalf, i.e. data processors. The data processors we use in our capacity as Controller are:'
+  data_residency:
+    url: https://sonetel.com/en/privacy/
+    section: Transfers of personal data to third countries or international organizations
+    note: Processing is EU/EEA by default; transfers outside rely on adequacy decisions or SCCs. Mobile-app diagnostic logging infrastructure is partly in the United States under SCCs.
+    evidence:
+    - source: https://sonetel.com/en/privacy/
+      http_status: 200
+      fetched: '2026-10-09'
+      quote: We and our suppliers and partners, as a general rule, only process your personal data within the EU/EEA.
+    - source: https://sonetel.com/en/privacy/
+      http_status: 200
+      fetched: '2026-10-09'
+      quote: Some of the Sonetel-controlled logging infrastructure used for this diagnostic stream is located outside the EEA, including in the United States; transfers to these locations are protected by standard contractual clauses (SCCs) as the safeguard required under GDPR Articles 44–46.
+  data_retention:
+    url: https://sonetel.com/en/privacy/
+    section: How long do we keep your personal data?
+    note: States retention bounded by law and purpose; marketing data held no more than one year after the customer relationship ends; mobile diagnostic logs retained at most 90 days.
+    evidence:
+    - source: https://sonetel.com/en/privacy/
+      http_status: 200
+      fetched: '2026-10-09'
+      quote: If you have a customer relationship with us we process your personal data for no more than one (1) year after the cessation of the customer relationship or until you notify us that you do not wish to receive our send outs anymore.
+    - source: https://sonetel.com/en/privacy/
+      http_status: 200
+      fetched: '2026-10-09'
+      quote: Diagnostic logs are retained for a maximum of 90 days.
+  accessibility_conformance:
+    url: https://sonetel.com/en/accessibility/
+    section: Conformance status
+    note: Accessibility statement targets WCAG 2.1 Level AA / EN 301 549 v3.2.1 under the European Accessibility Act and declares partial conformance; no formal audit yet.
+    evidence:
+    - source: https://sonetel.com/en/accessibility/
+      http_status: 200
+      fetched: '2026-10-09'
+      quote: 'A formal WCAG 2.1 AA audit has not yet been completed. The following accessibility measures are currently in place:'
+    - source: https://sonetel.com/en/accessibility/
+      http_status: 200
+      fetched: '2026-10-09'
+      quote: 'This accessibility statement applies to the following Sonetel services:'

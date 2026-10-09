@@ -1,0 +1,126 @@
+openapi: 3.2.0
+info:
+  title: Sonetel App View Settings API
+  version: '1.0'
+  contact:
+    name: ''
+  description: 'Operations tagged App View Settings across 2 of this provider''s published API definitions: app-view-settings.yaml, sonetel-app-view-settings-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.sonetel.com/
+tags:
+- name: App View Settings
+paths:
+  /app-view-settings:
+    get:
+      summary: GET app-view-settings
+      description: Get the app-view settings
+      operationId: get-app-view-settings
+      parameters:
+      - name: Authrorization
+        in: query
+        schema:
+          type: string
+      - name: app
+        in: query
+        description: App Type
+        schema:
+          type: string
+      - name: language
+        in: query
+        description: Two-char-language code
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/view_settings'
+      servers:
+      - url: https://api.sonetel.com/
+      tags:
+      - App View Settings
+    servers:
+    - url: https://api.sonetel.com/
+components:
+  schemas:
+    view_settings:
+      type: object
+      properties:
+        version_date:
+          type: string
+        hide:
+          type: array
+          items:
+            type: string
+        layout:
+          $ref: '#/components/schemas/layout_response'
+      x-examples:
+        Example 1:
+          version_date: LCRV20250305122515
+          hide:
+          - account-website-chat-auto-assignment
+          - account-website-chat-rules
+          - account-incoming-calls
+          - account-inbound-sms
+          - account-twitter-pages
+          - account-incoming-email
+          - number-call-forward-exceptions
+          - account-call-recording-transcribe
+          - account-voiceapps-prompt-record
+          - account-numbers-sms
+          - conversations-sms
+          - conversations-zoom
+          - conversations-voice-messages
+          - calls-video
+          - calls-transfer
+          - calls-csg
+          - people-customers
+          - insights
+          - conversations-translations
+          - calls-record-in-call
+          - calls-conference
+          - mm-upload-google-drive
+          - mm-upload-one-drive
+          - mm-settings
+    layout_response:
+      type: object
+      title: Layout_response
+      properties:
+        version:
+          type: string
+        cards:
+          type: array
+          items:
+            type: object
+            properties:
+              templateId:
+                type: string
+              templateType:
+                type: string
+                enum:
+                - banner-with-benefits-info
+                - card-plain
+                description: 'Template identifier for rendering.
+
+                  - `banner-with-benefits-info`: see BannerWithBenefitsInfoData
+
+                  - `card-plain`: see CardPlainData
+
+                  '
+              cardData:
+                type: object
+                description: 'Object shape varies by `templateType`.
+
+                  Use reference definitions for documentation only.
+
+                  '
+        metadata:
+          type: object
+          properties:
+            lastUpdated:
+              type: string
+x-refined-from:
+- app-view-settings.yaml
+- sonetel-app-view-settings-openapi.yml

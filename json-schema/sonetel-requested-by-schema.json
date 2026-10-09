@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/sonetel/main/json-schema/sonetel-requested-by-schema.json",
+  "title": "requested_by",
+  "description": "Details of the service requesting transcription",
+  "x-generated": "2026-10-09",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/sonetel-transcription-openapi.yml#/components/schemas/requested_by",
+  "type": "object",
+  "properties": {
+    "service": {
+      "type": "string",
+      "enum": [
+        "ai-service",
+        "call-recording",
+        "voicemail"
+      ],
+      "description": "Details of the service requesting transcription"
+    },
+    "ref_id": {
+      "type": "string",
+      "description": "A reference Id that a service may optionally provide for tracking the transcription request. The ref_id is provided along with the transcription."
+    },
+    "account_id": {
+      "type": "string",
+      "description": "The Sonetel account Id for which the transcription is requested"
+    },
+    "user_id": {
+      "type": "string",
+      "description": "The Sonetel user Id for which transcription id reqyested"
+    },
+    "business_id": {
+      "type": "string",
+      "description": "The business Id to which this request is associated"
+    }
+  }
+}

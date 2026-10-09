@@ -1,0 +1,75 @@
+generated: '2026-10-09'
+method: derived
+generator: derive-problem-types.py
+source:
+- openapi/sonetel-account-openapi.yml
+- openapi/sonetel-ai-business-openapi.yml
+- openapi/sonetel-ai-file-manager-openapi.yml
+- openapi/sonetel-ai-functions-openapi.yml
+- openapi/sonetel-ai-prompt-manager-openapi.yml
+- openapi/sonetel-ai-services-openapi.yml
+- openapi/sonetel-ai-text-manager-openapi.yml
+- openapi/sonetel-app-view-settings-openapi.yml
+- openapi/sonetel-authentication-openapi.yml
+- openapi/sonetel-make-calls-openapi.yml
+- openapi/sonetel-phone-numbers-openapi.yml
+- openapi/sonetel-recorded-calls-openapi.yml
+format: custom
+envelope:
+  media_type: application/json
+  schema: null
+coverage:
+  operations: 116
+  statuses_declared: 8
+problems:
+- status: 400
+  title: Bad Request
+  description: Bad Request
+  operations: 9
+  media_types:
+  - application/json
+  schema: null
+- status: 401
+  title: Unauthorized
+  description: Unauthorized
+  operations: 14
+  media_types:
+  - application/json
+  schema: null
+- status: 402
+  title: Payment Required
+  description: "No AI credits\r"
+  operations: 1
+  media_types: []
+  schema: null
+- status: 403
+  title: Forbidden
+  description: Example response
+  operations: 1
+  media_types:
+  - application/json
+  schema: null
+- status: 404
+  title: Not Found
+  description: Not Found
+  operations: 15
+  media_types: []
+  schema: null
+- status: 409
+  title: Conflict
+  description: Email Already Taken
+  operations: 1
+  media_types: []
+  schema: null
+- status: 413
+  title: Content Too Large
+  description: Payload Too Large
+  operations: 1
+  media_types: []
+  schema: null
+- status: 415
+  title: Unsupported Media Type
+  description: Unsupported Media Type. The server does not support the content-type of the uploaded file.
+  operations: 1
+  media_types: []
+  schema: null

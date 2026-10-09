@@ -1,0 +1,141 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/sonetel/main/json-schema/sonetel-user-call-settings-schema.json",
+  "title": "User-Call-Settings",
+  "description": "The object that defines the user's call settings",
+  "x-generated": "2026-10-09",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/sonetel-users-openapi.yml#/components/schemas/User-Call-Settings",
+  "type": "object",
+  "properties": {
+    "incoming": {
+      "type": "object",
+      "description": "A collection of properties that define how incoming calls to the user should be handled.",
+      "properties": {
+        "second_action": {
+          "type": "object",
+          "description": "The action to take if the call is not handled by the destination defined in the `first_action`.",
+          "properties": {
+            "action": {
+              "type": "string",
+              "description": "The action to take when an incoming call reaches the user.",
+              "minLength": 1
+            },
+            "to": {
+              "type": "string",
+              "enum": [
+                "myphones",
+                "sipphones",
+                "phone",
+                "voicemail",
+                "phnum",
+                "sip",
+                "voiceapp"
+              ],
+              "description": "The type of function on which the action is to be taken.",
+              "minLength": 3
+            }
+          },
+          "required": [
+            "action",
+            "to"
+          ]
+        },
+        "first_action": {
+          "type": "object",
+          "description": "Defines how an incoming call to the user should be handled.",
+          "properties": {
+            "show": {
+              "type": "string",
+              "description": "The caller ID shown when you receive an incoming call.",
+              "minLength": 1
+            },
+            "action": {
+              "type": "string",
+              "description": "The action to take when an incoming call reaches the user.",
+              "minLength": 1
+            },
+            "ring_time": {
+              "type": "string",
+              "description": "The number of seconds that the incoming call should ring. Only applies when the action is `ring` or `forward`.",
+              "minLength": 1
+            },
+            "to": {
+              "type": "string",
+              "enum": [
+                "myphones",
+                "sipphones",
+                "phone",
+                "voicemail",
+                "user",
+                "phnum",
+                "voiceapp",
+                "sip"
+              ],
+              "description": "The type of function on which the action is to be taken.",
+              "minLength": 3
+            },
+            "id": {
+              "type": "string",
+              "description": "The unique id of the destination to which the incoming call should be sent.",
+              "minLength": 1
+            }
+          },
+          "required": [
+            "show",
+            "action",
+            "ring_time",
+            "to",
+            "id"
+          ]
+        },
+        "standard_action": {
+          "type": "object",
+          "description": "Specifies how WebRTC calls (i.e. calls made using our apps) are handled.",
+          "properties": {
+            "action": {
+              "type": "string",
+              "description": "The action to take.",
+              "minLength": 1
+            },
+            "ring_time": {
+              "type": "string",
+              "description": "The number of seconds the call should ring before disconnecting.",
+              "minLength": 1
+            },
+            "to": {
+              "type": "string",
+              "description": "The destination where the call should connect.",
+              "minLength": 1
+            }
+          },
+          "required": [
+            "action",
+            "ring_time",
+            "to"
+          ]
+        }
+      }
+    },
+    "outgoing": {
+      "type": "object",
+      "description": "A collection of properties that control how outgoing calls are handled. At the moment it is only possible to select the caller ID shown to the person you call.",
+      "properties": {
+        "show": {
+          "type": "string",
+          "description": "The caller-id shown when a user makes an outgoing call. Accepts `auto`, `none` or an eligible Sonetel number.",
+          "minLength": 1
+        },
+        "callthru-pin": {
+          "type": "string",
+          "description": "Deprecated property used for our old manual Call Thru service.",
+          "x-deprecated": true
+        }
+      },
+      "required": [
+        "show"
+      ]
+    }
+  }
+}

@@ -1,0 +1,99 @@
+generated: '2026-10-09'
+method: derived
+source: openapi/sonetel-account-openapi.yml, openapi/sonetel-ai-business-openapi.yml, openapi/sonetel-ai-file-manager-openapi.yml,
+  openapi/sonetel-ai-functions-openapi.yml, openapi/sonetel-ai-prompt-manager-openapi.yml, openapi/sonetel-ai-services-openapi.yml,
+  openapi/sonetel-ai-text-manager-openapi.yml, openapi/sonetel-make-calls-openapi.yml, openapi/sonetel-recorded-calls-openapi.yml,
+  openapi/sonetel-text-to-speech-openapi.yml, openapi/sonetel-transcription-openapi.yml, openapi/sonetel-usage-records-openapi.yml,
+  openapi/sonetel-users-openapi.yml, openapi/sonetel-voice-apps-openapi.yml
+schemes:
+- name: Production
+  source: openapi/sonetel-account-openapi.yml
+  flows:
+  - flow: password
+    tokenUrl: https://api.sonetel.com/SonetelAuth/beta/oauth/token
+- name: Sonetel
+  source: openapi/sonetel-ai-business-openapi.yml
+  flows:
+  - flow: password
+    tokenUrl: https://api.sonetel.com/SonetelAuth/beta/oauth/token
+  description: Get an access token from the `/oauth/token` and pass it as a Bearer token in
+    the `Authorization` header.
+- name: Sonetel
+  source: openapi/sonetel-ai-file-manager-openapi.yml
+  flows:
+  - flow: password
+    tokenUrl: https://api.sonetel.com/SonetelAuth/beta
+- name: Sonetel
+  source: openapi/sonetel-ai-functions-openapi.yml
+  flows:
+  - flow: password
+    tokenUrl: https://api.sonetel.com/SonetelAuth/beta/oauth/token
+  description: Get an access token from the `/oauth/token` and pass it as a Bearer token in
+    the `Authorization` header.
+- name: Sonetel
+  source: openapi/sonetel-ai-prompt-manager-openapi.yml
+  flows:
+  - flow: password
+- name: grant_type
+  source: openapi/sonetel-ai-services-openapi.yml
+  flows:
+  - flow: password
+- name: Sonetel
+  source: openapi/sonetel-ai-text-manager-openapi.yml
+  flows:
+  - flow: password
+    tokenUrl: https://api.sonetel.com/SonetelAuth/beta/oauth/token
+  description: Get an access token from the `/oauth/token` and pass it as a Bearer token in
+    the `Authorization` header.
+- name: Production
+  source: openapi/sonetel-make-calls-openapi.yml
+  flows:
+  - flow: password
+    tokenUrl: https://api.sonetel.com/SonetelAuth/beta/oauth/token
+- name: Production
+  source: openapi/sonetel-recorded-calls-openapi.yml
+  flows:
+  - flow: password
+    tokenUrl: https://api.sonetel.com/SonetelAuth/beta/oauth/token
+- name: Bearer
+  source: openapi/sonetel-text-to-speech-openapi.yml
+  flows:
+  - flow: password
+    tokenUrl: https://api.sonetel.com/SonetelAuth/beta/oauth/token
+  description: Get an access token from the `/oauth/token` and pass it as a Bearer token in
+    the `Authorization` header.
+- name: Sonetel Admin
+  source: openapi/sonetel-transcription-openapi.yml
+  flows:
+  - flow: password
+    tokenUrl: https://api.sonetel.com/SonetelAuth/beta
+- name: production
+  source: openapi/sonetel-usage-records-openapi.yml
+  flows:
+  - flow: password
+    tokenUrl: https://api.sonetel.com/SonetelAuth/beta/oauth/token
+  description: Get an access token from the `/oauth/token` and pass it as a Bearer token in
+    the `Authorization` header.
+- name: Production
+  source: openapi/sonetel-users-openapi.yml
+  flows:
+  - flow: password
+    tokenUrl: https://api.sonetel.com/SonetelAuth/beta/oauth/token
+- name: Production
+  source: openapi/sonetel-voice-apps-openapi.yml
+  flows:
+  - flow: password
+    tokenUrl: https://api.sonetel.com/SonetelAuth/beta/oauth/token
+scopes:
+- scope: account.admin.read
+  description: Account admin read
+  flows:
+  - password
+  sources:
+  - openapi/sonetel-recorded-calls-openapi.yml
+- scope: account.admin.write
+  description: Account admin write
+  flows:
+  - password
+  sources:
+  - openapi/sonetel-recorded-calls-openapi.yml
