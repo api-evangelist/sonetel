@@ -1,8 +1,8 @@
 openapi: 3.2.0
 info:
-  title: Sonetel Business API
   version: '2.0'
-  description: 'Operations tagged Business across 2 of this provider''s published API definitions: 14_ai_business.yaml, sonetel-ai-business-openapi.yml. Each path carries the servers of the definition it was published in.'
+  title: Business API
+  description: The API allows to manage business profile for each account.
 servers:
 - url: https://public-api.sonetel.com
   description: Production
@@ -95,9 +95,6 @@ paths:
         description: Production
       tags:
       - Business
-    servers:
-    - url: https://public-api.sonetel.com
-      description: Production
   /business/{business_id}:
     put:
       summary: Update a business profile
@@ -185,9 +182,6 @@ paths:
         description: Production
       tags:
       - Business
-    servers:
-    - url: https://public-api.sonetel.com
-      description: Production
 components:
   schemas:
     business-without-desc:
@@ -350,6 +344,12 @@ components:
           schema:
             type: object
   responses:
+    Post-business:
+      description: Details of business
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/business-without-desc'
     Get-business-list:
       description: List of business details
       content:
@@ -358,12 +358,6 @@ components:
             type: array
             items:
               $ref: '#/components/schemas/business-with-description'
-    Post-business:
-      description: Details of business
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/business-without-desc'
     Get-business-by-id:
       description: Business details
       content:
@@ -385,6 +379,4 @@ components:
           refreshUrl: https://api.sonetel.com/SonetelAuth/beta/oauth/token
           tokenUrl: https://api.sonetel.com/SonetelAuth/beta/oauth/token
           scopes: {}
-x-refined-from:
-- 14_ai_business.yaml
-- sonetel-ai-business-openapi.yml
+x-internal: true

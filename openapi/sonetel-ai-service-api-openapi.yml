@@ -1,8 +1,8 @@
 openapi: 3.2.0
 info:
-  title: Sonetel Ai Service API
   version: '2.0'
-  description: 'Operations tagged Ai Service across 2 of this provider''s published API definitions: 12_ai_services.yaml, sonetel-ai-services-openapi.yml. Each path carries the servers of the definition it was published in.'
+  title: AI Services Ai Service API
+  description: The Sonetel AI service API enables you to trigger the Sonetel AI platform and request services from it.
 servers:
 - url: https://public-api.sonetel.com
   description: Production
@@ -47,9 +47,6 @@ paths:
         description: Production
       tags:
       - Ai Service
-    servers:
-    - url: https://public-api.sonetel.com
-      description: Production
   /ai-service/blog-title-list:
     post:
       summary: Generate blog titles
@@ -69,9 +66,6 @@ paths:
         description: Production
       tags:
       - Ai Service
-    servers:
-    - url: https://public-api.sonetel.com
-      description: Production
   /ai-service/blog:
     post:
       summary: Write a blog
@@ -89,9 +83,6 @@ paths:
         description: Production
       tags:
       - Ai Service
-    servers:
-    - url: https://public-api.sonetel.com
-      description: Production
   /ai-service/meeting-minutes:
     post:
       summary: Write meeting minutes
@@ -109,9 +100,6 @@ paths:
         description: Production
       tags:
       - Ai Service
-    servers:
-    - url: https://public-api.sonetel.com
-      description: Production
   /ai-service/vm-summary:
     post:
       summary: Write voicemail summary
@@ -130,9 +118,6 @@ paths:
       x-internal: true
       tags:
       - Ai Service
-    servers:
-    - url: https://public-api.sonetel.com
-      description: Production
   /ai-service/call-summary:
     post:
       summary: Write call summary
@@ -190,9 +175,6 @@ paths:
         description: Production
       tags:
       - Ai Service
-    servers:
-    - url: https://public-api.sonetel.com
-      description: Production
   /ai-service/{service_id}:
     get:
       summary: Get Service instance
@@ -215,9 +197,6 @@ paths:
         description: Production
       tags:
       - Ai Service
-    servers:
-    - url: https://public-api.sonetel.com
-      description: Production
   /ai-service:
     get:
       summary: List service instances
@@ -281,129 +260,171 @@ paths:
         description: Production
       tags:
       - Ai Service
-    servers:
-    - url: https://public-api.sonetel.com
-      description: Production
 components:
+  requestBodies:
+    Post-meeting-minutes:
+      description: Request to create meeting minutes
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              account:
+                $ref: '#/components/schemas/Account-context'
+              input:
+                $ref: '#/components/schemas/Meeting-minutes-inputs'
+    Post-blog-title-list:
+      description: Request to generate a blog title list
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              account:
+                $ref: '#/components/schemas/Account-context'
+              inputs:
+                $ref: '#/components/schemas/Blog-title-list-inputs'
+    Post-vm-summary:
+      description: Voicemail summary request
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              account:
+                $ref: '#/components/schemas/Account-context'
+              input:
+                type: object
+                properties:
+                  file:
+                    $ref: '#/components/schemas/File-input'
+                    description: The voicemail audio file
+                  caller_name:
+                    type: string
+                    description: 'The name of the caller.
+
+                      Caller name maybe optionally provided in case it is known to the service requesting the summary
+
+                      In case it is provided, the AI service uses it while generating the voicemail summary'
+                  company_name:
+                    type: string
+                    description: 'The company name of the caller.
+
+                      The company name of the caller can be provided optionally, if known to the service requesting the AI service'
+                required:
+                - file
+            required:
+            - account
+    Post-business-description:
+      description: Request to write a business description. The URL must be provided
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              account:
+                $ref: '#/components/schemas/Account-context'
+              inputs:
+                $ref: '#/components/schemas/Business-description-inputs'
+            required:
+            - inputs
+    Post-blog:
+      description: Request to write a blog
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              account:
+                $ref: '#/components/schemas/Account-context'
+              input:
+                $ref: '#/components/schemas/Blog-inputs'
+              post_process:
+                $ref: '#/components/schemas/Blog-post-process'
+  responses:
+    Get-service-by-id:
+      description: A service instance
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Service-object'
+        application/xml:
+          schema:
+            type: object
+    Get-service-list:
+      description: List of service instances
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/Service-object'
+    Post-service-response:
+      description: Information about service instance created and references where text and file output is available
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              service_id:
+                type: string
+                description: Id of the service instance created
+              text_id:
+                type: string
+                description: Text_id where the generated text would be available
+              ai_credit_balance:
+                type: integer
+                description: AI credits remaining in the account
+                format: int32
+                readOnly: true
+                examples:
+                - 125
   schemas:
-    Service-object:
+    Service-status:
       type: object
-      title: Service-object
-      description: A service object along with its status
+      title: Service-status
+      description: The service status information including an overall status and progress information
       properties:
-        service_id:
-          type: string
-          description: The service Id of the service instance
-        account:
-          $ref: '#/components/schemas/Account-context'
-        text_id:
-          type: string
-          description: The text_id where the services writes the output text
         status:
-          $ref: '#/components/schemas/Service-status'
+          type: string
+          enum:
+          - not_started
+          - in_progress
+          - completed
+          - failed
           description: The status of the service instance
-        create_date:
+        steps_total:
+          type: integer
+          description: Total steps that the service instance should execute
+          examples:
+          - 3
+        steps_done:
+          type: integer
+          description: Total steps completed by the service instance
+          examples:
+          - 2
+        last_step_time:
           type: string
-          description: The date/time this service started
+          description: The date/time when the last step was completed
           format: date-time
-        update_date:
-          type: string
-          description: The last modified date/time
-          format: date-time
-        error:
-          type: object
-          description: Error details, if service instance has failed
-          properties:
-            code:
-              type: string
-              description: Error code (details to be specified)
-            description:
-              type: string
-              description: A descriptive text of the error
-    Blog-title-list-inputs:
+      required:
+      - status
+    File-input:
       type: object
-      title: Blog-title-list-inputs
-      description: Inputs to service for generating blog title list
-      properties:
-        business_description:
-          type: object
-          description: Specify the text_id of the business description to generate a list of titles based on that
-          properties:
-            text_id:
-              type: string
-              description: Text Id of the business description for which the blog titles must be generated
-              examples:
-              - xGn3j7Jhy
-        language:
-          type: string
-          description: Language in which blog titles should be returned. [2 char ISO](https://en.wikipedia.org/wiki/ISO_639-1) or [IETF language tags](https://en.wikipedia.org/wiki/IETF_language_tag)
-    Meeting-minutes-inputs:
-      type: object
-      title: Meeting-minutes-inputs
-      description: Inputs for meeting minutes
-      properties:
-        file:
-          type: object
-          description: Audio/video file details such as `file_id`, `name` and `create_date`.
-          properties:
-            file_id:
-              type: string
-              description: Unique file_id of the meeting recording for generating meeting minutes
-              format: uuid
-              examples:
-              - e52672c0-fe41-498c-b4b5-a18504f4d147
-            name:
-              type: string
-              description: Name of the meeting
-            create_date:
-              type: string
-              description: The date and time of the meeting.
-              format: date-time
-              examples:
-              - '2025-06-24T10:37:59.140Z'
-          required:
-          - file_id
-          - create_date
-    Blog-post-process:
-      type: object
-      title: Blog-post-process
-      description: Optional settings and functions to be used while generating a Blog title list
-      properties:
-        photos:
-          type: object
-          properties:
-            add_photos:
-              type: boolean
-        links:
-          type: object
-          description: Specify web links that must be automatically added to blog text automatically
-          properties:
-            internal:
-              type: boolean
-              description: Text related to the business (such as company name, company product names) are made clickable links
-            external:
-              type: boolean
-              description: Text that has publicly available information on wikipedia and similar sites are makde clicable links (e.g. "Contact center" or "Virtual number")
-    Account-context:
-      type: object
-      title: Account-context
-      description: Account, user and business information
-      properties:
-        account_id:
-          type: string
-          description: Sonetel account Id
-          examples:
-          - 4hNj7651d
-        business_id:
-          type: string
-          description: Optional business Id
-          examples:
-          - 9iuj53hggys-65
-        user_id:
-          type: string
-          description: Optional user Id
-          examples:
-          - bv3hy09kkj6
+      title: File-input
+      description: File either as a `file_id` or a file URL
+      oneOf:
+      - type: object
+        properties:
+          file_id:
+            type: string
+            description: Unique file_id of a file managed by the [File managemer](reference/15_ai_filemanager.yaml)
+      - type: object
+        properties:
+          file_url:
+            type: string
+            description: File URL of a file
+            format: uri
     Business-description-inputs:
       type: object
       title: Business-description-inputs
@@ -466,169 +487,124 @@ components:
           description: User input guidelines or feedback for re-writing a blog. The feedback may only be provided on an existing blog to have it re-written.
           examples:
           - The blog must be adapted to primarily address an African consumer audience
-    Service-status:
+    Blog-title-list-inputs:
       type: object
-      title: Service-status
-      description: The service status information including an overall status and progress information
+      title: Blog-title-list-inputs
+      description: Inputs to service for generating blog title list
       properties:
-        status:
+        business_description:
+          type: object
+          description: Specify the text_id of the business description to generate a list of titles based on that
+          properties:
+            text_id:
+              type: string
+              description: Text Id of the business description for which the blog titles must be generated
+              examples:
+              - xGn3j7Jhy
+        language:
           type: string
-          enum:
-          - not_started
-          - in_progress
-          - completed
-          - failed
-          description: The status of the service instance
-        steps_total:
-          type: integer
-          description: Total steps that the service instance should execute
-          examples:
-          - 3
-        steps_done:
-          type: integer
-          description: Total steps completed by the service instance
-          examples:
-          - 2
-        last_step_time:
-          type: string
-          description: The date/time when the last step was completed
-          format: date-time
-      required:
-      - status
-    File-input:
+          description: Language in which blog titles should be returned. [2 char ISO](https://en.wikipedia.org/wiki/ISO_639-1) or [IETF language tags](https://en.wikipedia.org/wiki/IETF_language_tag)
+    Blog-post-process:
       type: object
-      title: File-input
-      description: File either as a `file_id` or a file URL
-      oneOf:
-      - type: object
-        properties:
-          file_id:
-            type: string
-            description: Unique file_id of a file managed by the [File managemer](reference/15_ai_filemanager.yaml)
-      - type: object
-        properties:
-          file_url:
-            type: string
-            description: File URL of a file
-            format: uri
-  responses:
-    Get-service-by-id:
-      description: A service instance
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Service-object'
-        application/xml:
-          schema:
-            type: object
-    Post-service-response:
-      description: Information about service instance created and references where text and file output is available
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              service_id:
-                type: string
-                description: Id of the service instance created
-              text_id:
-                type: string
-                description: Text_id where the generated text would be available
-              ai_credit_balance:
-                type: integer
-                description: AI credits remaining in the account
-                format: int32
-                readOnly: true
-                examples:
-                - 125
-    Get-service-list:
-      description: List of service instances
-      content:
-        application/json:
-          schema:
-            type: array
-            items:
-              $ref: '#/components/schemas/Service-object'
-  requestBodies:
-    Post-vm-summary:
-      description: Voicemail summary request
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              account:
-                $ref: '#/components/schemas/Account-context'
-              input:
-                type: object
-                properties:
-                  file:
-                    $ref: '#/components/schemas/File-input'
-                    description: The voicemail audio file
-                  caller_name:
-                    type: string
-                    description: 'The name of the caller.
-
-                      Caller name maybe optionally provided in case it is known to the service requesting the summary
-
-                      In case it is provided, the AI service uses it while generating the voicemail summary'
-                  company_name:
-                    type: string
-                    description: 'The company name of the caller.
-
-                      The company name of the caller can be provided optionally, if known to the service requesting the AI service'
-                required:
-                - file
-            required:
-            - account
-    Post-business-description:
-      description: Request to write a business description. The URL must be provided
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              account:
-                $ref: '#/components/schemas/Account-context'
-              inputs:
-                $ref: '#/components/schemas/Business-description-inputs'
-            required:
-            - inputs
-    Post-blog-title-list:
-      description: Request to generate a blog title list
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              account:
-                $ref: '#/components/schemas/Account-context'
-              inputs:
-                $ref: '#/components/schemas/Blog-title-list-inputs'
-    Post-meeting-minutes:
-      description: Request to create meeting minutes
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              account:
-                $ref: '#/components/schemas/Account-context'
-              input:
-                $ref: '#/components/schemas/Meeting-minutes-inputs'
-    Post-blog:
-      description: Request to write a blog
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              account:
-                $ref: '#/components/schemas/Account-context'
-              input:
-                $ref: '#/components/schemas/Blog-inputs'
-              post_process:
-                $ref: '#/components/schemas/Blog-post-process'
+      title: Blog-post-process
+      description: Optional settings and functions to be used while generating a Blog title list
+      properties:
+        photos:
+          type: object
+          properties:
+            add_photos:
+              type: boolean
+        links:
+          type: object
+          description: Specify web links that must be automatically added to blog text automatically
+          properties:
+            internal:
+              type: boolean
+              description: Text related to the business (such as company name, company product names) are made clickable links
+            external:
+              type: boolean
+              description: Text that has publicly available information on wikipedia and similar sites are makde clicable links (e.g. "Contact center" or "Virtual number")
+    Service-object:
+      type: object
+      title: Service-object
+      description: A service object along with its status
+      properties:
+        service_id:
+          type: string
+          description: The service Id of the service instance
+        account:
+          $ref: '#/components/schemas/Account-context'
+        text_id:
+          type: string
+          description: The text_id where the services writes the output text
+        status:
+          $ref: '#/components/schemas/Service-status'
+          description: The status of the service instance
+        create_date:
+          type: string
+          description: The date/time this service started
+          format: date-time
+        update_date:
+          type: string
+          description: The last modified date/time
+          format: date-time
+        error:
+          type: object
+          description: Error details, if service instance has failed
+          properties:
+            code:
+              type: string
+              description: Error code (details to be specified)
+            description:
+              type: string
+              description: A descriptive text of the error
+    Account-context:
+      type: object
+      title: Account-context
+      description: Account, user and business information
+      properties:
+        account_id:
+          type: string
+          description: Sonetel account Id
+          examples:
+          - 4hNj7651d
+        business_id:
+          type: string
+          description: Optional business Id
+          examples:
+          - 9iuj53hggys-65
+        user_id:
+          type: string
+          description: Optional user Id
+          examples:
+          - bv3hy09kkj6
+    Meeting-minutes-inputs:
+      type: object
+      title: Meeting-minutes-inputs
+      description: Inputs for meeting minutes
+      properties:
+        file:
+          type: object
+          description: Audio/video file details such as `file_id`, `name` and `create_date`.
+          properties:
+            file_id:
+              type: string
+              description: Unique file_id of the meeting recording for generating meeting minutes
+              format: uuid
+              examples:
+              - e52672c0-fe41-498c-b4b5-a18504f4d147
+            name:
+              type: string
+              description: Name of the meeting
+            create_date:
+              type: string
+              description: The date and time of the meeting.
+              format: date-time
+              examples:
+              - '2025-06-24T10:37:59.140Z'
+          required:
+          - file_id
+          - create_date
   securitySchemes:
     grant_type:
       type: oauth2
@@ -637,6 +613,4 @@ components:
           refreshUrl: ''
           tokenUrl: ''
           scopes: {}
-x-refined-from:
-- 12_ai_services.yaml
-- sonetel-ai-services-openapi.yml
+x-internal: true

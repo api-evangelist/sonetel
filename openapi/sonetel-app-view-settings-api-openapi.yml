@@ -1,10 +1,9 @@
 openapi: 3.2.0
 info:
-  title: Sonetel App View Settings API
-  version: '1.0'
+  title: App Settings App View Settings API
   contact:
     name: ''
-  description: 'Operations tagged App View Settings across 2 of this provider''s published API definitions: app-view-settings.yaml, sonetel-app-view-settings-openapi.yml. Each path carries the servers of the definition it was published in.'
+  version: '1.0'
 servers:
 - url: https://api.sonetel.com/
 tags:
@@ -41,8 +40,6 @@ paths:
       - url: https://api.sonetel.com/
       tags:
       - App View Settings
-    servers:
-    - url: https://api.sonetel.com/
 components:
   schemas:
     view_settings:
@@ -121,6 +118,4 @@ components:
           properties:
             lastUpdated:
               type: string
-x-refined-from:
-- app-view-settings.yaml
-- sonetel-app-view-settings-openapi.yml
+x-internal: true

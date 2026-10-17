@@ -1,8 +1,8 @@
 openapi: 3.2.0
 info:
-  title: Sonetel Tts API
   version: '2.0'
-  description: 'Operations tagged Tts across 2 of this provider''s published API definitions: 10_text_to_speech.yaml, sonetel-text-to-speech-openapi.yml. Each path carries the servers of the definition it was published in.'
+  title: Text to speech Tts API
+  description: Use our text-to-speech (TTS) API to quickly create professional voice messages for your IVR and other voice apps.
 servers:
 - url: https://public-api.sonetel.com
   description: Production
@@ -104,9 +104,6 @@ paths:
         description: Production
       tags:
       - TTS
-    servers:
-    - url: https://public-api.sonetel.com
-      description: Production
   /tts/prompt/voice:
     get:
       summary: List available voices
@@ -178,11 +175,51 @@ paths:
         description: Production
       tags:
       - TTS
-    servers:
-    - url: https://public-api.sonetel.com
-      description: Production
 components:
+  parameters:
+    Accept:
+      name: Accept
+      in: header
+      description: The content type that should be returned in the response.
+      required: true
+      schema:
+        type: string
+        default: application/json
+    Authorization:
+      name: Authorization
+      in: header
+      description: The authorization header contains your access token and is used to authenticate requests. Generate an `access_token` using the `/oauth/token` endpoint.
+      required: true
+      schema:
+        type: string
+        examples:
+        - Bearer <ACCESS_TOKEN>
+    Content-Type:
+      name: Content-Type
+      in: header
+      description: The content type of the request
+      required: false
+      schema:
+        type: string
+        default: application/json
   responses:
+    convert-success:
+      description: The response sent when the audio file has been successfully generated. Download the .wav file from the URL in the request.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              statusCode:
+                type: integer
+                description: The status of the response
+              response:
+                type: string
+                description: The URL from where the recorded file can be downloaded.
+            x-examples:
+              example-1:
+                statusCode: 200
+                response: https://sonetel-tts-prompts-prod.s3.amazonaws.com/voice-files/eR4FwCmUX2yc5ArP4gV1Yw%3D%3D/Z1%2BaJOufwivSqaTfvnoo3A%3D%3D.wav
     convert-error:
       description: The response when the request fails.
       content:
@@ -207,23 +244,6 @@ components:
                 message: language
                 errors:
                 - 'language: may not be empty'
-    convert-success:
-      description: The response sent when the audio file has been successfully generated. Download the .wav file from the URL in the request.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              statusCode:
-                type: integer
-                description: The status of the response
-              response:
-                type: string
-                description: The URL from where the recorded file can be downloaded.
-            x-examples:
-              example-1:
-                statusCode: 200
-                response: https://sonetel-tts-prompts-prod.s3.amazonaws.com/voice-files/eR4FwCmUX2yc5ArP4gV1Yw%3D%3D/Z1%2BaJOufwivSqaTfvnoo3A%3D%3D.wav
     list-of-voices:
       description: Response containing the list of voices and languages that are available for use with the TTS API.
       content:
@@ -304,32 +324,6 @@ components:
                   gender: D
                   default_variant: false
                   default_voice: false
-  parameters:
-    Authorization:
-      name: Authorization
-      in: header
-      description: The authorization header contains your access token and is used to authenticate requests. Generate an `access_token` using the `/oauth/token` endpoint.
-      required: true
-      schema:
-        type: string
-        examples:
-        - Bearer <ACCESS_TOKEN>
-    Content-Type:
-      name: Content-Type
-      in: header
-      description: The content type of the request
-      required: false
-      schema:
-        type: string
-        default: application/json
-    Accept:
-      name: Accept
-      in: header
-      description: The content type that should be returned in the response.
-      required: true
-      schema:
-        type: string
-        default: application/json
   requestBodies:
     convert-text:
       description: "Convert the given text to a voice message using the voice and language defined in the request.\n\nExample request:\n```json\n{\n  \"text\": \"Hello, welcome to Company\",\n  \"language\": \"en_GB\",\n  \"voice\": \"en-GB-Neural2-A\"\n}\n```"
@@ -369,6 +363,3 @@ components:
           refreshUrl: https://api.sonetel.com/SonetelAuth/beta/oauth/token
           tokenUrl: https://api.sonetel.com/SonetelAuth/beta/oauth/token
           scopes: {}
-x-refined-from:
-- 10_text_to_speech.yaml
-- sonetel-text-to-speech-openapi.yml

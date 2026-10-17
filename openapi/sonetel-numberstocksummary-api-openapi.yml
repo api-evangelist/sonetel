@@ -1,11 +1,12 @@
 openapi: 3.2.0
 info:
-  title: Sonetel Numberstocksummary API
   version: '2.0'
+  title: Phone Numbers Numberstocksummary API
+  summary: Buy new numbers and manage your existing phone number subscription
+  description: These API endpoints allow you to change the settings for your existing phone numbers, browse our available phone number stock, purchase new phone numbers and remove numbers from your account.
+  termsOfService: https://sonetel.com/en/help/help-topics/terms-conditions/terms-conditions/
   contact:
     email: api.support@sonetel.com
-  termsOfService: https://sonetel.com/en/help/help-topics/terms-conditions/terms-conditions/
-  description: 'Operations tagged Numberstocksummary across 2 of this provider''s published API definitions: phone_numbers.yaml, sonetel-phone-numbers-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://public-api.sonetel.com/
   description: Production
@@ -64,9 +65,6 @@ paths:
         description: Production
       tags:
       - Numberstocksummary
-    servers:
-    - url: https://public-api.sonetel.com/
-      description: Production
   /numberstocksummary/{country}/availablephonenumber:
     get:
       summary: Inventory - Available numbers in a country
@@ -127,9 +125,6 @@ paths:
         description: Production
       tags:
       - Numberstocksummary
-    servers:
-    - url: https://public-api.sonetel.com/
-      description: Production
 components:
   responses:
     availablenumbers-response:
@@ -29900,6 +29895,3 @@ components:
                   simple_name: Toll free
                   requirement_desc: You will be requested to provide a local address if you purchase this type of number
                   limitations_desc: Anyone can buy a phone number in India.<br>Phone numbers in India are not available for free with Premium and cannot be used for free on your website.
-x-refined-from:
-- phone_numbers.yaml
-- sonetel-phone-numbers-openapi.yml

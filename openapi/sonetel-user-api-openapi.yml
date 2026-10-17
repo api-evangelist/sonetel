@@ -1,13 +1,14 @@
 openapi: 3.2.0
 info:
-  title: Sonetel User API
   version: '2.0'
+  title: Users User API
+  summary: User API
+  description: Every user in your account is available as a resource via the API.
+  termsOfService: https://sonetel.com/en/help/help-topics/terms-conditions/terms-conditions/
   contact:
     name: Sonetel Developer Support
     email: dev.support@sonetel.com
     url: https://developer.sonetel.com
-  termsOfService: https://sonetel.com/en/help/help-topics/terms-conditions/terms-conditions/
-  description: 'Operations tagged User across 2 of this provider''s published API definitions: 7_users.yaml, sonetel-users-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://public-api.sonetel.com
   description: Production
@@ -69,10 +70,16 @@ paths:
         description: Production
       tags:
       - User
-    servers:
-    - url: https://public-api.sonetel.com
-      description: Production
 components:
+  requestBodies:
+    Put-user-data-settings:
+      description: 'User AI settings. Only the changes to settings can be sent
+
+        `meeting-minutes`: If `auto_delete` is set to a value other than `none`, the `auto_delete_time` must be specified'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/User-Data-settings'
   schemas:
     User-Data-settings:
       type: object
@@ -157,15 +164,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/User-Data-settings'
-  requestBodies:
-    Put-user-data-settings:
-      description: 'User AI settings. Only the changes to settings can be sent
-
-        `meeting-minutes`: If `auto_delete` is set to a value other than `none`, the `auto_delete_time` must be specified'
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/User-Data-settings'
   securitySchemes:
     Production:
       type: oauth2
@@ -174,6 +172,3 @@ components:
           refreshUrl: https://api.sonetel.com/SonetelAuth/beta/oauth/token
           tokenUrl: https://api.sonetel.com/SonetelAuth/beta/oauth/token
           scopes: {}
-x-refined-from:
-- 7_users.yaml
-- sonetel-users-openapi.yml

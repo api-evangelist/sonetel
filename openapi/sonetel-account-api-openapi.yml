@@ -3,7 +3,7 @@ info:
   title: Sonetel Account API
   version: '2.0'
   termsOfService: https://sonetel.com/en/help/help-topics/terms-conditions/terms-conditions/
-  description: 'Operations tagged Account across 8 of this provider''s published API definitions: 5_voice_apps.yaml, 7_users.yaml, account.yaml, phone_numbers.yaml, sonetel-account-openapi.yml, sonetel-phone-numbers-openapi.yml, sonetel-users-openapi.yml, sonetel-voice-apps-openapi.yml. Each path carries the servers of the definition it was published in.'
+  description: 'Operations tagged Account across 4 of this provider''s published API definitions: 5_voice_apps.yaml, 7_users.yaml, account.yaml, phone_numbers.yaml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://public-api.sonetel.com
   description: Production
@@ -2389,177 +2389,6 @@ components:
           schema:
             type: string
           description: application/json;charset=UTF-8
-    List-prompt:
-      description: ''
-      content:
-        application/json:
-          schema:
-            type: array
-            minItems: 1
-            uniqueItems: true
-            items:
-              type: object
-              description: Object containing the prompt's details
-              properties:
-                prompt_id:
-                  type: string
-                  description: The unique Id of the prompt
-                  minLength: 1
-                type:
-                  type: string
-                  enum:
-                  - custom
-                  - standard
-                  description: standard”. Specifies if the associated voice message is a custom message or a standard message. A custom message is one that has been recorded or uploaded by the customer, while a standard message is a pre-recorded message provided by Sonetel
-                  minLength: 1
-                name:
-                  type: string
-                  description: A descriptive name of the prompt.
-                  minLength: 1
-                app_id:
-                  type: string
-                  description: The unique ID of the voice app that the prompt belongs to.
-                  minLength: 1
-                account_id:
-                  type: string
-                  description: Your Sonetel account ID
-                  minLength: 1
-                record_id:
-                  type: string
-                  description: 'The ID of the prompt that can be dialed via DTMF digits when updating the voice message from the recording function (*22).
-
-
-                    Dial *22 from a SIP phone registered with Sonetel and enter the record ID to record over the existing message.'
-                  minLength: 1
-                exists:
-                  type: string
-                  description: 'A flag that specifies if the associated voice message for this prompt exists. This flag is only relevant in case of custom prompts.
-
-
-                    For default prompts, the flag is always “yes” since there is always a voice message associated with them.'
-                  minLength: 1
-                file_name:
-                  type: string
-                  description: The name of the audio file uploaded by the customer. The field is empty if no file has been uploaded.
-                file_details:
-                  type: string
-                  description: This lists details of the recording file, Empty if it is standard or non-existing. `Recorded by phone` if it is recorded. `uploaded` if it is uploaded, `Text to speech` if it is  TTS converted file.
-                play_path:
-                  type: string
-                  description: This field carries the prompt sip_uri that can be used to call to play the prompt. (play#prompt-id@prompts.sonetel.com)
-                record_path:
-                  type: string
-                  description: This field carries the prompt sip_url that can be used to record the prompt. (record#prompt-id@prompts.sonetel.com)
-                audio_length:
-                  type: string
-                  description: The length of the audio in seconds.
-                size:
-                  type: string
-                  description: The size of the file in kilobytes.
-                message_url:
-                  type: string
-                  description: The URL of the voice message of the prompt. This is the URL where the voice file for the prompt can be accessed and uploaded.
-                create_date:
-                  type: string
-                  description: The date and time when the prompt was created.
-                  format: date-time
-            x-examples:
-              example-1:
-              - record_id: '1001'
-                account_id: YOUR_ACCOUNT_ID
-                name: Welcome
-                exists: 'yes'
-                prompt_id: PRio9aaaaaaa
-                type: standard
-                app_id: AB0cdefghij
-              - record_id: '1002'
-                account_id: YOUR_ACCOUNT_ID
-                name: Main Menu
-                exists: 'yes'
-                prompt_id: PRio9aaaaaab
-                type: standard
-                app_id: AB0cdefghij
-              - record_id: '1007'
-                account_id: YOUR_ACCOUNT_ID
-                name: Invalid Menu Entry
-                exists: 'yes'
-                prompt_id: PRio9aaaaaac
-                type: standard
-                app_id: AB0cdefghij
-              - record_id: '1008'
-                account_id: YOUR_ACCOUNT_ID
-                name: Please Wait
-                exists: 'yes'
-                prompt_id: PRio9aaaaaad
-                type: standard
-                app_id: AB0cdefghij
-              - record_id: '1030'
-                account_id: YOUR_ACCOUNT_ID
-                name: Information
-                exists: 'yes'
-                prompt_id: PRio9aaaaaae
-                type: custom
-                app_id: AB0cdefghij
-              - record_id: '1003'
-                account_id: YOUR_ACCOUNT_ID
-                name: Office closed
-                exists: 'yes'
-                prompt_id: PRio9aaaaaaf
-                type: standard
-                app_id: AB0cdefghij
-              - record_id: '1004'
-                account_id: YOUR_ACCOUNT_ID
-                name: Info message 1
-                exists: 'yes'
-                prompt_id: PRio9aaaaaag
-                type: standard
-                app_id: AB0cdefghij
-              - record_id: '1005'
-                account_id: YOUR_ACCOUNT_ID
-                name: Enter Extension
-                exists: 'yes'
-                prompt_id: PRio9aaaaaah
-                type: standard
-                app_id: AB0cdefghij
-              - record_id: '1006'
-                account_id: YOUR_ACCOUNT_ID
-                name: Invalid Extension
-                exists: 'yes'
-                prompt_id: PRio9aaaaaai
-                type: standard
-                app_id: AB0cdefghij
-          examples:
-            Prompt:
-              value:
-                record_id: '1001'
-                account_id: YOUR_ACCOUNT_ID
-                name: Welcome
-                exists: 'yes'
-                prompt_id: PRio9aaaaaaa
-                type: standard
-                app_id: AB0cdefghij
-            Prompt with message details:
-              value:
-                prompt_id: PRia0abcdefGh
-                type: standard
-                name: Welcome
-                app_id: VAfgte45a2Gh
-                account_id: '200000000'
-                record_id: '7001'
-                exists: true
-                file_name: response.wav
-                file_details: Uploaded
-                play_path: play#PRia0abcdefGh@prompts.sonetel.com
-                record_path: record#PRia0abcdefGh@prompts.sonetel.com
-                audio_length: '10.0'
-                size: '157.92'
-                message_url: https://audio-prompts.sonetel.com/PRia0abcdefGh-00000a00-0000-aaaa-0000-aaaa0000b1b1.wav
-                create_date: 20210727T00:00:00Z
-      headers:
-        Content-Type:
-          schema:
-            type: string
-          description: application/json;charset=UTF-8
     List-voiceapps:
       description: Example response
       content:
@@ -3171,6 +3000,177 @@ components:
           schema:
             type: string
           description: application/json;charset=UTF-8
+    List-prompt:
+      description: ''
+      content:
+        application/json:
+          schema:
+            type: array
+            minItems: 1
+            uniqueItems: true
+            items:
+              type: object
+              description: Object containing the prompt's details
+              properties:
+                prompt_id:
+                  type: string
+                  description: The unique Id of the prompt
+                  minLength: 1
+                type:
+                  type: string
+                  enum:
+                  - custom
+                  - standard
+                  description: standard”. Specifies if the associated voice message is a custom message or a standard message. A custom message is one that has been recorded or uploaded by the customer, while a standard message is a pre-recorded message provided by Sonetel
+                  minLength: 1
+                name:
+                  type: string
+                  description: A descriptive name of the prompt.
+                  minLength: 1
+                app_id:
+                  type: string
+                  description: The unique ID of the voice app that the prompt belongs to.
+                  minLength: 1
+                account_id:
+                  type: string
+                  description: Your Sonetel account ID
+                  minLength: 1
+                record_id:
+                  type: string
+                  description: 'The ID of the prompt that can be dialed via DTMF digits when updating the voice message from the recording function (*22).
+
+
+                    Dial *22 from a SIP phone registered with Sonetel and enter the record ID to record over the existing message.'
+                  minLength: 1
+                exists:
+                  type: string
+                  description: 'A flag that specifies if the associated voice message for this prompt exists. This flag is only relevant in case of custom prompts.
+
+
+                    For default prompts, the flag is always “yes” since there is always a voice message associated with them.'
+                  minLength: 1
+                file_name:
+                  type: string
+                  description: The name of the audio file uploaded by the customer. The field is empty if no file has been uploaded.
+                file_details:
+                  type: string
+                  description: This lists details of the recording file, Empty if it is standard or non-existing. `Recorded by phone` if it is recorded. `uploaded` if it is uploaded, `Text to speech` if it is  TTS converted file.
+                play_path:
+                  type: string
+                  description: This field carries the prompt sip_uri that can be used to call to play the prompt. (play#prompt-id@prompts.sonetel.com)
+                record_path:
+                  type: string
+                  description: This field carries the prompt sip_url that can be used to record the prompt. (record#prompt-id@prompts.sonetel.com)
+                audio_length:
+                  type: string
+                  description: The length of the audio in seconds.
+                size:
+                  type: string
+                  description: The size of the file in kilobytes.
+                message_url:
+                  type: string
+                  description: The URL of the voice message of the prompt. This is the URL where the voice file for the prompt can be accessed and uploaded.
+                create_date:
+                  type: string
+                  description: The date and time when the prompt was created.
+                  format: date-time
+            x-examples:
+              example-1:
+              - record_id: '1001'
+                account_id: YOUR_ACCOUNT_ID
+                name: Welcome
+                exists: 'yes'
+                prompt_id: PRio9aaaaaaa
+                type: standard
+                app_id: AB0cdefghij
+              - record_id: '1002'
+                account_id: YOUR_ACCOUNT_ID
+                name: Main Menu
+                exists: 'yes'
+                prompt_id: PRio9aaaaaab
+                type: standard
+                app_id: AB0cdefghij
+              - record_id: '1007'
+                account_id: YOUR_ACCOUNT_ID
+                name: Invalid Menu Entry
+                exists: 'yes'
+                prompt_id: PRio9aaaaaac
+                type: standard
+                app_id: AB0cdefghij
+              - record_id: '1008'
+                account_id: YOUR_ACCOUNT_ID
+                name: Please Wait
+                exists: 'yes'
+                prompt_id: PRio9aaaaaad
+                type: standard
+                app_id: AB0cdefghij
+              - record_id: '1030'
+                account_id: YOUR_ACCOUNT_ID
+                name: Information
+                exists: 'yes'
+                prompt_id: PRio9aaaaaae
+                type: custom
+                app_id: AB0cdefghij
+              - record_id: '1003'
+                account_id: YOUR_ACCOUNT_ID
+                name: Office closed
+                exists: 'yes'
+                prompt_id: PRio9aaaaaaf
+                type: standard
+                app_id: AB0cdefghij
+              - record_id: '1004'
+                account_id: YOUR_ACCOUNT_ID
+                name: Info message 1
+                exists: 'yes'
+                prompt_id: PRio9aaaaaag
+                type: standard
+                app_id: AB0cdefghij
+              - record_id: '1005'
+                account_id: YOUR_ACCOUNT_ID
+                name: Enter Extension
+                exists: 'yes'
+                prompt_id: PRio9aaaaaah
+                type: standard
+                app_id: AB0cdefghij
+              - record_id: '1006'
+                account_id: YOUR_ACCOUNT_ID
+                name: Invalid Extension
+                exists: 'yes'
+                prompt_id: PRio9aaaaaai
+                type: standard
+                app_id: AB0cdefghij
+          examples:
+            Prompt:
+              value:
+                record_id: '1001'
+                account_id: YOUR_ACCOUNT_ID
+                name: Welcome
+                exists: 'yes'
+                prompt_id: PRio9aaaaaaa
+                type: standard
+                app_id: AB0cdefghij
+            Prompt with message details:
+              value:
+                prompt_id: PRia0abcdefGh
+                type: standard
+                name: Welcome
+                app_id: VAfgte45a2Gh
+                account_id: '200000000'
+                record_id: '7001'
+                exists: true
+                file_name: response.wav
+                file_details: Uploaded
+                play_path: play#PRia0abcdefGh@prompts.sonetel.com
+                record_path: record#PRia0abcdefGh@prompts.sonetel.com
+                audio_length: '10.0'
+                size: '157.92'
+                message_url: https://audio-prompts.sonetel.com/PRia0abcdefGh-00000a00-0000-aaaa-0000-aaaa0000b1b1.wav
+                create_date: 20210727T00:00:00Z
+      headers:
+        Content-Type:
+          schema:
+            type: string
+          description: application/json;charset=UTF-8
     DataMgrCallRecSettings:
       description: Example response
       content:
@@ -3619,134 +3619,6 @@ components:
           app_type: ivr
           play_menu: 'yes'
           name: Sai test menu
-    User-Update:
-      type: object
-      properties:
-        user_fname:
-          type: string
-          description: User's first name
-          minLength: 1
-        max_conversations:
-          type: number
-          description: The maximum number of customer conversations the user can handle simultaneously
-        phones:
-          type: array
-          description: List of the phones (SIP phones or verified mobile numbers) linked to the user's profile that can used for call forwarding.
-          minItems: 1
-          uniqueItems: true
-          items:
-            type: object
-            properties:
-              phnum:
-                type: string
-                description: The actual phone number that is used to forward incoming calls. Applied to non-SIP phones.
-                minLength: 1
-              phone_type:
-                type: string
-                enum:
-                - sip
-                - regular
-                description: 'The type of phone i.e. sip or regular
-
-                  '
-                minLength: 1
-              phone_name:
-                type: string
-                description: User's chosen name for the phone number
-                minLength: 1
-              receive_calls:
-                type: string
-                description: Flag that indicates if incoming calls to the user should be sent to this phone. In case of SIP phones, this field is not applicable.
-                minLength: 1
-              verified:
-                type: string
-                description: Read only field Flag that indicates if the phone is verified or not
-                minLength: 1
-                readOnly: true
-        language:
-          type: string
-          description: Three letter ISO code of the user's account language.
-          minLength: 1
-        language_id:
-          type: number
-          description: An internal numeric code of the user's account language.
-        title:
-          type: string
-          description: The user's job title for example, Sales Engineer, CEO, etc.
-          minLength: 1
-        type:
-          type: string
-          enum:
-          - admin
-          - regular
-          description: Privilege level of user i.e. admin or regular.
-          minLength: 1
-        user_lname:
-          type: string
-          description: The last name of the user.
-          minLength: 1
-        location:
-          type: object
-          description: User's location details such as country, area code and timezone.
-          properties:
-            country:
-              type: string
-              description: The user's country. Has an affect on how the user dials phone numbers.
-              minLength: 1
-            area_code:
-              type: string
-              description: The user's telephone area code.
-              minLength: 1
-            timezone:
-              type: string
-              description: The user's timezone.
-            timezone_id:
-              type: number
-              description: An internal numeric identifier for the user's timezone.
-        email:
-          type: string
-          description: The user's email address.
-          format: email
-          minLength: 1
-        password:
-          type: string
-          description: The user's login password.
-          format: password
-      required:
-      - user_fname
-      - user_lname
-      - email
-      - password
-      x-examples:
-        Example:
-          user_fname: John
-          max_conversations: 2
-          numbers:
-          - number_type: e.164
-            number: '13475550000'
-          - number_type: e.164
-            number: '46852500000'
-          phones:
-          - phnum: '+46708000000'
-            phone_type: regular
-            phone_name: Mobile
-            receive_calls: 'yes'
-            verified: 'yes'
-            is_primary: true
-          language: eng
-          auto_translate: false
-          language_id: 41
-          title: CEO and Founder
-          type: admin
-          user_lname: Doe
-          tags: phonenumber
-          location:
-            country: SWE
-            area_code: '8'
-            timezone: null
-            timezone_id: 4
-          email: user@example.com
-          notifications: 0
     User-GET:
       type: object
       description: User Schema
@@ -4191,6 +4063,199 @@ components:
           outgoing:
             show: auto
             callthru-pin: ''
+    User-Update:
+      type: object
+      properties:
+        user_fname:
+          type: string
+          description: User's first name
+          minLength: 1
+        max_conversations:
+          type: number
+          description: The maximum number of customer conversations the user can handle simultaneously
+        phones:
+          type: array
+          description: List of the phones (SIP phones or verified mobile numbers) linked to the user's profile that can used for call forwarding.
+          minItems: 1
+          uniqueItems: true
+          items:
+            type: object
+            properties:
+              phnum:
+                type: string
+                description: The actual phone number that is used to forward incoming calls. Applied to non-SIP phones.
+                minLength: 1
+              phone_type:
+                type: string
+                enum:
+                - sip
+                - regular
+                description: 'The type of phone i.e. sip or regular
+
+                  '
+                minLength: 1
+              phone_name:
+                type: string
+                description: User's chosen name for the phone number
+                minLength: 1
+              receive_calls:
+                type: string
+                description: Flag that indicates if incoming calls to the user should be sent to this phone. In case of SIP phones, this field is not applicable.
+                minLength: 1
+              verified:
+                type: string
+                description: Read only field Flag that indicates if the phone is verified or not
+                minLength: 1
+                readOnly: true
+        language:
+          type: string
+          description: Three letter ISO code of the user's account language.
+          minLength: 1
+        language_id:
+          type: number
+          description: An internal numeric code of the user's account language.
+        title:
+          type: string
+          description: The user's job title for example, Sales Engineer, CEO, etc.
+          minLength: 1
+        type:
+          type: string
+          enum:
+          - admin
+          - regular
+          description: Privilege level of user i.e. admin or regular.
+          minLength: 1
+        user_lname:
+          type: string
+          description: The last name of the user.
+          minLength: 1
+        location:
+          type: object
+          description: User's location details such as country, area code and timezone.
+          properties:
+            country:
+              type: string
+              description: The user's country. Has an affect on how the user dials phone numbers.
+              minLength: 1
+            area_code:
+              type: string
+              description: The user's telephone area code.
+              minLength: 1
+            timezone:
+              type: string
+              description: The user's timezone.
+            timezone_id:
+              type: number
+              description: An internal numeric identifier for the user's timezone.
+        email:
+          type: string
+          description: The user's email address.
+          format: email
+          minLength: 1
+        password:
+          type: string
+          description: The user's login password.
+          format: password
+      required:
+      - user_fname
+      - user_lname
+      - email
+      - password
+      x-examples:
+        Example:
+          user_fname: John
+          max_conversations: 2
+          numbers:
+          - number_type: e.164
+            number: '13475550000'
+          - number_type: e.164
+            number: '46852500000'
+          phones:
+          - phnum: '+46708000000'
+            phone_type: regular
+            phone_name: Mobile
+            receive_calls: 'yes'
+            verified: 'yes'
+            is_primary: true
+          language: eng
+          auto_translate: false
+          language_id: 41
+          title: CEO and Founder
+          type: admin
+          user_lname: Doe
+          tags: phonenumber
+          location:
+            country: SWE
+            area_code: '8'
+            timezone: null
+            timezone_id: 4
+          email: user@example.com
+          notifications: 0
+    Account-PUT:
+      type: object
+      title: Account-PUT
+      description: Update your account settings
+      properties:
+        name:
+          type: string
+          description: The new name of your company.
+        language:
+          type: string
+          description: 'The 3 letter ISO language code such as `deu` for German or `swa` for Swahili.
+
+
+            Get a list of all the language codes from https://beta-api.sonetel.com/globaldata/language'
+        timezone_details:
+          type: object
+          description: The object containing the updated timezone.
+          properties:
+            zone_id:
+              type: string
+              description: Two digit timezone identifier.
+          required:
+          - zone_id
+        service_settings:
+          $ref: '#/components/schemas/ServiceSettings-PUT'
+          description: Specify values that are changed. Values that are not provided remain un-altered
+      examples:
+      - name: Acme Inc.
+        language: hye
+        timezone_details:
+          zone_id: '45'
+    ServiceSettings:
+      type: object
+      title: ServiceSettings
+      description: An account's service settings
+      properties:
+        team_chat:
+          type: boolean
+          description: Specifies if the account has team chat service available and turned on
+          default: false
+        customer_chat:
+          type: boolean
+          description: Specifies if the account has customer chat service available and and turned on
+          default: false
+        ai_helper:
+          type: boolean
+          description: Specifies if the account has AI Helper services available and and turned on
+          default: false
+        free_trial:
+          type: string
+          enum:
+          - inactive
+          - active
+          - used
+          description: 'Specifies the status of free trial of services. Free trial applies to services such as Team chat and Customer chat which are available for free trial for a limited duration
+
+
+            `active`: Free trial is currently active
+
+
+            `inactive`: Free trial has never been used and is inactive currently
+
+
+            `used`: Free trial has been consumed and has expired'
+          readOnly: true
     Account-GET:
       type: object
       title: Account-GET
@@ -4411,37 +4476,23 @@ components:
             account_type: main_account
             account_category: regular
           status: success
-    Account-PUT:
+    ServiceSettings-PUT:
       type: object
-      title: Account-PUT
-      description: Update your account settings
+      title: ServiceSettings-PUT
+      description: Service settings of an account that can be updated
       properties:
-        name:
-          type: string
-          description: The new name of your company.
-        language:
-          type: string
-          description: 'The 3 letter ISO language code such as `deu` for German or `swa` for Swahili.
-
-
-            Get a list of all the language codes from https://beta-api.sonetel.com/globaldata/language'
-        timezone_details:
-          type: object
-          description: The object containing the updated timezone.
-          properties:
-            zone_id:
-              type: string
-              description: Two digit timezone identifier.
-          required:
-          - zone_id
-        service_settings:
-          $ref: '#/components/schemas/ServiceSettings-PUT'
-          description: Specify values that are changed. Values that are not provided remain un-altered
-      examples:
-      - name: Acme Inc.
-        language: hye
-        timezone_details:
-          zone_id: '45'
+        team_chat:
+          type: boolean
+          description: Specify if team chat service must be turned on (true) for the account
+          default: false
+        customer_chat:
+          type: boolean
+          description: Specify if customer chat service must be turned on (true) for the account
+          default: false
+        ai_helper:
+          type: boolean
+          description: Specify if AI helper service must be turned on (true) for the account
+          default: false
     AccountDataMgrCallRecSettings:
       type: object
       title: AccountDataMgrCallRecSettings
@@ -4470,657 +4521,6 @@ components:
 
 
             `1y`: Delete 1 year after the service data is generated'
-    ServiceSettings:
-      type: object
-      title: ServiceSettings
-      description: An account's service settings
-      properties:
-        team_chat:
-          type: boolean
-          description: Specifies if the account has team chat service available and turned on
-          default: false
-        customer_chat:
-          type: boolean
-          description: Specifies if the account has customer chat service available and and turned on
-          default: false
-        ai_helper:
-          type: boolean
-          description: Specifies if the account has AI Helper services available and and turned on
-          default: false
-        free_trial:
-          type: string
-          enum:
-          - inactive
-          - active
-          - used
-          description: 'Specifies the status of free trial of services. Free trial applies to services such as Team chat and Customer chat which are available for free trial for a limited duration
-
-
-            `active`: Free trial is currently active
-
-
-            `inactive`: Free trial has never been used and is inactive currently
-
-
-            `used`: Free trial has been consumed and has expired'
-          readOnly: true
-    ServiceSettings-PUT:
-      type: object
-      title: ServiceSettings-PUT
-      description: Service settings of an account that can be updated
-      properties:
-        team_chat:
-          type: boolean
-          description: Specify if team chat service must be turned on (true) for the account
-          default: false
-        customer_chat:
-          type: boolean
-          description: Specify if customer chat service must be turned on (true) for the account
-          default: false
-        ai_helper:
-          type: boolean
-          description: Specify if AI helper service must be turned on (true) for the account
-          default: false
-    List-PhnumSubscriptions:
-      type: object
-      title: List my phone number subscriptions
-      description: This is a list of subscriptions under an account
-      properties:
-        page_metadata:
-          type: object
-          description: Pagination information in case the results span across more than 1 page.
-          properties:
-            pagination_type:
-              type: string
-              description: Describes the pagination type
-              minLength: 1
-            count:
-              type: string
-              description: Number of objects in the response
-              minLength: 1
-            page_count:
-              type: string
-              description: The total number of pages in the result
-              minLength: 1
-            previous:
-              type: string
-              description: Link to the previous result page.
-              minLength: 1
-            next:
-              type: string
-              description: Link to the next result page.
-              minLength: 1
-            page:
-              type: string
-              description: Link to the current page.
-              minLength: 1
-            first:
-              type: string
-              description: Link to the first page in the results.
-              minLength: 1
-            last:
-              type: string
-              description: Link to the last page in the results.
-              minLength: 1
-            sort:
-              type: object
-              description: Sort order of the results
-              properties:
-                property:
-                  type: string
-                  minLength: 1
-                ignoreCase:
-                  type: boolean
-                nullHandling:
-                  type: string
-                  minLength: 1
-                descending:
-                  type: boolean
-                ascending:
-                  type: boolean
-        resource:
-          type: string
-          description: Name of the resource accessed
-          minLength: 1
-        status:
-          type: string
-          description: Status of the response
-          minLength: 1
-        response:
-          type: array
-          description: The response object.
-          minItems: 1
-          uniqueItems: true
-          items:
-            type: object
-            properties:
-              account_id:
-                type: string
-                description: The account_id is the account to which the number is currently assigned.
-                minLength: 1
-              country_code:
-                type: string
-                description: The telephony country code as per ITU standards.
-                minLength: 1
-              area_code:
-                type: string
-                description: The telephone area code of the phone number
-                minLength: 1
-              country:
-                type: string
-                description: The country where the number is from.
-                minLength: 1
-              is_part_of_series:
-                type: string
-                description: A Boolean that specifies if the number is a part of a number series
-                minLength: 1
-              range:
-                type: string
-                description: Applicable if the phone number subscription is of a number that is a part of a phone number series. The value specifies the quantity of phone numbers in the number series of which this phone number is a part of
-                minLength: 1
-              city:
-                type: string
-                description: Name of the city where the number is. The name is descriptive and does not follow any standard.
-                minLength: 1
-              type:
-                type: string
-                enum:
-                - national
-                - geographic
-                - tollfree
-                - mobile
-                description: Type of number – This can be either “national”, “geographic”, or “tollfree”
-                minLength: 1
-                readOnly: true
-              one_time_fee:
-                type: string
-                description: One-time fee for the number/series. Up to 2 decimals.
-                minLength: 1
-              recurring_fee:
-                type: string
-                description: Current recurring fee for the number/series. Up to 2 decimals
-                minLength: 1
-              recurrence_interval:
-                type: string
-                description: Current recurrence interval for the recurring fee. Specified in days(e.g. 15d) or months(e.g. 3m).
-                minLength: 1
-              per_call_fee:
-                type: string
-                description: The per call fee applicable to the number. Up to 2 decimals
-                format: float
-                readOnly: true
-              per_min_fee:
-                type: string
-                description: The charge per minute fee for calls. Up to 2 decimals
-                minLength: 1
-              charge_interval:
-                type: string
-                description: The charge interval in seconds
-                minLength: 1
-              per_sms_fee:
-                type: string
-                description: The per SMS receiving fee applicable. Up to 2 decimals
-                minLength: 1
-              per_fax_fee:
-                type: string
-                description: The per FAX receiving fee applicable. Up to 2 decimals
-              currency:
-                type: string
-                description: The currency in which the fee is specified
-                minLength: 1
-              price_category:
-                type: string
-                description: The price category of the number/series. The allowed values are 1- regular, 2- gold, 3 - gold+, 4 - gold++, 5 -gold+++
-                minLength: 1
-              connect_to_type:
-                type: string
-                enum:
-                - user
-                - phnum
-                - sip
-                - app
-                - csg
-                description: The destination to which this number is connected. The supported values are user, phnum, sip,app, csg
-                minLength: 1
-              connect_to:
-                type: string
-                description: The id of the connected to entity
-                minLength: 1
-              activation_date:
-                type: string
-                description: The date/time the number/series was activated.
-                minLength: 1
-              next_fee_date:
-                type: string
-                description: The date/time that the next recurring fee is to be charged
-                minLength: 1
-              reclaim_date:
-                type: string
-                description: The date/time an inactive number will be automatically removed from your account if it is inactive due to insufficient balance in the account.
-                minLength: 1
-              status:
-                type: string
-                description: The number/series status. Can take values “active” or “inactive”
-                minLength: 1
-              status_desc:
-                type: string
-                description: The text reason specification. Applies in case the number is inactive.
-              freetest:
-                type: string
-                description: Booleanthat specifies if this subscription is currently under free testing. Takes Boolean values.
-                minLength: 1
-              branded:
-                type: boolean
-                description: Flag that specifies whether the number is a branded number i.e. free with the website chat widget.
-              freeplan:
-                type: boolean
-                description: Flag that specifies whether the number is included for free with [paid plans](https://sonetel.com/plans).
-              sms_enabled:
-                type: string
-                description: Numbers that have SMS enabled.
-                minLength: 1
-              sms_supported:
-                type: string
-                description: Numbers that support SMS.
-                minLength: 1
-              phnum:
-                type: string
-                description: The number in E164 format without ‘+’
-                minLength: 1
-              free_test_expiry_date:
-                type: string
-                description: The date/time when the free testing period ends.
-              sms_settings:
-                type: object
-                description: SMS delivery settings for the number.
-                properties:
-                  delivery_methods:
-                    type: array
-                    minItems: 1
-                    uniqueItems: true
-                    items:
-                      type: object
-                      properties:
-                        dest_type:
-                          type: string
-                          minLength: 1
-                      required:
-                      - dest_type
-              plan_details:
-                type: object
-                description: The plan details of the number. Only the `next_renew_mode` can be updated
-                properties:
-                  current_renew_mode:
-                    type: string
-                    enum:
-                    - 1m
-                    - 1y
-                    - 3y
-                    description: This is a readonly property that holds values of 1m,1y,3y. 1m stands for one month, 1y stands for one year and 3y stands for 3 years renewal period
-                    minLength: 1
-                    readOnly: true
-                  next_renew_mode:
-                    type: string
-                    enum:
-                    - 1m
-                    - 1y
-                    - 3y
-                    description: When the number renews on `next_fee_date` how long should it renew for.
-                    minLength: 1
-                  activation_date:
-                    type: string
-                    description: The date of creation of the phone number subscription.
-                    format: date-time
-                    minLength: 1
-                    readOnly: true
-                  next_fee_date:
-                    type: string
-                    description: The date on which the next renewal fee is due.
-                    minLength: 1
-                  deactivate_date:
-                    type: string
-                    description: The date on which the number will be deactivated if your account does not have enough credit to apply the `next_recurring_fee`. This date includes a grace period.
-                    format: date-time
-                    minLength: 1
-                    readOnly: true
-                  next_recurring_fee:
-                    type: string
-                    description: The cost of the next renewal. (upto 2 decimals)
-                    minLength: 1
-                    readOnly: true
-              show:
-                type: string
-                enum:
-                - caller
-                - called
-                description: 'This field lists what to show in the CLI if the phone number is not connected to a user. Valid values are "caller", "called". '
-                minLength: 1
-              rule_set_id:
-                type: string
-                description: The Id of the rule set if exceptions are defined for call processing. This field is empty if no exceptions are defined.
-              state:
-                type: string
-                description: If the phone number is from USA, then this will hold the name of the state
-                minLength: 1
-                readOnly: true
-              addr_req:
-                type: string
-                description: Flag indicating whether there are any address requirements for this number. Can take values 'yes', 'no'
-                minLength: 1
-                readOnly: true
-              addr_proof:
-                type: string
-                description: Flag indicating whether submission of address proof is required for this number. Can take values 'yes', 'no'
-                minLength: 1
-                readOnly: true
-              access_restrictions:
-                type: string
-                description: Indicates if there are any access restriction from any provider on this number.
-                minLength: 1
-                readOnly: true
-              restrictions_desc:
-                type: string
-                description: Any additional restrictions applicable on this number.
-                minLength: 1
-              cli_support:
-                type: string
-                enum:
-                - 'yes'
-                - 'no'
-                - add_on
-                description: 'Indicates whethe the phone number can be shown as caller ID (CLI) in calls.
-
-
-                  - no  → can never be used for CLI
-
-                  - yes → number can be used for CLI
-
-                  - add_on → can be used as CLI with a package'
-                minLength: 1
-                readOnly: true
-              business_pkg_support:
-                type: string
-                enum:
-                - 'yes'
-                - 'no'
-                description: 'Indicates whether business package is supported on this number. '
-                minLength: 1
-                readOnly: true
-                x-deprecated: true
-              package:
-                type: string
-                enum:
-                - regular
-                - standard
-                - business
-                description: Describes the current package on this number. Available values "regular", "standard", "business"
-                minLength: 1
-              call_recording_allowed:
-                type: string
-                enum:
-                - 'yes'
-                - 'no'
-                - add_on
-                description: This property indicates whether call recording can be enabled on this number. Available values "yes", "no" "add-on".
-                minLength: 1
-              voiceapp_connect:
-                type: string
-                enum:
-                - 'yes'
-                - 'no'
-                description: Indicates whether this number can be allowed to connect to a voice app
-                minLength: 1
-              csg_connect:
-                type: string
-                enum:
-                - 'yes'
-                - 'no'
-                description: Indicates whether this number can be allowed to connect to a team.
-                minLength: 1
-      x-examples:
-        example-1:
-          page_metadata:
-            pagination_type: static
-            count: '126'
-            page_count: '1'
-            previous: NA
-            next: NA
-            page: '1'
-            first: NA
-            last: NA
-            sort:
-              property: activation_date
-              ignoreCase: false
-              nullHandling: client
-              descending: true
-              ascending: false
-          resource: phonenumbersubscription
-          response:
-          - account_id: '20000000'
-            country_code: '46'
-            area_code: '8'
-            country: SWE
-            is_part_of_series: 'no'
-            range: '1'
-            city: Stockholm (8)
-            type: geographic
-            one_time_fee: '0.0'
-            recurring_fee: '52.0'
-            recurrence_interval: 1m
-            per_call_fee: '0.00'
-            per_min_fee: '0.00'
-            charge_interval: '60'
-            per_sms_fee: ''
-            per_fax_fee: ''
-            currency: SEK
-            price_category: regular
-            connect_to_type: user
-            connect_to: '2000000000'
-            activation_date: 20200217T09:36:10Z
-            next_fee_date: 20210717T09:36:10Z
-            reclaim_date: 20210816T09:36:10Z
-            status: active
-            status_desc: ''
-            freetest: 'no'
-            branded: 'no'
-            freeplan: 'no'
-            fax_enabled: 'no'
-            sms_enabled: 'yes'
-            fax_supported: 'no'
-            sms_supported: 'yes'
-            phnum: '46840000000'
-            free_test_expiry_date: ''
-            sms_settings:
-              delivery_methods:
-              - dest_type: auto
-            plan_details:
-              current_renew_mode: 1m
-              next_renew_mode: 1m
-              activation_date: 20200217T09:36:10Z
-              next_fee_date: 20210717T09:36:10Z
-              deactivate_date: 20210816T09:36:10Z
-              next_recurring_fee: '52.00'
-            show: caller
-            rule_set_id: ''
-            addr_req: none
-            addr_proof: 'no'
-            access_restrictions: mobile
-            restrictions_desc: If you are on Premium, City and Mobile numbers can be subscribed for free.<br>If you want a free number, select a City number and use our free chat function at your website.
-            cli_support: 'yes'
-            business_pkg_support: 'no'
-            package: regular
-            call_recording_allowed: 'yes'
-            voiceapp_connect: 'yes'
-            csg_connect: 'yes'
-          - account_id: '20000000'
-            country_code: '1'
-            area_code: '917'
-            country: USA
-            is_part_of_series: 'no'
-            range: '1'
-            city: New York (917)
-            type: geographic
-            one_time_fee: '0.0'
-            recurring_fee: '33.0'
-            recurrence_interval: 1m
-            per_call_fee: '0.00'
-            per_min_fee: '0.00'
-            charge_interval: '60'
-            per_sms_fee: '0.0'
-            per_fax_fee: ''
-            currency: SEK
-            price_category: regular
-            connect_to_type: user
-            connect_to: '2000000000'
-            activation_date: 20190712T05:13:23Z
-            next_fee_date: 20221212T05:13:23Z
-            reclaim_date: 20230111T05:13:23Z
-            status: active
-            status_desc: ''
-            freetest: 'no'
-            branded: 'no'
-            freeplan: 'no'
-            fax_enabled: 'no'
-            sms_enabled: 'yes'
-            fax_supported: 'no'
-            sms_supported: 'no'
-            phnum: '19175550000'
-            free_test_expiry_date: ''
-            sms_settings:
-              delivery_methods:
-              - dest_type: auto
-            plan_details:
-              current_renew_mode: 3y
-              next_renew_mode: 3y
-              activation_date: 20190712T05:13:23Z
-              next_fee_date: 20221212T05:13:23Z
-              deactivate_date: 20230111T05:13:23Z
-              next_recurring_fee: '736.00'
-            show: caller
-            state: New York
-            addr_req: none
-            addr_proof: 'no'
-            access_restrictions: international
-            restrictions_desc: If you are on Premium, all types of numbers can be subscribed for free.<br>If you want a free number, select a City number and use our free chat function at your website.
-            cli_support: 'yes'
-            business_pkg_support: 'no'
-            package: regular
-            call_recording_allowed: 'yes'
-            voiceapp_connect: 'yes'
-            csg_connect: 'yes'
-          - account_id: '20000000'
-            country_code: '61'
-            area_code: '29'
-            country: AUS
-            is_part_of_series: 'no'
-            range: '1'
-            city: Sydney (29)
-            type: geographic
-            one_time_fee: '0.0'
-            recurring_fee: '82.0'
-            recurrence_interval: 1m
-            per_call_fee: '0.00'
-            per_min_fee: '0.00'
-            charge_interval: '60'
-            per_sms_fee: ''
-            per_fax_fee: ''
-            currency: SEK
-            price_category: regular
-            connect_to_type: app
-            connect_to:
-              app_type: ivr
-              app_id: VAi6345m4cccc
-            activation_date: 20190529T09:26:24Z
-            next_fee_date: 20221129T09:26:24Z
-            reclaim_date: 20221229T09:26:24Z
-            status: active
-            status_desc: ''
-            freetest: 'no'
-            branded: 'no'
-            freeplan: 'no'
-            fax_enabled: 'no'
-            sms_enabled: 'no'
-            fax_supported: 'no'
-            sms_supported: 'yes'
-            phnum: '61200000000'
-            free_test_expiry_date: ''
-            plan_details:
-              current_renew_mode: 3y
-              next_renew_mode: 3y
-              activation_date: 20190529T09:26:24Z
-              next_fee_date: 20221129T09:26:24Z
-              deactivate_date: 20221229T09:26:24Z
-              next_recurring_fee: '1711.00'
-            show: caller
-            rule_set_id: 5dbc0ec1de11ca111aed3039
-            addr_req: global
-            addr_proof: 'yes'
-            access_restrictions: international
-            restrictions_desc: Anyone can buy a number in Australia.<br>Mobile numbers require that you provide your address (anywhere in the world) and other supporting documents.<br>If you are on Premium, you can select City and Mobile numbers for free.<br>Free-for-website numbers are not available in Australia.
-            cli_support: 'yes'
-            business_pkg_support: 'no'
-            package: regular
-            call_recording_allowed: 'yes'
-            voiceapp_connect: 'yes'
-            csg_connect: 'yes'
-          - account_id: '20000000'
-            country_code: '46'
-            area_code: '8'
-            country: SWE
-            is_part_of_series: 'no'
-            range: '1'
-            city: Stockholm (8)
-            type: geographic
-            one_time_fee: '0.0'
-            recurring_fee: '65.0'
-            recurrence_interval: 1m
-            per_call_fee: '0.00'
-            per_min_fee: '0.00'
-            charge_interval: '60'
-            per_sms_fee: ''
-            per_fax_fee: ''
-            currency: SEK
-            price_category: regular
-            connect_to_type: app
-            connect_to:
-              app_type: ivr
-              app_id: VAi6345m1aaaaa
-            activation_date: 20100211T21:09:38Z
-            next_fee_date: 20270122T11:35:41Z
-            reclaim_date: 20270221T11:35:41Z
-            status: active
-            status_desc: ''
-            freetest: 'no'
-            branded: 'no'
-            freeplan: 'no'
-            fax_enabled: 'no'
-            sms_enabled: 'yes'
-            fax_supported: 'no'
-            sms_supported: 'yes'
-            phnum: '46800000000'
-            free_test_expiry_date: ''
-            sms_settings:
-              delivery_methods:
-              - dest_type: auto
-            plan_details:
-              current_renew_mode: 1m
-              next_renew_mode: 1m
-              activation_date: 20100211T21:09:38Z
-              next_fee_date: 20270122T11:35:41Z
-              deactivate_date: 20270221T11:35:41Z
-              next_recurring_fee: '65.00'
-            show: caller
-            addr_req: none
-            addr_proof: 'no'
-            access_restrictions: mobile
-            restrictions_desc: If you are on Premium, City and Mobile numbers can be subscribed for free.<br>If you want a free number, select a City number and use our free chat function at your website.
-            cli_support: 'yes'
-            business_pkg_support: 'no'
-            package: regular
-            call_recording_allowed: 'yes'
-            voiceapp_connect: 'yes'
-            csg_connect: 'yes'
-          status: success
     Single-phone-number-subscription:
       type: object
       title: Phone number subscription
@@ -5731,6 +5131,606 @@ components:
             voiceapp_connect: 'yes'
             csg_connect: 'yes'
           status: success
+    List-PhnumSubscriptions:
+      type: object
+      title: List my phone number subscriptions
+      description: This is a list of subscriptions under an account
+      properties:
+        page_metadata:
+          type: object
+          description: Pagination information in case the results span across more than 1 page.
+          properties:
+            pagination_type:
+              type: string
+              description: Describes the pagination type
+              minLength: 1
+            count:
+              type: string
+              description: Number of objects in the response
+              minLength: 1
+            page_count:
+              type: string
+              description: The total number of pages in the result
+              minLength: 1
+            previous:
+              type: string
+              description: Link to the previous result page.
+              minLength: 1
+            next:
+              type: string
+              description: Link to the next result page.
+              minLength: 1
+            page:
+              type: string
+              description: Link to the current page.
+              minLength: 1
+            first:
+              type: string
+              description: Link to the first page in the results.
+              minLength: 1
+            last:
+              type: string
+              description: Link to the last page in the results.
+              minLength: 1
+            sort:
+              type: object
+              description: Sort order of the results
+              properties:
+                property:
+                  type: string
+                  minLength: 1
+                ignoreCase:
+                  type: boolean
+                nullHandling:
+                  type: string
+                  minLength: 1
+                descending:
+                  type: boolean
+                ascending:
+                  type: boolean
+        resource:
+          type: string
+          description: Name of the resource accessed
+          minLength: 1
+        status:
+          type: string
+          description: Status of the response
+          minLength: 1
+        response:
+          type: array
+          description: The response object.
+          minItems: 1
+          uniqueItems: true
+          items:
+            type: object
+            properties:
+              account_id:
+                type: string
+                description: The account_id is the account to which the number is currently assigned.
+                minLength: 1
+              country_code:
+                type: string
+                description: The telephony country code as per ITU standards.
+                minLength: 1
+              area_code:
+                type: string
+                description: The telephone area code of the phone number
+                minLength: 1
+              country:
+                type: string
+                description: The country where the number is from.
+                minLength: 1
+              is_part_of_series:
+                type: string
+                description: A Boolean that specifies if the number is a part of a number series
+                minLength: 1
+              range:
+                type: string
+                description: Applicable if the phone number subscription is of a number that is a part of a phone number series. The value specifies the quantity of phone numbers in the number series of which this phone number is a part of
+                minLength: 1
+              city:
+                type: string
+                description: Name of the city where the number is. The name is descriptive and does not follow any standard.
+                minLength: 1
+              type:
+                type: string
+                enum:
+                - national
+                - geographic
+                - tollfree
+                - mobile
+                description: Type of number – This can be either “national”, “geographic”, or “tollfree”
+                minLength: 1
+                readOnly: true
+              one_time_fee:
+                type: string
+                description: One-time fee for the number/series. Up to 2 decimals.
+                minLength: 1
+              recurring_fee:
+                type: string
+                description: Current recurring fee for the number/series. Up to 2 decimals
+                minLength: 1
+              recurrence_interval:
+                type: string
+                description: Current recurrence interval for the recurring fee. Specified in days(e.g. 15d) or months(e.g. 3m).
+                minLength: 1
+              per_call_fee:
+                type: string
+                description: The per call fee applicable to the number. Up to 2 decimals
+                format: float
+                readOnly: true
+              per_min_fee:
+                type: string
+                description: The charge per minute fee for calls. Up to 2 decimals
+                minLength: 1
+              charge_interval:
+                type: string
+                description: The charge interval in seconds
+                minLength: 1
+              per_sms_fee:
+                type: string
+                description: The per SMS receiving fee applicable. Up to 2 decimals
+                minLength: 1
+              per_fax_fee:
+                type: string
+                description: The per FAX receiving fee applicable. Up to 2 decimals
+              currency:
+                type: string
+                description: The currency in which the fee is specified
+                minLength: 1
+              price_category:
+                type: string
+                description: The price category of the number/series. The allowed values are 1- regular, 2- gold, 3 - gold+, 4 - gold++, 5 -gold+++
+                minLength: 1
+              connect_to_type:
+                type: string
+                enum:
+                - user
+                - phnum
+                - sip
+                - app
+                - csg
+                description: The destination to which this number is connected. The supported values are user, phnum, sip,app, csg
+                minLength: 1
+              connect_to:
+                type: string
+                description: The id of the connected to entity
+                minLength: 1
+              activation_date:
+                type: string
+                description: The date/time the number/series was activated.
+                minLength: 1
+              next_fee_date:
+                type: string
+                description: The date/time that the next recurring fee is to be charged
+                minLength: 1
+              reclaim_date:
+                type: string
+                description: The date/time an inactive number will be automatically removed from your account if it is inactive due to insufficient balance in the account.
+                minLength: 1
+              status:
+                type: string
+                description: The number/series status. Can take values “active” or “inactive”
+                minLength: 1
+              status_desc:
+                type: string
+                description: The text reason specification. Applies in case the number is inactive.
+              freetest:
+                type: string
+                description: Booleanthat specifies if this subscription is currently under free testing. Takes Boolean values.
+                minLength: 1
+              branded:
+                type: boolean
+                description: Flag that specifies whether the number is a branded number i.e. free with the website chat widget.
+              freeplan:
+                type: boolean
+                description: Flag that specifies whether the number is included for free with [paid plans](https://sonetel.com/plans).
+              sms_enabled:
+                type: string
+                description: Numbers that have SMS enabled.
+                minLength: 1
+              sms_supported:
+                type: string
+                description: Numbers that support SMS.
+                minLength: 1
+              phnum:
+                type: string
+                description: The number in E164 format without ‘+’
+                minLength: 1
+              free_test_expiry_date:
+                type: string
+                description: The date/time when the free testing period ends.
+              sms_settings:
+                type: object
+                description: SMS delivery settings for the number.
+                properties:
+                  delivery_methods:
+                    type: array
+                    minItems: 1
+                    uniqueItems: true
+                    items:
+                      type: object
+                      properties:
+                        dest_type:
+                          type: string
+                          minLength: 1
+                      required:
+                      - dest_type
+              plan_details:
+                type: object
+                description: The plan details of the number. Only the `next_renew_mode` can be updated
+                properties:
+                  current_renew_mode:
+                    type: string
+                    enum:
+                    - 1m
+                    - 1y
+                    - 3y
+                    description: This is a readonly property that holds values of 1m,1y,3y. 1m stands for one month, 1y stands for one year and 3y stands for 3 years renewal period
+                    minLength: 1
+                    readOnly: true
+                  next_renew_mode:
+                    type: string
+                    enum:
+                    - 1m
+                    - 1y
+                    - 3y
+                    description: When the number renews on `next_fee_date` how long should it renew for.
+                    minLength: 1
+                  activation_date:
+                    type: string
+                    description: The date of creation of the phone number subscription.
+                    format: date-time
+                    minLength: 1
+                    readOnly: true
+                  next_fee_date:
+                    type: string
+                    description: The date on which the next renewal fee is due.
+                    minLength: 1
+                  deactivate_date:
+                    type: string
+                    description: The date on which the number will be deactivated if your account does not have enough credit to apply the `next_recurring_fee`. This date includes a grace period.
+                    format: date-time
+                    minLength: 1
+                    readOnly: true
+                  next_recurring_fee:
+                    type: string
+                    description: The cost of the next renewal. (upto 2 decimals)
+                    minLength: 1
+                    readOnly: true
+              show:
+                type: string
+                enum:
+                - caller
+                - called
+                description: 'This field lists what to show in the CLI if the phone number is not connected to a user. Valid values are "caller", "called". '
+                minLength: 1
+              rule_set_id:
+                type: string
+                description: The Id of the rule set if exceptions are defined for call processing. This field is empty if no exceptions are defined.
+              state:
+                type: string
+                description: If the phone number is from USA, then this will hold the name of the state
+                minLength: 1
+                readOnly: true
+              addr_req:
+                type: string
+                description: Flag indicating whether there are any address requirements for this number. Can take values 'yes', 'no'
+                minLength: 1
+                readOnly: true
+              addr_proof:
+                type: string
+                description: Flag indicating whether submission of address proof is required for this number. Can take values 'yes', 'no'
+                minLength: 1
+                readOnly: true
+              access_restrictions:
+                type: string
+                description: Indicates if there are any access restriction from any provider on this number.
+                minLength: 1
+                readOnly: true
+              restrictions_desc:
+                type: string
+                description: Any additional restrictions applicable on this number.
+                minLength: 1
+              cli_support:
+                type: string
+                enum:
+                - 'yes'
+                - 'no'
+                - add_on
+                description: 'Indicates whethe the phone number can be shown as caller ID (CLI) in calls.
+
+
+                  - no  → can never be used for CLI
+
+                  - yes → number can be used for CLI
+
+                  - add_on → can be used as CLI with a package'
+                minLength: 1
+                readOnly: true
+              business_pkg_support:
+                type: string
+                enum:
+                - 'yes'
+                - 'no'
+                description: 'Indicates whether business package is supported on this number. '
+                minLength: 1
+                readOnly: true
+                x-deprecated: true
+              package:
+                type: string
+                enum:
+                - regular
+                - standard
+                - business
+                description: Describes the current package on this number. Available values "regular", "standard", "business"
+                minLength: 1
+              call_recording_allowed:
+                type: string
+                enum:
+                - 'yes'
+                - 'no'
+                - add_on
+                description: This property indicates whether call recording can be enabled on this number. Available values "yes", "no" "add-on".
+                minLength: 1
+              voiceapp_connect:
+                type: string
+                enum:
+                - 'yes'
+                - 'no'
+                description: Indicates whether this number can be allowed to connect to a voice app
+                minLength: 1
+              csg_connect:
+                type: string
+                enum:
+                - 'yes'
+                - 'no'
+                description: Indicates whether this number can be allowed to connect to a team.
+                minLength: 1
+      x-examples:
+        example-1:
+          page_metadata:
+            pagination_type: static
+            count: '126'
+            page_count: '1'
+            previous: NA
+            next: NA
+            page: '1'
+            first: NA
+            last: NA
+            sort:
+              property: activation_date
+              ignoreCase: false
+              nullHandling: client
+              descending: true
+              ascending: false
+          resource: phonenumbersubscription
+          response:
+          - account_id: '20000000'
+            country_code: '46'
+            area_code: '8'
+            country: SWE
+            is_part_of_series: 'no'
+            range: '1'
+            city: Stockholm (8)
+            type: geographic
+            one_time_fee: '0.0'
+            recurring_fee: '52.0'
+            recurrence_interval: 1m
+            per_call_fee: '0.00'
+            per_min_fee: '0.00'
+            charge_interval: '60'
+            per_sms_fee: ''
+            per_fax_fee: ''
+            currency: SEK
+            price_category: regular
+            connect_to_type: user
+            connect_to: '2000000000'
+            activation_date: 20200217T09:36:10Z
+            next_fee_date: 20210717T09:36:10Z
+            reclaim_date: 20210816T09:36:10Z
+            status: active
+            status_desc: ''
+            freetest: 'no'
+            branded: 'no'
+            freeplan: 'no'
+            fax_enabled: 'no'
+            sms_enabled: 'yes'
+            fax_supported: 'no'
+            sms_supported: 'yes'
+            phnum: '46840000000'
+            free_test_expiry_date: ''
+            sms_settings:
+              delivery_methods:
+              - dest_type: auto
+            plan_details:
+              current_renew_mode: 1m
+              next_renew_mode: 1m
+              activation_date: 20200217T09:36:10Z
+              next_fee_date: 20210717T09:36:10Z
+              deactivate_date: 20210816T09:36:10Z
+              next_recurring_fee: '52.00'
+            show: caller
+            rule_set_id: ''
+            addr_req: none
+            addr_proof: 'no'
+            access_restrictions: mobile
+            restrictions_desc: If you are on Premium, City and Mobile numbers can be subscribed for free.<br>If you want a free number, select a City number and use our free chat function at your website.
+            cli_support: 'yes'
+            business_pkg_support: 'no'
+            package: regular
+            call_recording_allowed: 'yes'
+            voiceapp_connect: 'yes'
+            csg_connect: 'yes'
+          - account_id: '20000000'
+            country_code: '1'
+            area_code: '917'
+            country: USA
+            is_part_of_series: 'no'
+            range: '1'
+            city: New York (917)
+            type: geographic
+            one_time_fee: '0.0'
+            recurring_fee: '33.0'
+            recurrence_interval: 1m
+            per_call_fee: '0.00'
+            per_min_fee: '0.00'
+            charge_interval: '60'
+            per_sms_fee: '0.0'
+            per_fax_fee: ''
+            currency: SEK
+            price_category: regular
+            connect_to_type: user
+            connect_to: '2000000000'
+            activation_date: 20190712T05:13:23Z
+            next_fee_date: 20221212T05:13:23Z
+            reclaim_date: 20230111T05:13:23Z
+            status: active
+            status_desc: ''
+            freetest: 'no'
+            branded: 'no'
+            freeplan: 'no'
+            fax_enabled: 'no'
+            sms_enabled: 'yes'
+            fax_supported: 'no'
+            sms_supported: 'no'
+            phnum: '19175550000'
+            free_test_expiry_date: ''
+            sms_settings:
+              delivery_methods:
+              - dest_type: auto
+            plan_details:
+              current_renew_mode: 3y
+              next_renew_mode: 3y
+              activation_date: 20190712T05:13:23Z
+              next_fee_date: 20221212T05:13:23Z
+              deactivate_date: 20230111T05:13:23Z
+              next_recurring_fee: '736.00'
+            show: caller
+            state: New York
+            addr_req: none
+            addr_proof: 'no'
+            access_restrictions: international
+            restrictions_desc: If you are on Premium, all types of numbers can be subscribed for free.<br>If you want a free number, select a City number and use our free chat function at your website.
+            cli_support: 'yes'
+            business_pkg_support: 'no'
+            package: regular
+            call_recording_allowed: 'yes'
+            voiceapp_connect: 'yes'
+            csg_connect: 'yes'
+          - account_id: '20000000'
+            country_code: '61'
+            area_code: '29'
+            country: AUS
+            is_part_of_series: 'no'
+            range: '1'
+            city: Sydney (29)
+            type: geographic
+            one_time_fee: '0.0'
+            recurring_fee: '82.0'
+            recurrence_interval: 1m
+            per_call_fee: '0.00'
+            per_min_fee: '0.00'
+            charge_interval: '60'
+            per_sms_fee: ''
+            per_fax_fee: ''
+            currency: SEK
+            price_category: regular
+            connect_to_type: app
+            connect_to:
+              app_type: ivr
+              app_id: VAi6345m4cccc
+            activation_date: 20190529T09:26:24Z
+            next_fee_date: 20221129T09:26:24Z
+            reclaim_date: 20221229T09:26:24Z
+            status: active
+            status_desc: ''
+            freetest: 'no'
+            branded: 'no'
+            freeplan: 'no'
+            fax_enabled: 'no'
+            sms_enabled: 'no'
+            fax_supported: 'no'
+            sms_supported: 'yes'
+            phnum: '61200000000'
+            free_test_expiry_date: ''
+            plan_details:
+              current_renew_mode: 3y
+              next_renew_mode: 3y
+              activation_date: 20190529T09:26:24Z
+              next_fee_date: 20221129T09:26:24Z
+              deactivate_date: 20221229T09:26:24Z
+              next_recurring_fee: '1711.00'
+            show: caller
+            rule_set_id: 5dbc0ec1de11ca111aed3039
+            addr_req: global
+            addr_proof: 'yes'
+            access_restrictions: international
+            restrictions_desc: Anyone can buy a number in Australia.<br>Mobile numbers require that you provide your address (anywhere in the world) and other supporting documents.<br>If you are on Premium, you can select City and Mobile numbers for free.<br>Free-for-website numbers are not available in Australia.
+            cli_support: 'yes'
+            business_pkg_support: 'no'
+            package: regular
+            call_recording_allowed: 'yes'
+            voiceapp_connect: 'yes'
+            csg_connect: 'yes'
+          - account_id: '20000000'
+            country_code: '46'
+            area_code: '8'
+            country: SWE
+            is_part_of_series: 'no'
+            range: '1'
+            city: Stockholm (8)
+            type: geographic
+            one_time_fee: '0.0'
+            recurring_fee: '65.0'
+            recurrence_interval: 1m
+            per_call_fee: '0.00'
+            per_min_fee: '0.00'
+            charge_interval: '60'
+            per_sms_fee: ''
+            per_fax_fee: ''
+            currency: SEK
+            price_category: regular
+            connect_to_type: app
+            connect_to:
+              app_type: ivr
+              app_id: VAi6345m1aaaaa
+            activation_date: 20100211T21:09:38Z
+            next_fee_date: 20270122T11:35:41Z
+            reclaim_date: 20270221T11:35:41Z
+            status: active
+            status_desc: ''
+            freetest: 'no'
+            branded: 'no'
+            freeplan: 'no'
+            fax_enabled: 'no'
+            sms_enabled: 'yes'
+            fax_supported: 'no'
+            sms_supported: 'yes'
+            phnum: '46800000000'
+            free_test_expiry_date: ''
+            sms_settings:
+              delivery_methods:
+              - dest_type: auto
+            plan_details:
+              current_renew_mode: 1m
+              next_renew_mode: 1m
+              activation_date: 20100211T21:09:38Z
+              next_fee_date: 20270122T11:35:41Z
+              deactivate_date: 20270221T11:35:41Z
+              next_recurring_fee: '65.00'
+            show: caller
+            addr_req: none
+            addr_proof: 'no'
+            access_restrictions: mobile
+            restrictions_desc: If you are on Premium, City and Mobile numbers can be subscribed for free.<br>If you want a free number, select a City number and use our free chat function at your website.
+            cli_support: 'yes'
+            business_pkg_support: 'no'
+            package: regular
+            call_recording_allowed: 'yes'
+            voiceapp_connect: 'yes'
+            csg_connect: 'yes'
+          status: success
   parameters:
     Authorization:
       name: Authorization
@@ -5754,7 +5754,3 @@ x-refined-from:
 - 7_users.yaml
 - account.yaml
 - phone_numbers.yaml
-- sonetel-account-openapi.yml
-- sonetel-phone-numbers-openapi.yml
-- sonetel-users-openapi.yml
-- sonetel-voice-apps-openapi.yml

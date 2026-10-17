@@ -1,9 +1,9 @@
 openapi: 3.2.0
 info:
-  title: Sonetel Usage API
   version: '2.0'
+  title: Records Usage API
+  description: Use our `/usagerecord` APIs to get the details of calls and other charges applied to your Sonetel account.
   contact: {}
-  description: 'Operations tagged Usage across 2 of this provider''s published API definitions: 9_usagerecords.yaml, sonetel-usage-records-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://public-api.sonetel.com
   description: Production
@@ -31,9 +31,6 @@ paths:
         description: Production
       tags:
       - Usage
-    servers:
-    - url: https://public-api.sonetel.com
-      description: Production
   /usage/account/{accountid}/usagerecord/download:
     get:
       summary: Download usage records
@@ -59,10 +56,78 @@ paths:
         description: Production
       tags:
       - Usage
-    servers:
-    - url: https://public-api.sonetel.com
-      description: Production
 components:
+  parameters:
+    accountid:
+      name: accountid
+      in: path
+      description: Your Sonetel account ID.
+      required: true
+      schema:
+        type: string
+    charge_type:
+      name: charge_type
+      in: query
+      description: The type of charge applied to the account.
+      schema:
+        type: string
+        enum:
+        - usage_fixed
+        - usage_time
+        - subscription_setup
+        - subscription_recurring
+    count:
+      name: count
+      in: query
+      description: Limits the number of results per page. Used in pagination.
+      required: false
+      schema:
+        type: number
+    Authorization:
+      name: Authorization
+      in: header
+      description: The authorization header contains your access token and is used to authenticate requests. Generate an `access_token` using the `/oauth/token` endpoint.
+      required: true
+      schema:
+        type: string
+        example: Bearer <ACCESS_TOKEN>
+    start_time:
+      name: start_time
+      in: query
+      description: The starting date and time for which usage is included in the results.
+      required: false
+      schema:
+        type: string
+        example: 20220630T18:30:00Z
+    service:
+      name: service
+      in: query
+      description: String identifier for the service used.
+      schema:
+        type: string
+        enum:
+        - outbound_call
+        - inbound_call
+        - phnum_subscription
+        - on-net_call
+        - fax_to_email
+        - sms_to_email
+        - priceplan_premium
+        - voiceapp_menu
+        - voiceapp_company-voicemail
+        - voiceapp_prompt-recording
+        - voiceapp_call-thru
+        - overusage
+        - voiceapp_user-voicemail
+        - conference
+        - priceplan_business
+    end_time:
+      name: end_time
+      in: query
+      description: The last date and time for which usage is included in the results.
+      schema:
+        type: string
+        example: 20220731T18:29:59Z
   responses:
     usage-record-get:
       description: A success response returns the usage records along with pagination information.
@@ -609,77 +674,6 @@ components:
           schema:
             type: string
           description: application/json;charset=UTF-8
-  parameters:
-    service:
-      name: service
-      in: query
-      description: String identifier for the service used.
-      schema:
-        type: string
-        enum:
-        - outbound_call
-        - inbound_call
-        - phnum_subscription
-        - on-net_call
-        - fax_to_email
-        - sms_to_email
-        - priceplan_premium
-        - voiceapp_menu
-        - voiceapp_company-voicemail
-        - voiceapp_prompt-recording
-        - voiceapp_call-thru
-        - overusage
-        - voiceapp_user-voicemail
-        - conference
-        - priceplan_business
-    Authorization:
-      name: Authorization
-      in: header
-      description: The authorization header contains your access token and is used to authenticate requests. Generate an `access_token` using the `/oauth/token` endpoint.
-      required: true
-      schema:
-        type: string
-        example: Bearer <ACCESS_TOKEN>
-    accountid:
-      name: accountid
-      in: path
-      description: Your Sonetel account ID.
-      required: true
-      schema:
-        type: string
-    count:
-      name: count
-      in: query
-      description: Limits the number of results per page. Used in pagination.
-      required: false
-      schema:
-        type: number
-    charge_type:
-      name: charge_type
-      in: query
-      description: The type of charge applied to the account.
-      schema:
-        type: string
-        enum:
-        - usage_fixed
-        - usage_time
-        - subscription_setup
-        - subscription_recurring
-    start_time:
-      name: start_time
-      in: query
-      description: The starting date and time for which usage is included in the results.
-      required: false
-      schema:
-        type: string
-        example: 20220630T18:30:00Z
-    end_time:
-      name: end_time
-      in: query
-      description: The last date and time for which usage is included in the results.
-      schema:
-        type: string
-        example: 20220731T18:29:59Z
   securitySchemes:
     production:
       type: oauth2
@@ -689,6 +683,3 @@ components:
           refreshUrl: https://api.sonetel.com/SonetelAuth/beta/oauth/token
           tokenUrl: https://api.sonetel.com/SonetelAuth/beta/oauth/token
           scopes: {}
-x-refined-from:
-- 9_usagerecords.yaml
-- sonetel-usage-records-openapi.yml

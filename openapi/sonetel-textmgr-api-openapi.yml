@@ -1,13 +1,14 @@
 openapi: 3.2.0
 info:
-  title: Sonetel Textmgr API
   version: '2.0'
+  title: Text Manager Textmgr API
+  summary: The text manager to store and manage Sonetel AI generated text
+  description: The Sonetel Text manager is where AI generated text, created and processed, by the Sonetel /ai-services is stored and managed.
+  termsOfService: https://sonetel.com/en/help/help-topics/terms-conditions/terms-conditions/
   contact:
     name: Sonetel API Support
     url: www.sonetel.com
     email: api.support@sonetel.com
-  termsOfService: https://sonetel.com/en/help/help-topics/terms-conditions/terms-conditions/
-  description: 'Operations tagged Textmgr across 2 of this provider''s published API definitions: 13_ai_textmanager.yaml, sonetel-ai-text-manager-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://public-api.sonetel.com
   description: Production
@@ -174,9 +175,6 @@ paths:
       x-internal: true
       tags:
       - Textmgr
-    servers:
-    - url: https://public-api.sonetel.com
-      description: Production
   /textmgr/text/{text_id}:
     get:
       summary: GET text by id
@@ -280,9 +278,6 @@ paths:
       x-internal: true
       tags:
       - Textmgr
-    servers:
-    - url: https://public-api.sonetel.com
-      description: Production
   /textmgr/text/{text_id}/version:
     post:
       summary: Create text version
@@ -307,9 +302,6 @@ paths:
         description: Production
       tags:
       - Textmgr
-    servers:
-    - url: https://public-api.sonetel.com
-      description: Production
   /textmgr/text/{text_id}/version/{version}:
     put:
       summary: Update a text version (internal)
@@ -374,9 +366,6 @@ paths:
         description: Production
       tags:
       - Textmgr
-    servers:
-    - url: https://public-api.sonetel.com
-      description: Production
   /textmgr/text/{text_id}/write:
     post:
       summary: Write text (internal)
@@ -458,9 +447,6 @@ paths:
       x-internal: true
       tags:
       - Textmgr
-    servers:
-    - url: https://public-api.sonetel.com
-      description: Production
   /textmgr/text/{text_id}/business-description:
     get:
       summary: Get business description
@@ -491,9 +477,6 @@ paths:
         description: Production
       tags:
       - Textmgr
-    servers:
-    - url: https://public-api.sonetel.com
-      description: Production
   /textmgr/business-description:
     get:
       summary: List business description
@@ -541,9 +524,6 @@ paths:
         description: Production
       tags:
       - Textmgr
-    servers:
-    - url: https://public-api.sonetel.com
-      description: Production
   /textmgr/text/{text-id}/webpage:
     get:
       summary: Get Web page
@@ -566,9 +546,6 @@ paths:
         description: Production
       tags:
       - Textmgr
-    servers:
-    - url: https://public-api.sonetel.com
-      description: Production
   /textmgr/webpage:
     get:
       summary: List web pages
@@ -637,9 +614,6 @@ paths:
         description: Production
       tags:
       - Textmgr
-    servers:
-    - url: https://public-api.sonetel.com
-      description: Production
   /textmgr/text/{text_id}/blog-title-list:
     get:
       summary: Get blog title list
@@ -669,9 +643,6 @@ paths:
         description: Production
       tags:
       - Textmgr
-    servers:
-    - url: https://public-api.sonetel.com
-      description: Production
   /textmgr/blog-title-list:
     get:
       summary: List Blog title lists
@@ -723,9 +694,6 @@ paths:
         description: Production
       tags:
       - Textmgr
-    servers:
-    - url: https://public-api.sonetel.com
-      description: Production
   /textmgr/text/{text_id}/blog:
     get:
       summary: Get blog article
@@ -748,9 +716,6 @@ paths:
         description: Production
       tags:
       - Textmgr
-    servers:
-    - url: https://public-api.sonetel.com
-      description: Production
   /textmgr/blog:
     get:
       summary: List blogs
@@ -807,9 +772,6 @@ paths:
         description: Production
       tags:
       - Textmgr
-    servers:
-    - url: https://public-api.sonetel.com
-      description: Production
   /textmgr/text/{text_id}/meeting-minutes:
     get:
       summary: Get meeting minutes
@@ -877,9 +839,6 @@ paths:
         description: Production
       tags:
       - Textmgr
-    servers:
-    - url: https://public-api.sonetel.com
-      description: Production
   /textmgr/meeting-minutes:
     get:
       summary: List meeting minutes
@@ -948,9 +907,6 @@ paths:
         description: Production
       tags:
       - Textmgr
-    servers:
-    - url: https://public-api.sonetel.com
-      description: Production
   /textmgr/text/{text_id}/vm-summary:
     get:
       summary: Get voicemail summary
@@ -974,9 +930,6 @@ paths:
       x-internal: true
       tags:
       - Textmgr
-    servers:
-    - url: https://public-api.sonetel.com
-      description: Production
   /textmgr/vm-summary:
     get:
       summary: List voicemail summaries
@@ -1039,9 +992,6 @@ paths:
       x-internal: true
       tags:
       - Textmgr
-    servers:
-    - url: https://public-api.sonetel.com
-      description: Production
   /textmgr/text/{text_id}/call-summary:
     get:
       summary: Fetch call summary
@@ -1081,9 +1031,6 @@ paths:
         description: Production
       tags:
       - Textmgr
-    servers:
-    - url: https://public-api.sonetel.com
-      description: Production
   /textmgr/call-summary:
     get:
       summary: List call summaries
@@ -1165,556 +1112,81 @@ paths:
         description: Production
       tags:
       - Textmgr
-    servers:
-    - url: https://public-api.sonetel.com
-      description: Production
 components:
   schemas:
-    Meta-data:
-      title: Meta-data
-      description: The meta data associated to a version of the text. The meta-data may take the structure of any of any of the text types depending on the type of text stored
-      oneOf:
-      - $ref: '#/components/schemas/Business-description'
-      - $ref: '#/components/schemas/Web-page'
-      - $ref: '#/components/schemas/Blog-title-list'
-      - $ref: '#/components/schemas/Blog'
-      - $ref: '#/components/schemas/Meeting-minutes'
-      - $ref: '#/components/schemas/Call-summary'
-    Text-section:
+    Call-analysis-sentiment-customer:
       type: object
-      title: Text-section
-      description: 'A section of text which is a part of a longer text. A section has a `type` and `status`
-
-        `type` may be used by user interfaces to render the section in a certain way
-
-        `status` indicates if the text in the section is ready or still being written'
-      properties:
-        id:
-          type: string
-          description: The Id of the section
-          examples:
-          - gb36765
-        type:
-          type: string
-          enum:
-          - title
-          - intro
-          - list-numbered
-          - list-bulleted
-          - list-item
-          - h1
-          - h2
-          - text
-          description: The type of text in this section. If the type is a list type, the `text_list` field carries the list of texts. If type is a non-list type, the field  `text_data` carries the text
-        text_data:
-          $ref: '#/components/schemas/Text-data-simple'
-        text_list:
-          type: array
-          description: If the text section is of type `list-numbered` or `list-bulleted`, the text_list contains the text sections for each item in the list.
-          items:
-            $ref: '#/components/schemas/Text-section'
-        next_id:
-          type: string
-          description: The reference pointing to the Id of the next section in sequence
-          examples:
-          - nj3ju876
-        is_first:
-          type: boolean
-          description: Indicates if this item is the first item in the list. Only one item (the first one) in a list has this set true. Absence of this field indicates `false`
-    Call-analysis-other:
-      type: object
-      title: Call-analysis-other
-      properties:
-        general:
-          $ref: '#/components/schemas/Call-summary-common'
-    Text-data-simple:
-      type: object
-      title: Text-data-simple
-      description: Simple text data with status
-      properties:
-        text_data:
-          type: string
-          description: The completed or partially ready (still being written) text data
-        status:
-          type: string
-          enum:
-          - not_started
-          - in_progress
-          - ready
-          - ready_limited
-          description: 'The status of the text data.
-
-
-            `ready`: Text is fully ready and available on `text_data`
-
-            <br>`ready-limited`: Text is ready, but API only returns a part of the text or no text. This is due to restrictions with your account. An upgrade or purchase may be required to get access to full text.
-
-            <br>`not_started`: no part of text is available yet
-
-            <br>`in_progress`: text is being written. The `text_data` may have partially written text
-
-            his text)
-
-            <br>`failed`: Text generation has failed. The `error_code` and `error_description` provide more details'
-          examples:
-          - in_progress
-        error:
-          type: object
-          properties:
-            code:
-              type: string
-              description: The error code in case of failure
-              examples:
-              - 4001233-yt
-            error_description:
-              type: string
-              description: A textual description of the error
-              examples:
-              - Not enough AI credits
-    Call-summary-tactics:
-      type: array
-      title: Call-summary-tactics
-      items:
-        type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - successful
-            - failed
-          summary:
-            type: string
-          list:
-            type: array
-            items:
-              type: string
-          header:
-            type: string
-            description: The header for successful or failed sales tactics
-    Call-analysis-score:
-      type: object
-      title: Call-analysis-score
-      description: Scores from call analysis
+      title: Call-analysis-sentiment-customer
       properties:
         overall:
           type: number
           format: float
-          minimum: 0
-          maximum: 10
-          examples:
-          - 7.5
-        scores:
-          type: array
-          items:
-            type: object
-            properties:
-              seq_num:
-                type: number
-                minimum: 1
-                examples:
-                - 2
-              category:
-                type: string
-                enum:
-                - engagement
-                - politeness
-                - emotional
-                - communication_style
-                - intent_to_buy
-              value_type:
-                type: string
-                enum:
-                - 0-10
-                - 0-5
-                default: 0-10
-              value:
-                type: integer
-                examples:
-                - 5
-              explanation:
-                type: string
-              header:
-                type: string
-                description: The header for each score type
-        header:
-          type: string
-          description: Header for overall score
-    Text:
-      type: object
-      title: Text
-      description: The text object with the latest version of the text
-      properties:
-        text_id:
-          type: string
-          description: The unique text Id
-          examples:
-          - hn3h8645s
-        account_id:
-          type: string
-          description: The Sonetel account id
-          examples:
-          - '52688784'
-        business_id:
-          type: string
-          description: The business Id if specified
-          examples:
-          - 2hngtre
-        language:
-          type: string
-          description: Text available in this language should be returned. [2 char ISO](https://en.wikipedia.org/wiki/ISO_639-1) or [IETF language tags](https://en.wikipedia.org/wiki/IETF_language_tag)
-          minLength: 2
-          maxLength: 35
-          default: en
-          examples:
-          - sv-sv
-        user_id:
-          type: string
-          description: The user Id to which the text is associated
-          examples:
-          - '19876'
-        created_date:
-          type: string
-          description: The date/time when this version was created
-          format: date-time
-        updated_date:
-          type: string
-          description: The date/time when this version was last updated
-          format: date-time
-        type:
-          type: string
-          enum:
-          - business-description
-          - blog-title-list
-          - blog-article
-          - poem
-          - marketing-email
-          - website
-          - webpage
-          - meeting-minutes
-          - vm-summary
-          - call-summary
-          description: The text type
-        version_count:
-          type: integer
-          description: The number of versions that exist for this text
-          format: int32
-          examples:
-          - 2
-        parent_text_id:
-          type: string
-          description: The reference to the parent text_id of this text
-          examples:
-          - hn3h8645s
-        latest_version:
-          $ref: '#/components/schemas/Text-version-object'
-          description: Latest version of the text
-        in_use_with:
-          $ref: '#/components/schemas/InUseWith'
-          description: The services this text is in use with
-      examples: []
-    Blog:
-      type: object
-      title: Blog
-      description: A blog article along with a bunch of information about it. Blog article is broken down into ordered sections with text. Each section is assigned a type.
-      properties:
-        title:
-          type: string
-          description: The blog title
-        seo_keywords:
-          type: string
-          description: SEO keywords associated to this blog article
-        sections:
-          type: array
-          description: List of text sections that form the blog
-          items:
-            $ref: '#/components/schemas/Text-section'
-        text_info:
-          $ref: '#/components/schemas/Text-info'
-      examples:
-      - title: Writing great quality python code for the cloud
-        seo_keywords: python code cloud
-        sections:
-        - id: gb36765
-          type: title
-          text_data:
-            text_data: string
-            status: in_progress
-          text_list: {}
-          next_id: nj3ju876
-    Text-version-object:
-      type: object
-      title: Text-version-object
-      description: A version of text with the various text data, status and meta-data
-      properties:
-        version:
-          type: integer
-          default: 1
-          examples:
-          - 2
-        processed_text:
-          type: string
-        completion_text:
-          type: string
-        status:
-          type: string
-          enum:
-          - not_started
-          - in_progress
-          - completed
-          default: not_started
-          examples:
-          - in_progress
-        error:
-          type: object
-          properties:
-            code:
-              type: string
-              description: The error code in case of failure
-              examples:
-              - 4001233-yt
-            error_description:
-              type: string
-              description: A textual description of the error
-              examples:
-              - Not enough AI credits
-        meta_data:
-          $ref: '#/components/schemas/Meta-data'
-        create_date:
-          type: string
-          format: date-time
-        update_date:
-          type: string
-          format: date-time
-        user_input:
-          type: string
-      required:
-      - version
-      - status
-      - create_date
-      - update_date
-    Meeting-minutes:
-      type: object
-      title: Meeting-minutes
-      description: Meeting minutes and meeting details including meeting name, agreement, summary, action items.
-      properties:
-        name:
-          type: string
-          description: The meeting name
-          examples:
-          - Europe sales
-        meeting_date:
-          type: string
-          description: The date/time of the meeting.
-          format: date-time
-        participants:
-          type: array
-          description: List of participants and their names
-          items:
-            type: string
-            examples:
-            - Davy Jones
-        transcript:
-          $ref: '#/components/schemas/Text-data-simple'
-          description: Raw transcript of the meeting
-        minutes:
-          type: array
-          description: Meeting minutes broken down into various sections
-          items:
-            $ref: '#/components/schemas/Text-section'
-        notes:
-          type: string
-          description: Notes input by the user
-        text_info:
-          $ref: '#/components/schemas/Text-info'
-        file:
-          $ref: '#/components/schemas/File-single'
-          description: The file used as input for generating meeting minutes
-        word_count:
-          type: string
-          description: Number of words in the transcript
-    Text-info:
-      type: object
-      title: Text-info
-      description: Information about the text
-      properties:
-        text_id:
-          type: string
-          description: Text Id of the text object
-        account_id:
-          type: string
-        business_id:
-          type: string
-        user_id:
-          type: string
-        update_date:
-          type: string
-          format: date-time
-        version:
-          type: number
-          minimum: 1
-          examples:
-          - 2
-        user_input:
-          type: string
-          description: User feedback provided for generating description
-        language:
-          type: string
-        status:
-          type: string
-          enum:
-          - not_started
-          - in_progress
-          - completed
-          description: The overall status of the latest version of the text
-          examples:
-          - in_progress
-        in_use_with:
-          $ref: '#/components/schemas/InUseWith'
-          description: The services this text is in use with
-    Business-description:
-      $ref: '#/components/schemas/Text-data-simple'
-      title: Business description
-      description: 'Business description with partially (still being written) or completed text.
-
-        If status is `in_progress`, `text_data` may have part of the text available. The `text_data` continues to get updated until the status changes to `ready`.'
-    Call-summary-common:
-      type: object
-      title: Call-summary-common
-      properties:
-        summary:
-          type: object
-          properties:
-            one_sentence:
-              type: string
-            phrase:
-              type: string
-            detailed:
-              type: string
-            short:
-              type: string
-            headers:
-              $ref: '#/components/schemas/Headers'
-        topics:
-          type: object
-          properties:
-            main:
-              type: string
-            list:
-              type: array
-              items:
-                type: string
-        agreements:
-          type: array
-          items:
-            $ref: '#/components/schemas/Text-section'
-        action_items:
-          type: array
-          items:
-            type: object
-            properties:
-              action_for:
-                type: string
-                enum:
-                - general
-                - agent
-                - customer
-                - management
-              action:
-                type: string
-    Headers:
-      type: array
-      title: Headers
-      description: Headers to be shown on the UI
-      items:
-        type: object
-        properties:
-          field:
-            type: string
-            description: The field (typically maps to the JSON field) to which this header applies
-          header:
-            type: string
-            description: The header text that must be shown on the UI
-      x-internal: true
-    Text-version-object-no-Id:
-      type: object
-      title: Text-version-object-no-id
-      description: A version of text with the various text data, status and meta-data
-      properties:
-        processed_text:
-          type: string
-        completion_text:
-          type: string
-        status:
-          type: string
-          enum:
-          - not_started
-          - in_progress
-          - completed
-          default: not_started
-          examples:
-          - in_progress
-        error:
-          type: object
-          properties:
-            code:
-              type: string
-              description: The error code in case of failure
-            error_description:
-              type: string
-              description: A textual description of the error
-        meta_data:
-          $ref: '#/components/schemas/Meta-data'
-        user_input:
-          type: string
-      required:
-      - status
-    Voicemail-summary:
-      type: object
-      title: Voicemail-summary
-      description: Voicemail summary text object
-      properties:
-        vmail_id:
-          type: string
-          description: Unique Id of the voicemail
-          examples:
-          - Tht34uyh
-        transcript:
-          $ref: '#/components/schemas/Text-data-simple'
-          description: Raw transcript of the voicemail
-        summary:
-          type: array
-          description: The voicemail summary with its various sections
-          items:
-            $ref: '#/components/schemas/Text-section'
-        caller_name:
-          type: string
-          description: The name of the caller that left the voicemail
-        company_name:
-          type: string
-          description: The company name of the caller that left the voicemail
-        sentiment:
-          type: integer
-          description: 'The sentiment of the caller with values
-
-            `-1`: Negative
-
-            `0`: Neutral
-
-            `1`: Positive'
-          format: int32
           minimum: -1
           maximum: 1
-          readOnly: true
           examples:
-          - 0
-        text_info:
-          $ref: '#/components/schemas/Text-info'
-        file:
-          $ref: '#/components/schemas/File-single'
-          description: The file used as input for generating summary
-        word_count:
+          - 1
+        agent:
+          type: number
+          format: float
+          minimum: -1
+          maximum: 1
+          examples:
+          - 1
+        customer:
+          type: number
+          format: float
+          minimum: -1
+          maximum: 1
+          examples:
+          - 1
+        customer_h1:
+          type: number
+          format: float
+          minimum: -1
+          maximum: 1
+          examples:
+          - 1
+        customer_h2:
+          type: number
+          format: float
+          minimum: -1
+          maximum: 1
+          examples:
+          - 1
+        sentiment_decline_reason:
           type: string
-          description: Number of words in the transcript
+        header:
+          type: string
+          description: Header indicating change in customer sentiment
+    Call-analysis-suggestions:
+      type: object
+      title: Call-analysis-suggestions
+      properties:
+        list:
+          type: array
+          items:
+            type: object
+            properties:
+              suggestion_by:
+                type: string
+                enum:
+                - sonetel-ai
+                - agent
+                - customer
+              suggestion_for:
+                type: string
+                enum:
+                - agent
+                - management
+              summary:
+                type: string
+              details:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Text-section'
+              header:
+                type: string
+                description: The header shown on UI for each suggestion type
     Blog-title-list:
       type: object
       title: Blog-title-list
@@ -1770,6 +1242,258 @@ components:
           - ready
         text_info:
           $ref: '#/components/schemas/Text-info'
+    File-single:
+      type: object
+      title: File-single
+      description: A single file information
+      oneOf:
+      - type: object
+        properties:
+          file_id:
+            type: string
+      - type: object
+        properties:
+          file_url:
+            type: string
+    Text-section:
+      type: object
+      title: Text-section
+      description: 'A section of text which is a part of a longer text. A section has a `type` and `status`
+
+        `type` may be used by user interfaces to render the section in a certain way
+
+        `status` indicates if the text in the section is ready or still being written'
+      properties:
+        id:
+          type: string
+          description: The Id of the section
+          examples:
+          - gb36765
+        type:
+          type: string
+          enum:
+          - title
+          - intro
+          - list-numbered
+          - list-bulleted
+          - list-item
+          - h1
+          - h2
+          - text
+          description: The type of text in this section. If the type is a list type, the `text_list` field carries the list of texts. If type is a non-list type, the field  `text_data` carries the text
+        text_data:
+          $ref: '#/components/schemas/Text-data-simple'
+        text_list:
+          type: array
+          description: If the text section is of type `list-numbered` or `list-bulleted`, the text_list contains the text sections for each item in the list.
+          items:
+            $ref: '#/components/schemas/Text-section'
+        next_id:
+          type: string
+          description: The reference pointing to the Id of the next section in sequence
+          examples:
+          - nj3ju876
+        is_first:
+          type: boolean
+          description: Indicates if this item is the first item in the list. Only one item (the first one) in a list has this set true. Absence of this field indicates `false`
+    Text-version-object-no-Id:
+      type: object
+      title: Text-version-object-no-id
+      description: A version of text with the various text data, status and meta-data
+      properties:
+        processed_text:
+          type: string
+        completion_text:
+          type: string
+        status:
+          type: string
+          enum:
+          - not_started
+          - in_progress
+          - completed
+          default: not_started
+          examples:
+          - in_progress
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+              description: The error code in case of failure
+            error_description:
+              type: string
+              description: A textual description of the error
+        meta_data:
+          $ref: '#/components/schemas/Meta-data'
+        user_input:
+          type: string
+      required:
+      - status
+    Call-analysis-other:
+      type: object
+      title: Call-analysis-other
+      properties:
+        general:
+          $ref: '#/components/schemas/Call-summary-common'
+    Meeting-minutes:
+      type: object
+      title: Meeting-minutes
+      description: Meeting minutes and meeting details including meeting name, agreement, summary, action items.
+      properties:
+        name:
+          type: string
+          description: The meeting name
+          examples:
+          - Europe sales
+        meeting_date:
+          type: string
+          description: The date/time of the meeting.
+          format: date-time
+        participants:
+          type: array
+          description: List of participants and their names
+          items:
+            type: string
+            examples:
+            - Davy Jones
+        transcript:
+          $ref: '#/components/schemas/Text-data-simple'
+          description: Raw transcript of the meeting
+        minutes:
+          type: array
+          description: Meeting minutes broken down into various sections
+          items:
+            $ref: '#/components/schemas/Text-section'
+        notes:
+          type: string
+          description: Notes input by the user
+        text_info:
+          $ref: '#/components/schemas/Text-info'
+        file:
+          $ref: '#/components/schemas/File-single'
+          description: The file used as input for generating meeting minutes
+        word_count:
+          type: string
+          description: Number of words in the transcript
+    Web-page:
+      type: object
+      title: Web-page
+      description: Web page information along with the URL, raw text references and additional fields
+      properties:
+        url:
+          type: string
+          description: The page URL
+          format: uri-reference
+          examples:
+          - https://sonetel.com/en/services/virtual-phone-numbers/
+        page_summary:
+          $ref: '#/components/schemas/Text-data-simple'
+          description: A summary of the web page with status
+        page_type:
+          type: string
+          enum:
+          - home
+          - contact
+          - product
+          - other
+          description: The type of page
+          examples:
+          - contact
+        meta_description:
+          type: string
+          description: Meta description for the page
+          examples:
+          - Have your own local phone number in any city and country of choice. Answer calls anywhere. From $1.79 per month.
+        title:
+          type: string
+          description: The title of the page
+          examples:
+          - Be a Global Entrepreneur
+        text_info:
+          $ref: '#/components/schemas/Text-info'
+    Call-summary-common:
+      type: object
+      title: Call-summary-common
+      properties:
+        summary:
+          type: object
+          properties:
+            one_sentence:
+              type: string
+            phrase:
+              type: string
+            detailed:
+              type: string
+            short:
+              type: string
+            headers:
+              $ref: '#/components/schemas/Headers'
+        topics:
+          type: object
+          properties:
+            main:
+              type: string
+            list:
+              type: array
+              items:
+                type: string
+        agreements:
+          type: array
+          items:
+            $ref: '#/components/schemas/Text-section'
+        action_items:
+          type: array
+          items:
+            type: object
+            properties:
+              action_for:
+                type: string
+                enum:
+                - general
+                - agent
+                - customer
+                - management
+              action:
+                type: string
+    Text-info:
+      type: object
+      title: Text-info
+      description: Information about the text
+      properties:
+        text_id:
+          type: string
+          description: Text Id of the text object
+        account_id:
+          type: string
+        business_id:
+          type: string
+        user_id:
+          type: string
+        update_date:
+          type: string
+          format: date-time
+        version:
+          type: number
+          minimum: 1
+          examples:
+          - 2
+        user_input:
+          type: string
+          description: User feedback provided for generating description
+        language:
+          type: string
+        status:
+          type: string
+          enum:
+          - not_started
+          - in_progress
+          - completed
+          description: The overall status of the latest version of the text
+          examples:
+          - in_progress
+        in_use_with:
+          $ref: '#/components/schemas/InUseWith'
+          description: The services this text is in use with
     Call-summary:
       type: object
       title: Call-summary
@@ -1876,169 +1600,111 @@ components:
           minimum: 0
           examples:
           - 457
+    Business-description:
+      $ref: '#/components/schemas/Text-data-simple'
+      title: Business description
+      description: 'Business description with partially (still being written) or completed text.
+
+        If status is `in_progress`, `text_data` may have part of the text available. The `text_data` continues to get updated until the status changes to `ready`.'
+    Text-version-object:
+      type: object
+      title: Text-version-object
+      description: A version of text with the various text data, status and meta-data
+      properties:
+        version:
+          type: integer
+          default: 1
+          examples:
+          - 2
+        processed_text:
+          type: string
+        completion_text:
+          type: string
+        status:
+          type: string
+          enum:
+          - not_started
+          - in_progress
+          - completed
+          default: not_started
+          examples:
+          - in_progress
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+              description: The error code in case of failure
+              examples:
+              - 4001233-yt
+            error_description:
+              type: string
+              description: A textual description of the error
+              examples:
+              - Not enough AI credits
+        meta_data:
+          $ref: '#/components/schemas/Meta-data'
+        create_date:
+          type: string
+          format: date-time
+        update_date:
+          type: string
+          format: date-time
+        user_input:
+          type: string
+      required:
+      - version
+      - status
+      - create_date
+      - update_date
+    Text-data-simple:
+      type: object
+      title: Text-data-simple
+      description: Simple text data with status
+      properties:
+        text_data:
+          type: string
+          description: The completed or partially ready (still being written) text data
+        status:
+          type: string
+          enum:
+          - not_started
+          - in_progress
+          - ready
+          - ready_limited
+          description: 'The status of the text data.
+
+
+            `ready`: Text is fully ready and available on `text_data`
+
+            <br>`ready-limited`: Text is ready, but API only returns a part of the text or no text. This is due to restrictions with your account. An upgrade or purchase may be required to get access to full text.
+
+            <br>`not_started`: no part of text is available yet
+
+            <br>`in_progress`: text is being written. The `text_data` may have partially written text
+
+            his text)
+
+            <br>`failed`: Text generation has failed. The `error_code` and `error_description` provide more details'
+          examples:
+          - in_progress
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+              description: The error code in case of failure
+              examples:
+              - 4001233-yt
+            error_description:
+              type: string
+              description: A textual description of the error
+              examples:
+              - Not enough AI credits
     Call-analysis-sales:
       type: object
       title: Call-analysis-sales
       properties:
-        general:
-          $ref: '#/components/schemas/Call-summary-common'
-        sentiment:
-          $ref: '#/components/schemas/Call-analysis-sentiment-customer'
-        score:
-          $ref: '#/components/schemas/Call-analysis-score'
-        suggestion:
-          $ref: '#/components/schemas/Call-analysis-suggestions'
-        tactics:
-          $ref: '#/components/schemas/Call-summary-tactics'
-    Call-analysis-sentiment-customer:
-      type: object
-      title: Call-analysis-sentiment-customer
-      properties:
-        overall:
-          type: number
-          format: float
-          minimum: -1
-          maximum: 1
-          examples:
-          - 1
-        agent:
-          type: number
-          format: float
-          minimum: -1
-          maximum: 1
-          examples:
-          - 1
-        customer:
-          type: number
-          format: float
-          minimum: -1
-          maximum: 1
-          examples:
-          - 1
-        customer_h1:
-          type: number
-          format: float
-          minimum: -1
-          maximum: 1
-          examples:
-          - 1
-        customer_h2:
-          type: number
-          format: float
-          minimum: -1
-          maximum: 1
-          examples:
-          - 1
-        sentiment_decline_reason:
-          type: string
-        header:
-          type: string
-          description: Header indicating change in customer sentiment
-    Call-analysis-suggestions:
-      type: object
-      title: Call-analysis-suggestions
-      properties:
-        list:
-          type: array
-          items:
-            type: object
-            properties:
-              suggestion_by:
-                type: string
-                enum:
-                - sonetel-ai
-                - agent
-                - customer
-              suggestion_for:
-                type: string
-                enum:
-                - agent
-                - management
-              summary:
-                type: string
-              details:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Text-section'
-              header:
-                type: string
-                description: The header shown on UI for each suggestion type
-    Web-page:
-      type: object
-      title: Web-page
-      description: Web page information along with the URL, raw text references and additional fields
-      properties:
-        url:
-          type: string
-          description: The page URL
-          format: uri-reference
-          examples:
-          - https://sonetel.com/en/services/virtual-phone-numbers/
-        page_summary:
-          $ref: '#/components/schemas/Text-data-simple'
-          description: A summary of the web page with status
-        page_type:
-          type: string
-          enum:
-          - home
-          - contact
-          - product
-          - other
-          description: The type of page
-          examples:
-          - contact
-        meta_description:
-          type: string
-          description: Meta description for the page
-          examples:
-          - Have your own local phone number in any city and country of choice. Answer calls anywhere. From $1.79 per month.
-        title:
-          type: string
-          description: The title of the page
-          examples:
-          - Be a Global Entrepreneur
-        text_info:
-          $ref: '#/components/schemas/Text-info'
-    File-single:
-      type: object
-      title: File-single
-      description: A single file information
-      oneOf:
-      - type: object
-        properties:
-          file_id:
-            type: string
-      - type: object
-        properties:
-          file_url:
-            type: string
-    InUseWith:
-      type: array
-      title: InUseWith
-      description: List of services a text is in use with.
-      items:
-        type: object
-        properties:
-          service:
-            type: string
-            enum:
-            - meeting-minutes
-            - business-desc
-            - blog-title-list
-            - blog
-            - vmail-summary
-            - call-summary
-            description: The service the text is in use with
-          auto_expire:
-            type: string
-            description: Automatic expiry timestamp when the text is no longer required by the service. An empty value implies that the text is never automatically deleted.
-            format: date-time
-    Call-analysis-support:
-      type: object
-      title: Call-analysis-support
-      properties:
-        resolution:
-          type: boolean
         general:
           $ref: '#/components/schemas/Call-summary-common'
         sentiment:
@@ -2134,37 +1800,291 @@ components:
       - type
       - version_count
       - parent_text_id
+    Call-summary-tactics:
+      type: array
+      title: Call-summary-tactics
+      items:
+        type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - successful
+            - failed
+          summary:
+            type: string
+          list:
+            type: array
+            items:
+              type: string
+          header:
+            type: string
+            description: The header for successful or failed sales tactics
+    Voicemail-summary:
+      type: object
+      title: Voicemail-summary
+      description: Voicemail summary text object
+      properties:
+        vmail_id:
+          type: string
+          description: Unique Id of the voicemail
+          examples:
+          - Tht34uyh
+        transcript:
+          $ref: '#/components/schemas/Text-data-simple'
+          description: Raw transcript of the voicemail
+        summary:
+          type: array
+          description: The voicemail summary with its various sections
+          items:
+            $ref: '#/components/schemas/Text-section'
+        caller_name:
+          type: string
+          description: The name of the caller that left the voicemail
+        company_name:
+          type: string
+          description: The company name of the caller that left the voicemail
+        sentiment:
+          type: integer
+          description: 'The sentiment of the caller with values
+
+            `-1`: Negative
+
+            `0`: Neutral
+
+            `1`: Positive'
+          format: int32
+          minimum: -1
+          maximum: 1
+          readOnly: true
+          examples:
+          - 0
+        text_info:
+          $ref: '#/components/schemas/Text-info'
+        file:
+          $ref: '#/components/schemas/File-single'
+          description: The file used as input for generating summary
+        word_count:
+          type: string
+          description: Number of words in the transcript
+    Call-analysis-support:
+      type: object
+      title: Call-analysis-support
+      properties:
+        resolution:
+          type: boolean
+        general:
+          $ref: '#/components/schemas/Call-summary-common'
+        sentiment:
+          $ref: '#/components/schemas/Call-analysis-sentiment-customer'
+        score:
+          $ref: '#/components/schemas/Call-analysis-score'
+        suggestion:
+          $ref: '#/components/schemas/Call-analysis-suggestions'
+        tactics:
+          $ref: '#/components/schemas/Call-summary-tactics'
+    Blog:
+      type: object
+      title: Blog
+      description: A blog article along with a bunch of information about it. Blog article is broken down into ordered sections with text. Each section is assigned a type.
+      properties:
+        title:
+          type: string
+          description: The blog title
+        seo_keywords:
+          type: string
+          description: SEO keywords associated to this blog article
+        sections:
+          type: array
+          description: List of text sections that form the blog
+          items:
+            $ref: '#/components/schemas/Text-section'
+        text_info:
+          $ref: '#/components/schemas/Text-info'
+      examples:
+      - title: Writing great quality python code for the cloud
+        seo_keywords: python code cloud
+        sections:
+        - id: gb36765
+          type: title
+          text_data:
+            text_data: string
+            status: in_progress
+          text_list: {}
+          next_id: nj3ju876
+    Meta-data:
+      title: Meta-data
+      description: The meta data associated to a version of the text. The meta-data may take the structure of any of any of the text types depending on the type of text stored
+      oneOf:
+      - $ref: '#/components/schemas/Business-description'
+      - $ref: '#/components/schemas/Web-page'
+      - $ref: '#/components/schemas/Blog-title-list'
+      - $ref: '#/components/schemas/Blog'
+      - $ref: '#/components/schemas/Meeting-minutes'
+      - $ref: '#/components/schemas/Call-summary'
+    Call-analysis-score:
+      type: object
+      title: Call-analysis-score
+      description: Scores from call analysis
+      properties:
+        overall:
+          type: number
+          format: float
+          minimum: 0
+          maximum: 10
+          examples:
+          - 7.5
+        scores:
+          type: array
+          items:
+            type: object
+            properties:
+              seq_num:
+                type: number
+                minimum: 1
+                examples:
+                - 2
+              category:
+                type: string
+                enum:
+                - engagement
+                - politeness
+                - emotional
+                - communication_style
+                - intent_to_buy
+              value_type:
+                type: string
+                enum:
+                - 0-10
+                - 0-5
+                default: 0-10
+              value:
+                type: integer
+                examples:
+                - 5
+              explanation:
+                type: string
+              header:
+                type: string
+                description: The header for each score type
+        header:
+          type: string
+          description: Header for overall score
+    Headers:
+      type: array
+      title: Headers
+      description: Headers to be shown on the UI
+      items:
+        type: object
+        properties:
+          field:
+            type: string
+            description: The field (typically maps to the JSON field) to which this header applies
+          header:
+            type: string
+            description: The header text that must be shown on the UI
+      x-internal: true
+    Text:
+      type: object
+      title: Text
+      description: The text object with the latest version of the text
+      properties:
+        text_id:
+          type: string
+          description: The unique text Id
+          examples:
+          - hn3h8645s
+        account_id:
+          type: string
+          description: The Sonetel account id
+          examples:
+          - '52688784'
+        business_id:
+          type: string
+          description: The business Id if specified
+          examples:
+          - 2hngtre
+        language:
+          type: string
+          description: Text available in this language should be returned. [2 char ISO](https://en.wikipedia.org/wiki/ISO_639-1) or [IETF language tags](https://en.wikipedia.org/wiki/IETF_language_tag)
+          minLength: 2
+          maxLength: 35
+          default: en
+          examples:
+          - sv-sv
+        user_id:
+          type: string
+          description: The user Id to which the text is associated
+          examples:
+          - '19876'
+        created_date:
+          type: string
+          description: The date/time when this version was created
+          format: date-time
+        updated_date:
+          type: string
+          description: The date/time when this version was last updated
+          format: date-time
+        type:
+          type: string
+          enum:
+          - business-description
+          - blog-title-list
+          - blog-article
+          - poem
+          - marketing-email
+          - website
+          - webpage
+          - meeting-minutes
+          - vm-summary
+          - call-summary
+          description: The text type
+        version_count:
+          type: integer
+          description: The number of versions that exist for this text
+          format: int32
+          examples:
+          - 2
+        parent_text_id:
+          type: string
+          description: The reference to the parent text_id of this text
+          examples:
+          - hn3h8645s
+        latest_version:
+          $ref: '#/components/schemas/Text-version-object'
+          description: Latest version of the text
+        in_use_with:
+          $ref: '#/components/schemas/InUseWith'
+          description: The services this text is in use with
+      examples: []
+    InUseWith:
+      type: array
+      title: InUseWith
+      description: List of services a text is in use with.
+      items:
+        type: object
+        properties:
+          service:
+            type: string
+            enum:
+            - meeting-minutes
+            - business-desc
+            - blog-title-list
+            - blog
+            - vmail-summary
+            - call-summary
+            description: The service the text is in use with
+          auto_expire:
+            type: string
+            description: Automatic expiry timestamp when the text is no longer required by the service. An empty value implies that the text is never automatically deleted.
+            format: date-time
   responses:
-    Get-blog-by-id:
-      description: A blog article
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Blog'
-    Get-vmail-summary-by-id:
-      description: Voicemail summary
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Voicemail-summary'
-    Put-version-response:
-      description: Text version information
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Text-version-object'
     Delete-version:
       description: Deleted text version
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Text-version-object'
-    Get-meeting-minutes-by-id:
-      description: Meeting minutes
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Meeting-minutes'
     Get-business-description-by-id:
       description: The business description data
       content:
@@ -2174,6 +2094,137 @@ components:
         application/xml:
           schema:
             type: object
+    Get-vmail-summary-list:
+      description: List of voicemail summaries
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/Voicemail-summary'
+    Get-blog-title-lists:
+      description: Get blog title lists
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/Blog-title-list'
+    Get-text-id:
+      description: Text object with one or more versions
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Text-many-versions'
+    Put-version-response:
+      description: Text version information
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Text-version-object'
+    Get-meeting-minutes-list:
+      description: List of meeting minutes
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/Meeting-minutes'
+    Put-text-id-response:
+      description: Text Id with latest version
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Text'
+    Get-call-summary-by-id:
+      description: Call summary
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Call-summary'
+    Get-blog-list:
+      description: List of blog articles
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/Blog'
+    Get-web-page-by-id:
+      description: A web page with URL, page summary and a bunch of other info
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Web-page'
+    Get-blog-by-id:
+      description: A blog article
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Blog'
+    Text-list:
+      description: A list of text objects
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/Text'
+    Get-blog-title-list-by-id:
+      description: Get a blog title list by Id
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Blog-title-list'
+    Get-business-description-list:
+      description: List of business description data
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/Business-description'
+    Get-web-page-list:
+      description: List of web pages with URL, page summary and a bunch of other information
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/Web-page'
+    delete-success:
+      description: List of deleted text Ids
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              text_id_list:
+                type: array
+                description: List of text Ids that are deleted
+                items:
+                  type: string
+                  examples:
+                  - 4gh6354
+            required:
+            - text_id_list
+            x-examples:
+              example-1:
+                status: SUCCESS
+                message: 'Data deleted successfully. Account id : 200000000'
+                response: null
+          examples:
+            Example 1:
+              value:
+                text_id_list:
+                - 4gh6354
+                - gnr873654
+    Get-vmail-summary-by-id:
+      description: Voicemail summary
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Voicemail-summary'
     Create-text-response:
       description: The newly created text object
       content:
@@ -2233,86 +2284,6 @@ components:
               Example 1:
                 id: text_id
                 text: <Prepared-text>
-    Get-blog-title-list-by-id:
-      description: Get a blog title list by Id
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Blog-title-list'
-    Get-meeting-minutes-list:
-      description: List of meeting minutes
-      content:
-        application/json:
-          schema:
-            type: array
-            items:
-              $ref: '#/components/schemas/Meeting-minutes'
-    Get-web-page-list:
-      description: List of web pages with URL, page summary and a bunch of other information
-      content:
-        application/json:
-          schema:
-            type: array
-            items:
-              $ref: '#/components/schemas/Web-page'
-    Get-business-description-list:
-      description: List of business description data
-      content:
-        application/json:
-          schema:
-            type: array
-            items:
-              $ref: '#/components/schemas/Business-description'
-    Put-text-id-response:
-      description: Text Id with latest version
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Text'
-    Get-vmail-summary-list:
-      description: List of voicemail summaries
-      content:
-        application/json:
-          schema:
-            type: array
-            items:
-              $ref: '#/components/schemas/Voicemail-summary'
-    Text-list:
-      description: A list of text objects
-      content:
-        application/json:
-          schema:
-            type: array
-            items:
-              $ref: '#/components/schemas/Text'
-    Get-blog-title-lists:
-      description: Get blog title lists
-      content:
-        application/json:
-          schema:
-            type: array
-            items:
-              $ref: '#/components/schemas/Blog-title-list'
-    Get-text-id:
-      description: Text object with one or more versions
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Text-many-versions'
-    Get-web-page-by-id:
-      description: A web page with URL, page summary and a bunch of other info
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Web-page'
-    Get-blog-list:
-      description: List of blog articles
-      content:
-        application/json:
-          schema:
-            type: array
-            items:
-              $ref: '#/components/schemas/Blog'
     Get-call-summary-list:
       description: List of call summaries
       content:
@@ -2321,39 +2292,12 @@ components:
             type: array
             items:
               $ref: '#/components/schemas/Call-summary'
-    delete-success:
-      description: List of deleted text Ids
+    Get-meeting-minutes-by-id:
+      description: Meeting minutes
       content:
         application/json:
           schema:
-            type: object
-            properties:
-              text_id_list:
-                type: array
-                description: List of text Ids that are deleted
-                items:
-                  type: string
-                  examples:
-                  - 4gh6354
-            required:
-            - text_id_list
-            x-examples:
-              example-1:
-                status: SUCCESS
-                message: 'Data deleted successfully. Account id : 200000000'
-                response: null
-          examples:
-            Example 1:
-              value:
-                text_id_list:
-                - 4gh6354
-                - gnr873654
-    Get-call-summary-by-id:
-      description: Call summary
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Call-summary'
+            $ref: '#/components/schemas/Meeting-minutes'
   requestBodies:
     Post-text-version:
       description: List of fields while creating a new version
@@ -2370,6 +2314,35 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Text-version-object-no-Id'
+    Put-text-id:
+      description: List of fields to be updated
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              business_id:
+                type: string
+                description: The business Id
+                examples:
+                - 2hngtre
+              user_id:
+                type: string
+                description: The user_id to which the text is associated
+                examples:
+                - '19876'
+              language:
+                type: string
+                description: Text available in this language should be returned. [2 char ISO](https://en.wikipedia.org/wiki/ISO_639-1) or [IETF language tags](https://en.wikipedia.org/wiki/IETF_language_tag)
+                minLength: 2
+                maxLength: 35
+                examples:
+                - sv-sv
+              parent_text_id:
+                type: string
+                description: The parent text Id
+                examples:
+                - hn3h8645s
     Post-text:
       description: The data for the text object to be created. All fields except the type are optional
       content:
@@ -2427,35 +2400,6 @@ components:
         application/xml:
           schema:
             type: object
-    Put-text-id:
-      description: List of fields to be updated
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              business_id:
-                type: string
-                description: The business Id
-                examples:
-                - 2hngtre
-              user_id:
-                type: string
-                description: The user_id to which the text is associated
-                examples:
-                - '19876'
-              language:
-                type: string
-                description: Text available in this language should be returned. [2 char ISO](https://en.wikipedia.org/wiki/ISO_639-1) or [IETF language tags](https://en.wikipedia.org/wiki/IETF_language_tag)
-                minLength: 2
-                maxLength: 35
-                examples:
-                - sv-sv
-              parent_text_id:
-                type: string
-                description: The parent text Id
-                examples:
-                - hn3h8645s
     Put-meeting-minutes:
       description: Update meeting minutes
       content:
@@ -2495,6 +2439,4 @@ components:
           refreshUrl: https://api.sonetel.com/SonetelAuth/beta/oauth/token
           tokenUrl: https://api.sonetel.com/SonetelAuth/beta/oauth/token
           scopes: {}
-x-refined-from:
-- 13_ai_textmanager.yaml
-- sonetel-ai-text-manager-openapi.yml
+x-internal: true

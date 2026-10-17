@@ -1,8 +1,8 @@
 openapi: 3.2.0
 info:
-  title: Sonetel Globaldata API
   version: '2.0'
-  description: 'Operations tagged Globaldata across 2 of this provider''s published API definitions: 8_globaldata.yaml, sonetel-supporting-data-openapi.yml. Each path carries the servers of the definition it was published in.'
+  title: Supporting Data Globaldata API
+  description: Use these APIs to get supporting data such as the available timezones, default language for voice messages, etc for use in other APIs.
 servers:
 - url: https://public-api.sonetel.com/
   description: Production
@@ -54,9 +54,6 @@ paths:
         description: Production
       tags:
       - Globaldata
-    servers:
-    - url: https://public-api.sonetel.com/
-      description: Production
   /globaldata/voiceprompts:
     get:
       summary: List of pre-recorded voices
@@ -121,9 +118,6 @@ paths:
         description: Production
       tags:
       - Globaldata
-    servers:
-    - url: https://public-api.sonetel.com/
-      description: Production
   /globaldata/language:
     get:
       summary: List all language codes
@@ -195,9 +189,6 @@ paths:
         description: Production
       tags:
       - Globaldata
-    servers:
-    - url: https://public-api.sonetel.com/
-      description: Production
 components:
   responses:
     Voiceprompts:
@@ -304,6 +295,43 @@ components:
           schema:
             type: string
           description: application/json;charset=UTF-8
+    Language:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              isolangCode2Digit:
+                type: string
+                description: Two letter ISO code of the language
+              isolangCode3Digit:
+                type: string
+                description: Three letter ISO code of the language
+              langId:
+                type: number
+                description: A numeric ID that uniquely identifies this language.
+              langName:
+                type: string
+                description: Name of the language
+              langFamily:
+                type: string
+                description: The family that the language belongs to.
+            x-examples:
+              example-1:
+                isolangCode2Digit: ab
+                isolangCode3Digit: abk
+                langId: 1
+                langName: Abkhaz
+                langFamily: Northwest Caucasian
+          examples:
+            Example:
+              value:
+                isolangCode2Digit: sv
+                isolangCode3Digit: swe
+                langId: 154
+                langName: Swedish
+                langFamily: Indo-European
     Timezone:
       description: Support timezones
       content:
@@ -351,43 +379,3 @@ components:
           schema:
             type: string
           description: application/json;charset=UTF-8
-    Language:
-      description: Example response
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              isolangCode2Digit:
-                type: string
-                description: Two letter ISO code of the language
-              isolangCode3Digit:
-                type: string
-                description: Three letter ISO code of the language
-              langId:
-                type: number
-                description: A numeric ID that uniquely identifies this language.
-              langName:
-                type: string
-                description: Name of the language
-              langFamily:
-                type: string
-                description: The family that the language belongs to.
-            x-examples:
-              example-1:
-                isolangCode2Digit: ab
-                isolangCode3Digit: abk
-                langId: 1
-                langName: Abkhaz
-                langFamily: Northwest Caucasian
-          examples:
-            Example:
-              value:
-                isolangCode2Digit: sv
-                isolangCode3Digit: swe
-                langId: 154
-                langName: Swedish
-                langFamily: Indo-European
-x-refined-from:
-- 8_globaldata.yaml
-- sonetel-supporting-data-openapi.yml

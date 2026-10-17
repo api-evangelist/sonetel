@@ -1,12 +1,13 @@
 openapi: 3.2.0
 info:
-  title: Sonetel Make Calls API
   version: '2.0'
+  title: Make Calls API
+  summary: Use your Sonetel account to make Callback calls to your contacts
+  description: Use the callback service offered by Sonetel to make latency-free international calls using your mobile phones at the cost of a local call.
+  termsOfService: https://sonetel.com/en/help/help-topics/terms-conditions/terms-conditions/
   contact:
     name: Sonetel API Support
     email: api.support@sonetel.com
-  termsOfService: https://sonetel.com/en/help/help-topics/terms-conditions/terms-conditions/
-  description: 'Operations tagged Make Calls across 2 of this provider''s published API definitions: make_calls.yaml, sonetel-make-calls-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://public-api.sonetel.com/
   description: Production
@@ -95,9 +96,6 @@ paths:
         description: Production
       tags:
       - Make Calls
-    servers:
-    - url: https://public-api.sonetel.com/
-      description: Production
 components:
   responses:
     unauthorized:
@@ -140,6 +138,14 @@ components:
                 response:
                   session_id: string
   parameters:
+    Accept:
+      name: Accept
+      in: header
+      description: The content type that should be returned in the response.
+      required: true
+      schema:
+        type: string
+        default: application/json
     Authorization:
       name: Authorization
       in: header
@@ -154,14 +160,6 @@ components:
       in: header
       description: The content type of the request
       required: false
-      schema:
-        type: string
-        default: application/json
-    Accept:
-      name: Accept
-      in: header
-      description: The content type that should be returned in the response.
-      required: true
       schema:
         type: string
         default: application/json
@@ -211,6 +209,3 @@ components:
           refreshUrl: https://api.sonetel.com/SonetelAuth/beta/oauth/token
           tokenUrl: https://api.sonetel.com/SonetelAuth/beta/oauth/token
           scopes: {}
-x-refined-from:
-- make_calls.yaml
-- sonetel-make-calls-openapi.yml

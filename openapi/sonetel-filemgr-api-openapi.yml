@@ -1,13 +1,14 @@
 openapi: 3.2.0
 info:
-  title: Sonetel Filemgr API
   version: 1.0.0
+  title: File Manager Filemgr API
+  summary: A file management API for viewing, storing and managing files used with Sonetel services
+  description: Sonetel File Manager is an API for viewing, storing and managing files used with Sonetel services.
+  termsOfService: https://sonetel.com/en/help/help-topics/terms-conditions/terms-conditions/
   contact:
     name: Sonetel API Support
     url: https://sonetel.com/en/developer/help/
     email: api.support@sonetel.com
-  termsOfService: https://sonetel.com/en/help/help-topics/terms-conditions/terms-conditions/
-  description: 'Operations tagged Filemgr across 2 of this provider''s published API definitions: 15_ai_filemanager.yaml, sonetel-ai-file-manager-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://public-api.sonetel.com
   description: Production
@@ -49,9 +50,6 @@ paths:
         description: Production
       tags:
       - Filemgr
-    servers:
-    - url: https://public-api.sonetel.com
-      description: Production
   /filemgr/upload-url:
     post:
       summary: Create upload URLs
@@ -71,9 +69,6 @@ paths:
         description: Production
       tags:
       - Filemgr
-    servers:
-    - url: https://public-api.sonetel.com
-      description: Production
   /filemgr/upload-url/complete:
     post:
       summary: Complete multi-part upload
@@ -93,9 +88,6 @@ paths:
         description: Production
       tags:
       - Filemgr
-    servers:
-    - url: https://public-api.sonetel.com
-      description: Production
   /filemgr/file/{file_id}:
     get:
       summary: Fetch file content
@@ -164,9 +156,6 @@ paths:
       x-internal: true
       tags:
       - Filemgr
-    servers:
-    - url: https://public-api.sonetel.com
-      description: Production
   /filemgr/file/{file_id}/meta-data:
     get:
       summary: Fetch file meta data
@@ -225,9 +214,6 @@ paths:
         description: Production
       tags:
       - Filemgr
-    servers:
-    - url: https://public-api.sonetel.com
-      description: Production
   /filemgr/file:
     get:
       summary: List files
@@ -349,9 +335,6 @@ paths:
         description: Production
       tags:
       - Filemgr
-    servers:
-    - url: https://public-api.sonetel.com
-      description: Production
 components:
   requestBodies:
     put-file-meta-data:
@@ -516,6 +499,113 @@ components:
             required:
             - count
   schemas:
+    ImageMetaData:
+      type: object
+      title: ImageMetaData
+      description: Meta data for image files
+      properties:
+        resolution:
+          type: string
+          description: The image resolution
+          format: regex
+          pattern: ^\d{3,4}x\d{3,4}$
+          examples:
+          - 1920x1080
+        color_space:
+          type: string
+          description: The color space of the image such as `RGB` or `CMYK`
+          examples:
+          - RGB
+        image_format:
+          type: string
+          enum:
+          - jpg
+          - png
+          - gif
+          - bmp
+          - tiff
+          - svg
+          description: The image format such as `jpg`, `png`
+          examples:
+          - jpg
+        bit_depth:
+          type: integer
+          description: The bit depth of the image
+          format: int32
+          examples:
+          - 32
+    InUseWith:
+      type: array
+      title: InUseWith
+      description: Information about services file is in use with
+      items:
+        type: object
+        properties:
+          service:
+            type: string
+            enum:
+            - ai-meeting-minutes
+            - ai-call-summary
+            - ai-vmail-summary
+            description: The service the file is in use with
+            examples:
+            - ai-meeting-minutes
+          auto_expire:
+            type: string
+            description: 'Automatic expiry timestamp when the file is no longer required by the service
+
+              An empty value implies that the file is never automatically deleted'
+            format: date-time
+    VideoMetaData:
+      type: object
+      title: VideoMetaData
+      description: Meta data for video files
+      properties:
+        duration:
+          type: integer
+          description: The length in seconds of the video file
+          examples:
+          - 32
+        codec:
+          type: string
+          description: The [video codec](https://www.iana.org/assignments/media-types/media-types.xhtml#video) used
+        resolution:
+          type: string
+          enum:
+          - 480p
+          - 576p
+          - 720p
+          - 1080p
+          - 1440p
+          - 4K
+          - 8K
+          description: The video resolution
+        bitrate:
+          type: integer
+          description: The video bitrate in kbps
+          format: int32
+          examples:
+          - 8000
+        frame_rate:
+          type: integer
+          description: The frame rate in frames per second (fps)
+          format: int32
+          examples:
+          - 60
+        audio_codec:
+          type: string
+          description: The [audio code](https://www.iana.org/assignments/media-types/media-types.xhtml#audio) used
+          examples:
+          - pcma
+        audio_channels:
+          type: integer
+          description: The number of audio channels in the video
+          format: int32
+        language:
+          type: string
+          description: The language of the audio. [2 char ISO](https://en.wikipedia.org/wiki/ISO_639-1) or [IETF language tags](https://en.wikipedia.org/wiki/IETF_language_tag)
+          examples:
+          - en
     AudioMetaData:
       type: object
       title: AudioMetaData
@@ -667,113 +757,6 @@ components:
         store_obj_id:
           type: string
           description: Reference Id of the file in the object storage
-    VideoMetaData:
-      type: object
-      title: VideoMetaData
-      description: Meta data for video files
-      properties:
-        duration:
-          type: integer
-          description: The length in seconds of the video file
-          examples:
-          - 32
-        codec:
-          type: string
-          description: The [video codec](https://www.iana.org/assignments/media-types/media-types.xhtml#video) used
-        resolution:
-          type: string
-          enum:
-          - 480p
-          - 576p
-          - 720p
-          - 1080p
-          - 1440p
-          - 4K
-          - 8K
-          description: The video resolution
-        bitrate:
-          type: integer
-          description: The video bitrate in kbps
-          format: int32
-          examples:
-          - 8000
-        frame_rate:
-          type: integer
-          description: The frame rate in frames per second (fps)
-          format: int32
-          examples:
-          - 60
-        audio_codec:
-          type: string
-          description: The [audio code](https://www.iana.org/assignments/media-types/media-types.xhtml#audio) used
-          examples:
-          - pcma
-        audio_channels:
-          type: integer
-          description: The number of audio channels in the video
-          format: int32
-        language:
-          type: string
-          description: The language of the audio. [2 char ISO](https://en.wikipedia.org/wiki/ISO_639-1) or [IETF language tags](https://en.wikipedia.org/wiki/IETF_language_tag)
-          examples:
-          - en
-    ImageMetaData:
-      type: object
-      title: ImageMetaData
-      description: Meta data for image files
-      properties:
-        resolution:
-          type: string
-          description: The image resolution
-          format: regex
-          pattern: ^\d{3,4}x\d{3,4}$
-          examples:
-          - 1920x1080
-        color_space:
-          type: string
-          description: The color space of the image such as `RGB` or `CMYK`
-          examples:
-          - RGB
-        image_format:
-          type: string
-          enum:
-          - jpg
-          - png
-          - gif
-          - bmp
-          - tiff
-          - svg
-          description: The image format such as `jpg`, `png`
-          examples:
-          - jpg
-        bit_depth:
-          type: integer
-          description: The bit depth of the image
-          format: int32
-          examples:
-          - 32
-    InUseWith:
-      type: array
-      title: InUseWith
-      description: Information about services file is in use with
-      items:
-        type: object
-        properties:
-          service:
-            type: string
-            enum:
-            - ai-meeting-minutes
-            - ai-call-summary
-            - ai-vmail-summary
-            description: The service the file is in use with
-            examples:
-            - ai-meeting-minutes
-          auto_expire:
-            type: string
-            description: 'Automatic expiry timestamp when the file is no longer required by the service
-
-              An empty value implies that the file is never automatically deleted'
-            format: date-time
   responses:
     FileWithId:
       description: File meta data
@@ -825,6 +808,4 @@ components:
           refreshUrl: https://api.sonetel.com/SonetelAuth/beta
           tokenUrl: https://api.sonetel.com/SonetelAuth/beta
           scopes: {}
-x-refined-from:
-- 15_ai_filemanager.yaml
-- sonetel-ai-file-manager-openapi.yml
+x-internal: true

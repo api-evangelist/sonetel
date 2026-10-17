@@ -1,11 +1,12 @@
 openapi: 3.2.0
 info:
-  title: Sonetel Country API
   version: '2.0'
+  title: Phone Numbers Country API
+  summary: Buy new numbers and manage your existing phone number subscription
+  description: These API endpoints allow you to change the settings for your existing phone numbers, browse our available phone number stock, purchase new phone numbers and remove numbers from your account.
+  termsOfService: https://sonetel.com/en/help/help-topics/terms-conditions/terms-conditions/
   contact:
     email: api.support@sonetel.com
-  termsOfService: https://sonetel.com/en/help/help-topics/terms-conditions/terms-conditions/
-  description: 'Operations tagged Country across 2 of this provider''s published API definitions: phone_numbers.yaml, sonetel-phone-numbers-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://public-api.sonetel.com/
   description: Production
@@ -106,9 +107,6 @@ paths:
         description: Production
       tags:
       - Country
-    servers:
-    - url: https://public-api.sonetel.com/
-      description: Production
 components:
   responses:
     Country-response:
@@ -303,6 +301,3 @@ components:
                   currency: EUR
                   time_zone: GMT
                 status: success
-x-refined-from:
-- phone_numbers.yaml
-- sonetel-phone-numbers-openapi.yml

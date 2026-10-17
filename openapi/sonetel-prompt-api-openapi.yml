@@ -3,7 +3,7 @@ info:
   title: Sonetel Prompt API
   termsOfService: https://sonetel.com/en/help/help-topics/terms-conditions/terms-conditions/
   version: '1.0'
-  description: 'Operations tagged Prompt across 4 of this provider''s published API definitions: 5_voice_apps.yaml, ai_promptmanager.yaml, sonetel-ai-prompt-manager-openapi.yml, sonetel-voice-apps-openapi.yml. Each path carries the servers of the definition it was published in.'
+  description: 'Operations tagged Prompt across 2 of this provider''s published API definitions: 5_voice_apps.yaml, ai_promptmanager.yaml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://public-api.sonetel.com
   description: Production
@@ -713,14 +713,12 @@ components:
           schema:
             type: string
           description: application/json;charset=UTF-8
-    List-prompts:
-      description: List of prompts
+    Get-prompt-by-Id:
+      description: Prompt details
       content:
         application/json:
           schema:
-            type: array
-            items:
-              $ref: '#/components/schemas/prompt'
+            $ref: '#/components/schemas/prompt'
     List-prompt-versions:
       description: List of prompt versions
       content:
@@ -735,13 +733,38 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/prompt-version'
-    Get-prompt-by-Id:
-      description: Prompt details
+    List-prompts:
+      description: List of prompts
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/prompt'
+            type: array
+            items:
+              $ref: '#/components/schemas/prompt'
   schemas:
+    gpt-settings:
+      type: object
+      title: gpt-settings
+      description: GPT specific settings for the prompt
+      properties:
+        model:
+          type: string
+          description: The OpenAI [GPT model](https://platform.openai.com/docs/models) to be used. The model must match one of the model values supported by OpenAI.
+          default: gpt-3.5-turbo
+        max_tokens:
+          type: integer
+          description: The maximum tokens settings for completion requests  using this prompt
+          format: int32
+          examples:
+          - 5000
+        temperature:
+          type: number
+          description: The [temperature settings](https://platform.openai.com/docs/introduction/overview) for this prompt
+          format: float
+          minimum: 0
+          maximum: 1
+          examples:
+          - 0.2
     prompt:
       type: object
       title: prompt
@@ -828,6 +851,70 @@ components:
           maxLength: 50
           examples:
           - write-blog
+    prompt-version-no-id:
+      type: object
+      title: prompt-version-no-id
+      description: Prompt version information
+      properties:
+        version:
+          type: integer
+          description: The prompt version
+        prompt_text:
+          type: string
+          description: The text of the prompt
+          examples:
+          - Write a blog in less than 300 words for the title \"[%bltle%]\"
+        language:
+          type: string
+          description: The language ([2 char ISO](https://en.wikipedia.org/wiki/ISO_639-1) or [IETF language tags)](https://en.wikipedia.org/wiki/IETF_language_tag) of the text in the prompt version
+        translate_mode:
+          type: string
+          enum:
+          - auto
+          - manual
+          description: '`manual` if prompt version text is human generated. `auto` if the prompt text is translated and automatically generated'
+          examples:
+          - manual
+        version_desc:
+          type: string
+          description: A description of this version of the prompt
+        tags:
+          type: array
+          description: List of tags that apply to this prompt version
+          items:
+            $ref: '#/components/schemas/prompt-tag'
+    prompt-tag:
+      type: object
+      title: prompt-tag
+      description: Prompt tag
+      properties:
+        name:
+          type: string
+          description: Tag name
+        type:
+          type: string
+          enum:
+          - value
+          - text_id
+          description: Tag type. Type `value` indicates that the tag is specified by value. `text_id` indicates that the tag is specified as the reference Id of the text .
+    linked-prompts:
+      type: object
+      title: linked-prompts
+      description: A list of prompts linked to this prompt
+      properties:
+        l_prompt_id:
+          type: string
+          description: Id of the linked prompt
+          examples:
+          - g3nj46yt
+        type:
+          const: assembly
+          description: 'The type of link between this prompt and the linked prompt
+
+
+            `assembly`: A linked assembly prompt helps in assembling multiple pieces of AI generated text into a single text. This is used in cases when long texts, more than limitations of an AI model or API are generated and must be assembled together after generation.'
+          examples:
+          - assembly
     prompt-version:
       type: object
       title: prompt-version
@@ -874,125 +961,40 @@ components:
           description: List of prompt tags applicable to this version
           items:
             $ref: '#/components/schemas/prompt-tag'
-    prompt-version-no-id:
-      type: object
-      title: prompt-version-no-id
-      description: Prompt version information
-      properties:
-        version:
-          type: integer
-          description: The prompt version
-        prompt_text:
-          type: string
-          description: The text of the prompt
-          examples:
-          - Write a blog in less than 300 words for the title \"[%bltle%]\"
-        language:
-          type: string
-          description: The language ([2 char ISO](https://en.wikipedia.org/wiki/ISO_639-1) or [IETF language tags)](https://en.wikipedia.org/wiki/IETF_language_tag) of the text in the prompt version
-        translate_mode:
-          type: string
-          enum:
-          - auto
-          - manual
-          description: '`manual` if prompt version text is human generated. `auto` if the prompt text is translated and automatically generated'
-          examples:
-          - manual
-        version_desc:
-          type: string
-          description: A description of this version of the prompt
-        tags:
-          type: array
-          description: List of tags that apply to this prompt version
-          items:
-            $ref: '#/components/schemas/prompt-tag'
-    linked-prompts:
-      type: object
-      title: linked-prompts
-      description: A list of prompts linked to this prompt
-      properties:
-        l_prompt_id:
-          type: string
-          description: Id of the linked prompt
-          examples:
-          - g3nj46yt
-        type:
-          const: assembly
-          description: 'The type of link between this prompt and the linked prompt
-
-
-            `assembly`: A linked assembly prompt helps in assembling multiple pieces of AI generated text into a single text. This is used in cases when long texts, more than limitations of an AI model or API are generated and must be assembled together after generation.'
-          examples:
-          - assembly
-    gpt-settings:
-      type: object
-      title: gpt-settings
-      description: GPT specific settings for the prompt
-      properties:
-        model:
-          type: string
-          description: The OpenAI [GPT model](https://platform.openai.com/docs/models) to be used. The model must match one of the model values supported by OpenAI.
-          default: gpt-3.5-turbo
-        max_tokens:
-          type: integer
-          description: The maximum tokens settings for completion requests  using this prompt
-          format: int32
-          examples:
-          - 5000
-        temperature:
-          type: number
-          description: The [temperature settings](https://platform.openai.com/docs/introduction/overview) for this prompt
-          format: float
-          minimum: 0
-          maximum: 1
-          examples:
-          - 0.2
-    prompt-tag:
-      type: object
-      title: prompt-tag
-      description: Prompt tag
-      properties:
-        name:
-          type: string
-          description: Tag name
-        type:
-          type: string
-          enum:
-          - value
-          - text_id
-          description: Tag type. Type `value` indicates that the tag is specified by value. `text_id` indicates that the tag is specified as the reference Id of the text .
   requestBodies:
-    put-prompt:
-      description: Request to update a prompt
+    post-prompt-version:
+      description: Prompt version details
       content:
         application/json:
           schema:
             type: object
             properties:
-              description:
+              prompt_text:
                 type: string
-                description: A textual description of the prompt
+                description: The text of the prompt
+                examples:
+                - Write a blog in less than 300 words for the title {%__blog_title}
+              version_desc:
+                type: string
+                description: A textual description of the prompt version
                 examples:
                 - This prompt is used by the blog writer to write a blog based on a title with no user feedback
-              gpt_settings:
-                $ref: '#/components/schemas/gpt-settings'
-                description: GPT settings. Applies if `ai_platform` is `gpt`
-              linked_prompts:
-                type: array
-                items:
-                  $ref: '#/components/schemas/linked-prompts'
-              slug:
+    put-prompt-version:
+      description: Update prompt version
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              version_desc:
                 type: string
-                description: 'A textual name given to this prompt to search and identify the prompt.
-
-                  `slug` may be alphanumeric or contain `-`
-
-                  Slugs assigned to custom prompts must always begin with `cstm-<service_id>-`'
-                pattern: ^[a-zA-Z0-9][a-zA-Z0-9-]*$
-                minLength: 3
-                maxLength: 50
-                examples:
-                - write-blog
+                description: A textual description of the prompt
+              prompt_text:
+                type: string
+                description: The text of the prompt
+              language:
+                type: string
+                description: The language ([2 char ISO](https://en.wikipedia.org/wiki/ISO_639-1) or [IETF language tags)](https://en.wikipedia.org/wiki/IETF_language_tag) of the text in the prompt version
     post-prompt:
       description: Request to create a prompt
       content:
@@ -1061,39 +1063,37 @@ components:
             - language
             - service_type
             - ai_platform
-    put-prompt-version:
-      description: Update prompt version
+    put-prompt:
+      description: Request to update a prompt
       content:
         application/json:
           schema:
             type: object
             properties:
-              version_desc:
+              description:
                 type: string
                 description: A textual description of the prompt
-              prompt_text:
-                type: string
-                description: The text of the prompt
-              language:
-                type: string
-                description: The language ([2 char ISO](https://en.wikipedia.org/wiki/ISO_639-1) or [IETF language tags)](https://en.wikipedia.org/wiki/IETF_language_tag) of the text in the prompt version
-    post-prompt-version:
-      description: Prompt version details
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              prompt_text:
-                type: string
-                description: The text of the prompt
-                examples:
-                - Write a blog in less than 300 words for the title {%__blog_title}
-              version_desc:
-                type: string
-                description: A textual description of the prompt version
                 examples:
                 - This prompt is used by the blog writer to write a blog based on a title with no user feedback
+              gpt_settings:
+                $ref: '#/components/schemas/gpt-settings'
+                description: GPT settings. Applies if `ai_platform` is `gpt`
+              linked_prompts:
+                type: array
+                items:
+                  $ref: '#/components/schemas/linked-prompts'
+              slug:
+                type: string
+                description: 'A textual name given to this prompt to search and identify the prompt.
+
+                  `slug` may be alphanumeric or contain `-`
+
+                  Slugs assigned to custom prompts must always begin with `cstm-<service_id>-`'
+                pattern: ^[a-zA-Z0-9][a-zA-Z0-9-]*$
+                minLength: 3
+                maxLength: 50
+                examples:
+                - write-blog
   securitySchemes:
     Production:
       type: oauth2
@@ -1112,5 +1112,3 @@ components:
 x-refined-from:
 - 5_voice_apps.yaml
 - ai_promptmanager.yaml
-- sonetel-ai-prompt-manager-openapi.yml
-- sonetel-voice-apps-openapi.yml

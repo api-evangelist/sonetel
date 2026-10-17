@@ -1,15 +1,16 @@
 openapi: 3.2.0
 info:
-  title: Sonetel Call Recording API
   version: '2.0'
+  title: Recorded calls Call Recording API
+  summary: The API allows the user to download list of recorded calls and the files
+  description: Calls or conferences handled using your Sonetel account can be recorded using the call recording function.
+  termsOfService: https://sonetel.com/en/help/help-topics/terms-conditions/terms-conditions/
   contact:
     url: https://developer.sonetel.com
     name: Sonetel API Support
     email: api.support@sonetel.com
   license:
     name: ''
-  termsOfService: https://sonetel.com/en/help/help-topics/terms-conditions/terms-conditions/
-  description: 'Operations tagged Call Recording across 2 of this provider''s published API definitions: 4_recorded_calls.yaml, sonetel-recorded-calls-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://public-api.sonetel.com
   description: Production
@@ -185,9 +186,6 @@ paths:
         description: Production
       tags:
       - Call Recording
-    servers:
-    - url: https://public-api.sonetel.com
-      description: Production
   /call-recording:
     get:
       summary: Retrieve call recordings
@@ -350,9 +348,6 @@ paths:
       x-internal: true
       tags:
       - Call Recording
-    servers:
-    - url: https://public-api.sonetel.com
-      description: Production
   /call-recording/{recording-id}/summarize:
     get:
       summary: Summarize a call recording
@@ -391,9 +386,6 @@ paths:
         description: Production
       tags:
       - Call Recording
-    servers:
-    - url: https://public-api.sonetel.com
-      description: Production
   /call-recording/summarize:
     get:
       summary: Summarize many call recordings
@@ -462,9 +454,6 @@ paths:
         description: Production
       tags:
       - Call Recording
-    servers:
-    - url: https://public-api.sonetel.com
-      description: Production
 components:
   schemas:
     Call-recording-list:
@@ -1077,6 +1066,3 @@ components:
           scopes:
             account.admin.read: Account admin read
             account.admin.write: Account admin write
-x-refined-from:
-- 4_recorded_calls.yaml
-- sonetel-recorded-calls-openapi.yml

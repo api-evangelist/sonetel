@@ -1,8 +1,8 @@
 openapi: 3.2.0
 info:
-  title: Sonetel Ai Integration API
   version: '2.0'
-  description: 'Operations tagged Ai Integration across 2 of this provider''s published API definitions: 11_ai_functions.yaml, sonetel-ai-functions-openapi.yml. Each path carries the servers of the definition it was published in.'
+  title: Personalize suggested answers Ai Integration API
+  description: Our free customer service solution provides an easy way for answering customer questions with the assistance of Artificial Intelligence (AI).
 servers:
 - url: https://public-api.sonetel.com
   description: Production
@@ -101,9 +101,6 @@ paths:
       x-internal: false
       tags:
       - Ai Integration
-    servers:
-    - url: https://public-api.sonetel.com
-      description: Production
   /ai-integration/customer_faq/faq:
     get:
       summary: List all FAQs
@@ -409,9 +406,6 @@ paths:
       x-internal: false
       tags:
       - Ai Integration
-    servers:
-    - url: https://public-api.sonetel.com
-      description: Production
   /ai-integration/customer_faq/faq_csv:
     get:
       summary: Download as CSV
@@ -511,9 +505,6 @@ paths:
       x-internal: false
       tags:
       - Ai Integration
-    servers:
-    - url: https://public-api.sonetel.com
-      description: Production
   /ai-integration/customer_faq/suggested-answers:
     get:
       summary: Get Suggested Answer from AI
@@ -639,9 +630,6 @@ paths:
       x-internal: true
       tags:
       - Ai Integration
-    servers:
-    - url: https://public-api.sonetel.com
-      description: Production
 components:
   responses:
     unauthorized:
@@ -661,52 +649,6 @@ components:
               example-1:
                 error: unauthorized
                 error_description: Full authentication is required to access this resource
-    suggested-answer:
-      description: The response containing the suggested answers.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              status:
-                type: string
-                enum:
-                - SUCCESS
-                - FAIL
-                description: The status of the response.
-              message:
-                type: string
-                description: A short text describing the status of the response.
-              response:
-                type: object
-                properties:
-                  question-id:
-                    type: string
-                    description: A unique ID assigned to the question.
-                  answers:
-                    type: array
-                    description: Array containing the answers to the question. The array is empty if no relevant answer was found.
-                    items:
-                      type: object
-                  account-id:
-                    type: string
-                    description: Your Sonetel account ID.
-                  company-url:
-                    type: 'null'
-                    description: If the suggested answer was automatically fetched from your website's FAQs, this includes the URL.
-                  language:
-                    type: string
-                    description: The 2 letter [ISO language code](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes).
-            x-examples:
-              example-1:
-                status: SUCCESS
-                message: Got some suggestions.
-                response:
-                  question-id: ''
-                  answers: []
-                  account-id: '200000000'
-                  company-url: null
-                  language: en
     get-faq-success:
       description: The response returned when the FAQs are successfully fetched from the system.
       content:
@@ -783,27 +725,6 @@ components:
                       - que:
                         - Do you accept Gpay?
                         ans: Yes, we accept Gpay.
-    delete-success:
-      description: Delete the existing FAQs uploaded to your account.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              status:
-                type: string
-                description: The status of the request
-              message:
-                type: string
-                description: The message with details of the operation
-              response:
-                type: 'null'
-                description: The response value is `null` in case of a successful deletion.
-            x-examples:
-              example-1:
-                status: SUCCESS
-                message: 'Data deleted successfully. Account id : 200000000'
-                response: null
     faqs-uploaded:
       description: The response sent when the FAQs are uploaded succesfully
       content:
@@ -917,7 +838,82 @@ components:
                         - Thank you
                         - thanks
                         ans: Thank you. Have a nice day.
+    suggested-answer:
+      description: The response containing the suggested answers.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                enum:
+                - SUCCESS
+                - FAIL
+                description: The status of the response.
+              message:
+                type: string
+                description: A short text describing the status of the response.
+              response:
+                type: object
+                properties:
+                  question-id:
+                    type: string
+                    description: A unique ID assigned to the question.
+                  answers:
+                    type: array
+                    description: Array containing the answers to the question. The array is empty if no relevant answer was found.
+                    items:
+                      type: object
+                  account-id:
+                    type: string
+                    description: Your Sonetel account ID.
+                  company-url:
+                    type: 'null'
+                    description: If the suggested answer was automatically fetched from your website's FAQs, this includes the URL.
+                  language:
+                    type: string
+                    description: The 2 letter [ISO language code](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes).
+            x-examples:
+              example-1:
+                status: SUCCESS
+                message: Got some suggestions.
+                response:
+                  question-id: ''
+                  answers: []
+                  account-id: '200000000'
+                  company-url: null
+                  language: en
+    delete-success:
+      description: Delete the existing FAQs uploaded to your account.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: The status of the request
+              message:
+                type: string
+                description: The message with details of the operation
+              response:
+                type: 'null'
+                description: The response value is `null` in case of a successful deletion.
+            x-examples:
+              example-1:
+                status: SUCCESS
+                message: 'Data deleted successfully. Account id : 200000000'
+                response: null
   parameters:
+    Accept:
+      name: Accept
+      in: header
+      description: The content type that should be returned in the response.
+      required: true
+      schema:
+        type: string
+        default: application/json
     Authorization:
       name: Authorization
       in: header
@@ -927,14 +923,6 @@ components:
         type: string
         examples:
         - Bearer <ACCESS_TOKEN>
-    Accept:
-      name: Accept
-      in: header
-      description: The content type that should be returned in the response.
-      required: true
-      schema:
-        type: string
-        default: application/json
   requestBodies:
     get-suggested-answer:
       content:
@@ -971,6 +959,4 @@ components:
           refreshUrl: https://api.sonetel.com/SonetelAuth/beta/oauth/token
           tokenUrl: https://api.sonetel.com/SonetelAuth/beta/oauth/token
           scopes: {}
-x-refined-from:
-- 11_ai_functions.yaml
-- sonetel-ai-functions-openapi.yml
+x-internal: false
